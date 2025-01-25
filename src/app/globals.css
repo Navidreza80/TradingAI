@@ -1,11 +1,108 @@
+/* tailwind config */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+/* global styles */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --glass-border: rgba(255, 255, 255, 0.08);
+  --glass-background: rgba(15, 15, 15, 0.85);
+  --glass-gradient: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+  --primary-gradient: linear-gradient(45deg, #1890ff, #69c0ff);
+  --accent-gradient: linear-gradient(45deg, #52c41a, #95de64);
+  --text-gradient: linear-gradient(45deg, #ffffff, #d9d9d9);
+  --glow-blue: 0 0 30px rgba(24, 144, 255, 0.3);
+  --glow-green: 0 0 30px rgba(82, 196, 26, 0.3);
 }
+
+/* Font imports */
+@font-face {
+  font-family: 'Vazirmatn';
+  src: url('/fonts/Vazirmatn-Regular.ttf') format('ttf');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Vazirmatn';
+  src: url('/fonts/Vazirmatn-Medium.ttf') format('ttf');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Vazirmatn';
+  src: url('/fonts/Vazirmatn-Bold.ttf') format('ttf');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'NotoKufiArabic';
+  src: url('/fonts/NotoKufiArabic-Regular.ttf') format('ttf');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'NotoKufiArabic';
+  src: url('/fonts/NotoKufiArabic-Medium.ttf') format('ttf');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'NotoKufiArabic';
+  src: url('/fonts/NotoKufiArabic-Bold.ttf') format('ttf');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Modern Glass Morphism Variables */
+
+@media (max-width: 768px) {
+  .cta-section {
+    padding: 80px 0;
+  }
+
+  .cta-card {
+    padding: 40px 20px !important;
+  }
+
+  .cta-card h2 {
+    font-size: 2.5rem !important;
+  }
+
+  .cta-description {
+    font-size: 1.1rem !important;
+  }
+
+  .cta-buttons {
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .feature-item {
+    padding: 12px;
+  }
+}
+
+/* Dark theme overrides for Ant Design components */
+.ant-card-head-title,
+.ant-typography {
+  color: #ffffff !important;
+}
+
+.ant-card {
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+}
+
 
 @media (prefers-color-scheme: dark) {
   :root {
@@ -17,5 +114,68 @@
 body {
   color: var(--foreground);
   background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Drawer Custom Styles */
+.mobile-drawer .ant-drawer-close {
+  color: rgba(255, 255, 255, 0.85);
+  transition: all 0.3s;
+}
+
+.mobile-drawer .ant-drawer-close:hover {
+  color: white;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.mobile-drawer .ant-btn-primary:hover {
+  background: linear-gradient(to right, #40a9ff, #85d1ff) !important;
+}
+
+/* Dropdown styles */
+.ant-dropdown-menu {
+  background: rgba(15, 15, 15, 0.98) !important;
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* Light mode dropdown */
+:root:not(.dark) .ant-dropdown-menu {
+  background: rgba(255, 255, 255, 0.98) !important;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.ant-dropdown-menu-item {
+  color: rgba(255, 255, 255, 0.85) !important;
+}
+
+:root:not(.dark) .ant-dropdown-menu-item {
+  color: rgba(0, 0, 0, 0.85) !important;
+}
+
+.ant-dropdown-menu-item:hover {
+  background: rgba(255, 255, 255, 0.1) !important;
+}
+
+:root:not(.dark) .ant-dropdown-menu-item:hover {
+  background: rgba(0, 0, 0, 0.05) !important;
+}
+
+/* RTL Support */
+[dir="rtl"] {
+  .header-nav {
+    flex-direction: row-reverse;
+  }
+  
+  .auth-buttons {
+    flex-direction: row-reverse;
+  }
+}
+
+/* Language specific styles */
+:root[lang="fa"] body {
+  font-family: 'Vazirmatn', system-ui, sans-serif;
+}
+
+:root[lang="ar"] body {
+  font-family: 'NotoKufiArabic', system-ui, sans-serif;
 }
