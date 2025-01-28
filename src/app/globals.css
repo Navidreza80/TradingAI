@@ -1,9 +1,11 @@
 /* tailwind config */
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 /* global styles */
+
 :root {
   --glass-border: rgba(255, 255, 255, 0.08);
   --glass-background: rgba(15, 15, 15, 0.85);
@@ -61,6 +63,14 @@
   src: url('/fonts/NotoKufiArabic-Bold.ttf') format('ttf');
   font-weight: 700;
   font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'NumericPersian';
+  src: url('../../public/fonts/IRANSans\(FaNum\)_Medium.ttf') format('ttf');
+  font-weight: 700;
+  font-style: medium;
   font-display: swap;
 }
 
@@ -173,9 +183,9 @@ body {
 
 /* Language specific styles */
 :root[lang="fa"] body {
-  font-family: 'Vazirmatn', system-ui, sans-serif;
+  font-family: 'Vazirmatn';
 }
 
 :root[lang="ar"] body {
-  font-family: 'NotoKufiArabic', system-ui, sans-serif;
+  font-family: 'NotoKufiArabic';
 }
