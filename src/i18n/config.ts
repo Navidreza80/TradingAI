@@ -173,6 +173,9 @@ const resources = {
         subtitle: 'Latest news, analysis and insights about cryptocurrency market',
         searchPlaceholder: 'Search articles...',
         readTime: 'min read',
+        comments: 'Comments',
+        commentPlaceholder: 'Write your comment...',
+        submitComment: 'Submit'
       },
       about: {
         title: 'About TradingAI',
@@ -381,6 +384,9 @@ const resources = {
         subtitle: 'آخرین اخبار، تحلیل‌ها و بینش‌های مربوط به بازار ارزهای دیجیتال',
         searchPlaceholder: 'جستجوی مقالات...',
         readTime: 'دقیقه مطالعه',
+        comments: 'نظرات',
+        commentPlaceholder: 'نظر خود را بنویسید...',
+        submitComment: 'ارسال'
       },
       about: {
         title: 'درباره تریدینگ AI',
@@ -585,6 +591,9 @@ const resources = {
         subtitle: 'آخر الأخبار والتحليلات والرؤى حول سوق العملات الرقمية',
         searchPlaceholder: 'ابحث في المقالات...',
         readTime: 'دقيقة قراءة',
+        comments: 'التعليقات',
+        commentPlaceholder: 'اكتب تعليقك...',
+        submitComment: 'إرسال'
       },
       about: {
         title: 'حول TradingAI',
