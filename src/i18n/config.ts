@@ -61,6 +61,12 @@ const resources = {
         },
         countries: {
           title: 'Countries',
+        },
+        uptime: {
+          title: 'Platform Uptime',
+        },
+        support: {
+          title: 'Customer Support',
         }
       },
       experience: {
@@ -167,6 +173,42 @@ const resources = {
         subtitle: 'Latest news, analysis and insights about cryptocurrency market',
         searchPlaceholder: 'Search articles...',
         readTime: 'min read',
+      },
+      about: {
+        title: 'About TradingAI',
+        subtitle: 'Empowering traders with AI-driven insights and analysis',
+        stats: {
+          users: {
+            title: 'Active Users',
+          },
+          countries: {
+            title: 'Countries',
+          },
+          uptime: {
+            title: 'Platform Uptime',
+          },
+          support: {
+            title: 'Customer Support',
+          }
+        },
+        mission: {
+          title: 'Our Mission',
+          description: 'To democratize trading by providing advanced AI-powered tools and insights to traders of all levels, helping them make more informed decisions in the cryptocurrency market.',
+        },
+        team: {
+          title: 'Meet Our Team',
+          roles: {
+            ceo: {
+              title: 'Chief Executive Officer',
+            },
+            cto: {
+              title: 'Chief Technology Officer',
+            },
+            product: {
+              title: 'Product Manager',
+            }
+          }
+        }
       }
     }
   },
@@ -227,6 +269,12 @@ const resources = {
         },
         countries: {
           title: 'کشورها',
+        },
+        uptime: {
+          title: 'دسترس‌پذیری پلتفرم',
+        },
+        support: {
+          title: 'پشتیبانی مشتریان',
         }
       },
       experience: {
@@ -333,7 +381,43 @@ const resources = {
         subtitle: 'آخرین اخبار، تحلیل‌ها و بینش‌های مربوط به بازار ارزهای دیجیتال',
         searchPlaceholder: 'جستجوی مقالات...',
         readTime: 'دقیقه مطالعه',
-      }      
+      },
+      about: {
+        title: 'درباره تریدینگ AI',
+        subtitle: 'توانمندسازی معامله‌گران با تحلیل و بینش مبتنی بر هوش مصنوعی',
+        stats: {
+          users: {
+            title: 'کاربران فعال',
+          },
+          countries: {
+            title: 'کشور',
+          },
+          uptime: {
+            title: 'دسترس‌پذیری پلتفرم',
+          },
+          support: {
+            title: 'پشتیبانی مشتریان',
+          }
+        },
+        mission: {
+          title: 'ماموریت ما',
+          description: 'دموکراتیزه کردن معاملات با ارائه ابزارها و بینش‌های پیشرفته مبتنی بر هوش مصنوعی به معامله‌گران در تمام سطوح، کمک به آنها برای تصمیم‌گیری آگاهانه‌تر در بازار ارزهای دیجیتال.',
+        },
+        team: {
+          title: 'تیم ما',
+          roles: {
+            ceo: {
+              title: 'مدیرعامل',
+            },
+            cto: {
+              title: 'مدیر فنی',
+            },
+            product: {
+              title: 'مدیر محصول',
+            }
+          }
+        }
+      }
     }
   },
   ar: {
@@ -389,6 +473,12 @@ const resources = {
         },
         countries: {
           title: 'الدول',
+        },
+        uptime: {
+          title: 'وقت التشغيل',
+        },
+        support: {
+          title: 'دعم العملاء',
         }
       },
       experience: {
@@ -495,7 +585,43 @@ const resources = {
         subtitle: 'آخر الأخبار والتحليلات والرؤى حول سوق العملات الرقمية',
         searchPlaceholder: 'ابحث في المقالات...',
         readTime: 'دقيقة قراءة',
-      }      
+      },
+      about: {
+        title: 'حول TradingAI',
+        subtitle: 'تمكين المتداولين بالتحليلات والرؤى المدعومة بالذكاء الاصطناعي',
+        stats: {
+          users: {
+            title: 'مستخدم نشط',
+          },
+          countries: {
+            title: 'دولة',
+          },
+          uptime: {
+            title: 'وقت التشغيل',
+          },
+          support: {
+            title: 'دعم العملاء',
+          }
+        },
+        mission: {
+          title: 'مهمتنا',
+          description: 'إضفاء الطابع الديمقراطي على التداول من خلال توفير أدوات ورؤى متقدمة مدعومة بالذكاء الاصطناعي للمتداولين من جميع المستويات، ومساعدتهم على اتخاذ قرارات أكثر استنارة في سوق العملات الرقمية.'
+        },
+        team: {
+          title: 'فريقنا',
+          roles: {
+            ceo: {
+              title: 'الرئيس التنفيذي',
+            },
+            cto: {
+              title: 'المدير التقني',
+            },
+            product: {
+              title: 'مدير المنتج',
+            }
+          }
+        }
+      }
     }
   }
 };
