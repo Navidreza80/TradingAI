@@ -9,6 +9,7 @@ import { useState, useEffect } from 'react';
 import { Drawer, Button, Dropdown } from 'antd';
 import type { MenuProps } from 'antd';
 import { useTranslation } from 'react-i18next';
+import { SignedIn, SignedOut, SignInButton, SignUpButton, UserButton } from '@clerk/nextjs';
 
 /**
  * Header Component
@@ -36,21 +37,21 @@ export default function Header() {
   // Navigation items with translations
   const navItems = [
     { name: t('nav.home'), href: '/', description: t('nav.homeDesc') },
-    { name: t('nav.features'), href: '/features', description: t('nav.featuresDesc') },
-    { name: t('nav.pricing'), href: '/pricing', description: t('nav.pricingDesc') },
+    { name: t('nav.blogs'), href: '/blogs', description: t('nav.blogsDesc') },
+    { name: t('nav.suggestions'), href: '/suggestions', description: t('nav.suggestionsDesc') },
     { name: t('nav.about'), href: '/about', description: t('nav.aboutDesc') }
   ];
 
   // Handle scroll effect
-    useEffect(() => {
+  useEffect(() => {
 
     // Handle scroll effect if user scrolls down 20px
-        const handleScroll = () => {
+    const handleScroll = () => {
       setIsScrolled(window.scrollY > 20);
     };
-        window.addEventListener('scroll', handleScroll);
-        return () => window.removeEventListener('scroll', handleScroll);
-    }, []);
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   // Handle language change
   const handleLanguageChange = (lang: string) => {
@@ -84,7 +85,7 @@ export default function Header() {
     document.documentElement.classList.toggle('dark');
   };
 
-    return (
+  return (
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 backdrop-blur-md
         ${isScrolled
@@ -129,13 +130,13 @@ export default function Header() {
                   group-hover:drop-shadow-[0_0_8px_rgba(24,144,255,0.5)]"
                 priority
               />
-                        </div>
+            </div>
             <span className="text-base xs:text-lg sm:text-xl lg:text-2xl font-bold 
               bg-gradient-to-r from-[#1890ff] to-[#69c0ff] bg-clip-text text-transparent">
               TradingAI
             </span>
-                    </Link>
-                </div>
+          </Link>
+        </div>
 
         {/* Desktop Navigation - Centered */}
         <nav className="hidden lg:flex items-center justify-center absolute left-1/2 -translate-x-1/2">
@@ -157,8 +158,8 @@ export default function Header() {
                 </Link>
               </li>
             ))}
-                    </ul>
-                </nav>
+          </ul>
+        </nav>
 
         {/* Action Buttons - Desktop Only */}
         <div className="hidden lg:flex items-center gap-2 lg:gap-3 xl:gap-4
@@ -185,21 +186,30 @@ export default function Header() {
           </div>
 
           {/* Auth Buttons */}
-          <button className="hidden lg:flex items-center gap-1.5 px-2.5 py-1.5 w-[110px]
+          <SignedOut>
+            <SignInButton>
+              <button className="hidden lg:flex items-center gap-1.5 px-2.5 py-1.5 w-[110px]
             text-sm font-bold
             dark:text-white/80 text-black transition-colors delay-300 hover:text-[#1677ff] 
    rounded-[6px] hover:border-solid hover:border hover:border-[#1677ff]
             dark:hover:bg-white/5 hover:bg-gray-50">
-            <UserIcon className="w-3.5 h-3.5 xs:w-4 xs:h-4" />
-            {t('auth.login')}
-          </button>
-          <button className="hidden lg:block px-3 py-1.5 text-xs sm:text-sm font-medium text-white w-[120px]
+                <UserIcon className="w-3.5 h-3.5 xs:w-4 xs:h-4" />
+                {t('auth.login')}
+              </button>
+            </SignInButton>
+            <SignUpButton>
+              <button className="hidden lg:block px-3 py-1.5 text-xs sm:text-sm font-medium text-white w-[120px]
             bg-gradient-to-r from-[#1890ff] to-[#69c0ff]
             rounded-[6px] transition-all duration-300
             hover:shadow-[0_0_20px_rgba(24,144,255,0.3)]
             hover:scale-[1.02]">
-            {t('auth.getStarted')}
-          </button>
+                {t('auth.getStarted')}
+              </button>
+            </SignUpButton>
+          </SignedOut>
+          <SignedIn>
+            <UserButton />
+          </SignedIn>
         </div>
 
         {/* Mobile Menu Button */}
@@ -283,7 +293,7 @@ export default function Header() {
                   aria-label={item.description}
                 >
                   {item.name}
-                    </Link>
+                </Link>
               </li>
             ))}
           </ul>
@@ -323,14 +333,14 @@ export default function Header() {
               <LanguageIcon className="w-5 h-5" />
             </button>
           </Dropdown>
-                </div>
+        </div>
 
         {/* Mobile Auth Buttons */}
         <div className={`space-y-4 mt-auto
           ${i18n.language === 'fa' ? 'font-vazirmatn' : ''}
           ${i18n.language === 'ar' ? 'font-notokufi' : ''}`}>
-                <Button
-                    type="text"
+          <Button
+            type="text"
             className={`w-full h-12 flex items-center justify-center gap-2
               transition-all duration-300 font-bold
               ${isDarkMode
@@ -348,8 +358,8 @@ export default function Header() {
           >
             {t('auth.getStarted')}
           </Button>
-            </div>
+        </div>
       </Drawer>
-        </header>
+    </header>
   );
 }

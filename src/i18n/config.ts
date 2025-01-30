@@ -8,12 +8,12 @@ const resources = {
     translation: {
       nav: {
         home: 'Home',
-        features: 'Features',
-        pricing: 'Pricing',
+        blogs: 'Blogs',
+        suggestions: 'Suggestions',
         about: 'About',
         homeDesc: 'Return to homepage',
-        featuresDesc: 'Explore our trading features',
-        pricingDesc: 'View our pricing plans',
+        blogsDesc: 'Explore our trading features',
+        suggestionsDesc: 'View our pricing plans',
         aboutDesc: 'Learn more about TradingAI'
       },
       auth: {
@@ -106,6 +106,67 @@ const resources = {
           }
         },
         cta: 'Start Trading Now',
+      },
+      footer: {
+        description: 'AI-powered trading platform helping traders make smarter decisions with real-time market analysis and insights.',
+        product: {
+          title: 'Product',
+          features: 'Features',
+          pricing: 'Pricing',
+          security: 'Security',
+          enterprise: 'Enterprise'
+        },
+        company: {
+          title: 'Company',
+          about: 'About',
+          careers: 'Careers',
+          blog: 'Blog',
+          press: 'Press'
+        },
+        resources: {
+          title: 'Resources',
+          documentation: 'Documentation',
+          help: 'Help Center',
+          api: 'API',
+          status: 'Status'
+        },
+        legal: {
+          title: 'Legal',
+          privacy: 'Privacy',
+          terms: 'Terms',
+          cookies: 'Cookies',
+          licenses: 'Licenses'
+        },
+        contact: {
+          address: '123 Trading Street, Financial District, New York',
+          phone: '+1 (555) 123-4567',
+          email: 'contact@tradingai.com'
+        },
+        social: {
+          title: 'Follow Us'
+        },
+        newsletter: {
+          title: 'Subscribe to our newsletter',
+          placeholder: 'Enter your email',
+          subscribe: 'Subscribe'
+        },
+        copyright: '© {{year}} TradingAI. All rights reserved.'
+      },
+      suggestions: {
+        title: 'Trading Suggestions',
+        subtitle: 'AI-powered trading suggestions with detailed analysis and risk management',
+        confidence: 'Confidence Level',
+        entry: 'Entry Price',
+        takeProfit: 'Take Profit',
+        stopLoss: 'Stop Loss',
+        searchPlaceholder: 'Search by name or symbol...',
+        noResults: 'No matching cryptocurrencies found',
+      },
+      blogs: {
+        title: 'Cryptocurrency Blog',
+        subtitle: 'Latest news, analysis and insights about cryptocurrency market',
+        searchPlaceholder: 'Search articles...',
+        readTime: 'min read',
       }
     }
   },
@@ -113,12 +174,12 @@ const resources = {
     translation: {
       nav: {
         home: 'خانه',
-        features: 'امکانات',
-        pricing: 'قیمت‌ها',
+        blogs: 'بلاگ ها',
+        suggestions: 'پیشنهادات',
         about: 'درباره ما',
         homeDesc: 'بازگشت به صفحه اصلی',
-        featuresDesc: 'مشاهده امکانات معاملاتی',
-        pricingDesc: 'مشاهده تعرفه‌ها',
+        blogsDesc: 'مشاهده امکانات معاملاتی',
+        suggestionsDesc: 'مشاهده تعرفه‌ها',
         aboutDesc: 'درباره TradingAI'
       },
       auth: {
@@ -137,15 +198,19 @@ const resources = {
         subtitle: 'امکانات پیشرفته مدعوم با هوش مصنوعی برای کمک به تصمیم‌گیری بهتر در معاملات',
         realtime: {
           title: 'تحلیل لحظه‌ای',
+          description: 'دریافت تحلیل لحظه‌ای و سیگنال‌های معاملاتی بر اساس داده‌های لحظه‌ای'
         },
         ai: {
           title: 'هوش مصنوعی',
+          description: 'استفاده از هوش مصنوعی برای تولید سیگنال‌های معاملاتی'
         },
         secure: {
           title: 'امنیت',
+          description: 'دارایی‌های شما با امنیت در سطح بانکی محافظت می‌شوند'
         },
         advanced: {
           title: 'امکانات پیشرفته',
+          description: 'امکانات پیشرفته مدعوم با هوش مصنوعی برای کمک به تصمیم‌گیری بهتر در معاملات'
         },
       },
       stats: {
@@ -207,19 +272,80 @@ const resources = {
           }
         },
         cta: 'شروع معامله',
-      }
+      },
+      footer: {
+        description: 'پلتفرم معاملاتی مبتنی بر هوش مصنوعی که به معامله‌گران کمک می‌کند تصمیمات هوشمندانه‌تری با تحلیل و بینش لحظه‌ای بازار بگیرند.',
+        product: {
+          title: 'محصول',
+          features: 'ویژگی‌ها',
+          pricing: 'قیمت‌گذاری',
+          security: 'امنیت',
+          enterprise: 'نسخه سازمانی'
+        },
+        company: {
+          title: 'شرکت',
+          about: 'درباره ما',
+          careers: 'فرصت‌های شغلی',
+          blog: 'وبلاگ',
+          press: 'رسانه‌ها'
+        },
+        resources: {
+          title: 'منابع',
+          documentation: 'مستندات',
+          help: 'مرکز کمک',
+          api: 'رابط برنامه‌نویسی (API)',
+          status: 'وضعیت'
+        },
+        legal: {
+          title: 'قوانین',
+          privacy: 'حریم خصوصی',
+          terms: 'شرایط استفاده',
+          cookies: 'کوکی‌ها',
+          licenses: 'مجوزها'
+        },
+        contact: {
+          address: 'خیابان ۱۲۳ تریدینگ، منطقه مالی، نیویورک',
+          phone: '+1 (555) 123-4567',
+          email: 'contact@tradingai.com'
+        },
+        social: {
+          title: 'ما را دنبال کنید'
+        },
+        newsletter: {
+          title: 'عضویت در خبرنامه ما',
+          placeholder: 'ایمیل خود را وارد کنید',
+          subscribe: 'عضویت'
+        },
+        copyright: '© {{year}} TradingAI. تمامی حقوق محفوظ است.'
+      },
+      suggestions: {
+        title: 'پیشنهادات معاملاتی',
+        subtitle: 'پیشنهادات معاملاتی مبتنی بر هوش مصنوعی با تحلیل دقیق و مدیریت ریسک',
+        confidence: 'سطح اطمینان',
+        entry: 'قیمت ورود',
+        takeProfit: 'حد سود',
+        stopLoss: 'حد ضرر',
+        searchPlaceholder: 'جستجو بر اساس نام یا نماد...',
+        noResults: 'هیچ ارز دیجیتالی یافت نشد',
+      },
+      blogs: {
+        title: 'وبلاگ ارزهای دیجیتال',
+        subtitle: 'آخرین اخبار، تحلیل‌ها و بینش‌های مربوط به بازار ارزهای دیجیتال',
+        searchPlaceholder: 'جستجوی مقالات...',
+        readTime: 'دقیقه مطالعه',
+      }      
     }
   },
   ar: {
     translation: {
       nav: {
         home: 'الرئيسية',
-        features: 'المميزات',
-        pricing: 'الأسعار',
+        blogs: 'المدونات',
+        suggestions: 'التوصيات',
         about: 'حول',
         homeDesc: 'العودة إلى الصفحة الرئيسية',
-        featuresDesc: 'استكشف ميزات التداول',
-        pricingDesc: 'عرض خطط الأسعار',
+        blogsDesc: 'استكشف ميزات التداول',
+        suggestionsDesc: 'عرض خطط التوصيات',
         aboutDesc: 'تعرف على TradingAI'
       },
       auth: {
@@ -308,7 +434,68 @@ const resources = {
           }
         },
         cta: 'ابدأ التداول الآن'
-      }
+      },
+      footer: {
+        description: 'منصة تداول مدعومة بالذكاء الاصطناعي تساعد المتداولين على اتخاذ قرارات أكثر ذكاءً من خلال تحليل السوق ورؤى في الوقت الفعلي.',
+        product: {
+          title: 'المنتج',
+          features: 'الميزات',
+          pricing: 'التسعير',
+          security: 'الأمان',
+          enterprise: 'الشركات'
+        },
+        company: {
+          title: 'الشركة',
+          about: 'من نحن',
+          careers: 'الوظائف',
+          blog: 'المدونة',
+          press: 'الإعلام'
+        },
+        resources: {
+          title: 'الموارد',
+          documentation: 'التوثيق',
+          help: 'مركز المساعدة',
+          api: 'واجهة برمجة التطبيقات (API)',
+          status: 'الحالة'
+        },
+        legal: {
+          title: 'القانوني',
+          privacy: 'الخصوصية',
+          terms: 'الشروط',
+          cookies: 'ملفات تعريف الارتباط',
+          licenses: 'التراخيص'
+        },
+        contact: {
+          address: '123 شارع التداول، المنطقة المالية، نيويورك',
+          phone: '+1 (555) 123-4567',
+          email: 'contact@tradingai.com'
+        },
+        social: {
+          title: 'تابعنا'
+        },
+        newsletter: {
+          title: 'اشترك في النشرة الإخبارية',
+          placeholder: 'أدخل بريدك الإلكتروني',
+          subscribe: 'اشترك'
+        },
+        copyright: '© {{year}} TradingAI. جميع الحقوق محفوظة.'
+      },
+      suggestions: {
+        title: 'توصيات التداول',
+        subtitle: 'توصيات التداول مدعومة بالذكاء الاصطناعي بتحليل دقيق وإدارة المخاطر',
+        confidence: 'مستوى الثقة',
+        entry: 'سعر الدخول',
+        takeProfit: 'هدف الربح',
+        stopLoss: 'وقف الخسارة',
+        searchPlaceholder: 'البحث بالاسم أو الرمز...',
+        noResults: 'لم يتم العثور على عملات رقمية مطابقة'
+      },
+      blogs: {
+        title: 'مدونة العملات الرقمية',
+        subtitle: 'آخر الأخبار والتحليلات والرؤى حول سوق العملات الرقمية',
+        searchPlaceholder: 'ابحث في المقالات...',
+        readTime: 'دقيقة قراءة',
+      }      
     }
   }
 };

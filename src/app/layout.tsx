@@ -2,9 +2,10 @@
 
 import { Inter } from "next/font/google";
 import "./globals.css";
-import Header from "@/components/Header/Header";
 import { I18nProvider } from "@/providers/i18n-provider";
 import { siteConfig } from "@/config/metadata";
+import { ClerkProvider } from '@clerk/nextjs'
+import HeaderServer from "@/components/Header/HeaderServer";
 
 // fonts
 
@@ -70,10 +71,12 @@ export default function RootLayout({
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
       </head>
       <body className={inter.className}>
-        <I18nProvider>
-          <Header />
-          {children}
-        </I18nProvider>
+        <ClerkProvider>
+          <I18nProvider>
+            <HeaderServer />
+            {children}
+          </I18nProvider>
+        </ClerkProvider>
       </body>
     </html>
   );

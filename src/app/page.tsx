@@ -5,6 +5,7 @@ import HeroSection from "@/components/Landing/HeroSection";
 import Stats from "@/components/Landing/Stats";
 import UserExperience from "@/components/Landing/UserExperience";
 import StartTrading from "@/components/Landing/StartTrading";
+import Footer from "@/components/Footer/Footer";
 
 export default function Home() {
 
@@ -26,6 +27,8 @@ export default function Home() {
 
       {/* Start Trading Section */}
       <StartTrading />
+
+      <Footer />
     </main>
   );
 }

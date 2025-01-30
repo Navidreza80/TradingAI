@@ -10,8 +10,13 @@
   },
   "dependencies": {
     "@ant-design/icons": "^5.6.0",
+    "@clerk/nextjs": "^6.10.3",
     "@heroicons/react": "^2.2.0",
+    "@mistralai/mistralai": "^1.5.0",
+    "@prisma/client": "^6.3.0",
+    "@tanstack/react-query": "^5.65.1",
     "antd": "^5.23.2",
+    "axios": "^1.7.9",
     "framer-motion": "^12.0.5",
     "i18next": "^24.2.2",
     "i18next-browser-languagedetector": "^8.0.2",
@@ -19,6 +24,8 @@
     "next": "15.1.6",
     "next-i18next": "^15.4.1",
     "next-themes": "^0.4.4",
+    "node-fetch": "^3.3.2",
+    "openai": "^4.80.1",
     "react": "^19.0.0",
     "react-countup": "^6.5.3",
     "react-dom": "^19.0.0",
@@ -33,6 +40,7 @@
     "eslint": "^9",
     "eslint-config-next": "15.1.6",
     "postcss": "^8",
+    "prisma": "^6.3.0",
     "tailwindcss": "^3.4.1",
     "typescript": "^5"
   }
