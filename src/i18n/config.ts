@@ -212,6 +212,15 @@ const resources = {
             }
           }
         }
+      },
+      profile: {
+        tabs: {
+          likedBlogs: 'Blogs I Like',
+          comments: 'Comments',
+          shared: 'Shared',
+          suggestions: 'Suggestions',
+          courses: 'Courses',
+        }
       }
     }
   },
@@ -423,6 +432,15 @@ const resources = {
             }
           }
         }
+      },
+      profile: {
+        tabs: {
+          likedBlogs: 'بلاگ‌های مورد علاقه',
+          comments: 'نظرات',
+          shared: 'اشتراک گذاری',
+          suggestions: 'پیشنهادات',
+          courses: 'دوره‌ها',
+        }
       }
     }
   },
@@ -629,6 +647,15 @@ const resources = {
               title: 'مدير المنتج',
             }
           }
+        }
+      },
+      profile: {
+        tabs: {
+          "likedBlogs": "المدونات المفضلة",
+          "comments": "التعليقات",
+          "shared": "المشاركات",
+          "suggestions": "الاقتراحات",
+          "courses": "الدورات"
         }
       }
     }

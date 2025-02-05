@@ -9,7 +9,7 @@ import { useState, useEffect } from 'react';
 import { Drawer, Button, Dropdown } from 'antd';
 import type { MenuProps } from 'antd';
 import { useTranslation } from 'react-i18next';
-import { SignedIn, SignedOut, SignInButton, SignUpButton, UserButton } from '@clerk/nextjs';
+import { SignedIn, SignedOut, SignInButton, SignUpButton, UserButton, useUser } from '@clerk/nextjs';
 
 /**
  * Header Component
@@ -33,6 +33,7 @@ export default function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isDarkMode, setIsDarkMode] = useState(true);
   const [isScrolled, setIsScrolled] = useState(false);
+  const { user } = useUser();
 
   // Navigation items with translations
   const navItems = [
@@ -208,7 +209,9 @@ export default function Header() {
             </SignUpButton>
           </SignedOut>
           <SignedIn>
-            <UserButton />
+            <a href='/dashboard'>
+              <Image src={user?.imageUrl || "/image/user.png"} alt={user?.username || "User Avatar"} width={32} height={32} className='rounded-full' />
+            </a>
           </SignedIn>
         </div>
 
