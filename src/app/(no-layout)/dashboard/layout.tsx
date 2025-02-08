@@ -1,16 +1,15 @@
-import { AppSidebar } from "@/components/app-sidebar"
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar"
+import { AppSidebar } from "@/components/app-sidebar"
+import Headerdashboard from "@/components/HeaderDashboard"
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
-    <div className="mt-[68px]">
     <SidebarProvider>
       <AppSidebar />
+      <Headerdashboard />
       <main>
-        <SidebarTrigger />
         {children}
       </main>
     </SidebarProvider>
-    </div>
   )
 }

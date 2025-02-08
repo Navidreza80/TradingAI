@@ -42,20 +42,20 @@ export const metadata = {
       'ar-SA': '/ar'
     }
   },
-  manifest: '/manifest.json',
-  icons: {
-    icon: [
-      { url: './image/Logo.svg', type: 'image/svg+xml' },
-      { url: './image/favicon-32x32.png', sizes: '32x32', type: 'image/png' },
-      { url: './image/favicon-16x16.png', sizes: '16x16', type: 'image/png' }
-    ],
-    apple: [
-      { url: './image/apple-touch-icon.png', sizes: '180x180', type: 'image/png' }
-    ],
-    other: [
-      { rel: 'mask-icon', url: './image/safari-pinned-tab.svg', color: '#1890ff' }
-    ]
-  }
+  // manifest: '/manifest.json',
+  // icons: {
+  //   icon: [
+  //     { url: './image/Logo.svg', type: 'image/svg+xml' },
+  //     { url: './image/favicon-32x32.png', sizes: '32x32', type: 'image/png' },
+  //     { url: './image/favicon-16x16.png', sizes: '16x16', type: 'image/png' }
+  //   ],
+  //   apple: [
+  //     { url: './image/apple-touch-icon.png', sizes: '180x180', type: 'image/png' }
+  //   ],
+  //   other: [
+  //     { rel: 'mask-icon', url: './image/safari-pinned-tab.svg', color: '#1890ff' }
+  //   ]
+  // }
 };
 
 // root layout
@@ -73,7 +73,7 @@ export default function RootLayout({
       <body className={inter.className}>
         <ClerkProvider>
           <I18nProvider>
-            <HeaderServer />
+          <HeaderServer />
             {children}
           </I18nProvider>
         </ClerkProvider>
