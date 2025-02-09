@@ -1,6 +1,6 @@
 'use client'
 
-import ProfileCard from "@/components/ProfileCard";
+import ProfileCard from "@/components/user/profile-card";
 
 const staticUser = {
   name: "Sarah Johnson",

@@ -6,22 +6,26 @@ const config: Config = {
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
-  darkMode: 'class',
+  darkMode: "class",
   theme: {
     extend: {
+      backgroundImage: {
+        wave: "url('/image/gesture.png')",
+        waveDark: "url('/image/gestureDark.png')",
+      },
       screens: {
-        'xs': '375px',
-        'sm': '640px',
-        'md': '768px',
-        'lg': '1024px',
-        'xl': '1280px',
-        '2xl': '1536px',
-        '3xl': '1920px',
+        xs: "375px",
+        sm: "640px",
+        md: "768px",
+        lg: "1024px",
+        xl: "1280px",
+        "2xl": "1536px",
+        "3xl": "1920px",
       },
       fontFamily: {
-        vazirmatn: ['Vazirmatn', 'system-ui', 'sans-serif'],
-        notokufi: ['NotoKufiArabic', 'system-ui', 'sans-serif'],
-        numericpersian: ['NumericPersian', 'system-ui', 'sans-serif'],
+        vazirmatn: ["Vazirmatn", "system-ui", "sans-serif"],
+        notokufi: ["NotoKufiArabic", "system-ui", "sans-serif"],
+        numericpersian: ["NumericPersian", "system-ui", "sans-serif"],
       },
       colors: {
         background: "var(--background)",
@@ -29,12 +33,12 @@ const config: Config = {
       },
       keyframes: {
         headerPattern: {
-          '0%': { backgroundPosition: '0 0, 15px 15px' },
-          '100%': { backgroundPosition: '20px 20px, 35px 35px' },
-        }
+          "0%": { backgroundPosition: "0 0, 15px 15px" },
+          "100%": { backgroundPosition: "20px 20px, 35px 35px" },
+        },
       },
       animation: {
-        headerPattern: 'headerPattern 60s linear infinite',
+        headerPattern: "headerPattern 60s linear infinite",
       },
     },
   },

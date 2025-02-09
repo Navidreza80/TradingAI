@@ -1,5 +1,5 @@
 import { SidebarClose, SidebarOpen } from "lucide-react"
-import { useSidebar } from "./ui/sidebar"
+import { useSidebar } from "../ui/sidebar"
 
 export function CustomTrigger() {
     const { toggleSidebar, open } = useSidebar()

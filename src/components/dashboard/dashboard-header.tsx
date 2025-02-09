@@ -2,9 +2,10 @@
 
 // imports
 import Image from "next/image";
-import { CustomTrigger } from "./Trigger";
+import { CustomTrigger } from "./trigger";
 import DashboardNavigation from "./dashboard-navigation";
 import ActionBtns from "./dashboard-header-action-btns";
+
 
 // tsx render
 export default function Headerdashboard() {
