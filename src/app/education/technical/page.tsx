@@ -42,7 +42,7 @@ export default function TechnicalAnalysisPage() {
     return (
         <ConfigProvider locale={fa_IR} direction="rtl">
             <Layout className="min-h-screen bg-gradient-to-b dark:from-[#0a0a0a] dark:to-[#1a1a1a] from-white to-gray-50">
-                <Header className="flex items-center mt-20 justify-between bg-transparent px-16">
+                <Header className="flex items-center mt-20 justify-between bg-transparent px-32">
                     <div className="flex items-center">
                         <LineChartOutlined className="text-2xl dark:text-white gray-900 ml-2" />
                         <h3 className='dark:text-white text-2xl font-semibold text-gray-900' style={{  margin: 0 }}>تحلیل تکنیکال</h3>

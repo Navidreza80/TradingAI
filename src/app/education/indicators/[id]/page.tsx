@@ -20,8 +20,8 @@ export default function IndicatorDetail() {
     return (
         <ConfigProvider locale={fa_IR} direction="rtl">
             <Layout className="min-h-screen bg-gradient-to-b dark:from-[#0a0a0a] dark:to-[#1a1a1a] from-white to-gray-50">
-                <Header className="flex mt-16 items-center justify-between bg-transparent px-16">
-                <Title level={3} style={{ color: 'white', margin: 0 }}>توضیحات اندیکاتور</Title>
+                <Header className="flex mt-16 items-center justify-between bg-transparent px-32">
+                <h3 className='dark:text-white text-black font-bold text-2xl' style={{ margin: 0 }}>توضیحات اندیکاتور</h3>
                     <Link href="/education/indicators">
                         <Button type="primary" icon={<ArrowLeftOutlined />}>
                             بازگشت

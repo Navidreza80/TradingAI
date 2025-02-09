@@ -24,11 +24,11 @@ export default function TechnicalAnalysisDetailPage() {
     return (
         <ConfigProvider locale={fa_IR} direction="rtl">
             <Layout className="min-h-screen bg-gradient-to-b dark:from-[#0a0a0a] dark:to-[#1a1a1a] from-white to-gray-50">
-                <Header className="flex mt-16 items-center justify-between bg-transparent px-16">
-                    <Title level={3} style={{ color: 'white', margin: 0 }}>{analysis.title}</Title>
+                <Header className="flex mt-16 items-center justify-between bg-transparent px-32">
+                    <h3 className='dark:text-white text-black font-bold text-2xl' style={{ margin: 0 }}>{analysis.title}</h3>
                     <Link href="/education/technical">
                         <Button type="primary" icon={<ArrowLeftOutlined />}>
-                            بازگشت به لیست
+                            بازگشت 
                         </Button>
                     </Link>
                 </Header>
