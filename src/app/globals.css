@@ -4,12 +4,40 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+  :root {
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 240 5.3% 26.1%;
+    --sidebar-primary: 240 5.9% 10%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 240 4.8% 95.9%;
+    --sidebar-accent-foreground: 240 5.9% 10%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+
+  .dark {
+    --sidebar-background: 240 5.9% 10%;
+    --sidebar-foreground: 240 4.8% 95.9%;
+    --sidebar-primary: 224.3 76.3% 48%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 3.7% 15.9%;
+    --sidebar-accent-foreground: 240 4.8% 95.9%;
+    --sidebar-border: 240 3.7% 15.9%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+}
+
 /* global styles */
 
 :root {
   --glass-border: rgba(255, 255, 255, 0.08);
   --glass-background: rgba(15, 15, 15, 0.85);
-  --glass-gradient: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+  --glass-gradient: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.1),
+    rgba(255, 255, 255, 0.05)
+  );
   --primary-gradient: linear-gradient(45deg, #1890ff, #69c0ff);
   --accent-gradient: linear-gradient(45deg, #52c41a, #95de64);
   --text-gradient: linear-gradient(45deg, #ffffff, #d9d9d9);
@@ -19,56 +47,56 @@
 
 /* Font imports */
 @font-face {
-  font-family: 'Vazirmatn';
-  src: url('/fonts/Vazirmatn-Regular.ttf') format('ttf');
+  font-family: "Vazirmatn";
+  src: url("/fonts/Vazirmatn-Regular.ttf") format("ttf");
   font-weight: 400;
   font-style: normal;
   font-display: swap;
 }
 
 @font-face {
-  font-family: 'Vazirmatn';
-  src: url('/fonts/Vazirmatn-Medium.ttf') format('ttf');
+  font-family: "Vazirmatn";
+  src: url("/fonts/Vazirmatn-Medium.ttf") format("ttf");
   font-weight: 500;
   font-style: normal;
   font-display: swap;
 }
 
 @font-face {
-  font-family: 'Vazirmatn';
-  src: url('/fonts/Vazirmatn-Bold.ttf') format('ttf');
+  font-family: "Vazirmatn";
+  src: url("/fonts/Vazirmatn-Bold.ttf") format("ttf");
   font-weight: 700;
   font-style: normal;
   font-display: swap;
 }
 
 @font-face {
-  font-family: 'NotoKufiArabic';
-  src: url('/fonts/NotoKufiArabic-Regular.ttf') format('ttf');
+  font-family: "NotoKufiArabic";
+  src: url("/fonts/NotoKufiArabic-Regular.ttf") format("ttf");
   font-weight: 400;
   font-style: normal;
   font-display: swap;
 }
 
 @font-face {
-  font-family: 'NotoKufiArabic';
-  src: url('/fonts/NotoKufiArabic-Medium.ttf') format('ttf');
+  font-family: "NotoKufiArabic";
+  src: url("/fonts/NotoKufiArabic-Medium.ttf") format("ttf");
   font-weight: 500;
   font-style: normal;
   font-display: swap;
 }
 
 @font-face {
-  font-family: 'NotoKufiArabic';
-  src: url('/fonts/NotoKufiArabic-Bold.ttf') format('ttf');
+  font-family: "NotoKufiArabic";
+  src: url("/fonts/NotoKufiArabic-Bold.ttf") format("ttf");
   font-weight: 700;
   font-style: normal;
   font-display: swap;
 }
 
 @font-face {
-  font-family: 'NumericPersian';
-  src: url('../../public/fonts/IRANSans\(FaNum\)_Medium.ttf') format('ttf');
+  font-family: "NumericPersian";
+  src: url("../../public/fonts/IRANSans\(FaNum\)_Medium.ttf") format("ttf");
   font-weight: 700;
   font-style: medium;
   font-display: swap;
@@ -112,7 +140,6 @@
 .ant-card {
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
 }
-
 
 @media (prefers-color-scheme: dark) {
   :root {
@@ -175,7 +202,7 @@ body {
   .header-nav {
     flex-direction: row-reverse;
   }
-  
+
   .auth-buttons {
     flex-direction: row-reverse;
   }
@@ -183,9 +210,32 @@ body {
 
 /* Language specific styles */
 :root[lang="fa"] body {
-  font-family: 'Vazirmatn';
+  font-family: "Vazirmatn";
 }
 
 :root[lang="ar"] body {
-  font-family: 'NotoKufiArabic';
+  font-family: "NotoKufiArabic";
+}
+
+@layer base {
+  :root {
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 240 5.3% 26.1%;
+    --sidebar-primary: 240 5.9% 10%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 240 4.8% 95.9%;
+    --sidebar-accent-foreground: 240 5.9% 10%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+  .dark {
+    --sidebar-background: 240 5.9% 10%;
+    --sidebar-foreground: 240 4.8% 95.9%;
+    --sidebar-primary: 224.3 76.3% 48%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 3.7% 15.9%;
+    --sidebar-accent-foreground: 240 4.8% 95.9%;
+    --sidebar-border: 240 3.7% 15.9%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
 }

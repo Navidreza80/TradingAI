@@ -12,3 +12,9 @@ export const convertToLocaleNumber = (num: number, locale: string): string => {
   }
   return num.toString();
 }; 
+import { clsx, type ClassValue } from "clsx"
+import { twMerge } from "tailwind-merge"
+
+export function cn(...inputs: ClassValue[]) {
+  return twMerge(clsx(inputs))
+}
