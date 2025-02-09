@@ -1,4 +1,6 @@
+"use client"
 // imports
+
 
 import { Inter } from "next/font/google";
 import "./globals.css";
@@ -6,6 +8,8 @@ import { I18nProvider } from "@/providers/i18n-provider";
 import { siteConfig } from "@/config/metadata";
 import { ClerkProvider } from '@clerk/nextjs'
 import HeaderServer from "@/components/Header/HeaderServer";
+import { Provider } from "react-redux";
+import { store } from "@/redux/store";
 
 // fonts
 
@@ -73,8 +77,10 @@ export default function RootLayout({
       <body className={inter.className}>
         <ClerkProvider>
           <I18nProvider>
-            <HeaderServer />
-            {children}
+            <Provider store={store}>
+              <HeaderServer />
+              {children}
+            </Provider>
           </I18nProvider>
         </ClerkProvider>
       </body>

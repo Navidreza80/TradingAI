@@ -14,6 +14,7 @@
     "@heroicons/react": "^2.2.0",
     "@mistralai/mistralai": "^1.5.0",
     "@prisma/client": "^6.3.0",
+    "@reduxjs/toolkit": "^2.5.1",
     "@tanstack/react-query": "^5.65.1",
     "antd": "^5.23.2",
     "axios": "^1.7.9",
@@ -30,7 +31,9 @@
     "react-countup": "^6.5.3",
     "react-dom": "^19.0.0",
     "react-i18next": "^15.4.0",
-    "react-intersection-observer": "^9.15.1"
+    "react-intersection-observer": "^9.15.1",
+    "react-redux": "^9.2.0",
+    "redux": "^5.0.1"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
