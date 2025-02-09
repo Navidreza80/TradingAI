@@ -41,11 +41,11 @@ export default function TechnicalAnalysisPage() {
 
     return (
         <ConfigProvider locale={fa_IR} direction="rtl">
-            <Layout className="min-h-screen bg-gray-900">
-                <Header className="flex items-center mt-20 justify-between bg-gray-900 px-16">
+            <Layout className="min-h-screen bg-gradient-to-b dark:from-[#0a0a0a] dark:to-[#1a1a1a] from-white to-gray-50">
+                <Header className="flex items-center mt-20 justify-between bg-transparent px-16">
                     <div className="flex items-center">
-                        <LineChartOutlined className="text-2xl text-blue-500 ml-2" />
-                        <Title level={3} style={{ color: 'white', margin: 0 }}>تحلیل تکنیکال</Title>
+                        <LineChartOutlined className="text-2xl dark:text-white gray-900 ml-2" />
+                        <h3 className='dark:text-white text-2xl font-semibold text-gray-900' style={{  margin: 0 }}>تحلیل تکنیکال</h3>
                     </div>
                     <Link href="/education">
                         <Button type="primary" icon={<ArrowLeftOutlined />}>
@@ -59,27 +59,12 @@ export default function TechnicalAnalysisPage() {
                         {/* باکس جستجو با طراحی بهتر */}
                         <div className="mb-8 flex justify-center">
                             <div className="w-full max-w-2xl">
-                                <Input
-                                    placeholder="جستجو در آموزش‌های تکنیکال..."
-                                    prefix={
-                                        <SearchOutlined 
-                                            className="text-gray-400 text-lg" 
-                                            style={{ marginLeft: '8px' }}
-                                        />
-                                    }
+                                <input
+                                    type="text"
                                     value={searchTerm}
                                     onChange={handleSearchChange}
-                                    size="large"
-                                    style={{ 
-                                        backgroundColor: '#1F2937',
-                                        borderRadius: '12px',
-                                        color: "white",
-                                        height: '50px',
-                                        fontSize: '16px',
-                                        boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)',
-                                    }}
-                                    className=".placeholder-white technical-search-input"
-                                />
+                                    placeholder="جستجو در آموزش‌های تکنیکال..."
+                                    className="w-full px-4 py-3 pl-12 rounded-xl dark:bg-white/5 bg-white dark:text-white text-gray-900 dark:border-white/10 border-gray-200 border focus:outline-none focus:ring-2 focus:ring-[#1890ff] placeholder:dark:text-gray-500 placeholder:text-gray-400 transition-all duration-200"/>
                             </div>
                         </div>
 
@@ -88,7 +73,7 @@ export default function TechnicalAnalysisPage() {
                                 <Col xs={24} sm={12} md={8} lg={6} key={index}>
                                     <Card
                                         hoverable
-                                        className="bg-gray-800 border-gray-700 h-full"
+                                        className="rounded-2xl overflow-hidden dark:border-white/10 border-black/5 border backdrop-blur-xl dark:bg-white/5 bg-white/80 dark:hover:bg-white/10 hover:bg-white/90 transition-all duration-300 hover:scale-[1.02] dark:hover:shadow-[0_0_30px_rgba(24,144,255,0.1)] hover:shadow-[0_0_30px_rgba(24,144,255,0.2)] h-full transition-all duration-300 hover:transform hover:scale-105 h-full"
                                         cover={
                                             <div className="relative h-48">
                                                 <Image
@@ -104,7 +89,7 @@ export default function TechnicalAnalysisPage() {
                                         onClick={() => router.push(`/education/technical/${index}`)}
                                     >
                                         <Meta
-                                            title={<Text className="text-white text-center block">{analysis.title}</Text>}
+                                            title={<h1 className="dark:text-white text-gray-900 text-center block">{analysis.title}</h1>}
                                         />
                                     </Card>
                                 </Col>
@@ -114,9 +99,9 @@ export default function TechnicalAnalysisPage() {
                         {/* نمایش پیام در صورت عدم یافتن نتیجه */}
                         {filteredAnalysis.length === 0 && (
                             <div className="text-center mt-8">
-                                <Text className="text-gray-400">
+                                <h1 className="dark:text-white text-gray-900">
                                     نتیجه‌ای برای جستجوی شما یافت نشد.
-                                </Text>
+                                </h1>
                             </div>
                         )}
                     </div>

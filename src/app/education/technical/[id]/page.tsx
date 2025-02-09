@@ -23,8 +23,8 @@ export default function TechnicalAnalysisDetailPage() {
 
     return (
         <ConfigProvider locale={fa_IR} direction="rtl">
-            <Layout className="min-h-screen bg-gray-900">
-                <Header className="flex mt-16 items-center justify-between bg-gray-900 px-16">
+            <Layout className="min-h-screen bg-gradient-to-b dark:from-[#0a0a0a] dark:to-[#1a1a1a] from-white to-gray-50">
+                <Header className="flex mt-16 items-center justify-between bg-transparent px-16">
                     <Title level={3} style={{ color: 'white', margin: 0 }}>{analysis.title}</Title>
                     <Link href="/education/technical">
                         <Button type="primary" icon={<ArrowLeftOutlined />}>
@@ -35,7 +35,7 @@ export default function TechnicalAnalysisDetailPage() {
 
                 <Content className="p-6">
                     <div className="max-w-4xl mx-auto">
-                        <Card className="bg-gray-800 border-gray-700">
+                        <Card className="dark:bg-white/5 bg-white/80 dark:border-white/10 border-black/5">
                             <Space direction="vertical" size="large" className="w-full">
                                 <div className="relative h-96 w-full">
                                     <Image
@@ -55,28 +55,28 @@ export default function TechnicalAnalysisDetailPage() {
                                             const [title, content] = paragraph.split(':');
                                             return (
                                                 <div key={index} className="mb-4">
-                                                    <Text strong className="text-white text-lg block mb-2">
+                                                    <h2  className="dark:text-white text-gray-900 text-lg block mb-2">
                                                         {title.trim()}:
-                                                    </Text>
-                                                    <Paragraph className="text-gray-300 text-base whitespace-pre-line mr-4">
+                                                    </h2>
+                                                    <p className="dark:text-white text-gray-500 text-base whitespace-pre-line mr-4">
                                                         {content.trim()}
-                                                    </Paragraph>
+                                                    </p>
                                                 </div>
                                             );
                                         }
                                         // پاراگراف معمولی
                                         return (
-                                            <Paragraph key={index} className="text-gray-300 text-base whitespace-pre-line">
+                                            <p key={index} className="dark:text-white text-gray-500 text-base whitespace-pre-line">
                                                 {paragraph.trim()}
-                                            </Paragraph>
+                                            </p>
                                         );
                                     })}
                                 </div>
 
                                 <div>
-                                    <Text strong className="text-white block mb-2 text-lg">
+                                    <h2 className="dark:text-white text-gray-900 font-semibold block mb-2 text-lg">
                                         اندیکاتورهای مرتبط:
-                                    </Text>
+                                    </h2>
                                     <Space wrap>
                                         {analysis.indicators.map((indicator, i) => (
                                             <Tag key={i} color="blue" className="text-lg py-1 px-3">
@@ -87,14 +87,14 @@ export default function TechnicalAnalysisDetailPage() {
                                 </div>
 
                                 <div>
-                                    <Text strong className="text-white block mb-2 text-lg">
+                                    <h2 className="dark:text-white text-gray-900 font-semibold block mb-2 text-lg">
                                         نکات کلیدی:
-                                    </Text>
+                                    </h2>
                                     <List
                                         dataSource={analysis.tips}
                                         renderItem={tip => (
                                             <List.Item>
-                                                <Text className="text-gray-300 text-lg">• {tip}</Text>
+                                                <h2 className="dark:text-white text-gray-800 text-lg">• {tip}</h2>
                                             </List.Item>
                                         )}
                                     />

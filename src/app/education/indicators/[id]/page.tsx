@@ -19,8 +19,8 @@ export default function IndicatorDetail() {
 
     return (
         <ConfigProvider locale={fa_IR} direction="rtl">
-            <Layout className="min-h-screen bg-gray-900">
-                <Header className="flex mt-16 items-center justify-between bg-gray-900 px-16">
+            <Layout className="min-h-screen bg-gradient-to-b dark:from-[#0a0a0a] dark:to-[#1a1a1a] from-white to-gray-50">
+                <Header className="flex mt-16 items-center justify-between bg-transparent px-16">
                 <Title level={3} style={{ color: 'white', margin: 0 }}>توضیحات اندیکاتور</Title>
                     <Link href="/education/indicators">
                         <Button type="primary" icon={<ArrowLeftOutlined />}>
@@ -31,9 +31,9 @@ export default function IndicatorDetail() {
 
                 <Content className="p-6">
                     <div className="max-w-4xl mx-auto">
-                        <Card className="bg-gray-800">
+                        <Card className="dark:bg-white/5 bg-white/80 dark:border-white/10 border-black/5">
                             <Space direction="vertical" size="large" className="w-full">
-                                <Title level={3} style={{ color: 'white', margin: 0 }}>{indicator.title}</Title>
+                                <h3 className='dark:text-white text-black text-2xl font-semibold ' style={{ margin: 0 }}>{indicator.title}</h3>
                                 {/* Image with fixed dimensions and fallback */}
                                 <div className="w-full flex justify-center">
                                     <Image
@@ -52,12 +52,11 @@ export default function IndicatorDetail() {
 
                                 {/* توضیحات با استایل جدید */}
                                 <div>
-                                    <Title level={4} style={{ color: 'white', margin: 0 }}>توضیحات</Title>
-                                    <div className="text-gray-200 text-lg leading-8 whitespace-pre-line"
+                                    <h4 className='dark:text-white text-black text-xl font-semibold'  style={{ margin: 0 }}>توضیحات</h4>
+                                    <div className="dark:text-white text-gray-600 text-lg leading-8 whitespace-pre-line"
                                         style={{
                                             fontSize: '16px',
                                             lineHeight: '2',
-                                            color: '#e5e7eb',
                                             textAlign: 'justify',
                                             padding: '10px 0'
                                         }}>
@@ -68,10 +67,10 @@ export default function IndicatorDetail() {
                                 {/* تنظیمات با استایل جدید */}
                                 {indicator.settings && indicator.settings.length > 0 && (
                                     <div>
-                                        <Title level={4} style={{ color: 'white', margin: 0 }}>تنظیمات</Title>
+                                        <h4 className='dark:text-white text-black text-xl font-semibold' style={{ margin: 0 }}>تنظیمات</h4>
                                         <ul className="list-disc list-inside text-gray-200 text-lg leading-8">
                                             {indicator.settings.map((setting, index) => (
-                                                <li key={index} className="mb-2">{setting}</li>
+                                                <li key={index} className=" dark:text-white text-gray-600 mb-2">{setting}</li>
                                             ))}
                                         </ul>
                                     </div>
@@ -80,10 +79,10 @@ export default function IndicatorDetail() {
                                 {/* نکات با استایل جدید */}
                                 {indicator.tips && indicator.tips.length > 0 && (
                                     <div>
-                                        <Title level={4} style={{ color: 'white', margin: 0 }}>نکات کلیدی</Title>
+                                        <h4 className='dark:text-white text-black text-xl font-semibold' style={{ margin: 0 }}>نکات کلیدی</h4>
                                         <ul className="list-disc list-inside text-gray-200 text-lg leading-8">
                                             {indicator.tips.map((tip, index) => (
-                                                <li key={index} className="mb-2">{tip}</li>
+                                                <li key={index} className="dark:text-white text-gray-600 mb-2">{tip}</li>
                                             ))}
                                         </ul>
                                     </div>

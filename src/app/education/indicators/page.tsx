@@ -22,7 +22,7 @@ export default function IndicatorsPage() {
 
     const handleSearch = useCallback(
         debounce((value: string) => {
-            const filtered = indicators.filter(indicator => 
+            const filtered = indicators.filter(indicator =>
                 indicator.title.toLowerCase().includes(value.toLowerCase())
             );
             setFilteredIndicators(filtered);
@@ -32,11 +32,11 @@ export default function IndicatorsPage() {
 
     return (
         <ConfigProvider locale={fa_IR} direction="rtl">
-            <Layout className="min-h-screen bg-gray-900">
-                <Header className="flex items-center mt-20 justify-between bg-gray-900 px-16">
+            <Layout className="min-h-screen bg-gradient-to-b dark:from-[#0a0a0a] dark:to-[#1a1a1a] from-white to-gray-50">
+                <Header className="flex items-center mt-20 justify-between bg-transparent px-16">
                     <div className="flex items-center">
-                        <LineChartOutlined className="text-2xl text-white ml-2" />
-                        <Title level={3} style={{ color: 'white', margin: 0 }}>اندیکاتورها</Title>
+                        <LineChartOutlined className="text-2xl dark:text-white gray-900 ml-2" />
+                        <h3 className='dark:text-white text-2xl font-semibold text-gray-900' style={{  margin: 0 }}>اندیکاتورها</h3>
                     </div>
                     <Link href="/education">
                         <Button type="primary" icon={<ArrowLeftOutlined />}>
@@ -49,25 +49,15 @@ export default function IndicatorsPage() {
                     <div className="max-w-7xl mx-auto">
                         <div className="mb-8 flex justify-center">
                             <div className="w-full max-w-2xl">
-                                <Input
-                                    placeholder="جستجو در اندیکاتورها..."
-                                    prefix={<SearchOutlined className="text-gray-400 text-lg" />}
+
+                                <input
+                                    type="text"
                                     onChange={(e) => {
                                         setSearchTerm(e.target.value);
                                         handleSearch(e.target.value);
                                     }}
-                                    style={{ 
-                                        backgroundColor: '#1F2937',
-                                        borderRadius: '12px',
-                                        color: "white",
-                                        height: '50px',
-                                        fontSize: '16px',
-                                        boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)',
-                                    }}
-                                    size="large"
-                                    className=".placeholder-white technical-search-input"
-                                />
-                                
+                                    placeholder="جستجو در اندیکاتورها..."
+                                    className="w-full px-4 py-3 pl-12 rounded-xl dark:bg-white/5 bg-white dark:text-white text-gray-900 dark:border-white/10 border-gray-200 border focus:outline-none focus:ring-2 focus:ring-[#1890ff] placeholder:dark:text-gray-500 placeholder:text-gray-400 transition-all duration-200"/>
                             </div>
                         </div>
 
@@ -76,26 +66,33 @@ export default function IndicatorsPage() {
                                 <Col xs={24} sm={12} md={8} lg={6} key={index}>
                                     <Card
                                         hoverable
-                                        className="bg-gray-800 border-gray-700 h-full"
+                                        className="rounded-2xl overflow-hidden dark:border-white/10 border-black/5 border backdrop-blur-xl dark:bg-white/5 bg-white/80 dark:hover:bg-white/10 hover:bg-white/90 transition-all duration-300 hover:scale-[1.02] dark:hover:shadow-[0_0_30px_rgba(24,144,255,0.1)] hover:shadow-[0_0_30px_rgba(24,144,255,0.2)] h-full transition-all duration-300 hover:transform hover:scale-105 h-full p-1"
                                         onClick={() => router.push(`/education/indicators/${index}`)}
                                         cover={
                                             <div style={{ height: '200px', overflow: 'hidden', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                                                 <Image
                                                     alt={indicator.title}
                                                     src={indicator.image || DEFAULT_IMAGE}
-                                                    style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                                                    style={{ width: '100%', height: '192px', objectFit: 'cover', borderRadius: "8px" }}
                                                     preview={false}
                                                 />
                                             </div>
                                         }
                                     >
                                         <Meta
-                                            title={<Text className="text-white text-center block">{indicator.title}</Text>}
+                                            title={<h1 className="dark:text-white text-gray-900 text-center block">{indicator.title}</h1>}
                                         />
                                     </Card>
                                 </Col>
                             ))}
                         </Row>
+                        {filteredIndicators.length === 0 && (
+                            <div className="text-center mt-8">
+                                <h1 className="dark:text-white text-gray-900">
+                                    نتیجه‌ای برای جستجوی شما یافت نشد.
+                                </h1>
+                            </div>
+                        )}
                     </div>
                 </Content>
             </Layout>
