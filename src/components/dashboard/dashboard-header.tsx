@@ -5,10 +5,12 @@ import Image from "next/image";
 import { CustomTrigger } from "./trigger";
 import DashboardNavigation from "./dashboard-navigation";
 import ActionBtns from "./dashboard-header-action-btns";
+import { useTranslation } from "react-i18next";
 
 
 // tsx render
 export default function Headerdashboard() {
+    const { i18n } = useTranslation();
 
   return (
     <div className="w-full h-[68px] border-b border-[#53B1FB] flex flex-row flex-wrap justify-between p-[5px] items-center dark:text-white dark:bg-black text-black bg-white">
@@ -16,7 +18,7 @@ export default function Headerdashboard() {
         {/* custom trigger for sidebar */}
         <CustomTrigger />
 
-        <div className="flex flex-row gap-2 ml-5">
+        <div className={`flex flex-row gap-2 ${i18n.language != 'en' ? 'mr-5' : 'ml-5'}`}>
           {/* user profile picture */}
           <Image
             src="/image/8b167af653c2399dd93b952a48740620.jpg"

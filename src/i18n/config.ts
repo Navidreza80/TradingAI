@@ -253,6 +253,14 @@ const resources = {
           likes: "likes",
           subscriptions: "subscriptions",
           comments: "comments",
+          signout: "Sign Out"
+        },
+        welcome: {
+          welcome: "Welcome back,"
+        },
+        pandl: {
+          pandl: "P&L",
+          lastMonth: "Last Month"
         },
       },
     },
@@ -504,6 +512,14 @@ const resources = {
           likes: "مورد علاقه ها",
           subscriptions: "اشتراک",
           comments: "نظرات",
+          signout: 'خروج'
+        },
+        welcome: {
+          welcome: "خوش آمدید,"
+        },
+        pandl: {
+          pandl: "س/ض",
+          lastMonth: "ماه اخیر"
         },
       },
     },

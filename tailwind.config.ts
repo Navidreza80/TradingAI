@@ -12,6 +12,10 @@ const config: Config = {
       backgroundImage: {
         wave: "url('/image/gesture.png')",
         waveDark: "url('/image/gestureDark.png')",
+        comments: "url('/image/comments.png')",
+        likes: "url('/image/likes.png')",
+        user: "url('/image/user.png')",
+        save: "url('/image/saved.png')",
       },
       screens: {
         xs: "375px",

@@ -132,7 +132,15 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                   </SidebarMenuItem>
                 ))}
               </div>
-              {open == true && <Button>Sign Out</Button>}
+              {open == true && (
+                <Button
+                  className={`${i18n.language == "fa" && "font-vazirmatn"} ${
+                    i18n.language == "ar" && "font-notokufi"
+                  }`}
+                >
+                  {t("dashboard.side.signout")}
+                </Button>
+              )}
             </SidebarMenu>
           </SidebarGroupContent>
         </SidebarGroup>

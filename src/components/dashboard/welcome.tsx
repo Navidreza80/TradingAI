@@ -2,9 +2,11 @@
 
 // imports
 import { motion } from "framer-motion";
+import { useTranslation } from "react-i18next";
 
 // tsx render
 export default function Welcome() {
+  const { t, i18n } = useTranslation();
   // variants for animation
   const variants = {
     hidden: { opacity: 0, y: -20 },
@@ -18,14 +20,14 @@ export default function Welcome() {
 
       {/* A phrase to welcome user with his/her name on it */}
       <motion.h1
-        className="text-4xl font-extrabold w-full dark:text-white text-black"
+        className={`text-4xl font-extrabold w-full dark:text-white text-black ${i18n.language == "fa" && "font-vazirmatn"} ${i18n.language == "ar" && "font-notokufi"}`}
         initial="hidden"
         animate="visible"
         exit="hidden"
         variants={variants}
         transition={{ duration: 0.5 }}
       >
-        Welcome back, Navidreza!
+        {t("dashboard.welcome.welcome")} Navidreza!
       </motion.h1>
     </div>
   );
