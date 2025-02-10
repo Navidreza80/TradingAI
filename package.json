@@ -11,7 +11,7 @@
   "dependencies": {
     "@ant-design/icons": "^5.6.0",
     "@clerk/clerk-sdk-node": "^5.1.6",
-    "@clerk/nextjs": "^6.10.3",
+    "@clerk/nextjs": "^6.11.1",
     "@heroicons/react": "^2.2.0",
     "@mistralai/mistralai": "^1.5.0",
     "@prisma/client": "^6.3.1",
@@ -32,6 +32,7 @@
     "i18next": "^24.2.2",
     "i18next-browser-languagedetector": "^8.0.2",
     "i18next-resources-to-backend": "^1.2.1",
+    "lodash": "^4.17.21",
     "lucide-react": "^0.474.0",
     "next": "15.1.6",
     "next-i18next": "^15.4.1",
