@@ -73,7 +73,7 @@ export const technicalAnalysis = [
         • معمولاً در دو سوم مسیر مثلث شکست اتفاق می‌افتد
         • واگرایی مثبت در اندیکاتورها اعتبار الگو را تقویت می‌کند
         • گاهی پس از شکست، قیمت برای تست مقاومت شکسته شده برمی‌گردد`,
-        image: 'https://cms.ebidar.com/media/Education/trading-auction-2.jpg',
+        image: 'https://centerpointsecurities.com/wp-content/uploads/2022/12/Ascending-Triangle-Chart-Pattern-1024x735.png',
         indicators: [
             'حجم معاملات',
             'MACD',
@@ -94,7 +94,7 @@ export const technicalAnalysis = [
     {
         title: 'واگرایی (Divergence)',
         description: `واگرایی زمانی رخ می‌دهد که حرکت قیمت با حرکت اندیکاتورها همخوانی ندارد. واگرایی مثبت و منفی می‌تواند نشانه‌ای قوی برای تغییر روند باشد.`,
-        image: 'https://learning.emofid.com/wp-content/uploads/2020/12/5-1280x720.jpg',
+        image: 'https://forexbee.co/wp-content/uploads/2021/09/Divergence-Cheat-Sheet.webp',
         indicators: ['RSI', 'MACD', 'استوکاستیک'],
         tips: [
             'واگرایی مثبت: قیمت کف پایین‌تر اما اندیکاتور کف بالاتر می‌سازد',
@@ -361,7 +361,7 @@ export const technicalAnalysis = [
     {
         title: 'فیبوناچی (Fibonacci)',
         description: `ابزارهای فیبوناچی برای پیش‌بینی سطوح حمایت، مقاومت و اهداف قیمتی استفاده می‌شوند. سطوح کلیدی شامل 23.6%، 38.2%، 50%، 61.8% و 78.6% هستند.`,
-        image: 'https://i.ytimg.com/vi/Kz6-8nQLRHM/maxresdefault.jpg',
+        image: 'https://a2a3f5h6.delivery.rocketcdn.me/wp-content/uploads/2018/10/fibonacci-zigzag-levels-retracement-indicator.png',
         indicators: ['ریتریسمنت', 'اکستنشن', 'فن‌های زمانی'],
         tips: [
             'استفاده از چند سطح فیبوناچی برای تایید',

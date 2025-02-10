@@ -7,7 +7,7 @@ import fa_IR from 'antd/locale/fa_IR';
 import Link from 'next/link';
 import { technicalAnalysis } from '../../data';
 import { useParams } from 'next/navigation';
-const DEFAULT_IMAGE = 'https://media.salameno.com/d/2022/07/25/3/15384301.jpg?ts=1658737063000';
+
 
 const { Header, Content } = Layout;
 const { Title, Text, Paragraph } = Typography;
@@ -15,7 +15,7 @@ const { Title, Text, Paragraph } = Typography;
 export default function TechnicalAnalysisDetailPage() {
     const params = useParams();
     const analysis = technicalAnalysis[parseInt(params.id as string)];
-
+    const DEFAULT_IMAGE = 'https://nobitex.ir/mag/wp-content/uploads//2023/08/01-%D8%AA%D8%AD%D9%84%DB%8C%D9%84-%D8%AA%DA%A9%D9%86%DB%8C%DA%A9%D8%A7%D9%84.jpg';
     if (!analysis) return null;
 
     // تبدیل متن توضیحات به پاراگراف‌های مجزا
@@ -24,11 +24,11 @@ export default function TechnicalAnalysisDetailPage() {
     return (
         <ConfigProvider locale={fa_IR} direction="rtl">
             <Layout className="min-h-screen bg-gradient-to-b dark:from-[#0a0a0a] dark:to-[#1a1a1a] from-white to-gray-50">
-                <Header className="flex mt-16 items-center justify-between bg-transparent px-16">
-                    <Title level={3} style={{ color: 'white', margin: 0 }}>{analysis.title}</Title>
+                <Header className="flex mt-16 items-center justify-between bg-transparent px-32">
+                    <h3 className='dark:text-white text-black font-bold text-2xl' style={{ margin: 0 }}>{analysis.title}</h3>
                     <Link href="/education/technical">
                         <Button type="primary" icon={<ArrowLeftOutlined />}>
-                            بازگشت به لیست
+                            بازگشت 
                         </Button>
                     </Link>
                 </Header>

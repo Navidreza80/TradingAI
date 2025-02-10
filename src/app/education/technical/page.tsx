@@ -9,7 +9,7 @@ import { useRouter } from 'next/navigation';
 import { technicalAnalysis } from '../data';
 import { useState, useCallback } from 'react';
 import debounce from 'lodash/debounce';
-const DEFAULT_IMAGE = 'https://media.salameno.com/d/2022/07/25/3/15384301.jpg?ts=1658737063000';
+
 
 const { Header, Content } = Layout;
 const { Title, Text } = Typography;
@@ -20,6 +20,7 @@ export default function TechnicalAnalysisPage() {
     const router = useRouter();
     const [searchTerm, setSearchTerm] = useState('');
     const [filteredAnalysis, setFilteredAnalysis] = useState(technicalAnalysis);
+    const DEFAULT_IMAGE = 'https://nobitex.ir/mag/wp-content/uploads//2023/08/01-%D8%AA%D8%AD%D9%84%DB%8C%D9%84-%D8%AA%DA%A9%D9%86%DB%8C%DA%A9%D8%A7%D9%84.jpg';
 
     // جستجوی بهینه شده با debounce
     const handleSearch = useCallback(
@@ -42,7 +43,7 @@ export default function TechnicalAnalysisPage() {
     return (
         <ConfigProvider locale={fa_IR} direction="rtl">
             <Layout className="min-h-screen bg-gradient-to-b dark:from-[#0a0a0a] dark:to-[#1a1a1a] from-white to-gray-50">
-                <Header className="flex items-center mt-20 justify-between bg-transparent px-16">
+                <Header className="flex items-center mt-20 justify-between bg-transparent px-32">
                     <div className="flex items-center">
                         <LineChartOutlined className="text-2xl dark:text-white gray-900 ml-2" />
                         <h3 className='dark:text-white text-2xl font-semibold text-gray-900' style={{  margin: 0 }}>تحلیل تکنیکال</h3>
@@ -58,13 +59,14 @@ export default function TechnicalAnalysisPage() {
                     <div className="max-w-7xl mx-auto">
                         {/* باکس جستجو با طراحی بهتر */}
                         <div className="mb-8 flex justify-center">
-                            <div className="w-full max-w-2xl">
+                            <div className="relative w-full max-w-2xl mx-auto">
                                 <input
                                     type="text"
                                     value={searchTerm}
                                     onChange={handleSearchChange}
                                     placeholder="جستجو در آموزش‌های تکنیکال..."
                                     className="w-full px-4 py-3 pl-12 rounded-xl dark:bg-white/5 bg-white dark:text-white text-gray-900 dark:border-white/10 border-gray-200 border focus:outline-none focus:ring-2 focus:ring-[#1890ff] placeholder:dark:text-gray-500 placeholder:text-gray-400 transition-all duration-200"/>
+                                    <SearchOutlined className="absolute text-2xl left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 dark:text-gray-400 text-gray-500" />
                             </div>
                         </div>
 
