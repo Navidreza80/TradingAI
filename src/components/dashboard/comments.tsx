@@ -33,8 +33,12 @@ export default function Comments() {
 
           {/* username and role */}
           <div className="flex flex-row justify-start items-center flex-wrap">
-            <h1 className="w-full font-semibold text-[17px] dark:text-gray-400 gap-9 text-gray-600">Navidreza</h1>
-            <h3 className="w-full text-[15px] dark:text-gray-400 gap-9 text-gray-600">Forex Trader</h3>
+            <h1 className="w-full font-semibold text-[17px] dark:text-gray-400 gap-9 text-gray-600">
+              Navidreza
+            </h1>
+            <h3 className="w-full text-[15px] dark:text-gray-400 gap-9 text-gray-600">
+              Forex Trader
+            </h3>
           </div>
         </div>
         <h1 className="text-gray-400">2 hours ago...</h1>
@@ -57,8 +61,16 @@ export default function Comments() {
         </div>
       </div>
       <div className="flex flex-col w-full p-2 items-start gap-2">
-        <h1 className="font-bold text-2xl dark:text-gray-400 gap-9 text-gray-600">How this strategy works?</h1>
-        <h3 className="text-gray-400 overflow-hidden w-96 h-full text-ellipsis whitespace-nowrap">how can i implement this strategy in my trades so i can gai loads of profit and became elon musk ow can i implement this strategy in my trades so i can gai loads of profit and became elon musk ow can i implement this strategy in my trades so i can gai loads of profit and became elon musk</h3>
+        <h1 className="font-bold text-2xl dark:text-gray-400 gap-9 text-gray-600">
+          How this strategy works?
+        </h1>
+        <h3 className="text-gray-400 overflow-hidden w-96 h-full text-ellipsis whitespace-nowrap">
+          how can i implement this strategy in my trades so i can gai loads of
+          profit and became elon musk ow can i implement this strategy in my
+          trades so i can gai loads of profit and became elon musk ow can i
+          implement this strategy in my trades so i can gai loads of profit and
+          became elon musk
+        </h3>
       </div>
     </div>
   );

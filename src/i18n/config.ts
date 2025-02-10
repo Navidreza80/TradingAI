@@ -284,6 +284,12 @@ const resources = {
           saved: "Saved",
           comments: "Comments",
         },
+        course: {
+          title: "Latest Course",
+        },
+        blog: {
+          title: "Latest Blog",
+        },
       },
     },
   },
@@ -565,6 +571,12 @@ const resources = {
           saved: "ذخیره‌شده‌ها",
           comments: "دیدگاه‌ها",
         },
+        course: {
+          title: "دوره اخیر",
+        },
+        blog: {
+          title: "بلاگ اخیر",
+        },
       },
     },
   },
@@ -830,6 +842,12 @@ const resources = {
           following: "المتابعون",
           saved: "المحفوظة",
           comments: "التعليقات",
+        },
+        course: {
+          title: "أحدث دورة",
+        },
+        blog: {
+          title: "حدث مدونة",
         },
       },
     },
