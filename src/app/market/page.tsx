@@ -49,9 +49,6 @@ const Home = () => {
     return () => clearInterval(interval);
   }, [sortOption]);
 
-  const formatPrice = (price: number): string => {
-    return price < 1 ? price.toFixed(8) : price.toFixed(2);
-  };
 
   const filteredData = cryptoData.filter(crypto => {
     const matchesSearchTerm = crypto.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -66,7 +63,7 @@ const Home = () => {
     <main className="mt-12 bg-gradient-to-b dark:from-[#0a0a0a] dark:to-[#101010] from-white to-gray-50 p-8 min-h-screen p-10">
       {/* جستجو */}
       <div className='w-full flex justify-left'>
-        <div className="relative shadow-sm rounded-xl shadow-gray-500 mb-4 ml-4 w-[400px]">
+        <div className="relative shadow-sm rounded-xl shadow-gray-500 mb-4 ml-4 w-[400px] dark:bg-[#030303] bg-white">
           <input
             type="text"
             value={searchTerm}
@@ -86,12 +83,12 @@ const Home = () => {
       <table className="w-full table-auto bg-white shadow-md shadow-gray-500 rounded-lg overflow-hidden">
         <thead className=" dark:bg-gray-300 bg-gray-800 text-white">
           <tr>
-            <th className="px-4 text-left dark:text-gray-900 text-white py-2 cursor-pointer" >Icon</th>
-            <th className="px-4 text-left dark:text-gray-900 text-white py-2 cursor-pointer" >Name</th>
-            <th className="px-4 text-left dark:text-gray-900 text-white py-2 cursor-pointer" >Price</th>
-            <th className="px-4 text-left dark:text-gray-900 text-white py-2 cursor-pointer" >Market Cap</th>
-            <th className="px-4 text-left dark:text-gray-900 text-white py-2 cursor-pointer" >24h Volume</th>
-            <th className="px-4 text-left dark:text-gray-900 text-white py-2 cursor-pointer" >24h Change</th>
+            <th className="px-4 text-xl text-left dark:text-gray-900 text-white py-2 cursor-pointer" >Icon</th>
+            <th className="px-4 text-xl text-left dark:text-gray-900 text-white py-2 cursor-pointer" >Name</th>
+            <th className="px-4 text-xl text-left dark:text-gray-900 text-white py-2 cursor-pointer" >Price</th>
+            <th className="px-4 text-xl text-left dark:text-gray-900 text-white py-2 cursor-pointer" >Market Cap</th>
+            <th className="px-4 text-xl text-left dark:text-gray-900 text-white py-2 cursor-pointer" >24h Volume</th>
+            <th className="px-4 text-xl text-left dark:text-gray-900 text-white py-2 cursor-pointer" >24h Change</th>
           </tr>
         </thead>
         <tbody className='dark:bg-[#030303] bg-white'>
@@ -101,15 +98,13 @@ const Home = () => {
             </tr>
           ) : (
             filteredData.map(crypto => (
-              <tr key={crypto.id} className="border-b dark:border-[#202020] border-gray-300 hover:dark:bg-[#4a4a4a] hover:bg-gray-50">
-                <td className="px-4 dark:text-white text-gray-900 py-2"><img src={crypto.image} alt={crypto.name} className="w-6 h-6 inline-block" /></td>
-                <td className="px-4 dark:text-white flex gap-4 text-gray-900 py-2">
-                  {crypto.name}
-                </td>
-                <td className="px-4 dark:text-white text-gray-900 py-2">{formatPrice(crypto.current_price)}$</td>
-                <td className="px-4 dark:text-white text-gray-900 py-2">{crypto.market_cap.toLocaleString()}$</td>
-                <td className="px-4 dark:text-white text-gray-900 py-2">{crypto.total_volume.toLocaleString()}$</td>
-                <td className="px-4 py-2" style={{ color: crypto.price_change_percentage_24h < 0 ? '#ff2b2b' : '#16ff1e' }}>
+              <tr key={crypto.id} className="border-b h-16 dark:border-[#202020] border-gray-300 hover:dark:bg-[#4a4a4a] hover:bg-gray-50">
+                <td className="px-4 text-lg dark:text-white text-gray-900 py-2"><img src={crypto.image } alt={crypto.name} className="w-10 h-10 inline-block" /></td>
+                <td className="px-4 text-lg dark:text-white text-gray-900 py-2"> {crypto.name} </td>
+                <td className="px-4 text-lg dark:text-white text-gray-900 py-2">${crypto.current_price}</td>
+                <td className="px-4 text-lg dark:text-white text-gray-900 py-2">${crypto.market_cap.toLocaleString()}</td>
+                <td className="px-4 text-lg dark:text-white text-gray-900 py-2">${crypto.total_volume.toLocaleString()}</td>
+                <td className="px-4 text-lg py-2" style={{ color: crypto.price_change_percentage_24h < 0 ? '#ff2b2b' : '#16ff1e' }}>
                   {crypto.price_change_percentage_24h.toFixed(2)}%
                 </td>
               </tr>
