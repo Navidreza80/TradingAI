@@ -96,8 +96,8 @@ const Home = () => {
         </thead>
         <tbody className='dark:bg-[#030303] bg-white'>
           {filteredData.length === 0 ? (
-            <tr >
-              <td colSpan={5} className="text-center py-4 text-gray-600">No results found ☹️</td>
+            <tr className="w-full">
+              <td colSpan={6} className="text-center w-full py-4 dark:text-white text-gray-900">No results found ☹️</td>
             </tr>
           ) : (
             filteredData.map(crypto => (
