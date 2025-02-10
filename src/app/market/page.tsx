@@ -81,14 +81,14 @@ const Home = () => {
       </div>
       {/* نمایش جدول */}
       <table className="w-full table-auto bg-white shadow-md shadow-gray-500 rounded-lg overflow-hidden">
-        <thead className=" dark:bg-gray-300 bg-gray-800 text-white">
+        <thead className=" dark:bg-[#383838] bg-gray-800 text-white">
           <tr>
-            <th className="px-4 text-xl text-left dark:text-gray-900 text-white py-2 cursor-pointer" >Icon</th>
-            <th className="px-4 text-xl text-left dark:text-gray-900 text-white py-2 cursor-pointer" >Name</th>
-            <th className="px-4 text-xl text-left dark:text-gray-900 text-white py-2 cursor-pointer" >Price</th>
-            <th className="px-4 text-xl text-left dark:text-gray-900 text-white py-2 cursor-pointer" >Market Cap</th>
-            <th className="px-4 text-xl text-left dark:text-gray-900 text-white py-2 cursor-pointer" >24h Volume</th>
-            <th className="px-4 text-xl text-left dark:text-gray-900 text-white py-2 cursor-pointer" >24h Change</th>
+            <th className="px-4 text-xl text-left text-white py-2 cursor-pointer" >Icon</th>
+            <th className="px-4 text-xl text-left text-white py-2 cursor-pointer" >Name</th>
+            <th className="px-4 text-xl text-left text-white py-2 cursor-pointer" >Price</th>
+            <th className="px-4 text-xl text-left text-white py-2 cursor-pointer" >Market Cap</th>
+            <th className="px-4 text-xl text-left text-white py-2 cursor-pointer" >24h Volume</th>
+            <th className="px-4 text-xl text-left text-white py-2 cursor-pointer" >24h Change</th>
           </tr>
         </thead>
         <tbody className='dark:bg-[#030303] bg-white'>
