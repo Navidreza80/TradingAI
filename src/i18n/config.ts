@@ -253,14 +253,36 @@ const resources = {
           likes: "likes",
           subscriptions: "subscriptions",
           comments: "comments",
-          signout: "Sign Out"
+          signout: "Sign Out",
         },
         welcome: {
-          welcome: "Welcome back,"
+          welcome: "Welcome back,",
         },
         pandl: {
           pandl: "P&L",
-          lastMonth: "Last Month"
+          lastMonth: "Last Month",
+        },
+        position: {
+          title: "Current Position",
+          price: "Price",
+          view: "View On Charts",
+        },
+        chart: {
+          title: "W/L last 6 month",
+        },
+        plan: {
+          current: "Current Plan",
+          upgrade: "upgrade plan",
+          view: "view features",
+        },
+        comments: {
+          title: "Your Comments",
+        },
+        stats: {
+          likes: "Likes",
+          following: "Following",
+          saved: "Saved",
+          comments: "Comments",
         },
       },
     },
@@ -512,14 +534,36 @@ const resources = {
           likes: "مورد علاقه ها",
           subscriptions: "اشتراک",
           comments: "نظرات",
-          signout: 'خروج'
+          signout: "خروج",
         },
         welcome: {
-          welcome: "خوش آمدید,"
+          welcome: "خوش آمدید,",
         },
         pandl: {
           pandl: "س/ض",
-          lastMonth: "ماه اخیر"
+          lastMonth: "ماه اخیر",
+        },
+        position: {
+          title: "موقعیت فعلی",
+          price: "قیمت",
+          view: "مشاهده در نمودارها",
+        },
+        chart: {
+          title: "برد/باخت در ۶ ماه گذشته",
+        },
+        plan: {
+          current: "طرح فعلی",
+          upgrade: "ارتقاء طرح",
+          view: "مشاهده ویژگی‌ها",
+        },
+        comments: {
+          title: "دیدگاه‌های شما",
+        },
+        stats: {
+          likes: "پسندیده‌ها",
+          following: "دنبال‌کنندگان",
+          saved: "ذخیره‌شده‌ها",
+          comments: "دیدگاه‌ها",
         },
       },
     },
@@ -763,6 +807,28 @@ const resources = {
           saved: "المحفوظات",
           likes: "الإعجابات",
           subscriptions: "الاشتراكات",
+          comments: "التعليقات",
+        },
+        position: {
+          title: "الموقع الحالي",
+          price: "السعر",
+          view: "عرض على الرسوم البيانية",
+        },
+        chart: {
+          title: "الربح/الخسارة في آخر 6 أشهر",
+        },
+        plan: {
+          current: "الخطة الحالية",
+          upgrade: "ترقية الخطة",
+          view: "مشاهدة الميزات",
+        },
+        comments: {
+          title: "تعليقاتك",
+        },
+        stats: {
+          likes: "الإعجابات",
+          following: "المتابعون",
+          saved: "المحفوظة",
           comments: "التعليقات",
         },
       },
