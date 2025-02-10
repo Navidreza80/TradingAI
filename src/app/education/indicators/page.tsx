@@ -36,7 +36,7 @@ export default function IndicatorsPage() {
                 <Header className="flex items-center mt-20 justify-between bg-transparent px-32">
                     <div className="flex items-center">
                         <LineChartOutlined className="text-2xl dark:text-white gray-900 ml-2" />
-                        <h3 className='dark:text-white text-2xl font-semibold text-gray-900' style={{  margin: 0 }}>اندیکاتورها</h3>
+                        <h3 className='dark:text-white text-2xl font-semibold text-gray-900' style={{ margin: 0 }}>اندیکاتورها</h3>
                     </div>
                     <Link href="/education">
                         <Button type="primary" icon={<ArrowLeftOutlined />}>
@@ -48,8 +48,7 @@ export default function IndicatorsPage() {
                 <Content className="p-6">
                     <div className="max-w-7xl mx-auto">
                         <div className="mb-8 flex justify-center">
-                            <div className="w-full max-w-2xl">
-
+                            <div className="relative w-full max-w-2xl mx-auto">
                                 <input
                                     type="text"
                                     onChange={(e) => {
@@ -57,7 +56,8 @@ export default function IndicatorsPage() {
                                         handleSearch(e.target.value);
                                     }}
                                     placeholder="جستجو در اندیکاتورها..."
-                                    className="w-full px-4 py-3 pl-12 rounded-xl dark:bg-white/5 bg-white dark:text-white text-gray-900 dark:border-white/10 border-gray-200 border focus:outline-none focus:ring-2 focus:ring-[#1890ff] placeholder:dark:text-gray-500 placeholder:text-gray-400 transition-all duration-200"/>
+                                    className="w-full px-4 py-3 pl-12 rounded-xl dark:bg-white/5 bg-white dark:text-white text-gray-900 dark:border-white/10 border-gray-200 border focus:outline-none focus:ring-2 focus:ring-[#1890ff] placeholder:dark:text-gray-500 placeholder:text-gray-400 transition-all duration-200" />
+                                <SearchOutlined className="absolute text-2xl left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 dark:text-gray-400 text-gray-500" />
                             </div>
                         </div>
 

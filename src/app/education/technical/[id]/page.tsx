@@ -7,7 +7,7 @@ import fa_IR from 'antd/locale/fa_IR';
 import Link from 'next/link';
 import { technicalAnalysis } from '../../data';
 import { useParams } from 'next/navigation';
-const DEFAULT_IMAGE = 'https://media.salameno.com/d/2022/07/25/3/15384301.jpg?ts=1658737063000';
+
 
 const { Header, Content } = Layout;
 const { Title, Text, Paragraph } = Typography;
@@ -15,7 +15,7 @@ const { Title, Text, Paragraph } = Typography;
 export default function TechnicalAnalysisDetailPage() {
     const params = useParams();
     const analysis = technicalAnalysis[parseInt(params.id as string)];
-
+    const DEFAULT_IMAGE = 'https://nobitex.ir/mag/wp-content/uploads//2023/08/01-%D8%AA%D8%AD%D9%84%DB%8C%D9%84-%D8%AA%DA%A9%D9%86%DB%8C%DA%A9%D8%A7%D9%84.jpg';
     if (!analysis) return null;
 
     // تبدیل متن توضیحات به پاراگراف‌های مجزا
