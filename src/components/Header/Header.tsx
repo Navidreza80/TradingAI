@@ -114,7 +114,7 @@ export default function Header() {
 
   const pathName = usePathname()
 
-  return pathName !== '/dashboard' && (
+  return !pathName.includes('/dashboard') && (
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 backdrop-blur-md
         ${

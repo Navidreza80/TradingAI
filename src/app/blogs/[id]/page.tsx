@@ -146,8 +146,8 @@ export default function BlogDetailPage() {
         >
           <h1 className={`text-3xl sm:text-4xl font-bold mb-4
             dark:text-white text-gray-900
-            ${i18n.language === 'fa' ? 'font-vazirmatn' : ''} 
-            ${i18n.language === 'ar' ? 'font-notokufi' : ''}`}>
+             
+            `}>
             Understanding Bitcoin Halving and Its Impact on Price
           </h1>
 
@@ -184,8 +184,8 @@ export default function BlogDetailPage() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.2 }}
           className={`prose prose-lg max-w-none dark:prose-invert mb-12
-            ${i18n.language === 'fa' ? 'font-vazirmatn' : ''} 
-            ${i18n.language === 'ar' ? 'font-notokufi' : ''}`}
+             
+            `}
         >
           {/* Add your blog content here */}
           <p>
@@ -265,8 +265,8 @@ export default function BlogDetailPage() {
           transition={{ duration: 0.5, delay: 0.4 }}
         >
           <h2 className={`text-2xl font-bold mb-8 dark:text-white text-gray-900
-            ${i18n.language === 'fa' ? 'font-vazirmatn' : ''} 
-            ${i18n.language === 'ar' ? 'font-notokufi' : ''}`}>
+             
+            `}>
             {t('blogs.comments')} ({comments.length})
           </h2>
 
@@ -283,16 +283,16 @@ export default function BlogDetailPage() {
                 focus:outline-none focus:ring-2 focus:ring-[#1890ff]
                 placeholder:dark:text-gray-500 placeholder:text-gray-400
                 transition-all duration-200 min-h-[100px]
-                ${i18n.language === 'fa' ? 'font-vazirmatn' : ''} 
-                ${i18n.language === 'ar' ? 'font-notokufi' : ''}`}
+                 
+                `}
             />
             <div className="flex justify-end mt-4">
               <button
                 type="submit"
                 className={`px-6 py-2 bg-[#1890ff] text-white rounded-lg
                   hover:bg-[#40a9ff] transition-colors duration-200
-                  ${i18n.language === 'fa' ? 'font-vazirmatn' : ''} 
-                  ${i18n.language === 'ar' ? 'font-notokufi' : ''}`}
+                   
+                  `}
               >
                 {t('blogs.submitComment')}
               </button>
@@ -322,8 +322,8 @@ export default function BlogDetailPage() {
                   <div className="flex-1">
                     <div className="flex items-center justify-between mb-2">
                       <h3 className={`font-bold dark:text-white text-gray-900
-                        ${i18n.language === 'fa' ? 'font-vazirmatn' : ''} 
-                        ${i18n.language === 'ar' ? 'font-notokufi' : ''}`}>
+                         
+                        `}>
                         {comment.author.name}
                       </h3>
                       <span className="text-sm dark:text-gray-400 text-gray-600">
@@ -331,8 +331,8 @@ export default function BlogDetailPage() {
                       </span>
                     </div>
                     <p className={`dark:text-gray-300 text-gray-700 mb-4
-                      ${i18n.language === 'fa' ? 'font-vazirmatn' : ''} 
-                      ${i18n.language === 'ar' ? 'font-notokufi' : ''}`}>
+                       
+                      `}>
                       {comment.content}
                     </p>
                     <button

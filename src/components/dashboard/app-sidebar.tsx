@@ -27,6 +27,7 @@ import { FaMoneyBill } from "react-icons/fa";
 import { Button } from "../ui/button";
 import Image from "next/image";
 import { useTranslation } from "react-i18next";
+import Link from "next/link";
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   const { t, i18n } = useTranslation();
@@ -114,20 +115,18 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
           <SidebarGroupContent className="h-full">
             <SidebarMenu className="flex flex-col justify-between h-full">
               <div
-                className={`${i18n.language == "fa" && "font-vazirmatn"} ${
-                  i18n.language == "ar" && "font-notokufi"
-                } dark:text-white text-black`}
+                className={` dark:text-white text-black`}
               >
                 {items.map((item) => (
                   <SidebarMenuItem key={item.title}>
                     <SidebarMenuButton asChild>
-                      <a
+                      <Link
                         href={item.url}
                         className="rounded hover:text-[#53B1FB] hover:bg-[#42424271] transition-all duration-500 py-5"
                       >
                         <item.icon className="w-6 h-6" />
                         <span className="text-lg">{item.title}</span>
-                      </a>
+                      </Link>
                     </SidebarMenuButton>
                   </SidebarMenuItem>
                 ))}
