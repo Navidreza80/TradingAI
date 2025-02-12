@@ -101,7 +101,7 @@ const Home = () => {
         </div>
       </div>
       {/* نمایش جدول */}
-      <table className="w-full table-auto bg-white shadow-md shadow-gray-500 rounded-lg overflow-hidden">
+      <table className="w-full table-auto  shadow-md shadow-gray-500 dark:shadow-xs dark:shadow-[#383838]   rounded-lg overflow-hidden">
         <thead className=" dark:bg-[#383838] bg-gray-800 text-white">
           <tr>
             <th className="px-4 text-xl text-left text-white py-2 cursor-pointer" >Icon</th>
@@ -149,3 +149,5 @@ const Home = () => {
 };
 
 export default Home;
+
+
