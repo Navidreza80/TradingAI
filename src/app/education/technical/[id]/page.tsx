@@ -40,7 +40,7 @@ export default function TechnicalAnalysisDetailPage() {
                                 <div className="relative h-96 w-full">
                                     <Image
                                         src={analysis.image || DEFAULT_IMAGE}
-                                        alt={analysis.title}
+                                        alt={analysis.name}
                                         className="object-contain"
                                         width="100%"
                                         height="100%"
@@ -84,20 +84,6 @@ export default function TechnicalAnalysisDetailPage() {
                                             </Tag>
                                         ))}
                                     </Space>
-                                </div>
-
-                                <div>
-                                    <h2 className="dark:text-white text-gray-900 font-semibold block mb-2 text-lg">
-                                        نکات کلیدی:
-                                    </h2>
-                                    <List
-                                        dataSource={analysis.tips}
-                                        renderItem={tip => (
-                                            <List.Item>
-                                                <h2 className="dark:text-white text-gray-800 text-lg">• {tip}</h2>
-                                            </List.Item>
-                                        )}
-                                    />
                                 </div>
                             </Space>
                         </Card>

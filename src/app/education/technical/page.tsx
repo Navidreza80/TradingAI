@@ -26,7 +26,7 @@ export default function TechnicalAnalysisPage() {
     const handleSearch = useCallback(
         debounce((value: string) => {
             const filtered = technicalAnalysis.filter(analysis => 
-                analysis.title.toLowerCase().includes(value.toLowerCase())
+                analysis.name.toLowerCase().includes(value.toLowerCase())
             );
             setFilteredAnalysis(filtered);
         }, 300),
@@ -79,7 +79,7 @@ export default function TechnicalAnalysisPage() {
                                         cover={
                                             <div className="relative h-48">
                                                 <Image
-                                                    alt={analysis.title}
+                                                    alt={analysis.name}
                                                     src={analysis.image || DEFAULT_IMAGE}
                                                     className="object-cover"
                                                     width="100%"
@@ -91,7 +91,7 @@ export default function TechnicalAnalysisPage() {
                                         onClick={() => router.push(`/education/technical/${index}`)}
                                     >
                                         <Meta
-                                            title={<h1 className="dark:text-white text-gray-900 text-center block">{analysis.title}</h1>}
+                                            title={<h1 className="dark:text-white text-gray-900 text-center block">{analysis.name}</h1>}
                                         />
                                     </Card>
                                 </Col>
