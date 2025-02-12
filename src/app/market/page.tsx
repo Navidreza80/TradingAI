@@ -2,7 +2,7 @@
 import { useEffect, useState, useRef } from 'react';
 import axios from 'axios';
 import { MagnifyingGlassIcon } from '@heroicons/react/24/outline';
-import { Header } from 'antd/es/layout/layout';
+import style from './style.module.css';
 
 interface CryptoData {
   id: string;
@@ -16,20 +16,21 @@ interface CryptoData {
 }
 
 const Home = () => {
-  const [cryptoData, setCryptoData] = useState([]);
+  const [cryptoData, setCryptoData] = useState<CryptoData[]>([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [minPrice, setMinPrice] = useState('');
   const [maxPrice, setMaxPrice] = useState('');
   const [loading, setLoading] = useState(true);
-  const [sortOption, setSortOption] = useState('current_price'); // مرتب‌سازی بر اساس market cap به صورت پیش‌فرض
+  const [sortOption, setSortOption] = useState('');
+  const widgetRef = useRef(null);
 
   const fetchCryptoData = async () => {
-    setLoading(true);
+    setLoading(true); // شروع بارگذاری داده‌ها
     try {
       const response = await axios.get('https://api.coingecko.com/api/v3/coins/markets', {
         params: {
           vs_currency: 'usd',
-          order: sortOption, // مرتب‌سازی بر اساس sortOption
+          order: sortOption,
           per_page: 1000,
           page: 1,
           sparkline: false,
@@ -39,24 +40,44 @@ const Home = () => {
     } catch (error) {
       console.error('Error fetching data:', error);
     } finally {
-      setLoading(false);
+      setLoading(false); // پایان بارگذاری داده‌ها
     }
   };
 
   useEffect(() => {
     fetchCryptoData();
-    const interval = setInterval(fetchCryptoData, 30000); // هر 30 ثانیه داده‌ها به‌روز شوند
-    return () => clearInterval(interval);
+    const interval = setInterval(fetchCryptoData, 30000); // هر ۵ ثانیه به‌روز شود
+
+    return () => clearInterval(interval); // پاک کردن interval هنگام unmount
   }, [sortOption]);
 
+  const formatPrice = (price: number): string => {
+    return price < 1 ? price.toFixed(8) : price.toFixed(2);
+  };
 
   const filteredData = cryptoData.filter(crypto => {
     const matchesSearchTerm = crypto.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
       crypto.symbol.toLowerCase().includes(searchTerm.toLowerCase());
     const matchesMinPrice = minPrice ? crypto.current_price >= parseFloat(minPrice) : true;
     const matchesMaxPrice = maxPrice ? crypto.current_price <= parseFloat(maxPrice) : true;
+
     return matchesSearchTerm && matchesMinPrice && matchesMaxPrice;
   });
+
+  // useEffect(() => {
+  //   fetchCryptoData();
+  //   const interval = setInterval(fetchCryptoData, 30000); // هر 30 ثانیه داده‌ها به‌روز شوند
+  //   return () => clearInterval(interval);
+  // }, [sortOption]);
+
+
+  // const filteredData = cryptoData.filter(crypto => {
+  //   const matchesSearchTerm = crypto.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+  //     crypto.symbol.toLowerCase().includes(searchTerm.toLowerCase());
+  //   const matchesMinPrice = minPrice ? crypto.current_price >= parseFloat(minPrice) : true;
+  //   const matchesMaxPrice = maxPrice ? crypto.current_price <= parseFloat(maxPrice) : true;
+  //   return matchesSearchTerm && matchesMinPrice && matchesMaxPrice;
+  // });
 
 
   return (
@@ -91,27 +112,38 @@ const Home = () => {
             <th className="px-4 text-xl text-left text-white py-2 cursor-pointer" >24h Change</th>
           </tr>
         </thead>
-        <tbody className='dark:bg-[#030303] bg-white'>
-          {filteredData.length === 0 ? (
-            <tr className="w-full">
-              <td colSpan={6} className="text-center w-full py-4 dark:text-white text-gray-900">No results found ☹️</td>
+        {loading ? (
+          <tbody className='dark:bg-[#030303] bg-white'>
+            <tr className=" w-full py-4 dark:text-white text-gray-900">
+              <td colSpan={6}  className=" w-full py-4 dark:text-white text-gray-900"><div className='flex justify-center gap-4 m-auto'><div className={style.loader}></div><h1 className='text-xl text-left text-white cursor-pointer'>loading</h1> </div></td>
             </tr>
-          ) : (
-            filteredData.map(crypto => (
-              <tr key={crypto.id} className="border-b h-16 dark:border-[#202020] border-gray-300 hover:dark:bg-[#4a4a4a] hover:bg-gray-50">
-                <td className="px-4 text-lg dark:text-white text-gray-900 py-2"><img src={crypto.image } alt={crypto.name} className="w-10 h-10 inline-block" /></td>
-                <td className="px-4 text-lg dark:text-white text-gray-900 py-2"> {crypto.name} </td>
-                <td className="px-4 text-lg dark:text-white text-gray-900 py-2">${crypto.current_price}</td>
-                <td className="px-4 text-lg dark:text-white text-gray-900 py-2">${crypto.market_cap.toLocaleString()}</td>
-                <td className="px-4 text-lg dark:text-white text-gray-900 py-2">${crypto.total_volume.toLocaleString()}</td>
-                <td className="px-4 text-lg py-2" style={{ color: crypto.price_change_percentage_24h < 0 ? '#ff2b2b' : '#16ff1e' }}>
-                  {crypto.price_change_percentage_24h.toFixed(2)}%
-                </td>
-              </tr>
-            ))
-          )}
-        </tbody>
+          </tbody>
+        ) : (
+          <tbody className='dark:bg-[#030303] bg-white'>
+            {
+              filteredData.length === 0 ? (
+                <tr className="w-full">
+                  <td colSpan={6} className="text-center w-full py-4 dark:text-white text-gray-900">No results found ☹️</td>
+                </tr>
+              ) : (
+                filteredData.map(crypto => (
+                  <tr key={crypto.id} className="border-b h-16 dark:border-[#202020] border-gray-300 hover:dark:bg-[#4a4a4a] hover:bg-gray-50">
+                    <td className="px-4 text-lg dark:text-white text-gray-900 py-2"><img src={crypto.image} alt={crypto.name} className="w-10 h-10 inline-block" /></td>
+                    <td className="px-4 text-lg dark:text-white text-gray-900 py-2"> {crypto.name} </td>
+                    <td className="px-4 text-lg dark:text-white text-gray-900 py-2">${crypto.current_price}</td>
+                    <td className="px-4 text-lg dark:text-white text-gray-900 py-2">${crypto.market_cap.toLocaleString()}</td>
+                    <td className="px-4 text-lg dark:text-white text-gray-900 py-2">${crypto.total_volume.toLocaleString()}</td>
+                    <td className="px-4 text-lg py-2" style={{ color: crypto.price_change_percentage_24h < 0 ? '#ff2b2b' : '#16ff1e' }}>
+                      {crypto.price_change_percentage_24h.toFixed(2)}%
+                    </td>
+                  </tr>
+                ))
+              )
+            }
+
+          </tbody>)}
       </table>
+
     </main>
   );
 };
