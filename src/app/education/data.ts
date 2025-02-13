@@ -484,7 +484,7 @@ export const technicalAnalysis = [
 
   خلاصه:
 چکش یک الگوی کندل استیک است که نشان‌دهنده تغییر جهت قیمت از نزولی به صعودی است. این الگو در پایان روندهای نزولی ظاهر می‌شود و به‌عنوان یک سیگنال بازگشتی صعودی شناخته می‌شود. برای تأیید اعتبار این الگو، باید از حجم معاملات و سایر ابزارهای تحلیل تکنیکال استفاده کرد.`,
-        image: `https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgZHD46qm8o3rvMxcvv1zLLlv1-zP5uto6eH9U1y1qjKn7BQJQVNnPTrUtFgROzZp39vd9I2VJ_jCXmFS9FNHxEbzTe4rpL6yxCqIJzvltC7w-dJ7GqXOJ_iq8ZXgioLgPlY5Rah4-22K5IbedB_rzIHa7njNOAps_h8o9OCG0HLSqS7Atvhv61eJQPhuEW/w0/Hammer.webp`,
+        image: `https://bpcdn.co/images/2016/05/grade2-hammer-hanging-man-example.png`,
         indicators: [`RSI Oversold`, `MACD Bullish Crossover`, `Volume Surge`]
     },
     {
@@ -810,7 +810,7 @@ export const technicalAnalysis = [
 
   خلاصه:
 الگوی  شکست  زمانی رخ می‌دهد که قیمت از یک سطح حمایت یا مقاومت عبور کند. این الگو معمولاً سیگنالی برای ادامه روند یا تغییر آن است. تأیید شکست با استفاده از حجم معاملات و اندیکاتورها، اعتبار سیگنال را بیشتر می‌کند. شکست می‌تواند در جهت صعودی یا نزولی باشد و برای تجزیه و تحلیل دقیق‌تر، باید به حجم معاملات و تایم فریم‌های مختلف دقت کرد.`,
-        image: `https://i.pinimg.com/736x/c0/66/d3/c066d39b43165543fff2e2e4f95a9889.jpg`,
+        image: `https://www.forex.academy/wp-content/uploads/2020/03/6.eurgbp-b-out-confirmation.png`,
         indicators: [`RSI Momentum`, `MACD Breakout`, `Volume Surge`]
     },
     {
@@ -850,7 +850,7 @@ export const technicalAnalysis = [
 
   خلاصه:
  شکست خط روند  زمانی رخ می‌دهد که قیمت از یک خط روند معتبر عبور می‌کند، که ممکن است به‌عنوان یک سیگنال برای ادامه روند یا تغییر آن عمل کند. برای استفاده از این الگو، باید حجم معاملات و تاییدات از اندیکاتورها و ابزارهای دیگر را مدنظر قرار دهید تا از صحت شکست اطمینان حاصل کنید.`,
-        image: `https://blogger.googleusercontent.com/img/a/AVvXsEgFIgRl5Cf-VUWkpZmpJCGqTU-GPfdwmOtfKuXWo6Y-0c_BWSvcePQuF0AVDxKdVJ4LlihARN9Sa45qPoxYO8NVZDToKMjvjM5c2tkvKkiwWWHyR14oLkZmy3xSsL_HSEooCWeO6ytdppUDQ_pPzmzGeHPQ472DfwqASm3UQqSc92pHnDo5AVR_dg=rw`,
+        image: `https://www.tradingwithrayner.com/wp-content/uploads/2022/07/19.-Trend-line-breakout-schematic-bearish.png`,
         indicators: [`RSI`, `MACD`, `Volume`]
     },
     {
@@ -1172,7 +1172,7 @@ export const technicalAnalysis = [
 
   خلاصه:
 الگوی  سه کلاغ سیاه  یک الگوی نزولی قوی است که نشان‌دهنده تغییر روند از صعودی به نزولی است. این الگو از سه شمع نزولی تشکیل می‌شود که هرکدام پایین‌تر از شمع قبلی بسته می‌شوند. این الگو معمولاً در بازارهای صعودی شکل می‌گیرد و نشان‌دهنده شروع یک روند نزولی است. برای تأیید صحت این الگو، باید حجم معاملات افزایش یابد. این الگو به‌عنوان یک سیگنال فروش در نظر گرفته می‌شود و می‌تواند فرصتی برای ورود به موقعیت فروش در بازار باشد.`,
-        image: `https://www.5paisa.com/finschool/wp-content/uploads/2023/07/2-2.svg`,
+        image: `https://hawk-oss.hawkinsight.com/hawk/image/20240802/image-3-1024x576_150081519_887.png`,
         indicators: [`RSI Bearish`, `MACD Bearish`, `Volume Surge`]
     },
     {
@@ -1244,7 +1244,7 @@ export const technicalAnalysis = [
 
   خلاصه:
  شکست از محدوده (Breakout from Range)  به تغییر قیمت از یک محدوده قیمتی ثابت گفته می‌شود که می‌تواند نشان‌دهنده شروع یک روند جدید باشد. استفاده از این سیگنال می‌تواند برای شناسایی فرصت‌های ورود به معامله و بهره‌برداری از روندهای جدید در بازار مفید باشد. مهم است که شکست تایید شده باشد و حجم معاملات افزایش یافته باشد تا از اعتبار سیگنال اطمینان حاصل شود.`,
-        image: ``,
+        image: `https://www.trade2win.com/section/system/images/2490/original/figure01.jpg?1287790956`,
         indicators: [`RSI`, `MACD`, `Volume Surge`]
     },
     {
@@ -1280,7 +1280,7 @@ export const technicalAnalysis = [
 4.  استفاده از مدیریت ریسک : همیشه باید در کنار این الگوها از استاپ لاس (Stop Loss) استفاده کنید تا در صورت اشتباه پیش‌بینی، ضرر محدود شود.
 
 با استفاده از این الگوها و همراه با تحلیل سایر اندیکاتورها و ابزارها، می‌توانید پیش‌بینی بهتری از بازگشت‌های روند داشته باشید.`,
-        image: ``,
+        image: `https://forexsb.com/wiki/_media/trading/higher_high_trend_reversal.png`,
         indicators: [`RSI`, `MACD`, `Price Action`]
     },
     {
@@ -1322,7 +1322,7 @@ export const technicalAnalysis = [
 - از طرف دیگر، اگر قیمت به سطح حمایت 50 دلار نزدیک شود و آن را بشکند، سیگنال فروش صادر می‌شود.
 
 شکست‌های حمایت و مقاومت یکی از ابزارهای پرکاربرد در تحلیل تکنیکال هستند و می‌توانند فرصت‌های خوبی برای ورود به بازار فراهم کنند.`,
-        image: ``,
+        image: `https://c.mql5.com/6/936/photo_2021-01-27_11-58-43.jpg`,
         indicators: [`RSI`, `MACD`, `Volume`]
     },
     {
@@ -1424,7 +1424,7 @@ export const technicalAnalysis = [
 فرض کنید قیمت یک سهم در روند صعودی قرار دارد و قیمت‌ها به‌طور مداوم بالاتر می‌روند، همراه با افزایش حجم معاملات. این نشان‌دهنده‌ی یک بازار قوی صعودی است. در این شرایط، شما می‌توانید وارد پوزیشن خرید شوید و در صورت ادامه روند صعودی، سود کنید. در صورتی که قیمت شروع به بازگشت کند، سیگنال‌های معکوس را بررسی کرده و در صورت لزوم از بازار خارج شوید.
 
 بازارهای قوی فرصتی مناسب برای معامله‌گران هستند تا از روندهای بزرگ و پربازده استفاده کنند، به شرطی که دقت در شناسایی سیگنال‌های بازار و مدیریت ریسک داشته باشند.`,
-        image: ``,
+        image: `https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ-wIICWhY8Lnp15IlK1wPgyYwJi5m19tkMBQ&s`,
         indicators: [`RSI`, `MACD`, `Volume`]
     },
     {
@@ -1529,7 +1529,7 @@ export const technicalAnalysis = [
 - در هنگام استفاده از این استراتژی، لازم است که تغییرات قیمت و وضعیت بازار را به دقت پیگیری کنید، زیرا حتی در بازارهای قوی، ممکن است تغییرات ناگهانی رخ دهد.
 
  ادامه مومنتوم  یک استراتژی مفید برای بهره‌برداری از روندهای قوی در بازار است. با شناسایی درست روند و استفاده از ابزارهای مناسب، می‌توان از حرکت قیمت‌ها به نفع خود استفاده کرد.`,
-        image: ``,
+        image: `https://www.tradingwithrayner.com/wp-content/uploads/2020/01/8.-Bear-Flag-GBPUSD.png`,
         indicators: [`RSI`, `MACD`, `Volume`]
     },
     {
@@ -1587,7 +1587,7 @@ export const technicalAnalysis = [
 فرض کنید در یک روند نزولی، الگوی  چکش  (Hammer) ظاهر می‌شود. این الگو نشان‌دهنده احتمال بازگشت روند به صعودی است. اگر حجم معاملات در این نقطه بالا باشد و اندیکاتورهایی مانند  RSI  در ناحیه اشباع فروش قرار داشته باشند، می‌توانیم وارد پوزیشن خرید شویم.
 
 در نهایت، الگوهای دو شمع ابزارهای مفیدی برای پیش‌بینی حرکت قیمت هستند، اما همیشه باید آن‌ها را با سایر ابزارهای تحلیلی و مدیریت ریسک ترکیب کنید تا از سیگنال‌های غلط جلوگیری کنید.`,
-        image: ``,
+        image: `https://bpcdn.co/images/2016/05/grade2-tweezer-tops-bottoms.png`,
         indicators: [`RSI`, `MACD`, `Volume`]
     },
     {
@@ -1633,7 +1633,7 @@ export const technicalAnalysis = [
 - در هنگام شکستن سطوح قبلی،  مدیریت ریسک  از اهمیت زیادی برخوردار است؛ چرا که شکست‌های کاذب نیز ممکن است رخ دهند.
 
  تشکیل سطح جدید  به تحلیلگران این امکان را می‌دهد تا نقاط ورود و خروج جدیدی را شناسایی کنند و به طور کلی استراتژی‌های معاملاتی خود را بر اساس تغییرات قیمت و روندهای بازار تنظیم کنند.`,
-        image: ``,
+        image: `https://bpcdn.co/images/2016/05/grade1-support-resistance-basics.png`,
         indicators: [`RSI`, `MACD`, `Volume`]
     },
     {
@@ -1707,7 +1707,7 @@ export const technicalAnalysis = [
 - واگرایی معمولاً یک سیگنال پیشرفته است، به این معنی که معامله‌گران باید از آن در کنار سایر ابزارها استفاده کنند تا بهترین نتایج را بگیرند.
 
  الگوی واگرایی  ابزار قدرتمندی برای پیش‌بینی تغییرات روند است، اما باید با احتیاط و تایید سایر شاخص‌ها همراه باشد.`,
-        image: ``,
+        image: `https://thetradinganalyst.com/wp-content/uploads/Types-of-Divergence.svg`,
         indicators: [`RSI Divergence`, `MACD Divergence`, `Price Action`]
     }
 ];

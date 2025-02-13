@@ -37,6 +37,7 @@ export default function TechnicalAnalysisDetailPage() {
                     <div className="max-w-4xl mx-auto">
                         <Card className="dark:bg-white/5 bg-white/80 dark:border-white/10 border-black/5">
                             <Space direction="vertical" size="large" className="w-full">
+                                <h1 className='dark:text-white text-gray-900 font-serif font-extrabold text-3xl'>{analysis.name}</h1>
                                 <div className="relative h-96 w-full">
                                     <Image
                                         src={analysis.image || DEFAULT_IMAGE}
