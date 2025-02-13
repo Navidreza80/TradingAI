@@ -9,6 +9,7 @@ import { useRouter } from 'next/navigation';
 import { indicators } from '../data';
 import { useState, useCallback } from 'react';
 import debounce from 'lodash/debounce';
+import style from '../technical/[id]/style.module.css';
 
 const { Header, Content } = Layout;
 const { Title, Text } = Typography;
@@ -33,15 +34,16 @@ export default function IndicatorsPage() {
     return (
         <ConfigProvider locale={fa_IR} direction="rtl">
             <Layout className="min-h-screen bg-gradient-to-b dark:from-[#0a0a0a] dark:to-[#1a1a1a] from-white to-gray-50">
-                <Header className="flex items-center mt-20 justify-between bg-transparent px-32">
+                <Header className={` flex mt-16 items-center justify-between bg-transparent px-32 ${style.Header}`}>
                     <div className="flex items-center">
                         <LineChartOutlined className="text-2xl dark:text-white gray-900 ml-2" />
-                        <h3 className='dark:text-white text-2xl font-semibold text-gray-900' style={{ margin: 0 }}>اندیکاتورها</h3>
+                        <h3 className={` dark:text-white text-black font-bold text-2xl ${style.titleTop}`} style={{ margin: 0 }}>اندیکاتورها</h3>
                     </div>
                     <Link href="/education">
-                        <Button type="primary" icon={<ArrowLeftOutlined />}>
+                        <Button className={`${style.return}`} type="primary" icon={<ArrowLeftOutlined />}>
                             بازگشت
                         </Button>
+                        <Button className={`${style.returnRes}`} type="primary" icon={<ArrowLeftOutlined className='dark:text-white text-black' />}> </Button>
                     </Link>
                 </Header>
 
@@ -61,29 +63,29 @@ export default function IndicatorsPage() {
                             </div>
                         </div>
 
-                        <Row gutter={[16, 16]}>
+                        <Row className={style.listEducation} gutter={[16, 16]}>
                             {filteredIndicators.map((indicator, index) => (
-                                <Col xs={24} sm={12} md={8} lg={6} key={index}>
+                                <div className={style.CardListEducationHolder} key={index}>
                                     <Card
                                         hoverable
-                                        className="rounded-2xl overflow-hidden dark:border-white/10 border-black/5 border backdrop-blur-xl dark:bg-white/5 bg-white/80 dark:hover:bg-white/10 hover:bg-white/90 transition-all duration-300 hover:scale-[1.02] dark:hover:shadow-[0_0_30px_rgba(24,144,255,0.1)] hover:shadow-[0_0_30px_rgba(24,144,255,0.2)] h-full transition-all duration-300 hover:transform hover:scale-105 h-full p-1"
-                                        onClick={() => router.push(`/education/indicators/${index}`)}
+                                        className={`${style.CardListEducation} rounded-2xl overflow-hidden dark:border-white/10 border-black/5 border backdrop-blur-xl dark:bg-white/5 bg-white/80 dark:hover:bg-white/10 hover:bg-white/90 transition-all duration-300 hover:scale-[1.02] dark:hover:shadow-[0_0_30px_rgba(24,144,255,0.1)] hover:shadow-[0_0_30px_rgba(24,144,255,0.2)] h-full  transition-all duration-300 hover:transform hover:scale-105 h-full p-1`}
+                                        onClick={() => router.push(`/education/indicators/${indicator.id}`)}
                                         cover={
-                                            <div style={{ height: '200px', overflow: 'hidden', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                                                <Image
-                                                    alt={indicator.title}
-                                                    src={indicator.image || DEFAULT_IMAGE}
-                                                    style={{ width: '100%', height: '192px', objectFit: 'cover', borderRadius: "8px" }}
-                                                    preview={false}
-                                                />
-                                            </div>
+                                            <>
+                                                <div className={style.ImageHolderList} style={{ height: '200px', overflow: 'hidden', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                                                    <Image
+                                                        alt={indicator.title}
+                                                        src={indicator.image || DEFAULT_IMAGE}
+                                                        className="object-cover"
+                                                        width="100%"
+                                                        style={{ borderRadius: "8px" }}
+                                                    />
+                                                    <h1 className={`${style.titlCardList} dark:text-white text-gray-900 text-center font-semibold text-sm block m-auto`}>{indicator.title}</h1>
+                                                </div>
+                                            </>
                                         }
-                                    >
-                                        <Meta
-                                            title={<h1 className="dark:text-white text-gray-900 text-center block">{indicator.title}</h1>}
-                                        />
-                                    </Card>
-                                </Col>
+                                    ></Card>
+                                </div>
                             ))}
                         </Row>
                         {filteredIndicators.length === 0 && (

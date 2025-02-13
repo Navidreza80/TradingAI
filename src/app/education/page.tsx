@@ -6,6 +6,7 @@ import { ConfigProvider } from 'antd';
 import fa_IR from 'antd/locale/fa_IR';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
+import style from './style.module.css';
 
 const { Header, Content } = Layout;
 const { Title, Text } = Typography;
@@ -35,14 +36,14 @@ export default function EducationPage() {
                 <Header className='bg-gradient-to-b dark:from-[#0a0a0a] dark:to-[#0a0a0a] from-white to-gray-50'></Header>
                 <Content className="p-6">
                     <div className=" ">
-                        <Row gutter={[24, 24]} className="mt-8 gap-4 justify-center">
+                        <div className={style.CardHolder}>
                             {educationSections.map((section, index) => (
-                                <Col xs={24} sm={12} md={12} lg={6} key={index}>
+                                <div className={style.Card}>
                                     <Card
                                         hoverable
-                                        className="w-96 rounded-2xl overflow-hidden dark:border-white/10 border-black/5 border backdrop-blur-xl dark:bg-white/5 bg-white/80 dark:hover:bg-white/10 hover:bg-white/90 transition-all duration-300 hover:scale-[1.02] dark:hover:shadow-[0_0_30px_rgba(24,144,255,0.1)] hover:shadow-[0_0_30px_rgba(24,144,255,0.2)] h-full transition-all duration-300 hover:transform hover:scale-105"
+                                        className=" rounded-2xl overflow-hidden dark:border-white/10 border-black/5 border backdrop-blur-xl dark:bg-white/5 bg-white/80 dark:hover:bg-white/10 hover:bg-white/90 transition-all duration-300 hover:scale-[1.02] dark:hover:shadow-[0_0_30px_rgba(24,144,255,0.1)] hover:shadow-[0_0_30px_rgba(24,144,255,0.2)] h-full transition-all duration-300 hover:transform hover:scale-105"
                                         cover={
-                                            <div className="relative h-[250px] overflow-hidden">
+                                            <div className={`${style.imageCard} relative h-[250px] overflow-hidden`}>
                                                 <div
                                                     className="absolute inset-0 bg-center bg-cover"
                                                     style={{
@@ -62,9 +63,9 @@ export default function EducationPage() {
                                             description={<h1 className="dark:text-white text-gray-900 text-center block mt-2">{section.description}</h1>}
                                         />
                                     </Card>
-                                </Col>
+                                </div>
                             ))}
-                        </Row>
+                        </div>
                     </div>
                 </Content>
             </Layout>

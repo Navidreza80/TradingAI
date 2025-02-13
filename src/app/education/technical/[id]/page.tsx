@@ -7,7 +7,7 @@ import fa_IR from 'antd/locale/fa_IR';
 import Link from 'next/link';
 import { technicalAnalysis } from '../../data';
 import { useParams } from 'next/navigation';
-
+import style from './style.module.css';
 
 const { Header, Content } = Layout;
 const { Title, Text, Paragraph } = Typography;
@@ -24,21 +24,22 @@ export default function TechnicalAnalysisDetailPage() {
     return (
         <ConfigProvider locale={fa_IR} direction="rtl">
             <Layout className="min-h-screen bg-gradient-to-b dark:from-[#0a0a0a] dark:to-[#1a1a1a] from-white to-gray-50">
-                <Header className="flex mt-16 items-center justify-between bg-transparent px-32">
-                    <h3 className='dark:text-white text-black font-bold text-2xl' style={{ margin: 0 }}>{analysis.title}</h3>
+                <Header className={` flex mt-16 items-center justify-between bg-transparent px-32 ${style.Header}`}>
+                    <h3 className={` dark:text-white text-black font-bold text-2xl ${style.titleTop}`} style={{ margin: 0 }}>{analysis.name}</h3>
                     <Link href="/education/technical">
-                        <Button type="primary" icon={<ArrowLeftOutlined />}>
+                        <Button className={`${style.return}`} type="primary" icon={<ArrowLeftOutlined />}>
                             بازگشت 
                         </Button>
+                        <Button className={`${style.returnRes}`} type="primary" icon={<ArrowLeftOutlined className='dark:text-white text-black'/>}> </Button>
                     </Link>
                 </Header>
 
                 <Content className="p-6">
-                    <div className="max-w-4xl mx-auto">
-                        <Card className="dark:bg-white/5 bg-white/80 dark:border-white/10 border-black/5">
+                    <div className={` max-w-4xl mx-auto ${style.CardHolder}`}>
+                        <Card className={` dark:bg-white/5 bg-white/80 dark:border-white/10 border-black/5`}>
                             <Space direction="vertical" size="large" className="w-full">
-                                <h1 className='dark:text-white text-gray-900 font-serif font-extrabold text-3xl'>{analysis.name}</h1>
-                                <div className="relative h-96 w-full">
+                               
+                                <div className={`${style.ImageHolder} relative h-96 w-full`}>
                                     <Image
                                         src={analysis.image || DEFAULT_IMAGE}
                                         alt={analysis.name}
@@ -56,10 +57,10 @@ export default function TechnicalAnalysisDetailPage() {
                                             const [title, content] = paragraph.split(':');
                                             return (
                                                 <div key={index} className="mb-4">
-                                                    <h2  className="dark:text-white text-gray-900 text-lg block mb-2">
+                                                    <h1 className={`${style.titleDesc} dark:text-white my-1 text-black font-bold text-xl`} >
                                                         {title.trim()}:
-                                                    </h2>
-                                                    <p className="dark:text-white text-gray-500 text-base whitespace-pre-line mr-4">
+                                                    </h1>
+                                                    <p className={`${style.ParagraphDesc} dark:text-[#cacaca] text-gray-500 text-base whitespace-pre-line mr-4`}>
                                                         {content.trim()}
                                                     </p>
                                                 </div>
@@ -67,7 +68,7 @@ export default function TechnicalAnalysisDetailPage() {
                                         }
                                         // پاراگراف معمولی
                                         return (
-                                            <p key={index} className="dark:text-white text-gray-500 text-base whitespace-pre-line">
+                                            <p key={index} className={`${style.ParagraphDesc} dark:text-[#cacaca] text-gray-500 text-base whitespace-pre-line mr-4`}>
                                                 {paragraph.trim()}
                                             </p>
                                         );
@@ -75,12 +76,12 @@ export default function TechnicalAnalysisDetailPage() {
                                 </div>
 
                                 <div>
-                                    <h2 className="dark:text-white text-gray-900 font-semibold block mb-2 text-lg">
+                                    <h2 className={`${style.ParagraphDesc} dark:text-white mb-4 text-black font-bold text-xl`}>
                                         اندیکاتورهای مرتبط:
                                     </h2>
                                     <Space wrap>
                                         {analysis.indicators.map((indicator, i) => (
-                                            <Tag key={i} color="blue" className="text-lg py-1 px-3">
+                                            <Tag key={i} color="blue" className={`${style.indicator} text-lg py-1 px-3`}>
                                                 {indicator}
                                             </Tag>
                                         ))}

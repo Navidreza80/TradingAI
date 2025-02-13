@@ -9,6 +9,7 @@ import { useRouter } from 'next/navigation';
 import { technicalAnalysis } from '../data';
 import { useState, useCallback } from 'react';
 import debounce from 'lodash/debounce';
+import style from './[id]/style.module.css';
 
 
 const { Header, Content } = Layout;
@@ -25,7 +26,7 @@ export default function TechnicalAnalysisPage() {
     // جستجوی بهینه شده با debounce
     const handleSearch = useCallback(
         debounce((value: string) => {
-            const filtered = technicalAnalysis.filter(analysis => 
+            const filtered = technicalAnalysis.filter(analysis =>
                 analysis.name.toLowerCase().includes(value.toLowerCase())
             );
             setFilteredAnalysis(filtered);
@@ -43,15 +44,16 @@ export default function TechnicalAnalysisPage() {
     return (
         <ConfigProvider locale={fa_IR} direction="rtl">
             <Layout className="min-h-screen bg-gradient-to-b dark:from-[#0a0a0a] dark:to-[#1a1a1a] from-white to-gray-50">
-                <Header className="flex items-center mt-20 justify-between bg-transparent px-32">
+                <Header className={` flex mt-16 items-center justify-between bg-transparent px-32 ${style.Header}`}>
                     <div className="flex items-center">
                         <LineChartOutlined className="text-2xl dark:text-white gray-900 ml-2" />
-                        <h3 className='dark:text-white text-2xl font-semibold text-gray-900' style={{  margin: 0 }}>تحلیل تکنیکال</h3>
+                        <h3 className={` dark:text-white text-black font-bold text-2xl ${style.titleTop}`} style={{ margin: 0 }}>تحلیل تکنیکال</h3>
                     </div>
                     <Link href="/education">
-                        <Button type="primary" icon={<ArrowLeftOutlined />}>
+                        <Button className={`${style.return}`} type="primary" icon={<ArrowLeftOutlined />}>
                             بازگشت
                         </Button>
+                        <Button className={`${style.returnRes}`} type="primary" icon={<ArrowLeftOutlined className='dark:text-white text-black' />}> </Button>
                     </Link>
                 </Header>
 
@@ -65,39 +67,37 @@ export default function TechnicalAnalysisPage() {
                                     value={searchTerm}
                                     onChange={handleSearchChange}
                                     placeholder="جستجو در آموزش‌های تکنیکال..."
-                                    className="w-full px-4 py-3 pl-12 rounded-xl dark:bg-white/5 bg-white dark:text-white text-gray-900 dark:border-white/10 border-gray-200 border focus:outline-none focus:ring-2 focus:ring-[#1890ff] placeholder:dark:text-gray-500 placeholder:text-gray-400 transition-all duration-200"/>
-                                    <SearchOutlined className="absolute text-2xl left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 dark:text-gray-400 text-gray-500" />
+                                    className="w-full px-4 py-3 pl-12 rounded-xl dark:bg-white/5 bg-white dark:text-white text-gray-900 dark:border-white/10 border-gray-200 border focus:outline-none focus:ring-2 focus:ring-[#1890ff] placeholder:dark:text-gray-500 placeholder:text-gray-400 transition-all duration-200" />
+                                <SearchOutlined className="absolute text-2xl left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 dark:text-gray-400 text-gray-500" />
                             </div>
                         </div>
 
-                        <Row gutter={[16, 16]}>
+                        <Row className={style.listEducation} gutter={[16, 16]}>
                             {filteredAnalysis.map((analysis, index) => (
-                                <Col xs={24} sm={12} md={8} lg={6} key={index}>
+                                <div className={style.CardListEducationHolder} key={index}>
                                     <Card
                                         hoverable
-                                        className="rounded-2xl overflow-hidden dark:border-white/10 border-black/5 border backdrop-blur-xl dark:bg-white/5 bg-white/80 dark:hover:bg-white/10 hover:bg-white/90 transition-all duration-300 hover:scale-[1.02] dark:hover:shadow-[0_0_30px_rgba(24,144,255,0.1)] hover:shadow-[0_0_30px_rgba(24,144,255,0.2)] h-full transition-all duration-300 hover:transform hover:scale-105 h-full"
+                                        className={`${style.CardListEducation} rounded-2xl overflow-hidden dark:border-white/10 border-black/5 border backdrop-blur-xl dark:bg-white/5 bg-white/80 dark:hover:bg-white/10 hover:bg-white/90 transition-all duration-300 hover:scale-[1.02] dark:hover:shadow-[0_0_30px_rgba(24,144,255,0.1)] hover:shadow-[0_0_30px_rgba(24,144,255,0.2)] h-full  transition-all duration-300 hover:transform hover:scale-105 h-full p-1`}
+                                        onClick={() => router.push(`/education/indicators/${analysis.id}`)}
                                         cover={
-                                            <div className="relative h-48">
-                                                <Image
-                                                    alt={analysis.name}
-                                                    src={analysis.image || DEFAULT_IMAGE}
-                                                    className="object-cover"
-                                                    width="100%"
-                                                    height="192px"
-                                                    style={{borderRadius: "8px"}}
-                                                />
-                                            </div>
+                                            <>
+                                                <div className={style.ImageHolderList} style={{ height: '200px', overflow: 'hidden', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                                                    <Image
+                                                        alt={analysis.name}
+                                                        src={analysis.image || DEFAULT_IMAGE}
+                                                        className="object-cover"
+                                                        width="100%"
+                                                        style={{ borderRadius: "8px" }}
+                                                    />
+                                                    <h1 className={`${style.titlCardList} dark:text-white text-gray-900 text-center font-semibold text-sm block m-auto`}>{analysis.name}</h1>
+                                                </div>
+                                            </>
                                         }
-                                        onClick={() => router.push(`/education/technical/${index}`)}
-                                    >
-                                        <Meta
-                                            title={<h1 className="dark:text-white text-gray-900 text-center block">{analysis.name}</h1>}
-                                        />
-                                    </Card>
-                                </Col>
+                                    ></Card>
+                                </div>
                             ))}
                         </Row>
-                        
+
                         {/* نمایش پیام در صورت عدم یافتن نتیجه */}
                         {filteredAnalysis.length === 0 && (
                             <div className="text-center mt-8">
