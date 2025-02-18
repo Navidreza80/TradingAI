@@ -344,6 +344,7 @@ const resources = {
           hideP: "Hide P&L",
         },
       },
+      
     },
   },
   fa: {

@@ -20,7 +20,7 @@ export default function Blog() {
   const { i18n, t } = useTranslation();
   return (
     <div
-      className={`flex flex-col w-full h-1/2 border border-[#4b4b4b61] rounded-[16px] dark:bg-[#4b4b4b5b] bg-white transition-all duration-300 
+      className={`flex flex-col w-full h-1/2 border border-[#4b4b4b61] rounded-[16px] justify-between dark:bg-[#4b4b4b5b] bg-white transition-all duration-300 
             hover:shadow-xl hover:scale-102 hover:border-gray-300 dark:hover:border-gray-700 ${
               i18n.language == "fa" && "font-vazirmatn"
             } ${i18n.language == "ar" && "font-notokufi"}`}

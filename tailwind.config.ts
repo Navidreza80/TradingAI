@@ -34,6 +34,8 @@ const config: Config = {
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
+        primary: "#6366f1", // Custom primary color
+        secondary: "#10b981", // Custom secondary color
       },
       keyframes: {
         headerPattern: {
