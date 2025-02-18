@@ -14,7 +14,7 @@ import { useState, useEffect, useCallback, useRef } from 'react'
 import { TradingViewWidget } from '../../components/tradePage/TradingViewWidget'
 import TradeForm from '../../components/tradePage/TradeForm'
 import { Layout, Select, Card, Button, Typography, Space, Tag, Statistic, Divider, Modal, Input } from 'antd'
-import { DeleteOutlined, ArrowUpOutlined, ArrowDownOutlined, MoreOutlined, BookOutlined } from '@ant-design/icons'
+import { ArrowUpOutlined, ArrowDownOutlined, MoreOutlined, BookOutlined } from '@ant-design/icons'
 import { ConfigProvider } from 'antd'
 import style from './style.module.css'
 import fa_IR from 'antd/locale/fa_IR'
@@ -399,7 +399,7 @@ export default function TradePage() {
 
     return (
         <ConfigProvider locale={fa_IR} direction="rtl">
-            <Layout className="min-h-screen">
+            <Layout className="min-h-screen mt-16">
                 <Header className={style.header}>
                     <div className="flex items-center gap-4">
                     <Title level={3}>TradingAi</Title>
