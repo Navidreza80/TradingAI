@@ -5,7 +5,9 @@ import { useDispatch } from 'react-redux';
 import { addPosition } from '../../redux/positionsSlice';
 import type { FormData, Position } from '../../types/index';
 import style from './style.module.css';
-import { Statistic } from 'antd';
+import { Statistic, Select } from 'antd';
+
+const { Option } = Select;
 
 // تعریف اینترفیس props فرم معامله
 interface TradeFormProps {
@@ -17,7 +19,7 @@ interface TradeFormProps {
 // کامپوننت اصلی فرم معامله
 const TradeForm: React.FC<TradeFormProps> = ({ currentPrice, onOpenPosition, symbol }) => {
   const dispatch = useDispatch();
-  
+
   // وضعیت‌های مختلف فرم
   const [formData, setFormData] = useState<FormData>({
     symbol: '', // نماد
@@ -25,6 +27,7 @@ const TradeForm: React.FC<TradeFormProps> = ({ currentPrice, onOpenPosition, sym
     amount: '', // مقدار
   });
   const [leverage, setLeverage] = useState(1); // اهرم
+  const [TPSL, setTPSL] = useState<boolean>(false); // قیمت حد ضرر
   const [mode, setMode] = useState<'cross' | 'isolated'>('cross'); // حالت معامله (کراس یا ایزوله)
   const [takeProfitPrice, setTakeProfitPrice] = useState<string>(''); // قیمت حد سود
   const [stopLossPrice, setStopLossPrice] = useState<string>(''); // قیمت حد ضرر
@@ -99,7 +102,7 @@ const TradeForm: React.FC<TradeFormProps> = ({ currentPrice, onOpenPosition, sym
       }
 
       const data = await response.json();
-      
+
       // اضافه کردن پوزیشن جدید به وضعیت ری‌داکس
       dispatch(addPosition(data));
 
@@ -128,34 +131,24 @@ const TradeForm: React.FC<TradeFormProps> = ({ currentPrice, onOpenPosition, sym
 
   return (
     <form onSubmit={handleSubmit} className={style.Form}>
-      {/* بخش نماد */}
-      <div className={style.symbolForm}>
-        <label className="block text-sm font-semibold text-gray-700 dark:text-gray-200">نماد:</label>
-        <input
-          type="text"
-          name="symbol"
-          value={symbol || formData.symbol}
-          onChange={handleChange}
-          className=" block rounded-lg border-gray-300 dark:border-gray-600 shadow-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-gray-700 dark:text-white"
-          required
-          disabled={!!symbol} // اگر نماد وارد شده باشد، فیلد غیرفعال می‌شود
-        />
-      </div>
-
       {/* نمایش قیمت فعلی */}
-      <div className="mb-8 bg-gray-800 rounded-lg p-6">
-        <div className="flex items-center justify-between mb-2">
-          <h1 className="text-gray-300 text-lg">قیمت فعلی</h1>
+      <div className="bg-gray-400 dark:bg-gray-800 rounded-lg p-6">
+        {/* <div className="flex items-center justify-between mb-2">
+          <h1 className="text-black dark:text-white font-bold text-lg">قیمت فعلی</h1>
         </div>
         <Statistic
           value={currentPrice || "از اتصال اینترنت و فیلترشکن مطمئن شوید"}
           valueStyle={{
-            fontSize: '20px',
-            fontWeight: 'bold',
+            fontSize: '17px',
+            fontWeight: 'semi-bold',
             textAlign: "right",
-            color: "white",
           }}
-        />
+          className='text-black dark:text-white'
+        /> */}
+        <div className="dark:text-white">
+          <h1 className='text-[20px] text-black font-bold dark:text-white'>قیمت فعلی</h1>
+          <h1 className='text-[15px] text-[#202020] dark:text-gray-200'>{currentPrice || "از اتصال اینترنت و فیلترشکن مطمئن شوید"}</h1>
+        </div>
       </div>
 
       {/* بخش نوع معامله */}
@@ -165,50 +158,46 @@ const TradeForm: React.FC<TradeFormProps> = ({ currentPrice, onOpenPosition, sym
           <button
             type="button"
             onClick={() => handleTypeChange('LONG')}
-            className={`py-2 px-4 rounded-lg font-medium transition-all ${formData.type === 'LONG' ? 'bg-green-600 text-white' : 'bg-gray-100 text-gray-700 hover:bg-gray-200 dark:bg-gray-700 dark:text-gray-200'}`}
+            className={`py-2 px-4 rounded-lg font-medium transition-all text-white ${formData.type === 'LONG' ? 'bg-[#448717] ' : 'bg-[#1fff70] '}`}
           >
             لانگ
           </button>
           <button
             type="button"
             onClick={() => handleTypeChange('SHORT')}
-            className={`py-2 px-4 rounded-lg font-medium transition-all ${formData.type === 'SHORT' ? 'bg-red-600 text-white' : 'bg-gray-100 text-gray-700 hover:bg-gray-200 dark:bg-gray-700 dark:text-gray-200'}`}
+            className={`py-2 px-4 rounded-lg font-medium transition-all text-white ${formData.type === 'SHORT' ? 'bg-red-600 ' : 'bg-red-300  '}`}
           >
             شورت
           </button>
         </div>
       </div>
 
-      {/* بخش حالت معامله */}
+      {/* بخش حالت معامله و اهرم*/}
       <div className={style.CrossOrIsolatedHolder}>
-        <label className="block text-sm font-semibold text-gray-700 dark:text-gray-200 mb-2">حالت معامله:</label>
-        <div className={style.CrossOrIsolated}>
-          <label className="inline-flex items-center">
-            <input
-              type="radio"
-              value="cross"
-              checked={mode === 'cross'}
-              onChange={handleModeChange}
-              className="form-radio text-blue-600"
-            />
-            <span className="ml-2 text-gray-700 dark:text-gray-200">کراس</span>
-          </label>
-          <label className="inline-flex items-center">
-            <input
-              type="radio"
-              value="isolated"
-              checked={mode === 'isolated'}
-              onChange={handleModeChange}
-              className="form-radio text-blue-600"
-            />
-            <span className="ml-2 text-gray-700 dark:text-gray-200">ایزوله</span>
-          </label>
+        <div className='w-[40%]'>
+          <label className="block text-sm font-semibold text-gray-700 dark:text-gray-200 mb-2">حالت معامله:</label>
+          <div className={style.CrossOrIsolated}>
+            <select className="w-24 text-center text-[#394353] dark:text-[#c7cbd4] dark:bg-[#374151] px-1 rounded-xs bg-white">
+              <option onClick={handleModeChange} value="cross">cross</option>
+              <option onClick={handleModeChange} value="isolated">isolated</option>
+            </select>
+          </div>
         </div>
-        {mode === 'isolated' && (
-          <p className="mt-1 text-xs text-yellow-600 dark:text-yellow-500">
-            در حالت ایزوله، معامله در صورت رسیدن به 100% ضرر به صورت خودکار بسته خواهد شد.
-          </p>
-        )}
+        <div className='w-[60%]'>
+          <label className="block text-sm font-semibold text-gray-700 dark:text-gray-200 mb-2">اهرم: {leverage}x</label>
+          <div className="flex items-center mt-2.5 gap-2">
+            <span className="text-sm text-gray-500 dark:text-gray-400">1x</span>
+            <input
+              type="range"
+              min="1"
+              max="150"
+              value={leverage}
+              onChange={(e) => setLeverage(Number(e.target.value))}
+              className="w-full h-2 bg-white rounded-lg appearance-none cursor-pointer dark:bg-gray-700 [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-4 [&::-webkit-slider-thumb]:h-4 [&::-webkit-slider-thumb]:bg-blue-500 [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:cursor-pointer [&::-webkit-slider-thumb]:transition-all [&::-webkit-slider-thumb]:hover:bg-blue-600"
+            />
+            <span className="text-sm text-gray-500 dark:text-gray-400">150x</span>
+          </div>
+        </div>
       </div>
 
       {/* بخش مقدار معامله */}
@@ -227,71 +216,64 @@ const TradeForm: React.FC<TradeFormProps> = ({ currentPrice, onOpenPosition, sym
         />
       </div>
 
-      {/* بخش اهرم */}
-      <div>
-        <label className="block text-sm font-semibold text-gray-700 dark:text-gray-200 mb-2">اهرم: {leverage}x</label>
-        <div className="flex items-center gap-2">
-          <span className="text-sm text-gray-500 dark:text-gray-400">1x</span>
-          <input
-            type="range"
-            min="1"
-            max="150"
-            value={leverage}
-            onChange={(e) => setLeverage(Number(e.target.value))}
-            className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer dark:bg-gray-700 [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-4 [&::-webkit-slider-thumb]:h-4 [&::-webkit-slider-thumb]:bg-blue-500 [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:cursor-pointer [&::-webkit-slider-thumb]:transition-all [&::-webkit-slider-thumb]:hover:bg-blue-600"
-          />
-          <span className="text-sm text-gray-500 dark:text-gray-400">150x</span>
-        </div>
-      </div>
-
       {/* بخش قیمت حد سود و ضرر */}
-      <div className={style.TargetHolderAndStopHolderHolder}>
-        <div className={style.TargetStopHolder}>
-          <div className={style.TargetStopHolderInputTitle}>
-            <label className="block text-sm font-semibold text-gray-700 dark:text-gray-200 mb-2">
-              قیمت حد سود:
-            </label>
-            <input
-              type="text"
-              value={takeProfitPrice}
-              onChange={(e) => handlePriceChange(e.target.value, setTakeProfitPrice)}
-              placeholder="USDT"
-              className="mt-1 block w-full rounded-lg border-gray-300 dark:border-gray-600 shadow-sm focus:border-green-500 focus:ring-green-500 dark:bg-gray-700 dark:text-white"
-            />
-          </div>
-          {currentPrice && takeProfitPrice && !isNaN(parseFloat(takeProfitPrice)) && (
-            <div className="mt-1 text-sm text-green-600">
-              درصد سود با لوریج: {calculatePricePercent(parseFloat(takeProfitPrice), currentPrice, formData.type).toFixed(2)}%
-            </div>
-          )}
+
+
+
+
+      <div className={`${style.TargetHolderAndStopHolderHolder}`}>
+        <div className='flex w-full gap-1 cursor-pointer'>
+          <input
+            type='checkbox'
+            className='cursor-pointer bg-black'
+            id='inputTPSL'
+            onChange={(e) => setTPSL(e.target.checked)}
+          />
+          <label className='text-black dark:text-white cursor-pointer' htmlFor="inputTPSL">TP/SL</label>
         </div>
-        <div className={style.TargetStopHolder}>
-          <div className={style.TargetStopHolderInputTitle}>
-            <label className="block text-sm font-semibold text-gray-700 dark:text-gray-200 mb-2">
-              قیمت حد ضرر:
-            </label>
-            <input
-              type="text"
-              value={stopLossPrice}
-              onChange={(e) => handlePriceChange(e.target.value, setStopLossPrice)}
-              placeholder="USDT"
-              className="mt-1 block w-full rounded-lg border-gray-300 dark:border-gray-600 shadow-sm focus:border-red-500 focus:ring-red-500 dark:bg-gray-700 dark:text-white"
-            />
-          </div>
-          {currentPrice && stopLossPrice && !isNaN(parseFloat(stopLossPrice)) && (
-            <div className="mt-1 text-sm text-red-600">
-              درصد ضرر با لوریج: {calculatePricePercent(parseFloat(stopLossPrice), currentPrice, formData.type).toFixed(2)}%
+        {TPSL && (
+          <div className='flex justify-between'>
+            <div className={style.TargetStopHolder}>
+              <div className={style.TargetStopHolderInputTitle}>
+                <input
+                  type="text"
+                  value={takeProfitPrice}
+                  onChange={(e) => handlePriceChange(e.target.value, setTakeProfitPrice)}
+                  placeholder="Take Profit"
+                  className="mt-1 block w-full rounded-lg border-gray-300 dark:border-gray-600 shadow-sm focus:border-green-500 focus:ring-green-500 dark:bg-gray-700 dark:text-white dark:focus:border-green-500 dark:focus:ring-green-500"
+                />
+              </div>
+              {currentPrice && takeProfitPrice && !isNaN(parseFloat(takeProfitPrice)) && (
+                <div className="mt-1 text-center text-sm text-green-600 dark:text-green-400">
+                  {calculatePricePercent(parseFloat(takeProfitPrice), currentPrice, formData.type).toFixed(2)}%
+                </div>
+              )}
             </div>
-          )}
-        </div>
-      </div>
+            <div className={style.TargetStopHolder}>
+              <div className={style.TargetStopHolderInputTitle}>
+                <input
+                  type="text"
+                  value={stopLossPrice}
+                  onChange={(e) => handlePriceChange(e.target.value, setStopLossPrice)}
+                  placeholder="Stop Loss"
+                  className="mt-1 block w-full rounded-lg border-gray-300 dark:border-gray-600 shadow-sm focus:border-red-500 focus:ring-red-500 dark:bg-gray-700 dark:text-white dark:focus:border-red-500 dark:focus:ring-red-500"
+                />
+              </div>
+              {currentPrice && stopLossPrice && !isNaN(parseFloat(stopLossPrice)) && (
+                <div className="mt-1 text-center text-sm text-red-600 dark:text-red-400">
+                  {calculatePricePercent(parseFloat(stopLossPrice), currentPrice, formData.type).toFixed(2)}%
+                </div>
+              )}
+            </div>
+          </div>
+        )}</div>
+
 
       {/* دکمه ارسال فرم */}
       <button
         type="submit"
-        className={`w-full py-3 px-4 rounded-lg font-medium transition-all ${
-          formData.type === 'LONG' ? style.ShortButton : style.LongButton
-        }`}
+        className={`w-full py-3 px-4 rounded-lg font-medium transition-all ${formData.type === 'LONG' ? style.ShortButton : style.LongButton
+          }`}
       >
         {formData.type === 'LONG' ? 'باز کردن پوزیشن لانگ' : 'باز کردن پوزیشن شورت'}
       </button>

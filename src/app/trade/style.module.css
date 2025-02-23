@@ -13,7 +13,6 @@
     display: flex;
     flex-flow: row-reverse nowrap;
     width: 100%;
-    background: #000;
     justify-content: space-between;
     padding: 32px;
 }
@@ -26,7 +25,6 @@
     width: 27%;
     border-radius: 20px;
     overflow: hidden;
-    background-color: #202020;
     color: #fff;
     text-align: right;
     font-size: 17px;
@@ -79,18 +77,15 @@
     color: rgb(255, 255, 255) !important;
 }
 .positionOpen{
+    min-width: 450px !important;
+    max-width: 450px !important;
     width: 100%;
     justify-content: space-between;
     display: flex;
     flex-flow: column wrap;
-    background: #1f2937 !important;
     border-radius: 12px;
     padding: 16px;
     box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-}
-.positionOpen:hover {
-    transform: translateY(-2px);
-    transition: all 0.3s ease;
 }
 .positionHolder{
     display: flex;
@@ -119,7 +114,6 @@
     border: 0 none !important;
     padding: 0px !important;
     margin: 0 !important;
-    background-color: #434343 !important;
 }
 .positions > div:first-child{
     border-bottom: 2px solid #000;
@@ -142,7 +136,6 @@
     display: flex;
     justify-content: center;
     overflow-x: scroll;
-    background-color: black;
 }
 .positionHolderFlex {
     overflow-x: scroll;
@@ -152,7 +145,6 @@
 }
 .titlePositionCard{
     font-size: 18px;
-    color: #e5e7eb !important;
 }
 .historyCard {
     background-color: rgba(255, 255, 255, 0.02);
@@ -165,17 +157,6 @@
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-/* اضافه کردن استایل برای input‌های حد سود و ضرر */
-.positionOpen input {
-    background: #374151;
-    border-color: #4b5563;
-    color: #e5e7eb;
-}
-
-.positionOpen input:focus {
-    border-color: #60a5fa;
-    box-shadow: 0 0 0 2px rgba(96, 165, 250, 0.2);
-}
 
 
 

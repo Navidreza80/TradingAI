@@ -69,7 +69,7 @@ export default function TradePage() {
     const [positions, setPositions] = useState<Position[]>([])
     const [currentPrice, setCurrentPrice] = useState<number | null>(null)
     const positionsRef = useRef<HTMLDivElement>(null)
-    const [pnlState, setPnlState] = useState<{[key: string]: { amount: number; percentage: number }}>({})
+    const [pnlState, setPnlState] = useState<{ [key: string]: { amount: number; percentage: number } }>({})
     const [isHistoryModalVisible, setIsHistoryModalVisible] = useState(false);
     const [closedPositions, setClosedPositions] = useState<ClosedPosition[]>([]);
     const [isLimitModalVisible, setIsLimitModalVisible] = useState(false);
@@ -122,7 +122,7 @@ export default function TradePage() {
                     )).values()
                 );
                 uniquePositions.sort((a, b) => b.closeTime - a.closeTime);
-                
+
                 localStorage.setItem('closed_positions', JSON.stringify(uniquePositions));
                 setClosedPositions(uniquePositions);
             }
@@ -178,7 +178,7 @@ export default function TradePage() {
     }, [positions, prices, calculatePnL, closePosition]);
 
     useEffect(() => {
-        const newPnlState: {[key: string]: { amount: number; percentage: number }} = {};
+        const newPnlState: { [key: string]: { amount: number; percentage: number } } = {};
         positions.forEach(position => {
             const price = prices[position.symbol];
             if (price) {
@@ -191,8 +191,8 @@ export default function TradePage() {
     }, [positions, prices, calculatePnL, checkAndClosePositions]);
 
     useEffect(() => {
-            const savedPositions = localStorage.getItem(POSITIONS_STORAGE_KEY)
-            if (savedPositions) {
+        const savedPositions = localStorage.getItem(POSITIONS_STORAGE_KEY)
+        if (savedPositions) {
             try {
                 const parsedPositions = JSON.parse(savedPositions)
                 setPositions(parsedPositions)
@@ -268,7 +268,7 @@ export default function TradePage() {
             );
 
             const priceResults = await Promise.all(pricePromises);
-            
+
             const newPrices: PriceMap = {};
             priceResults.forEach(result => {
                 if (!isNaN(result.price)) {
@@ -279,7 +279,7 @@ export default function TradePage() {
             setPrices(newPrices);
             setCurrentPrice(newPrices[selectedSymbol]);
 
-            const newPnlState: {[key: string]: { amount: number; percentage: number }} = {};
+            const newPnlState: { [key: string]: { amount: number; percentage: number } } = {};
             positions.forEach(position => {
                 const price = newPrices[position.symbol];
                 if (price) {
@@ -329,10 +329,10 @@ export default function TradePage() {
                 const parsedPositions = JSON.parse(savedClosedPositions);
                 const uniquePositions = Array.from(
                     new Map(parsedPositions.map((position: ClosedPosition) => [position.timestamp, position]))
-                    .values()
+                        .values()
                 );
                 uniquePositions.sort((a, b) => b.closeTime - a.closeTime);
-                
+
                 setClosedPositions(uniquePositions);
                 localStorage.setItem('closed_positions', JSON.stringify(uniquePositions));
             } catch (error) {
@@ -399,46 +399,30 @@ export default function TradePage() {
 
     return (
         <ConfigProvider locale={fa_IR} direction="rtl">
-            <Layout className="min-h-screen mt-16">
-                <Header className={style.header}>
+            <Layout className="min-h-screen mt-16 bg-white dark:bg-black dark:text-white">
+                <Header className={`${style.header} dark:bg-gray-800`}>
                     <div className="flex items-center gap-4">
-                    <Title level={3}>TradingAi</Title>
                         <Space>
-                            <Button 
+                            <Button
                                 onClick={() => setIsHistoryModalVisible(true)}
                                 type="primary"
                                 ghost
+                                className="dark:bg-gray-700 dark:text-white"
                             >
                                 تاریخچه معاملات
                             </Button>
                             <Link href="/education">
-                                <Button type="primary" ghost icon={<BookOutlined />}>
+                                <Button type="primary" ghost icon={<BookOutlined />} className="dark:bg-gray-700 dark:text-white">
                                     آموزش ترید
                                 </Button>
                             </Link>
                         </Space>
                     </div>
-                    <Space size="large">
-                        <Select
-                            value={selectedSymbol}
-                            onChange={setSelectedSymbol}
-                            className={style.OptionHolder}
-                            showSearch
-                            optionFilterProp="children"
-                            filterOption={(input: string, option: any) =>
-                                (option?.children?.toString().toLowerCase().indexOf(input.toLowerCase()) ?? -1) >= 0
-                            }
-                        >
-                            {coins.map(({ symbol, name, image }) => (
-                                <Option key={symbol} value={symbol.toUpperCase() + "USDT"}><div className={style.option}><h1>{symbol.toUpperCase() + "/USDT"}</h1><img className='w-6' src={image} /></div></Option>
-                            ))}
-                        </Select>
-                    </Space>
                 </Header>
 
-                <Content className="p-6 bg-black">
-                    <div>
-                        <div className={style.contentTrade}>
+                <Content className="p-6 bg-white dark:bg-black">
+                    <div className='bg-white dark:bg-black'>
+                        <div className={`${style.contentTrade}  bg-white dark:bg-black`}>
                             <div className={style.contentTradingView}>
                                 <TradingViewWidget
                                     symbol={selectedSymbol}
@@ -446,7 +430,20 @@ export default function TradePage() {
                                 />
                             </div>
 
-                            <div className={style.contentTradeForm}>
+                            <div className={`${style.contentTradeForm}  bg-[#f1f1f1] dark:bg-[#202020]`}>
+                                <div className='flex justify-[right] gap-3 mb-[20px]'>
+                                    <label className="block text-[18px] font-semibold text-gray-700 dark:text-gray-200">نماد:</label>
+                                    <Select
+                                        value={selectedSymbol}
+                                        onChange={setSelectedSymbol}
+                                        className={`${style.OptionHolder} bg-black dark:bg-gray-700 dark:text-white`}
+                                        showSearch
+                                    >
+                                        {coins.map(({ symbol, image }) => (
+                                            <Option className="bg-black dark:bg-gray-700 dark:text-white" key={symbol} value={symbol.toUpperCase() + "USDT"}><div className={style.option}><h1>{symbol.toUpperCase() + "/USDT"}</h1><img className='w-6' src={image} /></div></Option>
+                                        ))}
+                                    </Select>
+                                </div>
                                 <TradeForm
                                     currentPrice={prices[selectedSymbol]}
                                     onOpenPosition={handleOpenPosition}
@@ -461,11 +458,11 @@ export default function TradePage() {
                             <Card
                                 title={
                                     <div className="flex justify-between items-center">
-                                        <span>معاملات فعال</span>
+                                        <span className="text-black dark:text-white">معاملات فعال</span>
                                         <Tag className={style.OpenPositionTag}>{positions.length}</Tag>
                                     </div>
                                 }
-                                className={style.positions}
+                                className={`${style.positions} bg-[#f1f1f1] dark:bg-[#434343]`}
                             >
                                 <Space direction="vertical" className={style.positionHolder}>
                                     <div className={style.positionHolderFlex}>
@@ -480,75 +477,89 @@ export default function TradePage() {
                                                 <Card
                                                     key={position.timestamp}
                                                     size="small"
-                                                    className={style.positionOpen}
+
                                                     style={{
-                                                        borderColor: isProfitable ? '#b7eb8f' : '#ffccc7',
                                                         marginBottom: 16,
-                                                        background: '#1f2937'
                                                     }}
+                                                    className={`${style.positionOpen} ${isProfitable
+                                                        ? 'dark:border-[#b7eb8f] border-[#3e8301]'
+                                                        : 'dark:border-[#ffccc7] border-[#ff5555]'
+                                                        }  bg-white dark:bg-black`}
                                                 >
-                                                    <div className="flex justify-between mb-4">
-                                                        <Space>
-                                                            <Text className={style.titlePositionCard} strong>{position.symbol}</Text>
-                                                            <Tag color={position.mode === 'cross' ? 'blue' : 'purple'}>
+                                                    <div className="flex  mb-4">
+                                                        <Space className="flex justify-left ">
+                                                            <h1 className={`${style.titlePositionCard} text-black dark:text-white`}>{position.symbol}</h1>
+                                                            <Tag color={position.type === 'LONG' ? 'green' : 'red'}>
+                                                                {position.type === 'LONG' ? 'long' : 'short'}
+                                                            </Tag>
+                                                            <Tag className="bg-white dark:bg-gray-500 text-black dark:text-white">
                                                                 {position.mode}
                                                             </Tag>
-                                                            <Tag color={position.type === 'LONG' ? 'green' : 'red'}>
-                                                                {position.type === 'LONG' ? 'لانگ' : 'شورت'}
-                                                            </Tag>
+                                                            <Tag className="bg-white dark:bg-gray-500 text-black dark:text-white">{position.leverage}X</Tag>
                                                         </Space>
-                                                        <Space>
-                                                        <Statistic
-                                                            value={pnl.percentage}
-                                                            precision={2}
-                                                                valueStyle={{ color: isProfitable ? '#3f8600' : '#cf1322', fontSize: '16px' }}
-                                                            prefix={isProfitable ? <ArrowUpOutlined /> : <ArrowDownOutlined />}
-                                                            suffix="%"
-                                                        />
-                                                        </Space>
+
+                                                    </div>
+                                                    <Divider style={{ background: "#64748b", height: "1px" }} />
+                                                    <div className='flex justify-between'>
+                                                        <Space className=' w-full flex justify-between'>
+                                                            <Statistic
+                                                                value={pnl.percentage}
+                                                                precision={2}
+                                                                valueStyle={{ color: isProfitable ? '#3f8600' : '#cf1322', fontSize: '20px' }}
+                                                                suffix="%"
+                                                                className="dark:text-white"
+                                                            />
+                                                            <Statistic
+                                                                suffix="$"
+                                                                value={Math.abs(pnl.amount)}
+                                                                precision={2}
+                                                                valueStyle={{ color: isProfitable ? '#3f8600' : '#cf1322', fontSize: '20px' }}
+                                                                className="dark:text-white"
+                                                            /></Space>
                                                     </div>
 
                                                     <div className="grid grid-cols-2 gap-4 mb-4">
-                                                        <Statistic title="مقدار" prefix="$" value={position.amount} />
-                                                        <Statistic title="اهرم" value={position.leverage} suffix="x" />
-                                                        <Statistic
-                                                            title="قیمت ورود"
-                                                            value={position.entryPrice}
-                                                            prefix="$"
-                                                        />
-                                                        <Statistic
-                                                            title="سود/ضرر"
-                                                            prefix="$"
-                                                            value={Math.abs(pnl.amount)}
-                                                            precision={2}
-                                                            valueStyle={{ color: isProfitable ? '#3f8600' : '#cf1322' }}
-                                                        />
+                                                        <div className="dark:text-white">
+                                                            <p className='text-[14px] text-[#969696]'>اندازه</p>
+                                                            <h1 className='text-[20px]'>{position.amount * position.leverage}$</h1>
+                                                        </div>
+                                                        <div className="dark:text-white">
+                                                            <p className='text-[14px] text-[#969696]'>مقدار</p>
+                                                            <h1 className='text-[20px]'>{position.amount}$</h1>
+                                                        </div>
+                                                        <div className="dark:text-white">
+                                                            <p className='text-[14px] text-[#969696]'>قیمت ورود</p>
+                                                            <h1 className='text-[20px]'>{position.entryPrice}$</h1>
+                                                        </div>
+                                                        <div className="dark:text-white">
+                                                            <p className='text-[14px] text-[#969696]'>قیمت لحظه ای</p>
+                                                            <h1 className='text-[20px]'>{prices[position.symbol] | 0}$</h1>
+                                                        </div>
                                                     </div>
 
                                                     <Divider style={{ margin: '12px 0' }} />
+                                                    <div className='flex gap-3'>
+                                                        <Button
+                                                            block
+                                                            type="primary"
+                                                            onClick={() => {
+                                                                setSelectedPosition(position);
+                                                                setIsLimitModalVisible(true);
+                                                            }}
+                                                            className='bg-slate-500 dark:bg-gray-600 dark:text-white'
+                                                        >
+                                                            TP/SL
+                                                        </Button>
 
-                                                    <Button
-                                                        block
-                                                        type="primary"
-                                                        icon={<MoreOutlined />}
-                                                        onClick={() => {
-                                                            setSelectedPosition(position);
-                                                            setIsLimitModalVisible(true);
-                                                        }}
-                                                        className="mb-2"
-                                                        style={{ backgroundColor: '#1890ff' }}
-                                                    >
-                                                        تنظیم حد سود و ضرر
-                                                    </Button>
-
-                                                    <Button
-                                                        block
-                                                        type="primary"
-                                                        danger={!isProfitable}
-                                                        onClick={() => closePosition(position.timestamp)}
-                                                    >
-                                                        بستن معامله
-                                                    </Button>
+                                                        <Button
+                                                            block
+                                                            type="primary"
+                                                            className='bg-slate-500 dark:bg-gray-600 dark:text-white'
+                                                            onClick={() => closePosition(position.timestamp)}
+                                                        >
+                                                            بستن معامله
+                                                        </Button>
+                                                    </div>
                                                 </Card>
                                             )
 
@@ -557,7 +568,7 @@ export default function TradePage() {
                                 </Space>
                             </Card>
                         ) : (
-                            <div className={style.noPositions}>هیچ معامله‌ای باز نیست</div>
+                            <div className={`${style.noPositions} dark:text-white`}>هیچ معامله‌ای باز نیست</div>
                         )}
                     </div>
                 </Content>
@@ -568,7 +579,7 @@ export default function TradePage() {
                     onCancel={() => setIsHistoryModalVisible(false)}
                     footer={null}
                     width={800}
-                    className="rtl"
+                    className="rtl dark:bg-gray-800 dark:text-white"
                 >
                     <div className="space-y-4">
                         {closedPositions.length > 0 ? (
@@ -578,15 +589,15 @@ export default function TradePage() {
                                     <Card
                                         key={position.timestamp}
                                         size="small"
-                                        className={style.historyCard}
+                                        className={`${style.historyCard} dark:bg-black`}
                                         style={{
                                             borderColor: position.pnl?.amount >= 0 ? '#b7eb8f' : '#ffccc7',
                                         }}
                                     >
                                         <div className="flex justify-between mb-4">
                                             <Space>
-                                                <Text strong>{position.symbol}</Text>
-                                                <Tag color={'gray'} className='text-black'>
+                                                <h1 className="text-black text-[16px] font-semibold dark:text-white">{position.symbol}</h1>
+                                                <Tag color={'gray'} className='text-black dark:text-white'>
                                                     {position.mode}
                                                 </Tag>
                                                 <Tag color={position.type === 'LONG' ? 'green' : 'red'}>
@@ -594,42 +605,44 @@ export default function TradePage() {
                                                 </Tag>
                                             </Space>
                                             <Text type={position.pnl?.amount >= 0 ? 'success' : 'danger'}>
-                                                {position.pnl?.percentage.toFixed(2)}%
+                                                <div className={position.pnl?.percentage >= 0 ? 'text-green-500' : 'text-red-500 dark:text-[#e65330]'}>
+                                                    %{Math.abs(position.pnl?.percentage || 0).toFixed(2)}
+                                                </div>
                                             </Text>
                                         </div>
 
                                         <div className="grid grid-cols-3 gap-4">
                                             <div>
-                                                <Text type="secondary">قیمت ورود:</Text>
-                                                <div>${position.entryPrice}</div>
+                                                <h1 className="text-black text-[14px]  dark:text-white">قیمت ورود:</h1>
+                                                <div className="dark:text-white">${position.entryPrice}</div>
                                             </div>
                                             <div>
-                                                <Text type="secondary">قیمت خروج:</Text>
-                                                <div>${position.closePrice}</div>
+                                                <h1 className="text-black text-[14px]  dark:text-white">قیمت خروج:</h1>
+                                                <div className="dark:text-white">${position.closePrice}</div>
                                             </div>
                                             <div>
-                                                <Text type="secondary">سود/ضرر:</Text>
+                                                <h1 className="text-black text-[14px]  dark:text-white">سود/ضرر:</h1>
                                                 <div className={position.pnl?.amount >= 0 ? 'text-green-500' : 'text-red-500'}>
                                                     ${Math.abs(position.pnl?.amount || 0).toFixed(2)}
                                                 </div>
                                             </div>
                                             <div>
-                                                <Text type="secondary">مقدار:</Text>
-                                                <div>${position.amount}</div>
+                                                <h1 className="text-black text-[14px]  dark:text-white">مقدار:</h1>
+                                                <div className="dark:text-white">${position.amount}</div>
                                             </div>
                                             <div>
-                                                <Text type="secondary">اهرم:</Text>
-                                                <div>{position.leverage}x</div>
+                                                <h1 className="text-black text-[14px]  dark:text-white">اهرم:</h1>
+                                                <div className="dark:text-white">{position.leverage}x</div>
                                             </div>
                                             <div>
-                                                <Text type="secondary">تاریخ بسته شدن:</Text>
-                                                <div>{new Date(position.closeTime).toLocaleString('fa-IR')}</div>
+                                                <h1 className="text-black text-[14px]  dark:text-white">تاریخ بسته شدن:</h1>
+                                                <div className="dark:text-white">{new Date(position.closeTime).toLocaleString('fa-IR')}</div>
                                             </div>
                                         </div>
                                     </Card>
                                 ))
                         ) : (
-                            <div className="text-center text-gray-500 py-8">
+                            <div className="text-center text-gray-500 py-8 dark:text-gray-400">
                                 تاریخچه‌ای وجود ندارد
                             </div>
                         )}
@@ -645,13 +658,14 @@ export default function TradePage() {
                         setTempLimits({ takeProfit: null, stopLoss: null });
                     }}
                     footer={[
-                        <Button 
-                            key="cancel" 
+                        <Button
+                            key="cancel"
                             onClick={() => {
                                 setIsLimitModalVisible(false);
                                 setSelectedPosition(null);
                                 setTempLimits({ takeProfit: null, stopLoss: null });
                             }}
+                            className="dark:bg-gray-700 dark:text-white"
                         >
                             انصراف
                         </Button>,
@@ -660,12 +674,13 @@ export default function TradePage() {
                             type="primary"
                             onClick={handleApplyLimits}
                             style={{ backgroundColor: '#1890ff' }}
+                            className="dark:bg-blue-600 dark:text-white"
                         >
                             اعمال تغییرات
                         </Button>
                     ]}
                     width={600}
-                    className="rtl"
+                    className="rtl dark:bg-gray-800 dark:text-white"
                 >
                     {selectedPosition && (
                         <div className="space-y-6">
@@ -690,6 +705,7 @@ export default function TradePage() {
                                                     }
                                                 }}
                                                 suffix="$"
+                                                className="dark:bg-gray-700 dark:text-white"
                                             />
                                         </div>
                                         <div>
@@ -701,18 +717,19 @@ export default function TradePage() {
                                                     if (!isNaN(percentWithLeverage)) {
                                                         const actualPercent = percentWithLeverage / selectedPosition.leverage;
                                                         const price = selectedPosition.type === 'LONG'
-                                                            ? selectedPosition.entryPrice * (1 + actualPercent/100)
-                                                            : selectedPosition.entryPrice * (1 - actualPercent/100);
+                                                            ? selectedPosition.entryPrice * (1 + actualPercent / 100)
+                                                            : selectedPosition.entryPrice * (1 - actualPercent / 100);
                                                         setTempLimits(prev => ({
                                                             ...prev,
-                                                            takeProfit: { 
-                                                                price, 
+                                                            takeProfit: {
+                                                                price,
                                                                 percent: percentWithLeverage
                                                             }
                                                         }));
                                                     }
                                                 }}
                                                 suffix={`% (${selectedPosition.leverage}x)`}
+                                                className="dark:bg-gray-700 dark:text-white"
                                             />
                                         </div>
                                     </div>
@@ -744,6 +761,7 @@ export default function TradePage() {
                                                     }
                                                 }}
                                                 suffix="$"
+                                                className="dark:bg-gray-700 dark:text-white"
                                             />
                                         </div>
                                         <div>
@@ -755,18 +773,19 @@ export default function TradePage() {
                                                     if (!isNaN(percentWithLeverage)) {
                                                         const actualPercent = percentWithLeverage / selectedPosition.leverage;
                                                         const price = selectedPosition.type === 'LONG'
-                                                            ? selectedPosition.entryPrice * (1 - actualPercent/100)
-                                                            : selectedPosition.entryPrice * (1 + actualPercent/100);
+                                                            ? selectedPosition.entryPrice * (1 - actualPercent / 100)
+                                                            : selectedPosition.entryPrice * (1 + actualPercent / 100);
                                                         setTempLimits(prev => ({
                                                             ...prev,
-                                                            stopLoss: { 
-                                                                price, 
+                                                            stopLoss: {
+                                                                price,
                                                                 percent: percentWithLeverage
                                                             }
                                                         }));
                                                     }
                                                 }}
                                                 suffix={`% (${selectedPosition.leverage}x)`}
+                                                className="dark:bg-gray-700 dark:text-white"
                                             />
                                         </div>
                                     </div>

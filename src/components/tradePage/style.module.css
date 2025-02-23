@@ -65,17 +65,14 @@
 .TargetHolderAndStopHolderHolder {
     display: flex;
     justify-content: space-between;
-    border-top: 2px dashed #323232;
+    border-top: 1px solid #878787b0;
+    border-bottom: 1px solid #878787b0;
+    flex-flow: column wrap;
+    
 }
 
-.TargetStopHolderInputTitle>label {
-    font-size: 15px;
-    color: #ffffff;
-}
 
 .TargetStopHolderInputTitle>input {
-    background-color: #494949;
-    color: #fff;
     border-radius: 10px;
     margin-right: 5px;
     padding: 5px 10px;
@@ -99,7 +96,7 @@
 }
 
 .Form {
-    height: 100%;
+    height: 610px;
     display: flex;
     justify-content: space-between;
     flex-flow: column wrap;
@@ -174,30 +171,20 @@
     background-color: #ff0000;
 }
 .CrossOrIsolatedHolder{
-
+    display: flex;
+    justify-content: space-between;
 }
 .CrossOrIsolated{
     display: flex;
     justify-content: center;
 }
-.CrossOrIsolated > label{
-    display: flex;
-    gap: 10px;
-}
-.CrossOrIsolated > label > input{
-    appearance: none;
-    width: 20px;
-    height: 20px;
-    border: 1px solid #181818;
-    background-color: #575757;
-    border-radius: 5px;
+.CrossOrIsolated > select{
+    border-radius: 50px;
     cursor: pointer;
+    border: 1px solid #828387;
 }
-.CrossOrIsolated > label > input:checked{
-    background: url(https://img.icons8.com/?size=100&id=924&format=png&color=ffffff);
-    background-size: 20px;
-    background-position: 50% 50%;
-    background-repeat: no-repeat;
+.CrossOrIsolated > select > option{ 
+    cursor: pointer;
 }
 .amountHolder{
     display: flex;
