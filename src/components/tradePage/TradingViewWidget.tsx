@@ -32,7 +32,7 @@ const widgetConfig = {
     enable_publishing: false,
     allow_symbol_change: false,
     width: "100%",
-    height: "100%",
+    height: "600px",
     save_image: true,
     hide_side_toolbar: false,
     hide_legend: false,
@@ -95,7 +95,7 @@ const widgetConfig = {
 
   // رنگ‌بندی چارت
   chartStyles: {
-    upColor: "#26a69a", // رنگ سبز برای حرکت صعودی
+    upColor: "#448717", // رنگ سبز برای حرکت صعودی
     downColor: "#ef5350", // رنگ قرمز برای حرکت نزولی
   },
 
@@ -159,7 +159,7 @@ export const TradingViewWidget = ({ symbol, onPriceChange }: TradingViewWidgetPr
       containerRef.current.innerHTML = '';
       const widget = new (window as any).TradingView.widget({
         width: "100%",
-        height: "700px",
+        height: "600px",
         symbol: `BINANCE:${symbol}`,
         interval: "15",
         timezone: "Asia/Tehran",
@@ -290,7 +290,7 @@ export const TradingViewWidget = ({ symbol, onPriceChange }: TradingViewWidgetPr
     <div 
       id='tradingview_widget_container'
       ref={containerRef}
-      style={{ height: '700px', width: '100%' }}
+      style={{ width: '100%' }}
     />
   );
 };

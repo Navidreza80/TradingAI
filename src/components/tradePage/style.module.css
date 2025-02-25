@@ -68,9 +68,11 @@
     border-top: 1px solid #878787b0;
     border-bottom: 1px solid #878787b0;
     flex-flow: column wrap;
-    
+    padding-bottom: 15px;
 }
-
+.TargetStopHolder{
+    width: 50%;
+}
 
 .TargetStopHolderInputTitle>input {
     border-radius: 10px;
@@ -91,16 +93,14 @@
     justify-content: right;
     gap: 4px;
     width: 100%;
-    padding: 5px 0px;
     flex-flow: column wrap;
 }
 
 .Form {
     height: 610px;
     display: flex;
-    justify-content: space-between;
     flex-flow: column wrap;
-    gap: 13px;
+    gap: 25px;
 }
 .ShortButton {
     background-color: rgb(68, 127, 0);
@@ -195,8 +195,10 @@
     border-radius: 50px;
     padding: 5px 15px 5px 10px !important;
 }
-
-
+.checkedTPSL{
+    display: flex;
+    gap: 5px;
+}
 
 
 
@@ -215,7 +217,7 @@
 @media (max-width: 1200px) {
     .contentTradingView {
         width: 100%;
-        height: 600px;
+        height: 200px;
     }
 }
 
@@ -224,3 +226,18 @@
         height: 400px;
     }
 }
+
+@media (max-width: 1200px) {
+    .TargetStopHolder {
+        width: 100%;
+    }
+    .checkedTPSL{
+        flex-flow: column wrap;
+    }
+    .TargetStopHolderInputTitle > input{
+        width: 100%;
+        border-radius: 5px;
+    }
+}
+
+

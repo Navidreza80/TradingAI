@@ -131,47 +131,6 @@ const TradeForm: React.FC<TradeFormProps> = ({ currentPrice, onOpenPosition, sym
 
   return (
     <form onSubmit={handleSubmit} className={style.Form}>
-      {/* نمایش قیمت فعلی */}
-      <div className="bg-gray-400 dark:bg-gray-800 rounded-lg p-6">
-        {/* <div className="flex items-center justify-between mb-2">
-          <h1 className="text-black dark:text-white font-bold text-lg">قیمت فعلی</h1>
-        </div>
-        <Statistic
-          value={currentPrice || "از اتصال اینترنت و فیلترشکن مطمئن شوید"}
-          valueStyle={{
-            fontSize: '17px',
-            fontWeight: 'semi-bold',
-            textAlign: "right",
-          }}
-          className='text-black dark:text-white'
-        /> */}
-        <div className="dark:text-white">
-          <h1 className='text-[20px] text-black font-bold dark:text-white'>قیمت فعلی</h1>
-          <h1 className='text-[15px] text-[#202020] dark:text-gray-200'>{currentPrice || "از اتصال اینترنت و فیلترشکن مطمئن شوید"}</h1>
-        </div>
-      </div>
-
-      {/* بخش نوع معامله */}
-      <div>
-        <label className="block text-sm font-semibold text-gray-700 dark:text-gray-200 mb-2">نوع معامله:</label>
-        <div className="grid grid-cols-2 gap-2">
-          <button
-            type="button"
-            onClick={() => handleTypeChange('LONG')}
-            className={`py-2 px-4 rounded-lg font-medium transition-all text-white ${formData.type === 'LONG' ? 'bg-[#448717] ' : 'bg-[#1fff70] '}`}
-          >
-            لانگ
-          </button>
-          <button
-            type="button"
-            onClick={() => handleTypeChange('SHORT')}
-            className={`py-2 px-4 rounded-lg font-medium transition-all text-white ${formData.type === 'SHORT' ? 'bg-red-600 ' : 'bg-red-300  '}`}
-          >
-            شورت
-          </button>
-        </div>
-      </div>
-
       {/* بخش حالت معامله و اهرم*/}
       <div className={style.CrossOrIsolatedHolder}>
         <div className='w-[40%]'>
@@ -200,6 +159,35 @@ const TradeForm: React.FC<TradeFormProps> = ({ currentPrice, onOpenPosition, sym
         </div>
       </div>
 
+      {/* نمایش قیمت فعلی */}
+      <div className="bg-gray-400 dark:bg-gray-800 rounded-lg p-4">
+        <div className="dark:text-white">
+          <h1 className='text-[20px] mb-2 text-black font-bold dark:text-white'>قیمت فعلی</h1>
+          <h1 className='text-[15px] text-[#202020] dark:text-gray-200'>{currentPrice || "از اتصال اینترنت و فیلترشکن مطمئن شوید"}</h1>
+        </div>
+      </div>
+
+      {/* بخش نوع معامله */}
+      <div>
+        <label className="block text-sm font-semibold text-gray-700 dark:text-gray-200 mb-2">نوع معامله:</label>
+        <div className="grid grid-cols-2 gap-2">
+          <button
+            type="button"
+            onClick={() => handleTypeChange('LONG')}
+            className={`py-2 px-4 rounded-lg font-medium transition-all text-white ${formData.type === 'LONG' ? 'bg-[#448717] ' : 'bg-[#1fff70] '}`}
+          >
+            لانگ
+          </button>
+          <button
+            type="button"
+            onClick={() => handleTypeChange('SHORT')}
+            className={`py-2 px-4 rounded-lg font-medium transition-all text-white ${formData.type === 'SHORT' ? 'bg-red-600 ' : 'bg-red-300  '}`}
+          >
+            شورت
+          </button>
+        </div>
+      </div>
+
       {/* بخش مقدار معامله */}
       <div>
         <label className="block text-sm font-semibold text-gray-700 dark:text-gray-200 mb-2">مقدار:</label>
@@ -217,10 +205,6 @@ const TradeForm: React.FC<TradeFormProps> = ({ currentPrice, onOpenPosition, sym
       </div>
 
       {/* بخش قیمت حد سود و ضرر */}
-
-
-
-
       <div className={`${style.TargetHolderAndStopHolderHolder}`}>
         <div className='flex w-full gap-1 cursor-pointer'>
           <input
@@ -232,7 +216,7 @@ const TradeForm: React.FC<TradeFormProps> = ({ currentPrice, onOpenPosition, sym
           <label className='text-black dark:text-white cursor-pointer' htmlFor="inputTPSL">TP/SL</label>
         </div>
         {TPSL && (
-          <div className='flex justify-between'>
+          <div className={style.checkedTPSL}>
             <div className={style.TargetStopHolder}>
               <div className={style.TargetStopHolderInputTitle}>
                 <input
@@ -243,11 +227,6 @@ const TradeForm: React.FC<TradeFormProps> = ({ currentPrice, onOpenPosition, sym
                   className="mt-1 block w-full rounded-lg border-gray-300 dark:border-gray-600 shadow-sm focus:border-green-500 focus:ring-green-500 dark:bg-gray-700 dark:text-white dark:focus:border-green-500 dark:focus:ring-green-500"
                 />
               </div>
-              {currentPrice && takeProfitPrice && !isNaN(parseFloat(takeProfitPrice)) && (
-                <div className="mt-1 text-center text-sm text-green-600 dark:text-green-400">
-                  {calculatePricePercent(parseFloat(takeProfitPrice), currentPrice, formData.type).toFixed(2)}%
-                </div>
-              )}
             </div>
             <div className={style.TargetStopHolder}>
               <div className={style.TargetStopHolderInputTitle}>
@@ -259,14 +238,10 @@ const TradeForm: React.FC<TradeFormProps> = ({ currentPrice, onOpenPosition, sym
                   className="mt-1 block w-full rounded-lg border-gray-300 dark:border-gray-600 shadow-sm focus:border-red-500 focus:ring-red-500 dark:bg-gray-700 dark:text-white dark:focus:border-red-500 dark:focus:ring-red-500"
                 />
               </div>
-              {currentPrice && stopLossPrice && !isNaN(parseFloat(stopLossPrice)) && (
-                <div className="mt-1 text-center text-sm text-red-600 dark:text-red-400">
-                  {calculatePricePercent(parseFloat(stopLossPrice), currentPrice, formData.type).toFixed(2)}%
-                </div>
-              )}
             </div>
           </div>
-        )}</div>
+        )}
+        </div>
 
 
       {/* دکمه ارسال فرم */}

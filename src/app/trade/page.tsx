@@ -400,36 +400,15 @@ export default function TradePage() {
     return (
         <ConfigProvider locale={fa_IR} direction="rtl">
             <Layout className="min-h-screen mt-16 bg-white dark:bg-black dark:text-white">
-                <Header className={`${style.header} dark:bg-gray-800`}>
-                    <div className="flex items-center gap-4">
-                        <Space>
-                            <Button
-                                onClick={() => setIsHistoryModalVisible(true)}
-                                type="primary"
-                                ghost
-                                className="dark:bg-gray-700 dark:text-white"
-                            >
-                                تاریخچه معاملات
-                            </Button>
-                            <Link href="/education">
-                                <Button type="primary" ghost icon={<BookOutlined />} className="dark:bg-gray-700 dark:text-white">
-                                    آموزش ترید
-                                </Button>
-                            </Link>
-                        </Space>
-                    </div>
-                </Header>
-
                 <Content className="p-6 bg-white dark:bg-black">
                     <div className='bg-white dark:bg-black'>
                         <div className={`${style.contentTrade}  bg-white dark:bg-black`}>
-                            <div className={style.contentTradingView}>
+                            <div className={`${style.contentTradingView}  bg-[#f1f1f1] dark:bg-[#202020]`}>
                                 <TradingViewWidget
                                     symbol={selectedSymbol}
                                     onPriceChange={setCurrentPrice}
                                 />
                             </div>
-
                             <div className={`${style.contentTradeForm}  bg-[#f1f1f1] dark:bg-[#202020]`}>
                                 <div className='flex justify-[right] gap-3 mb-[20px]'>
                                     <label className="block text-[18px] font-semibold text-gray-700 dark:text-gray-200">نماد:</label>
@@ -449,127 +428,108 @@ export default function TradePage() {
                                     onOpenPosition={handleOpenPosition}
                                     symbol={selectedSymbol}
                                 />
-
                             </div>
                         </div>
                     </div>
                     <div className={style.positionsHolder}>
-                        {positions.length > 0 ? (
-                            <Card
-                                title={
-                                    <div className="flex justify-between items-center">
-                                        <span className="text-black dark:text-white">معاملات فعال</span>
-                                        <Tag className={style.OpenPositionTag}>{positions.length}</Tag>
-                                    </div>
-                                }
-                                className={`${style.positions} bg-[#f1f1f1] dark:bg-[#434343]`}
-                            >
-                                <Space direction="vertical" className={style.positionHolder}>
-                                    <div className={style.positionHolderFlex}>
+                        <div className={`${style.positions} bg-[#f1f1f1] dark:bg-[#434343]`} style={{ marginBottom: '16px' }}>
+
+                            <div className="flex text-white mb-1 justify-between items-center">
+                                <div className='flex gap-1.5'>
+                                    <span className="text-black text-[16px] font-[700] dark:text-white">معاملات فعال:</span>
+                                    <Tag className={`${style.OpenPositionTag} bg-gray-200 dark:bg-gray-600 text-black dark:text-white p-2 rounded`}>
+                                        {positions.length}
+                                    </Tag>
+                                </div>
+                                <Button
+                                    onClick={() => setIsHistoryModalVisible(true)}
+                                    type="primary"
+                                    ghost
+                                    className="border-none gap-1 flex dark:text-white"
+                                >
+                                    <h1 className='text-[#202020] text-[16px] dark:text-white'>history</h1>
+                                    <img className='w-6 h-6' src='https://img.icons8.com/?size=100&id=ZG6vinMQTTq8&format=png&color=7e7e7e' />
+                                </Button>
+                            </div>
+                            {positions.length > 0 ? (
+                                <table className="w-full table-auto border-collapse">
+                                    <thead>
+                                        <tr>
+                                            <th className="text-center text-black dark:text-white py-2 px-4">Symbol</th>
+                                            <th className="text-center text-black dark:text-white py-2 px-4">Type</th>
+                                            <th className="text-center text-black dark:text-white py-2 px-4">Mode</th>
+                                            <th className="text-center text-black dark:text-white py-2 px-4">Leverage</th>
+                                            <th className="text-center text-black dark:text-white py-2 px-4">Amount</th>
+                                            <th className="text-center text-black dark:text-white py-2 px-4">Entry Price</th>
+                                            <th className="text-center text-black dark:text-white py-2 px-4">Current Price</th>
+                                            <th className="text-left text-black dark:text-white py-2 px-4">PNL</th>
+                                            <th className="text-center text-black dark:text-white py-2 px-4"></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody className=''>
                                         {positions.map((position) => {
-                                            const currentPrice = prices[position.symbol]
-
-                                            const pnl = pnlState[position.timestamp] || { amount: 0, percentage: 0 }
-                                            const isProfitable = pnl.amount >= 0
-
+                                            const currentPrice = prices[position.symbol];
+                                            const pnl = pnlState[position.timestamp] || { amount: 0, percentage: 0 };
+                                            const isProfitable = pnl.amount >= 0;
 
                                             return (
-                                                <Card
-                                                    key={position.timestamp}
-                                                    size="small"
-
-                                                    style={{
-                                                        marginBottom: 16,
-                                                    }}
-                                                    className={`${style.positionOpen} ${isProfitable
-                                                        ? 'dark:border-[#b7eb8f] border-[#3e8301]'
-                                                        : 'dark:border-[#ffccc7] border-[#ff5555]'
-                                                        }  bg-white dark:bg-black`}
-                                                >
-                                                    <div className="flex  mb-4">
-                                                        <Space className="flex justify-left ">
-                                                            <h1 className={`${style.titlePositionCard} text-black dark:text-white`}>{position.symbol}</h1>
-                                                            <Tag color={position.type === 'LONG' ? 'green' : 'red'}>
-                                                                {position.type === 'LONG' ? 'long' : 'short'}
-                                                            </Tag>
-                                                            <Tag className="bg-white dark:bg-gray-500 text-black dark:text-white">
-                                                                {position.mode}
-                                                            </Tag>
-                                                            <Tag className="bg-white dark:bg-gray-500 text-black dark:text-white">{position.leverage}X</Tag>
-                                                        </Space>
-
-                                                    </div>
-                                                    <Divider style={{ background: "#64748b", height: "1px" }} />
-                                                    <div className='flex justify-between'>
-                                                        <Space className=' w-full flex justify-between'>
-                                                            <Statistic
-                                                                value={pnl.percentage}
-                                                                precision={2}
-                                                                valueStyle={{ color: isProfitable ? '#3f8600' : '#cf1322', fontSize: '20px' }}
-                                                                suffix="%"
-                                                                className="dark:text-white"
-                                                            />
-                                                            <Statistic
-                                                                suffix="$"
-                                                                value={Math.abs(pnl.amount)}
-                                                                precision={2}
-                                                                valueStyle={{ color: isProfitable ? '#3f8600' : '#cf1322', fontSize: '20px' }}
-                                                                className="dark:text-white"
-                                                            /></Space>
-                                                    </div>
-
-                                                    <div className="grid grid-cols-2 gap-4 mb-4">
-                                                        <div className="dark:text-white">
-                                                            <p className='text-[14px] text-[#969696]'>اندازه</p>
-                                                            <h1 className='text-[20px]'>{position.amount * position.leverage}$</h1>
+                                                <tr key={position.timestamp} className={`rounded-sm border-b border-[#202020] dark:border-[#ccc]  bg-white dark:bg-black `}>
+                                                    <td className="py-2 px-4 text-center text-black dark:text-white ">{position.symbol}</td>
+                                                    <td className="py-2  px-4">
+                                                        <button className={`px-2 mx-auto py-1 rounded-full ${position.type === 'LONG' ? 'bg-green-500' : 'bg-red-500'} text-white`}>
+                                                            {position.type === 'LONG' ? 'long' : 'short'}
+                                                        </button>
+                                                    </td>
+                                                    <td className="py-2 px-4 text-center text-black dark:text-white "> {position.mode}</td>
+                                                    <td className="py-2 px-4 text-center text-black dark:text-white ">{position.leverage}X</td>
+                                                    <td className="text-center text-black dark:text-white py-2 px-4">
+                                                        {(position.amount).toFixed(2)}$
+                                                    </td>
+                                                    <td className="text-center text-black dark:text-white py-2 px-4">
+                                                        {position.entryPrice}$
+                                                    </td>
+                                                    <td className="text-center text-black dark:text-white py-2 px-4">
+                                                        {currentPrice || "!"}$
+                                                    </td>
+                                                    <td className="py-2 px-4  ">
+                                                        <div className=' flex-col justify-[left] flex-wrap flex'>
+                                                            <span className='text-left text-black dark:text-white' style={{ color: isProfitable ? '#3f8600' : '#cf1322', fontSize: '16px' }} > {Math.abs(pnl.amount).toFixed(2) + "USDT  " }</span>
+                                                            <span className='text-left text-black dark:text-white' style={{ color: isProfitable ? '#3f8600' : '#cf1322', fontSize: '16px' }} >{pnl.percentage.toFixed(2)}%</span>
                                                         </div>
-                                                        <div className="dark:text-white">
-                                                            <p className='text-[14px] text-[#969696]'>مقدار</p>
-                                                            <h1 className='text-[20px]'>{position.amount}$</h1>
+                                                    </td>
+                                                    <td className="py-2 px-4">
+                                                        <div className="flex gap-2">
+                                                            <button
+                                                                className="bg-blue-500 mr-auto text-white py-1 px-4 rounded"
+                                                                onClick={() => {
+                                                                    setSelectedPosition(position);
+                                                                    setIsLimitModalVisible(true);
+                                                                }}
+                                                            >
+                                                                TP/SL
+                                                            </button>
+                                                            <button
+                                                                style={{ background: isProfitable ? '#3f8600' : '#cf1322' }}
+                                                                className="bg-red-500 ml-auto text-white py-1 px-4 rounded"
+                                                                onClick={() => closePosition(position.timestamp)}
+                                                            >
+                                                                بستن معامله
+                                                            </button>
                                                         </div>
-                                                        <div className="dark:text-white">
-                                                            <p className='text-[14px] text-[#969696]'>قیمت ورود</p>
-                                                            <h1 className='text-[20px]'>{position.entryPrice}$</h1>
-                                                        </div>
-                                                        <div className="dark:text-white">
-                                                            <p className='text-[14px] text-[#969696]'>قیمت لحظه ای</p>
-                                                            <h1 className='text-[20px]'>{prices[position.symbol] | 0}$</h1>
-                                                        </div>
-                                                    </div>
-
-                                                    <Divider style={{ margin: '12px 0' }} />
-                                                    <div className='flex gap-3'>
-                                                        <Button
-                                                            block
-                                                            type="primary"
-                                                            onClick={() => {
-                                                                setSelectedPosition(position);
-                                                                setIsLimitModalVisible(true);
-                                                            }}
-                                                            className='bg-slate-500 dark:bg-gray-600 dark:text-white'
-                                                        >
-                                                            TP/SL
-                                                        </Button>
-
-                                                        <Button
-                                                            block
-                                                            type="primary"
-                                                            className='bg-slate-500 dark:bg-gray-600 dark:text-white'
-                                                            onClick={() => closePosition(position.timestamp)}
-                                                        >
-                                                            بستن معامله
-                                                        </Button>
-                                                    </div>
-                                                </Card>
-                                            )
-
+                                                    </td>
+                                                </tr>
+                                            );
                                         })}
-                                    </div>
-                                </Space>
-                            </Card>
-                        ) : (
-                            <div className={`${style.noPositions} dark:text-white`}>هیچ معامله‌ای باز نیست</div>
-                        )}
+                                    </tbody>
+                                </table>) : (
+
+
+                                <div className={`${style.noPositions} dark:text-white`}>
+                                    هیچ معامله‌ای باز نیست
+                                </div>
+                            )}
+                        </div>
+
                     </div>
                 </Content>
 
@@ -736,7 +696,7 @@ export default function TradePage() {
                                     {(tempLimits.takeProfit?.price || selectedPosition.takeProfit?.price) && (
                                         <div className="mt-2 text-green-500">
                                             سود تخمینی: ${calculateEstimatedPnL(selectedPosition, tempLimits.takeProfit?.price || selectedPosition.takeProfit?.price || 0).amount.toFixed(2)}
-                                            ({calculateEstimatedPnL(selectedPosition, tempLimits.takeProfit?.price || selectedPosition.takeProfit?.price || 0).percentage.toFixed(2)}%)
+
                                         </div>
                                     )}
                                 </div>
@@ -790,9 +750,8 @@ export default function TradePage() {
                                         </div>
                                     </div>
                                     {(tempLimits.stopLoss?.price || selectedPosition.stopLoss?.price) && (
-                                        <div className="mt-2 text-red-500">
+                                        <div className="mt-2" style={{ color: Math.abs(calculateEstimatedPnL(selectedPosition, tempLimits.stopLoss?.price || selectedPosition.stopLoss?.price || 0).amount) < 1 ? '#000' : '#3f8600', fontSize: '20px' }}>
                                             ضرر تخمینی: ${Math.abs(calculateEstimatedPnL(selectedPosition, tempLimits.stopLoss?.price || selectedPosition.stopLoss?.price || 0).amount).toFixed(2)}
-                                            ({Math.abs(calculateEstimatedPnL(selectedPosition, tempLimits.stopLoss?.price || selectedPosition.stopLoss?.price || 0).percentage).toFixed(2)}%)
                                         </div>
                                     )}
                                 </div>
