@@ -474,7 +474,7 @@ export default function TradePage() {
 
                                             return (
                                                 <tr key={position.timestamp} className={`rounded-sm border-b border-[#202020] dark:border-[#ccc]  bg-white dark:bg-black `}>
-                                                    <td className="py-2 px-4 text-center text-black dark:text-white ">{position.symbol}</td>
+                                                    <td className="py-2 px-4 text-[16px] font-[700] text-center text-black dark:text-white ">{position.symbol}</td>
                                                     <td className="py-2  px-4">
                                                         <button className={`px-2 mx-auto py-1 rounded-full ${position.type === 'LONG' ? 'bg-green-500' : 'bg-red-500'} text-white`}>
                                                             {position.type === 'LONG' ? 'long' : 'short'}
