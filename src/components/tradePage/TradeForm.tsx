@@ -176,14 +176,14 @@ const TradeForm: React.FC<TradeFormProps> = ({ currentPrice, onOpenPosition, sym
             onClick={() => handleTypeChange('LONG')}
             className={`py-2 px-4 rounded-lg font-medium transition-all text-white ${formData.type === 'LONG' ? 'bg-[#448717] ' : 'bg-[#1fff70] '}`}
           >
-            لانگ
+            Long
           </button>
           <button
             type="button"
             onClick={() => handleTypeChange('SHORT')}
             className={`py-2 px-4 rounded-lg font-medium transition-all text-white ${formData.type === 'SHORT' ? 'bg-red-600 ' : 'bg-red-300  '}`}
           >
-            شورت
+            Short
           </button>
         </div>
       </div>

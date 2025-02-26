@@ -12,6 +12,7 @@ type Price = {
 };
 import { useState, useEffect, useCallback, useRef } from 'react'
 import { TradingViewWidget } from '../../components/tradePage/TradingViewWidget'
+import { TradingViewWidgetDark } from '../../components/tradePage/TradingViewWidgetDark'
 import TradeForm from '../../components/tradePage/TradeForm'
 import { Layout, Select, Card, Button, Typography, Space, Tag, Statistic, Divider, Modal, Input } from 'antd'
 import { ArrowUpOutlined, ArrowDownOutlined, MoreOutlined, BookOutlined } from '@ant-design/icons'
@@ -79,6 +80,7 @@ export default function TradePage() {
         stopLoss: { price: number | null; percent: number | null; } | null;
     }>({ takeProfit: null, stopLoss: null });
 
+    
     const calculatePnL = useCallback((position: Position, price: number) => {
         if (!price || !position.entryPrice) return { amount: 0, percentage: 0 }
 
@@ -396,6 +398,8 @@ export default function TradePage() {
             setTempLimits({ takeProfit: null, stopLoss: null });
         }
     };
+      
+    
 
     return (
         <ConfigProvider locale={fa_IR} direction="rtl">
@@ -404,10 +408,22 @@ export default function TradePage() {
                     <div className='bg-white dark:bg-black'>
                         <div className={`${style.contentTrade}  bg-white dark:bg-black`}>
                             <div className={`${style.contentTradingView}  bg-[#f1f1f1] dark:bg-[#202020]`}>
-                                <TradingViewWidget
+                                <TradingViewWidgetDark
                                     symbol={selectedSymbol}
                                     onPriceChange={setCurrentPrice}
                                 />
+                                {/* {darkMode == true ? (      NavidReza
+                                    <TradingViewWidgetDark
+                                        symbol={selectedSymbol}
+                                        onPriceChange={setCurrentPrice}
+                                    />
+                                ) : (
+                                    <TradingViewWidget
+                                        symbol={selectedSymbol}
+                                        onPriceChange={setCurrentPrice}
+                                    />
+                                )} */}
+
                             </div>
                             <div className={`${style.contentTradeForm}  bg-[#f1f1f1] dark:bg-[#202020]`}>
                                 <div className='flex justify-[right] gap-3 mb-[20px]'>
@@ -445,7 +461,7 @@ export default function TradePage() {
                                     onClick={() => setIsHistoryModalVisible(true)}
                                     type="primary"
                                     ghost
-                                    className="border-none gap-1 flex dark:text-white"
+                                    className="border-none gap-1 flex dark:hover:bg-[#ccc] bg-white dark:bg-black"
                                 >
                                     <h1 className='text-[#202020] text-[16px] dark:text-white'>history</h1>
                                     <img className='w-6 h-6' src='https://img.icons8.com/?size=100&id=ZG6vinMQTTq8&format=png&color=7e7e7e' />
@@ -493,7 +509,7 @@ export default function TradePage() {
                                                     </td>
                                                     <td className="py-2 px-4  ">
                                                         <div className=' flex-col justify-[left] flex-wrap flex'>
-                                                            <span className='text-left text-black dark:text-white' style={{ color: isProfitable ? '#3f8600' : '#cf1322', fontSize: '16px' }} > {Math.abs(pnl.amount).toFixed(2) + "USDT  " }</span>
+                                                            <span className='text-left text-black dark:text-white' style={{ color: isProfitable ? '#3f8600' : '#cf1322', fontSize: '16px' }} > {Math.abs(pnl.amount).toFixed(2) + "USDT  "}</span>
                                                             <span className='text-left text-black dark:text-white' style={{ color: isProfitable ? '#3f8600' : '#cf1322', fontSize: '16px' }} >{pnl.percentage.toFixed(2)}%</span>
                                                         </div>
                                                     </td>
