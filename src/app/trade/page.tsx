@@ -412,7 +412,7 @@ export default function TradePage() {
                                     symbol={selectedSymbol}
                                     onPriceChange={setCurrentPrice}
                                 />
-                                {/* {darkMode == true ? (      NavidReza
+                                {/* {darkMode == true ? (      NavidRezaBug
                                     <TradingViewWidgetDark
                                         symbol={selectedSymbol}
                                         onPriceChange={setCurrentPrice}
