@@ -4,7 +4,7 @@ import { Book, Eye, Calendar, Heart, MessageSquare } from "lucide-react";
 import { useTranslation } from "react-i18next";
 
 export default function Blog() {
-  const { i18n, t } = useTranslation();
+  const { t } = useTranslation();
   return (
     <div
       className={`flex flex-col w-full h-1/2 border border-[#4b4b4b61] justify-between rounded-[16px] dark:bg-[#4b4b4b5b] bg-white transition-all duration-300 

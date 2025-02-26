@@ -67,14 +67,14 @@ export default function AppSheet() {
         <div
           className=" aspect-square" // Position the button
         >
-          <Menu className="lg:w-6 lg:h-6 md:w-5 md:h-5 sm:w-4 sm:h-4 xs:w-3 xs:h-3 text-black dark:text-white" /> {/* Hamburger menu icon */}
+          <Menu className="lg:w-6 lg:h-6 md:w-5 md:h-5 sm:w-5 sm:h-5 xs:w-5 xs:h-5 text-black dark:text-white" /> {/* Hamburger menu icon */}
         </div>
       </SheetTrigger>
 
       {/* Sheet Content */}
       <SheetContent
         side={i18n.language == "fa" || i18n.language == "ar" ? "right" : "left"}
-        className="dark:bg-[#202020b6] bg-white border-r-[#53B1FB] w-[300px]"
+        className="dark:bg-[#000000bd] bg-white border-r-[#53B1FB] w-[300px]"
       >
         <SheetHeader>
           {/* Logo and Title */}
@@ -108,11 +108,6 @@ export default function AppSheet() {
             </Link>
           ))}
         </div>
-
-        {/* Sheet Footer */}
-        <SheetFooter className="text-center text-[#6F6F6F] mt-4">
-          © 2025 TradingAI.
-        </SheetFooter>
       </SheetContent>
     </Sheet>
   );

@@ -14,12 +14,60 @@ datasource db {
 }
 
 model User {
-  id String @id @default(cuid())
-  email String @unique
-  username String @unique
-  clerkId String @unique
-  name String?
-  image String?
-  createdAt DateTime @default(now()) // member since 2020
+  id        String   @id @default(cuid())
+  email     String   @unique
+  username  String   @unique
+  clerkId   String   @unique
+  name      String?
+  image     String?
+  createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+  role      String?
+
+  // Relations
+  blogs    Blog[] // One-to-many relation with Blog
+  comments Comment[] // One-to-many relation with Comment
+  // userInteraction BlogInteraction[]
+}
+
+// model BlogInteraction {
+//   id String @id @default(cuid())
+//   blogId String 
+//   blog Blog @relation(fields: [blogId], references: [id])
+//   userId String
+//   user User @relation(fields: [userId], references: [id])
+//   isLiked Boolean
+//   isDisliked Boolean
+//   isSaved Boolean
+// }
+
+model Blog {
+  id               String    @id @default(cuid())
+  title            String
+  shortDescription String
+  content          String?
+  likes            Int       @default(0)
+  dislikes         Int       @default(0)
+  isLiked          Boolean   @default(false)
+  isDisliked       Boolean   @default(false)
+  isSaved          Boolean   @default(false)
+  comments         Comment[]
+  blogThumbnail    String?
+  publisherId      String
+  publisher        User      @relation(fields: [publisherId], references: [id])
+  createdAt        DateTime  @default(now())
+  updatedAt        DateTime  @updatedAt
+  // blogInteraction BlogInteraction[]
+}
+
+model Comment {
+  id        String   @id @default(cuid())
+  content   String
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
+  blogId    String
+  blog      Blog     @relation(fields: [blogId], references: [id])
+  createdAt DateTime @default(now())
+  likes     Int      @default(0)
+  dislikes  Int      @default(0)
 }

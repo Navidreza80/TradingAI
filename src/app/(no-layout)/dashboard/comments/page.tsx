@@ -2,7 +2,6 @@
 
 import * as React from "react";
 import {
-  ColumnDef,
   ColumnFiltersState,
   SortingState,
   VisibilityState,
@@ -33,76 +32,15 @@ import {
 } from "@/components/ui/table";
 import EditComment from "@/components/dashboard/edit-comment";
 import ViewReplies from "@/components/dashboard/view-replies";
+import { fetchUserComment } from "@/actions/comment.action";
 
-const data: Payment[] = [
+export const columns = [
   {
-    id: "13",
-    title: "Very Helpfull",
-    description: "That was very helpful thank you bro",
-    blog: "Understanding bitcoin",
-    date: "11/02/2025",
-    likes: 1,
-    replies: 10,
-    dislikes: 11,
-  },
-  {
-    id: "13",
-    title: "Very Helpfull",
-    description: "That was very helpful thank you bro",
-    blog: "Understanding bitcoin",
-    date: "11/02/2025",
-    likes: 1,
-    replies: 10,
-    dislikes: 11,
-  },
-  {
-    id: "13",
-    title: "Very Helpfull",
-    description: "That was very helpful thank you bro",
-    blog: "Understanding bitcoin",
-    date: "11/02/2025",
-    likes: 1,
-    replies: 10,
-    dislikes: 11,
-  },
-];
-
-export type Payment = {
-  id: string;
-  title: string;
-  description: string;
-  blog: string;
-  date: string;
-  likes: number;
-  replies: number;
-  dislikes: number;
-};
-
-export const columns: ColumnDef<Payment>[] = [
-  {
-    accessorKey: "title",
-    header: "Title",
+    accessorKey: "content",
+    header: "Content",
     cell: ({ row }) => (
       <div className="capitalize dark:text-white text-black">
-        {row.getValue("title")}
-      </div>
-    ),
-  },
-  {
-    accessorKey: "description",
-    header: "Description",
-    cell: ({ row }) => (
-      <div className="capitalize dark:text-white text-black">
-        {row.getValue("description")}
-      </div>
-    ),
-  },
-  {
-    accessorKey: "blog",
-    header: "Blog",
-    cell: ({ row }) => (
-      <div className="capitalize dark:text-white text-black">
-        {row.getValue("blog")}
+        {row.getValue("content")}
       </div>
     ),
   },
@@ -125,21 +63,11 @@ export const columns: ColumnDef<Payment>[] = [
     ),
   },
   {
-    accessorKey: "replies",
-    header: "Replies",
-    cell: ({ row }) => (
-      <div className="capitalize dark:text-white text-black flex flex-row items-center gap-2">
-        {row.getValue("replies")}
-        <ViewReplies />
-      </div>
-    ),
-  },
-  {
-    accessorKey: "date",
-    header: "Date",
+    accessorKey: "createdAt",
+    header: "CreatedAt",
     cell: ({ row }) => (
       <div className="capitalize dark:text-white text-black">
-        {row.getValue("date")}
+        {new Date(row.getValue("createdAt")).toLocaleDateString()}
       </div>
     ),
   },
@@ -152,6 +80,7 @@ export const columns: ColumnDef<Payment>[] = [
 ];
 
 export default function DataTableDemo() {
+  const [data, setData] = React.useState([]);
   const [sorting, setSorting] = React.useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
     []
@@ -159,6 +88,15 @@ export default function DataTableDemo() {
   const [columnVisibility, setColumnVisibility] =
     React.useState<VisibilityState>({});
   const [rowSelection, setRowSelection] = React.useState({});
+
+  const fetchComments = async () => {
+    const data = await fetchUserComment();
+    setData(data);
+  };
+
+  React.useEffect(() => {
+    fetchComments();
+  }, []);
 
   const table = useReactTable({
     data,
@@ -184,9 +122,9 @@ export default function DataTableDemo() {
       <div className="flex items-center py-4">
         <Input
           placeholder="Filter comments..."
-          value={(table.getColumn("title")?.getFilterValue() as string) ?? ""}
+          value={(table.getColumn("content")?.getFilterValue() as string) ?? ""}
           onChange={(event) =>
-            table.getColumn("title")?.setFilterValue(event.target.value)
+            table.getColumn("content")?.setFilterValue(event.target.value)
           }
           className="max-w-sm border dark:border-white dark:bg-white bg-black text-black placeholder:text-white dark:placeholder:text-black"
         />
