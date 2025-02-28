@@ -103,13 +103,13 @@ export default function UserExperience() {
           <h2 className={`text-3xl sm:text-4xl lg:text-5xl font-bold p-3
             bg-gradient-to-r dark:from-white dark:to-gray-400 from-gray-900 to-gray-600 
             bg-clip-text text-transparent 
-            ${i18n.language === 'fa' ? 'font-vazirmatn' : ''} 
-            ${i18n.language === 'ar' ? 'font-notokufi' : ''}`}>
+             
+            `}>
             {t('experience.title')}
           </h2>
           <p className={`mt-4 text-lg dark:text-gray-400 text-gray-600 max-w-3xl mx-auto 
-            ${i18n.language === 'fa' ? 'font-vazirmatn' : ''} 
-            ${i18n.language === 'ar' ? 'font-notokufi' : ''}`}>
+             
+            `}>
             {t('experience.subtitle')}
           </p>
         </motion.div>
@@ -150,13 +150,13 @@ export default function UserExperience() {
                   </div>
                   <div className="ml-4">
                     <h3 className={`font-bold dark:text-white text-gray-900
-                      ${i18n.language === 'fa' ? 'font-vazirmatn' : ''} 
-                      ${i18n.language === 'ar' ? 'font-notokufi' : ''}`}>
+                       
+                      `}>
                       {testimonial.name}
                     </h3>
                     <p className={`text-sm dark:text-gray-400 text-gray-600
-                      ${i18n.language === 'fa' ? 'font-vazirmatn' : ''} 
-                      ${i18n.language === 'ar' ? 'font-notokufi' : ''}`}>
+                       
+                      `}>
                       {testimonial.role}
                     </p>
                   </div>
@@ -169,8 +169,8 @@ export default function UserExperience() {
 
                 {/* Content */}
                 <p className={`flex-grow dark:text-gray-300 text-gray-700
-                  ${i18n.language === 'fa' ? 'font-vazirmatn' : ''} 
-                  ${i18n.language === 'ar' ? 'font-notokufi' : ''}`}>
+                   
+                  `}>
                   {testimonial.content}
                 </p>
 

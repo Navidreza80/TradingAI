@@ -241,13 +241,13 @@ export default function SuggestionsPage() {
           <h1 className={`text-3xl sm:text-4xl lg:text-5xl font-bold p-3
             bg-gradient-to-r dark:from-white dark:to-gray-400 from-gray-900 to-gray-600 
             bg-clip-text text-transparent 
-            ${i18n.language === 'fa' ? 'font-vazirmatn' : ''} 
-            ${i18n.language === 'ar' ? 'font-notokufi' : ''}`}>
+             
+            `}>
             {t('suggestions.title')}
           </h1>
           <p className={`mt-4 text-lg dark:text-gray-400 text-gray-600 max-w-3xl mx-auto
-            ${i18n.language === 'fa' ? 'font-vazirmatn' : ''} 
-            ${i18n.language === 'ar' ? 'font-notokufi' : ''}`}>
+             
+            `}>
             {t('suggestions.subtitle')}
           </p>
         </motion.div>
@@ -273,8 +273,8 @@ export default function SuggestionsPage() {
                   focus:outline-none focus:ring-2 focus:ring-[#1890ff]
                   placeholder:dark:text-gray-500 placeholder:text-gray-400
                   transition-all duration-200
-                  ${i18n.language === 'fa' ? 'font-vazirmatn' : ''} 
-                  ${i18n.language === 'ar' ? 'font-notokufi' : ''}`}
+                   
+                  `}
               />
               <MagnifyingGlassIcon className="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 dark:text-gray-400 text-gray-500" />
             </div>
@@ -289,8 +289,8 @@ export default function SuggestionsPage() {
             className="text-center py-12"
           >
             <p className={`text-lg dark:text-gray-400 text-gray-600
-              ${i18n.language === 'fa' ? 'font-vazirmatn' : ''} 
-              ${i18n.language === 'ar' ? 'font-notokufi' : ''}`}>
+               
+              `}>
               {t('suggestions.noResults')}
             </p>
           </motion.div>
@@ -333,8 +333,8 @@ export default function SuggestionsPage() {
                     />
         <div>
                       <h3 className={`font-bold dark:text-white text-gray-900
-                        ${i18n.language === 'fa' ? 'font-vazirmatn' : ''} 
-                        ${i18n.language === 'ar' ? 'font-notokufi' : ''}`}>
+                         
+                        `}>
                         {suggestion.crypto}
                       </h3>
                       <span className="text-sm dark:text-gray-400 text-gray-600">
@@ -356,8 +356,8 @@ export default function SuggestionsPage() {
                 <div className="h-[72px]">
                   <div className="flex justify-between items-center mb-2">
                     <span className={`text-sm dark:text-gray-400 text-gray-600
-                      ${i18n.language === 'fa' ? 'font-vazirmatn' : ''} 
-                      ${i18n.language === 'ar' ? 'font-notokufi' : ''}`}>
+                       
+                      `}>
                       {t('suggestions.confidence')}
                     </span>
                     <span className="text-sm font-bold dark:text-white text-gray-900">
@@ -377,8 +377,8 @@ export default function SuggestionsPage() {
                   {/* Entry */}
                   <div className="flex justify-between items-center">
                     <span className={`text-sm dark:text-gray-400 text-gray-600
-                      ${i18n.language === 'fa' ? 'font-vazirmatn' : ''} 
-                      ${i18n.language === 'ar' ? 'font-notokufi' : ''}`}>
+                       
+                      `}>
                       {t('suggestions.entry')}
                     </span>
                     <span className="font-mono text-sm dark:text-white text-gray-900">
@@ -389,8 +389,8 @@ export default function SuggestionsPage() {
                   {/* Take Profit */}
                   <div className="flex justify-between items-center">
                     <span className={`text-sm dark:text-gray-400 text-gray-600
-                      ${i18n.language === 'fa' ? 'font-vazirmatn' : ''} 
-                      ${i18n.language === 'ar' ? 'font-notokufi' : ''}`}>
+                       
+                      `}>
                       {t('suggestions.takeProfit')}
                     </span>
                     <span className="font-mono text-sm text-green-500">
@@ -401,8 +401,8 @@ export default function SuggestionsPage() {
                   {/* Stop Loss */}
                   <div className="flex justify-between items-center">
                     <span className={`text-sm dark:text-gray-400 text-gray-600
-                      ${i18n.language === 'fa' ? 'font-vazirmatn' : ''} 
-                      ${i18n.language === 'ar' ? 'font-notokufi' : ''}`}>
+                       
+                      `}>
                       {t('suggestions.stopLoss')}
                     </span>
                     <span className="font-mono text-sm text-red-500">
@@ -417,8 +417,8 @@ export default function SuggestionsPage() {
                     <div className="flex items-start gap-2 h-full">
                       <InformationCircleIcon className="w-5 h-5 dark:text-gray-400 text-gray-600 flex-shrink-0 mt-0.5" />
                       <p className={`text-sm dark:text-gray-400 text-gray-600 line-clamp-4
-                        ${i18n.language === 'fa' ? 'font-vazirmatn' : ''} 
-                        ${i18n.language === 'ar' ? 'font-notokufi' : ''}`}>
+                         
+                        `}>
                         {suggestion.reason}
                       </p>
                     </div>
@@ -459,8 +459,8 @@ export default function SuggestionsPage() {
                     ${currentPage === index + 1
                       ? 'bg-[#1890ff] text-white'
                       : 'dark:text-white text-gray-900 hover:bg-white/10 dark:hover:bg-white/10'}
-                    ${i18n.language === 'fa' ? 'font-vazirmatn' : ''} 
-                    ${i18n.language === 'ar' ? 'font-notokufi' : ''}`}
+                     
+                    `}
                 >
                   {index + 1}
                 </button>

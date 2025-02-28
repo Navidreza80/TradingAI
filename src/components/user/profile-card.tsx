@@ -142,13 +142,13 @@ export default function ProfileCard({ user }: ProfileCardProps) {
               <div className="flex items-start justify-between">
                 <div>
                   <h1 className={`text-3xl font-bold dark:text-white text-gray-900
-                    ${i18n.language === 'fa' ? 'font-vazirmatn' : ''} 
-                    ${i18n.language === 'ar' ? 'font-notokufi' : ''}`}>
+                     
+                    `}>
                     {user.name}
                   </h1>
                   <p className={`text-lg dark:text-blue-400 text-blue-600 font-medium
-                    ${i18n.language === 'fa' ? 'font-vazirmatn' : ''} 
-                    ${i18n.language === 'ar' ? 'font-notokufi' : ''}`}>
+                     
+                    `}>
                     {user.role}
                   </p>
                 </div>

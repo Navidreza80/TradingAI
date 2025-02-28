@@ -94,14 +94,14 @@ export default function Footer() {
               <span className={`ml-2 text-lg xs:text-xl font-bold bg-gradient-to-r 
                 dark:from-white dark:to-gray-400 from-gray-900 to-gray-600
                 bg-clip-text text-transparent
-                ${i18n.language === 'fa' ? 'font-vazirmatn' : ''} 
-                ${i18n.language === 'ar' ? 'font-notokufi' : ''}`}>
+                 
+                `}>
                 TradingAI
               </span>
             </Link>
             <p className={`mt-4 text-sm dark:text-gray-400 text-gray-600 max-w-sm
-              ${i18n.language === 'fa' ? 'font-vazirmatn' : ''} 
-              ${i18n.language === 'ar' ? 'font-notokufi' : ''}`}>
+               
+              `}>
               {t('footer.description')}
             </p>
           </div>
@@ -110,8 +110,8 @@ export default function Footer() {
           {footerSections.map((section) => (
             <div key={section.title}>
               <h3 className={`text-sm font-semibold dark:text-white text-gray-900 mb-4
-                ${i18n.language === 'fa' ? 'font-vazirmatn' : ''} 
-                ${i18n.language === 'ar' ? 'font-notokufi' : ''}`}>
+                 
+                `}>
                 {section.title}
               </h3>
               <ul className="space-y-3">
@@ -121,8 +121,8 @@ export default function Footer() {
                       href={link.href}
                       className={`text-sm dark:text-gray-400 text-gray-600 
                         hover:text-[#1890ff] transition-colors duration-200 block
-                        ${i18n.language === 'fa' ? 'font-vazirmatn' : ''} 
-                        ${i18n.language === 'ar' ? 'font-notokufi' : ''}`}
+                         
+                        `}
                     >
                       {link.name}
                     </Link>
@@ -141,24 +141,24 @@ export default function Footer() {
               <div className="flex items-center">
                 <GlobeAltIcon className="w-5 h-5 dark:text-gray-400 text-gray-600 flex-shrink-0" />
                 <span className={`ml-2 text-sm dark:text-gray-400 text-gray-600
-                  ${i18n.language === 'fa' ? 'font-vazirmatn' : ''} 
-                  ${i18n.language === 'ar' ? 'font-notokufi' : ''}`}>
+                   
+                  `}>
                   {t('footer.contact.address')}
                 </span>
               </div>
               <div className="flex items-center">
                 <PhoneIcon className="w-5 h-5 dark:text-gray-400 text-gray-600 flex-shrink-0" />
                 <span className={`ml-2 text-sm dark:text-gray-400 text-gray-600
-                  ${i18n.language === 'fa' ? 'font-vazirmatn' : ''} 
-                  ${i18n.language === 'ar' ? 'font-notokufi' : ''}`}>
+                   
+                  `}>
                   {t('footer.contact.phone')}
                 </span>
               </div>
               <div className="flex items-center">
                 <EnvelopeIcon className="w-5 h-5 dark:text-gray-400 text-gray-600 flex-shrink-0" />
                 <span className={`ml-2 text-sm dark:text-gray-400 text-gray-600
-                  ${i18n.language === 'fa' ? 'font-vazirmatn' : ''} 
-                  ${i18n.language === 'ar' ? 'font-notokufi' : ''}`}>
+                   
+                  `}>
                   {t('footer.contact.email')}
                 </span>
               </div>
@@ -167,8 +167,8 @@ export default function Footer() {
             {/* Social Links - Centered on mobile */}
             <div className="text-center sm:text-start">
               <h3 className={`text-sm font-semibold dark:text-white text-gray-900 mb-4
-                ${i18n.language === 'fa' ? 'font-vazirmatn' : ''} 
-                ${i18n.language === 'ar' ? 'font-notokufi' : ''}`}>
+                 
+                `}>
                 {t('footer.social.title')}
               </h3>
               <div className={`flex justify-start rtl:justify-end sm:justify-start gap-4
@@ -197,8 +197,8 @@ export default function Footer() {
             {/* Newsletter - Full width on mobile */}
             <div className="sm:col-span-2 lg:col-span-1">
               <h3 className={`text-sm font-semibold dark:text-white text-gray-900 mb-4
-                ${i18n.language === 'fa' ? 'font-vazirmatn' : ''} 
-                ${i18n.language === 'ar' ? 'font-notokufi' : ''}`}>
+                 
+                `}>
                 {t('footer.newsletter.title')}
               </h3>
               <form className="flex flex-col xs:flex-row gap-2">
@@ -210,16 +210,16 @@ export default function Footer() {
                     dark:text-white text-gray-900
                     dark:border-white/10 border-gray-200 border
                     focus:outline-none focus:ring-2 focus:ring-[#1890ff]
-                    ${i18n.language === 'fa' ? 'font-vazirmatn' : ''} 
-                    ${i18n.language === 'ar' ? 'font-notokufi' : ''}`}
+                     
+                    `}
                 />
                 <button
                   type="submit"
                   className={`px-4 py-2 bg-[#1890ff] text-white 
                     rounded-lg xs:rounded-r-lg xs:rounded-l-none
                     hover:bg-[#40a9ff] transition-colors duration-200
-                    ${i18n.language === 'fa' ? 'font-vazirmatn' : ''} 
-                    ${i18n.language === 'ar' ? 'font-notokufi' : ''}`}
+                     
+                    `}
                 >
                   {t('footer.newsletter.subscribe')}
                 </button>
@@ -231,8 +231,8 @@ export default function Footer() {
         {/* Copyright - Responsive padding */}
         <div className="py-6 sm:py-8 border-t dark:border-white/10 border-gray-200 text-center">
           <p className={`text-xs sm:text-sm dark:text-gray-400 text-gray-600
-            ${i18n.language === 'fa' ? 'font-vazirmatn' : ''} 
-            ${i18n.language === 'ar' ? 'font-notokufi' : ''}`}>
+             
+            `}>
             {t('footer.copyright', { year: new Date().getFullYear() })}
           </p>
         </div>

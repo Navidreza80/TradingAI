@@ -95,13 +95,13 @@ export default function StartTrading() {
           <h2 className={`text-3xl sm:text-4xl lg:text-5xl font-bold p-3
             bg-gradient-to-r dark:from-white dark:to-gray-400 from-gray-900 to-gray-600 
             bg-clip-text text-transparent 
-            ${i18n.language === 'fa' ? 'font-vazirmatn' : ''} 
-            ${i18n.language === 'ar' ? 'font-notokufi' : ''}`}>
+             
+            `}>
             {t('startTrading.title')}
           </h2>
           <p className={`mt-4 text-lg dark:text-gray-400 text-gray-600 max-w-3xl mx-auto 
-            ${i18n.language === 'fa' ? 'font-vazirmatn' : ''} 
-            ${i18n.language === 'ar' ? 'font-notokufi' : ''}`}>
+             
+            `}>
             {t('startTrading.subtitle')}
           </p>
         </motion.div>
@@ -144,13 +144,13 @@ export default function StartTrading() {
                 {/* Step Content */}
                 <div className="flex-grow flex flex-col">
                   <h3 className={`text-xl font-bold dark:text-white text-gray-900 mb-4
-                    ${i18n.language === 'fa' ? 'font-vazirmatn' : ''} 
-                    ${i18n.language === 'ar' ? 'font-notokufi' : ''}`}>
+                     
+                    `}>
                     {step.title}
                   </h3>
                   <p className={`dark:text-gray-400 text-gray-600 mb-6
-                    ${i18n.language === 'fa' ? 'font-vazirmatn' : ''} 
-                    ${i18n.language === 'ar' ? 'font-notokufi' : ''}`}>
+                     
+                    `}>
                     {step.description}
                   </p>
                 </div>
@@ -186,8 +186,8 @@ export default function StartTrading() {
             rounded-xl text-white font-bold text-lg
             hover:shadow-[0_0_30px_rgba(24,144,255,0.3)]
             transition-all duration-300 hover:scale-[1.02]
-            ${i18n.language === 'fa' ? 'font-vazirmatn' : ''} 
-            ${i18n.language === 'ar' ? 'font-notokufi' : ''}`}>
+             
+            `}>
             {t('startTrading.cta')}
           </button>
         </motion.div>

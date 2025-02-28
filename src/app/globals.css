@@ -126,6 +126,14 @@
   font-display: swap;
 }
 
+:lang(ar){
+  font-family: "NotoKufiArabic", "system-ui", "sans-serif";
+}
+
+
+:lang(fa){
+  font-family: "Vazirmatn", "system-ui", "sans-serif";
+}
 /* Modern Glass Morphism Variables */
 
 @media (max-width: 768px) {
