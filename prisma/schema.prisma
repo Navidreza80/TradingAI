@@ -1,9 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -14,12 +8,65 @@ datasource db {
 }
 
 model User {
-  id String @id @default(cuid())
-  email String @unique
-  username String @unique
-  clerkId String @unique
-  name String?
-  image String?
-  createdAt DateTime @default(now()) // member since 2020
-  updatedAt DateTime @updatedAt
+  id        String    @id @default(cuid())
+  clerkId   String    @unique
+  email     String    @unique
+  name      String?
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  image     String?
+  username  String    @unique
+  role      String?
+  blogs     Blog[]
+  comments  Comment[]
+  trades Trade[]
+}
+
+model Trade {
+  id          String  @id @default(cuid())
+  symbol      String
+  type        String
+  amount      Int
+  leverage    Int
+  mode        String
+  entryPrice  Float
+  takeProfit  Float?
+  stopLoss    Float?
+  timestamp   BigInt
+  closePrice  Float
+  closeTime   BigInt
+  pnlAmount   Float
+  pnlPercent  Float
+  userId      String
+  user        User   @relation(fields: [userId], references: [id])
+}
+
+model Blog {
+  id               String    @id @default(cuid())
+  title            String
+  shortDescription String
+  content          String?
+  likes            Int       @default(0)
+  dislikes         Int       @default(0)
+  isLiked          Boolean   @default(false)
+  isDisliked       Boolean   @default(false)
+  isSaved          Boolean   @default(false)
+  blogThumbnail    String?
+  publisherId      String
+  createdAt        DateTime  @default(now())
+  updatedAt        DateTime  @updatedAt
+  publisher        User      @relation(fields: [publisherId], references: [id])
+  comments         Comment[]
+}
+
+model Comment {
+  id        String   @id @default(cuid())
+  content   String
+  userId    String
+  blogId    String
+  createdAt DateTime @default(now())
+  likes     Int?     @default(0)
+  dislikes  Int?     @default(0)
+  blog      Blog     @relation(fields: [blogId], references: [id])
+  user      User     @relation(fields: [userId], references: [id])
 }
