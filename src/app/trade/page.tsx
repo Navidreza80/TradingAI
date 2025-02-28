@@ -42,54 +42,23 @@ const POSITIONS_STORAGE_KEY = "trading_positions";
 
 // react functional component
 export default function TradePage() {
+    const [selectedSymbol, setSelectedSymbol] = useState<string>('BTCUSDT')
+    const [prices, setPrices] = useState<PriceMap>({})
+    const [positions, setPositions] = useState<Position[]>([])
+    const [currentPrice, setCurrentPrice] = useState<number | null>(null)
+    const positionsRef = useRef<HTMLDivElement>(null)
+    const [pnlState, setPnlState] = useState<{ [key: string]: { amount: number; percentage: number } }>({})
+    const [isHistoryModalVisible, setIsHistoryModalVisible] = useState(false);
+    const [closedPositions, setClosedPositions] = useState<ClosedPosition[]>([]);
+    const [isLimitModalVisible, setIsLimitModalVisible] = useState(false);
+    const [selectedPosition, setSelectedPosition] = useState<Position | null>(null);
+    const [tempLimits, setTempLimits] = useState<{
+        takeProfit: { price: number | null; percent: number | null; } | null;
+        stopLoss: { price: number | null; percent: number | null; } | null;
+    }>({ takeProfit: null, stopLoss: null });
 
-  // state for recognizing what symbol is selected
-  const [selectedSymbol, setSelectedSymbol] = useState<string>("BTCUSDT");
-
-  // state to save price of symbol
-  const [prices, setPrices] = useState<PriceMap>({});
-
-  // state to save open positions
-  const [positions, setPositions] = useState<Position[]>([]);
-
-  // state to show current price of certain symbol to user
-  const [currentPrice, setCurrentPrice] = useState<number | null>(null);
-
-  // state to save coins
-  const [coins, setCoins] = useState<Coin[]>([]);
-
-  // state to save loading and error
-  const [loading, setLoading] = useState<boolean>(true);
-  const [error, setError] = useState<string | null>(null);
-
-  // state to show profit and lost
-  const [pnlState, setPnlState] = useState<{
-    [key: string]: { amount: number; percentage: number };
-  }>({});
-
-  // state to show or hide the history of closed positions modal
-  const [isHistoryModalVisible, setIsHistoryModalVisible] = useState(false);
-
-  // state to save closed positions as an array
-  const [closedPositions, setClosedPositions] = useState<ClosedPosition[]>([]);
-
-  // state to show or hide setting S/L or T/P modal
-  const [isLimitModalVisible, setIsLimitModalVisible] = useState(false);
-
-  // state to save what position is selected to apply something to it
-  const [selectedPosition, setSelectedPosition] = useState<Position | null>(
-    null
-  );
-
-  // state to save take profit and stop loss
-  const [tempLimits, setTempLimits] = useState<{
-    takeProfit: { price: number | null; percent: number | null } | null;
-    stopLoss: { price: number | null; percent: number | null } | null;
-  }>({ takeProfit: null, stopLoss: null });
-
-  // call back to calculate profit and lost of a position
-  const calculatePnL = useCallback((position: Position, price: number) => {
-    if (!price || !position.entryPrice) return { amount: 0, percentage: 0 };
+    const calculatePnL = useCallback((position: Position, price: number) => {
+        if (!price || !position.entryPrice) return { amount: 0, percentage: 0 }
 
     const priceDiff =
       position.type === "LONG"
@@ -466,239 +435,166 @@ export default function TradePage() {
     return { amount: estimatedAmount, percentage: estimatedPercentage };
   };
 
-  // apply take profit and stop loss
-  const handleApplyLimits = () => {
-    if (selectedPosition && tempLimits) {
-      handleUpdateLimits(
-        selectedPosition,
-        tempLimits.takeProfit?.price || null,
-        tempLimits.stopLoss?.price || null
-      );
-      setIsLimitModalVisible(false);
-      setSelectedPosition(null);
-      setTempLimits({ takeProfit: null, stopLoss: null });
-    }
-  };
+    const handleApplyLimits = () => {
+        if (selectedPosition && tempLimits) {
+            handleUpdateLimits(
+                selectedPosition,
+                tempLimits.takeProfit?.price || null,
+                tempLimits.stopLoss?.price || null
+            );
+            setIsLimitModalVisible(false);
+            setSelectedPosition(null);
+            setTempLimits({ takeProfit: null, stopLoss: null });
+        }
+    };
 
-  return (
-    <ConfigProvider locale={fa_IR} direction="rtl">
-      <Layout className="min-h-screen mt-16 bg-white dark:bg-black dark:text-white">
-        <Content className="p-6 bg-white dark:bg-black">
-          <div className="bg-white dark:bg-black">
-            <div className={`${style.contentTrade}  bg-white dark:bg-black`}>
-              <div
-                className={`${style.contentTradingView}  bg-[#f1f1f1] dark:bg-[#202020]`}
-              >
-                <TradingViewWidget
-                  symbol={selectedSymbol}
-                  onPriceChange={setCurrentPrice}
-                />
-              </div>
-              <div
-                className={`${style.contentTradeForm}  bg-[#f1f1f1] dark:bg-[#202020]`}
-              >
-                <div className="flex justify-[right] gap-3 mb-[20px]">
-                  <label className="block text-[18px] font-semibold text-gray-700 dark:text-gray-200">
-                    نماد:
-                  </label>
-                  <Select
-                    value={selectedSymbol}
-                    onChange={setSelectedSymbol}
-                    className={`${style.OptionHolder} bg-black dark:bg-gray-700 dark:text-white`}
-                    showSearch
-                  >
-                    {coins.map(({ symbol, image }) => (
-                      <Option
-                        className="bg-black dark:bg-gray-700 dark:text-white"
-                        key={symbol}
-                        value={symbol.toUpperCase() + "USDT"}
-                      >
-                        <div className={style.option}>
-                          <h1>{symbol.toUpperCase() + "/USDT"}</h1>
-                          <img className="w-6" src={image} />
+    return (
+        <ConfigProvider locale={fa_IR} direction="rtl">
+            <Layout className="min-h-screen mt-16 bg-white dark:bg-black dark:text-white">
+                <Content className="p-6 bg-white dark:bg-black">
+                    <div className='bg-white dark:bg-black'>
+                        <div className={`${style.contentTrade}  bg-white dark:bg-black`}>
+                            <div className={`${style.contentTradingView}  bg-[#f1f1f1] dark:bg-[#202020]`}>
+                                <TradingViewWidgetDark
+                                    symbol={selectedSymbol}
+                                    onPriceChange={setCurrentPrice}
+                                />
+                                {/* {darkMode == true ? (      NavidRezaBug
+                                    <TradingViewWidgetDark
+                                        symbol={selectedSymbol}
+                                        onPriceChange={setCurrentPrice}
+                                    />
+                                ) : (
+                                    <TradingViewWidget
+                                        symbol={selectedSymbol}
+                                        onPriceChange={setCurrentPrice}
+                                    />
+                                )} */}
+
+                            </div>
+                            <div className={`${style.contentTradeForm}  bg-[#f1f1f1] dark:bg-[#202020]`}>
+                                <div className='flex justify-[right] gap-3 mb-[20px]'>
+                                    <label className="block text-[18px] font-semibold text-gray-700 dark:text-gray-200">نماد:</label>
+                                    <Select
+                                        value={selectedSymbol}
+                                        onChange={setSelectedSymbol}
+                                        className={`${style.OptionHolder} bg-black dark:bg-gray-700 dark:text-white`}
+                                        showSearch
+                                    >
+                                        {coins.map(({ symbol, image }) => (
+                                            <Option className="bg-black dark:bg-gray-700 dark:text-white" key={symbol} value={symbol.toUpperCase() + "USDT"}><div className={style.option}><h1>{symbol.toUpperCase() + "/USDT"}</h1><img className='w-6' src={image} /></div></Option>
+                                        ))}
+                                    </Select>
+                                </div>
+                                <TradeForm
+                                    currentPrice={prices[selectedSymbol]}
+                                    onOpenPosition={handleOpenPosition}
+                                    symbol={selectedSymbol}
+                                />
+                            </div>
                         </div>
-                      </Option>
-                    ))}
-                  </Select>
-                </div>
-                <TradeForm
-                  currentPrice={prices[selectedSymbol]}
-                  onOpenPosition={handleOpenPosition}
-                  symbol={selectedSymbol}
-                />
-              </div>
-            </div>
-          </div>
-          <div className={style.positionsHolder}>
-            <div
-              className={`${style.positions} bg-[#f1f1f1] dark:bg-[#434343]`}
-              style={{ marginBottom: "16px" }}
-            >
-              <div className="flex text-white mb-1 justify-between items-center">
-                <div className="flex gap-1.5">
-                  <span className="text-black text-[16px] font-[700] dark:text-white">
-                    معاملات فعال:
-                  </span>
-                  <Tag
-                    className={`${style.OpenPositionTag} bg-gray-200 dark:bg-gray-600 text-black dark:text-white p-2 rounded`}
-                  >
-                    {positions.length}
-                  </Tag>
-                </div>
-                <Button
-                  onClick={() => setIsHistoryModalVisible(true)}
-                  type="primary"
-                  ghost
-                  className="border-none gap-1 flex dark:text-white"
-                >
-                  <h1 className="text-[#202020] text-[16px] dark:text-white">
-                    history
-                  </h1>
-                  <Image
-                    width={24}
-                    height={24}
-                    alt="image"
-                    src="https://img.icons8.com/?size=100&id=ZG6vinMQTTq8&format=png&color=7e7e7e"
-                  />
-                </Button>
-              </div>
-              {positions.length > 0 ? (
-                <table className="w-full table-auto border-collapse">
-                  <thead>
-                    <tr>
-                      <th className="text-center text-black dark:text-white py-2 px-4">
-                        Symbol
-                      </th>
-                      <th className="text-center text-black dark:text-white py-2 px-4">
-                        Type
-                      </th>
-                      <th className="text-center text-black dark:text-white py-2 px-4">
-                        Mode
-                      </th>
-                      <th className="text-center text-black dark:text-white py-2 px-4">
-                        Leverage
-                      </th>
-                      <th className="text-center text-black dark:text-white py-2 px-4">
-                        Amount
-                      </th>
-                      <th className="text-center text-black dark:text-white py-2 px-4">
-                        Entry Price
-                      </th>
-                      <th className="text-center text-black dark:text-white py-2 px-4">
-                        Current Price
-                      </th>
-                      <th className="text-left text-black dark:text-white py-2 px-4">
-                        PNL
-                      </th>
-                      <th className="text-center text-black dark:text-white py-2 px-4"></th>
-                    </tr>
-                  </thead>
-                  <tbody className="">
-                    {positions.map((position) => {
-                      const currentPrice = prices[position.symbol];
-                      const pnl = pnlState[position.timestamp] || {
-                        amount: 0,
-                        percentage: 0,
-                      };
-                      const isProfitable = pnl.amount >= 0;
+                    </div>
+                    <div className={style.positionsHolder}>
+                        <div className={`${style.positions} bg-[#f1f1f1] dark:bg-[#434343]`} style={{ marginBottom: '16px' }}>
 
-                      return (
-                        <tr
-                          key={position.timestamp}
-                          className={`rounded-sm border-b border-[#202020] dark:border-[#ccc]  bg-white dark:bg-black `}
-                        >
-                          <td className="py-2 px-4 text-[16px] font-[700] text-center text-black dark:text-white ">
-                            {position.symbol}
-                          </td>
-                          <td className="py-2  px-4">
-                            <button
-                              className={`px-2 mx-auto py-1 rounded-full ${
-                                position.type === "LONG"
-                                  ? "bg-green-500"
-                                  : "bg-red-500"
-                              } text-white`}
-                            >
-                              {position.type === "LONG" ? "long" : "short"}
-                            </button>
-                          </td>
-                          <td className="py-2 px-4 text-center text-black dark:text-white ">
-                            {" "}
-                            {position.mode}
-                          </td>
-                          <td className="py-2 px-4 text-center text-black dark:text-white ">
-                            {position.leverage}X
-                          </td>
-                          <td className="text-center text-black dark:text-white py-2 px-4">
-                            {position.amount.toFixed(2)}$
-                          </td>
-                          <td className="text-center text-black dark:text-white py-2 px-4">
-                            {position.entryPrice}$
-                          </td>
-                          <td className="text-center text-black dark:text-white py-2 px-4">
-                            {currentPrice || "!"}$
-                          </td>
-                          <td className="py-2 px-4  ">
-                            <div className=" flex-col justify-[left] flex-wrap flex">
-                              <span
-                                className="text-left text-black dark:text-white"
-                                style={{
-                                  color: isProfitable ? "#3f8600" : "#cf1322",
-                                  fontSize: "16px",
-                                }}
-                              >
-                                {" "}
-                                {Math.abs(pnl.amount).toFixed(2) + "USDT  "}
-                              </span>
-                              <span
-                                className="text-left text-black dark:text-white"
-                                style={{
-                                  color: isProfitable ? "#3f8600" : "#cf1322",
-                                  fontSize: "16px",
-                                }}
-                              >
-                                {pnl.percentage.toFixed(2)}%
-                              </span>
+                            <div className="flex text-white mb-1 justify-between items-center">
+                                <div className='flex gap-1.5'>
+                                    <span className="text-black text-[16px] font-[700] dark:text-white">معاملات فعال:</span>
+                                    <Tag className={`${style.OpenPositionTag} bg-gray-200 dark:bg-gray-600 text-black dark:text-white p-2 rounded`}>
+                                        {positions.length}
+                                    </Tag>
+                                </div>
+                                <Button
+                                    onClick={() => setIsHistoryModalVisible(true)}
+                                    type="primary"
+                                    ghost
+                                    className="border-none gap-1 flex dark:hover:bg-[#ccc] bg-white dark:bg-black"
+                                >
+                                    <h1 className='text-[#202020] text-[16px] dark:text-white'>history</h1>
+                                    <img className='w-6 h-6' src='https://img.icons8.com/?size=100&id=ZG6vinMQTTq8&format=png&color=7e7e7e' />
+                                </Button>
                             </div>
-                          </td>
-                          <td className="py-2 px-4">
-                            <div className="flex gap-2">
-                              <button
-                                className="bg-blue-500 mr-auto text-white py-1 px-4 rounded"
-                                onClick={() => {
-                                  setSelectedPosition(position);
-                                  setIsLimitModalVisible(true);
-                                }}
-                              >
-                                TP/SL
-                              </button>
-                              <button
-                                style={{
-                                  background: isProfitable
-                                    ? "#3f8600"
-                                    : "#cf1322",
-                                }}
-                                className="bg-red-500 ml-auto text-white py-1 px-4 rounded"
-                                onClick={() =>
-                                  closePosition(position.timestamp)
-                                }
-                              >
-                                بستن معامله
-                              </button>
-                            </div>
-                          </td>
-                        </tr>
-                      );
-                    })}
-                  </tbody>
-                </table>
-              ) : (
-                <div className={`${style.noPositions} dark:text-white`}>
-                  هیچ معامله‌ای باز نیست
-                </div>
-              )}
-            </div>
-          </div>
-        </Content>
+                            {positions.length > 0 ? (
+                                <table className="w-full table-auto border-collapse">
+                                    <thead>
+                                        <tr>
+                                            <th className="text-center text-black dark:text-white py-2 px-4">Symbol</th>
+                                            <th className="text-center text-black dark:text-white py-2 px-4">Type</th>
+                                            <th className="text-center text-black dark:text-white py-2 px-4">Mode</th>
+                                            <th className="text-center text-black dark:text-white py-2 px-4">Leverage</th>
+                                            <th className="text-center text-black dark:text-white py-2 px-4">Amount</th>
+                                            <th className="text-center text-black dark:text-white py-2 px-4">Entry Price</th>
+                                            <th className="text-center text-black dark:text-white py-2 px-4">Current Price</th>
+                                            <th className="text-left text-black dark:text-white py-2 px-4">PNL</th>
+                                            <th className="text-center text-black dark:text-white py-2 px-4"></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody className=''>
+                                        {positions.map((position) => {
+                                            const currentPrice = prices[position.symbol];
+                                            const pnl = pnlState[position.timestamp] || { amount: 0, percentage: 0 };
+                                            const isProfitable = pnl.amount >= 0;
+
+                                            return (
+                                                <tr key={position.timestamp} className={`rounded-sm border-b border-[#202020] dark:border-[#ccc]  bg-white dark:bg-black `}>
+                                                    <td className="py-2 px-4 text-[16px] font-[700] text-center text-black dark:text-white ">{position.symbol}</td>
+                                                    <td className="py-2  px-4">
+                                                        <button className={`px-2 mx-auto py-1 rounded-full ${position.type === 'LONG' ? 'bg-green-500' : 'bg-red-500'} text-white`}>
+                                                            {position.type === 'LONG' ? 'long' : 'short'}
+                                                        </button>
+                                                    </td>
+                                                    <td className="py-2 px-4 text-center text-black dark:text-white "> {position.mode}</td>
+                                                    <td className="py-2 px-4 text-center text-black dark:text-white ">{position.leverage}X</td>
+                                                    <td className="text-center text-black dark:text-white py-2 px-4">
+                                                        {(position.amount).toFixed(2)}$
+                                                    </td>
+                                                    <td className="text-center text-black dark:text-white py-2 px-4">
+                                                        {position.entryPrice}$
+                                                    </td>
+                                                    <td className="text-center text-black dark:text-white py-2 px-4">
+                                                        {currentPrice || "!"}$
+                                                    </td>
+                                                    <td className="py-2 px-4  ">
+                                                        <div className=' flex-col justify-[left] flex-wrap flex'>
+                                                            <span className='text-left text-black dark:text-white' style={{ color: isProfitable ? '#3f8600' : '#cf1322', fontSize: '16px' }} > {Math.abs(pnl.amount).toFixed(2) + "USDT  "}</span>
+                                                            <span className='text-left text-black dark:text-white' style={{ color: isProfitable ? '#3f8600' : '#cf1322', fontSize: '16px' }} >{pnl.percentage.toFixed(2)}%</span>
+                                                        </div>
+                                                    </td>
+                                                    <td className="py-2 px-4">
+                                                        <div className="flex gap-2">
+                                                            <button
+                                                                className="bg-blue-500 mr-auto text-white py-1 px-4 rounded"
+                                                                onClick={() => {
+                                                                    setSelectedPosition(position);
+                                                                    setIsLimitModalVisible(true);
+                                                                }}
+                                                            >
+                                                                TP/SL
+                                                            </button>
+                                                            <button
+                                                                style={{ background: isProfitable ? '#3f8600' : '#cf1322' }}
+                                                                className="bg-red-500 ml-auto text-white py-1 px-4 rounded"
+                                                                onClick={() => closePosition(position.timestamp)}
+                                                            >
+                                                                بستن معامله
+                                                            </button>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            );
+                                        })}
+                                    </tbody>
+                                </table>) : (
+
+
+                                <div className={`${style.noPositions} dark:text-white`}>
+                                    هیچ معامله‌ای باز نیست
+                                </div>
+                            )}
+                        </div>
+
+                    </div>
+                </Content>
 
         <Modal
           title="تاریخچه معاملات"

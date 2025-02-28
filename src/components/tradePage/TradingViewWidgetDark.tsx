@@ -126,7 +126,7 @@ const widgetConfig = {
  * کامپوننت TradingViewWidget
  * نمایش چارت TradingView با به‌روزرسانی قیمت لحظه‌ای
  */
-export const TradingViewWidget = ({ symbol, onPriceChange }: TradingViewWidgetProps) => {
+export const TradingViewWidgetDark = ({ symbol, onPriceChange }: TradingViewWidgetProps) => {
   const onLoadScriptRef = useRef<(() => void) | null>(null);
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -163,7 +163,7 @@ export const TradingViewWidget = ({ symbol, onPriceChange }: TradingViewWidgetPr
         symbol: `BINANCE:${symbol}`,
         interval: "5",
         timezone: "Asia/Tehran",
-        theme: "light",
+        theme: "dark",
         style: "1",
         locale: "fa_IR",
         toolbar_bg: "#131722",
