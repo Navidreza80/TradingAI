@@ -22,15 +22,12 @@ import {
 import fa_IR from "antd/locale/fa_IR";
 
 // react hooks
-import { useCallback, useEffect, useState } from "react";
-
-// next components
-import Image from "next/image";
+import { useCallback, useEffect, useState, useRef } from "react";
 
 // components
 import TradeForm from "../../components/tradePage/TradeForm";
-import { TradingViewWidget } from "../../components/tradePage/TradingViewWidget";
 import style from "./style.module.css";
+import { TradingViewWidgetDark } from '../../components/tradePage/TradingViewWidgetDark'
 
 // typography
 const { Content } = Layout;
@@ -43,6 +40,7 @@ const POSITIONS_STORAGE_KEY = "trading_positions";
 // react functional component
 export default function TradePage() {
     const [selectedSymbol, setSelectedSymbol] = useState<string>('BTCUSDT')
+    const [coins, setCoins] = useState([])
     const [prices, setPrices] = useState<PriceMap>({})
     const [positions, setPositions] = useState<Position[]>([])
     const [currentPrice, setCurrentPrice] = useState<number | null>(null)
