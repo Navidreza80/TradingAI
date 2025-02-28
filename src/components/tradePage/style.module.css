@@ -1,0 +1,243 @@
+.holder {
+    background: #202020;
+    border-radius: 20px;
+    padding: 20px;
+}
+
+.formItems {
+    background: #575757;
+}
+
+.longButtonOpen {
+    background: #5ee300 !important;
+    opacity: 1 !important;
+}
+
+.longButtonOpen>span {
+    color: #202020;
+    opacity: 1 !important;
+}
+
+.shortButtonOpen {
+    background: #e32d00 !important;
+    opacity: 1 !important;
+}
+
+.shortButtonOpen>span {
+    color: #e1e1e1;
+    opacity: 1 !important;
+}
+
+.LineChartOutlined {
+    color: white;
+    margin: 0 auto;
+    height: 28px;
+}
+
+.LineChartOutlined>svg {
+    height: 24px;
+    width: 24px;
+}
+
+.contentTradingView {
+    width: 70%;
+    height: 800px;
+    background: #131722;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+.TargetCalculate {
+    color: #5ee300;
+}
+
+.StopCalculate {
+    color: #ff0000;
+}
+
+.StopCalculate,
+.TargetCalculate {
+    text-align: center;
+
+}
+
+.TargetHolderAndStopHolderHolder {
+    display: flex;
+    justify-content: space-between;
+    border-top: 1px solid #878787b0;
+    border-bottom: 1px solid #878787b0;
+    flex-flow: column wrap;
+    padding-bottom: 15px;
+}
+.TargetStopHolder{
+    width: 50%;
+}
+
+.TargetStopHolderInputTitle>input {
+    border-radius: 10px;
+    margin-right: 5px;
+    padding: 5px 10px;
+    height: 25px;
+    width: 150px;
+}
+
+.TargetStopHolderInputTitle>input::placeholder {
+    color: #9e9e9e;
+    font-size: 16px;
+    text-align: center;
+}
+
+.TargetStopHolderInputTitle {
+    display: flex;
+    justify-content: right;
+    gap: 4px;
+    width: 100%;
+    flex-flow: column wrap;
+}
+
+.Form {
+    height: 610px;
+    display: flex;
+    flex-flow: column wrap;
+    gap: 25px;
+}
+.ShortButton {
+    background-color: rgb(68, 127, 0);
+}
+
+.LongButton {
+    background-color: #e32d00;
+}
+
+.ShortButton,
+.LongButton {
+    width: 100%;
+    padding: 12px 0;
+    height: 50px;
+    border-radius: 5px;
+}
+
+.symbolForm{
+    display: flex;
+    justify-content: left;
+    gap: 10px;
+    width: 100%;
+    height: 45px;
+    padding: 10px;
+
+}
+
+.symbolForm > input{
+    color: #fff;
+    background-color: transparent;
+    font-size: 20px;
+    font-weight: 700;
+    height: 25px;
+}
+
+.symbolForm > label{
+    color: #fff;
+    background-color: transparent;
+    font-size: 17px;
+    padding-top: 3px;
+}
+.longOrShort{
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    background: rgb(31, 41, 55);
+    padding: 5px 10px;
+    border-radius: 8px;
+    margin-right: 20%;
+    cursor: pointer;
+}
+.longOrShort> option{
+    color: #fff;
+    padding: 5px 10px;
+    border-radius: 10px;
+    font-size: 17px;
+    font-weight: 600;
+    cursor: pointer;
+}
+.longOrShort> option:hover{
+    box-shadow: 1px 1px 1px 1px #202020;
+    background: yellow;
+}
+.longOrShort> option:first-child{
+    background-color: #447f00;
+}
+.longOrShort> option:last-child{
+    background-color: #ff0000;
+}
+.CrossOrIsolatedHolder{
+    display: flex;
+    justify-content: space-between;
+}
+.CrossOrIsolated{
+    display: flex;
+    justify-content: center;
+}
+.CrossOrIsolated > select{
+    border-radius: 50px;
+    cursor: pointer;
+    border: 1px solid #828387;
+}
+.CrossOrIsolated > select > option{ 
+    cursor: pointer;
+}
+.amountHolder{
+    display: flex;
+    gap: 20px;
+}
+.amountHolder > input{
+    width: 70%;
+    border-radius: 50px;
+    padding: 5px 15px 5px 10px !important;
+}
+.checkedTPSL{
+    display: flex;
+    gap: 5px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* اضافه کردن استایل‌های جدید برای responsive بودن */
+@media (max-width: 1200px) {
+    .contentTradingView {
+        width: 100%;
+        height: 200px;
+    }
+}
+
+@media (max-width: 768px) {
+    .contentTradingView {
+        height: 400px;
+    }
+}
+
+@media (max-width: 1200px) {
+    .TargetStopHolder {
+        width: 100%;
+    }
+    .checkedTPSL{
+        flex-flow: column wrap;
+    }
+    .TargetStopHolderInputTitle > input{
+        width: 100%;
+        border-radius: 5px;
+    }
+}
+
+
