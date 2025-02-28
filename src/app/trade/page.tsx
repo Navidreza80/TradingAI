@@ -54,6 +54,30 @@ export default function TradePage() {
         takeProfit: { price: number | null; percent: number | null; } | null;
         stopLoss: { price: number | null; percent: number | null; } | null;
     }>({ takeProfit: null, stopLoss: null });
+    const [showChart, setShowChart] = useState(false); // وضعیت چک‌باکس
+    const [isMobile, setIsMobile] = useState(false); // وضعیت برای بررسی عرض صفحه
+
+    // بررسی تغییر عرض صفحه
+    useEffect(() => {
+        const handleResize = () => {
+            if (window.innerWidth < 940) {
+                setIsMobile(true); // اگر عرض کمتر از 940px شد
+            } else {
+                setIsMobile(false); // در غیر این صورت
+            }
+        };
+
+        handleResize(); // هنگام بارگذاری صفحه ابتدا چک می‌کنیم
+        window.addEventListener('resize', handleResize); // به تغییرات سایز صفحه گوش می‌دهیم
+
+        return () => window.removeEventListener('resize', handleResize); // پاکسازی رویداد
+    }, []);
+
+    const handleCheckboxChange = () => {
+        setShowChart(prevState => !prevState); // تغییر وضعیت چک‌باکس
+    };
+
+
 
     const calculatePnL = useCallback((position: Position, price: number) => {
         if (!price || !position.entryPrice) return { amount: 0, percentage: 0 }
@@ -451,12 +475,32 @@ export default function TradePage() {
             <Layout className="min-h-screen mt-16 bg-white dark:bg-black dark:text-white">
                 <Content className="p-6 bg-white dark:bg-black">
                     <div className='bg-white dark:bg-black'>
+                        <div className={style.ShowResChart}>
+                            <input
+                                className='hidden'
+                                type="checkbox"
+                                id='ShowResChart'
+                                checked={showChart} // وضعیت چک‌باکس
+                                onChange={handleCheckboxChange} // تغییر وضعیت چک‌باکس
+                                disabled={!isMobile} 
+                            />
+                            <label
+                                className={`cursor-pointer rounded-xl p-2 text-black dark:text-white ${showChart ? 'bg-gray-500 dark:bg-gray-900' : 'bg-gray-400 dark:bg-gray-600'}`}
+                                htmlFor='ShowResChart'
+                            >
+                                نمایش نمودار
+                            </label>
+
+                        </div>
                         <div className={`${style.contentTrade}  bg-white dark:bg-black`}>
-                            <div className={`${style.contentTradingView}  bg-[#f1f1f1] dark:bg-[#202020]`}>
+                            <div
+                                className={`${style.contentTradingView}  bg-[#f1f1f1] dark:bg-[#202020] ${isMobile ? (showChart ? 'flex' : 'hidden') : 'flex'}`}>
                                 <TradingViewWidgetDark
                                     symbol={selectedSymbol}
                                     onPriceChange={setCurrentPrice}
                                 />
+
+
                                 {/* {darkMode == true ? (      NavidRezaBug
                                     <TradingViewWidgetDark
                                         symbol={selectedSymbol}
@@ -489,6 +533,7 @@ export default function TradePage() {
                                     onOpenPosition={handleOpenPosition}
                                     symbol={selectedSymbol}
                                 />
+
                             </div>
                         </div>
                     </div>
@@ -498,19 +543,17 @@ export default function TradePage() {
                             <div className="flex text-white mb-1 justify-between items-center">
                                 <div className='flex gap-1.5'>
                                     <span className="text-black text-[16px] font-[700] dark:text-white">معاملات فعال:</span>
-                                    <Tag className={`${style.OpenPositionTag} bg-gray-200 dark:bg-gray-600 text-black dark:text-white p-2 rounded`}>
+                                    <span className={` text-[17px] font-bold  border border-black dark:border-white text-black dark:text-white px-1 rounded bg-white dark:bg-black`}>
                                         {positions.length}
-                                    </Tag>
+                                    </span>
                                 </div>
-                                <Button
+                                <button
                                     onClick={() => setIsHistoryModalVisible(true)}
-                                    type="primary"
-                                    ghost
-                                    className="border-none gap-1 flex dark:hover:bg-[#ccc] bg-white dark:bg-black"
+                                    className="border-none gap-1 flex bg-black p-1 rounded-[8px] bg-white dark:bg-black"
                                 >
-                                    <h1 className='text-[#202020] text-[16px] dark:text-white'>history</h1>
+                                    <h1 className='text-[#202020] text-[16px] flex dark:text-white'>history</h1>
                                     <img className='w-6 h-6' src='https://img.icons8.com/?size=100&id=ZG6vinMQTTq8&format=png&color=7e7e7e' />
-                                </Button>
+                                </button>
                             </div>
                             {positions.length > 0 ? (
                                 <table className="w-full table-auto border-collapse">
@@ -537,9 +580,11 @@ export default function TradePage() {
                                                 <tr key={position.timestamp} className={`rounded-sm border-b border-[#202020] dark:border-[#ccc]  bg-white dark:bg-black `}>
                                                     <td className="py-2 px-4 text-[16px] font-[700] text-center text-black dark:text-white ">{position.symbol}</td>
                                                     <td className="py-2  px-4">
-                                                        <button className={`px-2 mx-auto py-1 rounded-full ${position.type === 'LONG' ? 'bg-green-500' : 'bg-red-500'} text-white`}>
-                                                            {position.type === 'LONG' ? 'long' : 'short'}
-                                                        </button>
+                                                        <div className='justify-center flex'>
+                                                            <button className={`px-2 mx-auto py-1 rounded-full ${position.type === 'LONG' ? 'bg-green-500 dark:bg-green-700' : 'bg-red-500 dark:bg-red-700'} text-white`}>
+                                                                {position.type === 'LONG' ? 'long' : 'short'}
+                                                            </button>
+                                                        </div>
                                                     </td>
                                                     <td className="py-2 px-4 text-center text-black dark:text-white "> {position.mode}</td>
                                                     <td className="py-2 px-4 text-center text-black dark:text-white ">{position.leverage}X</td>
@@ -585,7 +630,7 @@ export default function TradePage() {
                                 </table>) : (
 
 
-                                <div className={`${style.noPositions} dark:text-white`}>
+                                <div className={`flex justify-center w-full dark:text-white`}>
                                     هیچ معامله‌ای باز نیست
                                 </div>
                             )}

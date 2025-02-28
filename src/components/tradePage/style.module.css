@@ -70,7 +70,8 @@
     flex-flow: column wrap;
     padding-bottom: 15px;
 }
-.TargetStopHolder{
+
+.TargetStopHolder {
     width: 50%;
 }
 
@@ -97,11 +98,11 @@
 }
 
 .Form {
-    height: 610px;
     display: flex;
     flex-flow: column wrap;
     gap: 25px;
 }
+
 .ShortButton {
     background-color: rgb(68, 127, 0);
 }
@@ -118,7 +119,7 @@
     border-radius: 5px;
 }
 
-.symbolForm{
+.symbolForm {
     display: flex;
     justify-content: left;
     gap: 10px;
@@ -128,7 +129,7 @@
 
 }
 
-.symbolForm > input{
+.symbolForm>input {
     color: #fff;
     background-color: transparent;
     font-size: 20px;
@@ -136,13 +137,14 @@
     height: 25px;
 }
 
-.symbolForm > label{
+.symbolForm>label {
     color: #fff;
     background-color: transparent;
     font-size: 17px;
     padding-top: 3px;
 }
-.longOrShort{
+
+.longOrShort {
     display: flex;
     justify-content: center;
     gap: 20px;
@@ -152,7 +154,8 @@
     margin-right: 20%;
     cursor: pointer;
 }
-.longOrShort> option{
+
+.longOrShort>option {
     color: #fff;
     padding: 5px 10px;
     border-radius: 10px;
@@ -160,42 +163,52 @@
     font-weight: 600;
     cursor: pointer;
 }
-.longOrShort> option:hover{
+
+.longOrShort>option:hover {
     box-shadow: 1px 1px 1px 1px #202020;
     background: yellow;
 }
-.longOrShort> option:first-child{
+
+.longOrShort>option:first-child {
     background-color: #447f00;
 }
-.longOrShort> option:last-child{
+
+.longOrShort>option:last-child {
     background-color: #ff0000;
 }
-.CrossOrIsolatedHolder{
+
+.CrossOrIsolatedHolder {
     display: flex;
     justify-content: space-between;
 }
-.CrossOrIsolated{
+
+.CrossOrIsolated {
     display: flex;
     justify-content: center;
 }
-.CrossOrIsolated > select{
+
+.CrossOrIsolated>select {
     border-radius: 50px;
     cursor: pointer;
     border: 1px solid #828387;
 }
-.CrossOrIsolated > select > option{ 
+
+.CrossOrIsolated>select>option {
     cursor: pointer;
 }
-.amountHolder{
+
+.amountHolder {
     display: flex;
     gap: 20px;
 }
-.amountHolder > input{
+
+.amountHolder>input {
     width: 70%;
     border-radius: 50px;
     padding: 5px 15px 5px 10px !important;
 }
-.checkedTPSL{
+
+.checkedTPSL {
     display: flex;
     gap: 5px;
 }
@@ -214,30 +227,32 @@
 
 
 /* اضافه کردن استایل‌های جدید برای responsive بودن */
-@media (max-width: 1200px) {
-    .contentTradingView {
-        width: 100%;
-        height: 200px;
+@media screen and (max-width: 1210px) {
+    .Form {
+        gap: 10px;
     }
 }
 
 @media (max-width: 768px) {
-    .contentTradingView {
-        height: 400px;
-    }
+    
 }
 
 @media (max-width: 1200px) {
     .TargetStopHolder {
         width: 100%;
     }
-    .checkedTPSL{
+
+    .checkedTPSL {
         flex-flow: column wrap;
     }
-    .TargetStopHolderInputTitle > input{
+
+    .TargetStopHolderInputTitle>input {
         width: 100%;
         border-radius: 5px;
     }
+
+    .contentTradingView {
+        width: 100%;
+        height: 200px;
+    }
 }
-
-
