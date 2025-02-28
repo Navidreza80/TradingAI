@@ -71,13 +71,13 @@ export default function AboutPage() {
           <h1 className={`text-4xl sm:text-5xl lg:text-6xl font-bold mb-6 p-2
             bg-gradient-to-r dark:from-white dark:to-gray-400 from-gray-900 to-gray-600 
             bg-clip-text text-transparent 
-            ${i18n.language === 'fa' ? 'font-vazirmatn' : ''} 
-            ${i18n.language === 'ar' ? 'font-notokufi' : ''}`}>
+             
+            `}>
             {t('about.title')}
           </h1>
           <p className={`text-xl dark:text-gray-400 text-gray-600 max-w-3xl mx-auto p-2
-            ${i18n.language === 'fa' ? 'font-vazirmatn' : ''} 
-            ${i18n.language === 'ar' ? 'font-notokufi' : ''}`}>
+             
+            `}>
             {t('about.subtitle')}
           </p>
         </motion.div>
@@ -113,8 +113,8 @@ export default function AboutPage() {
                   {stat.value}
                 </div>
                 <div className={`dark:text-gray-400 text-gray-600
-                  ${i18n.language === 'fa' ? 'font-vazirmatn' : ''} 
-                  ${i18n.language === 'ar' ? 'font-notokufi' : ''}`}>
+                   
+                  `}>
                   {stat.label}
                 </div>
               </div>
@@ -131,13 +131,13 @@ export default function AboutPage() {
         >
           <div className="max-w-3xl mx-auto text-center">
             <h2 className={`text-3xl font-bold mb-6 dark:text-white text-gray-900
-              ${i18n.language === 'fa' ? 'font-vazirmatn' : ''} 
-              ${i18n.language === 'ar' ? 'font-notokufi' : ''}`}>
+               
+              `}>
               {t('about.mission.title')}
             </h2>
             <p className={`text-lg dark:text-gray-400 text-gray-600
-              ${i18n.language === 'fa' ? 'font-vazirmatn' : ''} 
-              ${i18n.language === 'ar' ? 'font-notokufi' : ''}`}>
+               
+              `}>
               {t('about.mission.description')}
             </p>
           </div>
@@ -150,8 +150,8 @@ export default function AboutPage() {
           transition={{ duration: 0.5, delay: 0.6 }}
         >
           <h2 className={`text-3xl font-bold mb-12 text-center dark:text-white text-gray-900
-            ${i18n.language === 'fa' ? 'font-vazirmatn' : ''} 
-            ${i18n.language === 'ar' ? 'font-notokufi' : ''}`}>
+             
+            `}>
             {t('about.team.title')}
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -181,13 +181,13 @@ export default function AboutPage() {
                   </div>
                   <div className="p-6 text-center">
                     <h3 className={`text-xl font-bold mb-2 dark:text-white text-gray-900
-                      ${i18n.language === 'fa' ? 'font-vazirmatn' : ''} 
-                      ${i18n.language === 'ar' ? 'font-notokufi' : ''}`}>
+                       
+                      `}>
                       {member.name}
                     </h3>
                     <p className={`dark:text-gray-400 text-gray-600
-                      ${i18n.language === 'fa' ? 'font-vazirmatn' : ''} 
-                      ${i18n.language === 'ar' ? 'font-notokufi' : ''}`}>
+                       
+                      `}>
                       {member.role}
                     </p>
                   </div>

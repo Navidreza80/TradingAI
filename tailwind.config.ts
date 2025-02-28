@@ -23,8 +23,6 @@ const config: Config = {
         md: "768px",
         lg: "1024px",
         xl: "1280px",
-        "2xl": "1536px",
-        "3xl": "1920px",
       },
       fontFamily: {
         vazirmatn: ["Vazirmatn", "system-ui", "sans-serif"],
@@ -34,6 +32,8 @@ const config: Config = {
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
+        primary: "#6366f1", // Custom primary color
+        secondary: "#10b981", // Custom secondary color
       },
       keyframes: {
         headerPattern: {

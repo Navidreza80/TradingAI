@@ -1,9 +1,11 @@
 "use client";
 
-// imports
-
+// next imports
 import Link from "next/link";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
+
+// icons imports
 import {
   UserIcon,
   Bars3Icon,
@@ -11,18 +13,28 @@ import {
   MoonIcon,
   LanguageIcon,
 } from "@heroicons/react/24/outline";
+
+// react imports
 import { useState, useEffect } from "react";
+
+// antd importss
 import { Drawer, Button, Dropdown } from "antd";
 import type { MenuProps } from "antd";
+
+// i18n imports
 import { useTranslation } from "react-i18next";
+
+// auth imports
 import {
   SignedIn,
   SignedOut,
   SignInButton,
+  SignOutButton,
   SignUpButton,
   useUser,
 } from "@clerk/nextjs";
 
+// shadcn imports
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -31,7 +43,6 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { usePathname } from "next/navigation";
 
 /**
  * Header Component
@@ -50,11 +61,16 @@ import { usePathname } from "next/navigation";
  */
 
 export default function Header() {
+
+  // i18n (translation) hooks
   const { t, i18n } = useTranslation();
+
   // States
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isDarkMode, setIsDarkMode] = useState(true);
   const [isScrolled, setIsScrolled] = useState(false);
+
+  // auth hooks
   const { user } = useUser();
 
   // Navigation items with translations
@@ -71,6 +87,7 @@ export default function Header() {
 
   // Handle scroll effect
   useEffect(() => {
+    
     // Handle scroll effect if user scrolls down 20px
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20);
@@ -114,16 +131,13 @@ export default function Header() {
 
   const pathName = usePathname()
 
-  return pathName !== '/dashboard' && (
+  return !pathName.includes('/dashboard') && (
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 backdrop-blur-md
-        ${
-          isScrolled
-            ? "dark:bg-[rgba(10,10,10,0.95)] dark:shadow-2xl dark:backdrop-blur-xl bg-white/95 shadow-lg backdrop-blur-xl"
-            : "dark:bg-transparent bg-white"
+        ${isScrolled
+          ? "dark:bg-[rgba(10,10,10,0.95)] dark:shadow-2xl dark:backdrop-blur-xl bg-white/95 shadow-lg backdrop-blur-xl"
+          : "dark:bg-transparent bg-white"
         }
-        ${i18n.language === "fa" ? "font-vazirmatn" : ""}
-        ${i18n.language === "ar" ? "font-notokufi" : ""}
         min-h-[60px] sm:min-h-[68px] lg:min-h-[68px]`}
       role="banner"
     >
@@ -181,11 +195,10 @@ export default function Header() {
             {navItems.map((item) => (
               <li
                 key={item.name}
-                className={`${
-                  i18n.language === "fa" || i18n.language === "ar"
+                className={`${i18n.language === "fa" || i18n.language === "ar"
                     ? "ml-[32px]"
                     : "first:ml-0"
-                }`}
+                  }`}
               >
                 <Link
                   href={item.href}
@@ -260,13 +273,13 @@ export default function Header() {
           <SignedIn>
             <DropdownMenu>
               <DropdownMenuTrigger>
-                  <Image
-                    src={user?.imageUrl || "/image/user.png"}
-                    alt={user?.username || "User Avatar"}
-                    width={32}
-                    height={32}
-                    className="rounded-full"
-                  />
+                <Image
+                  src={user?.imageUrl || "/image/user.png"}
+                  alt={user?.username || "User Avatar"}
+                  width={32}
+                  height={32}
+                  className="rounded-full"
+                />
               </DropdownMenuTrigger>
               <DropdownMenuContent>
                 <DropdownMenuLabel>My Account</DropdownMenuLabel>
@@ -275,6 +288,7 @@ export default function Header() {
                 <DropdownMenuItem>Billing</DropdownMenuItem>
                 <DropdownMenuItem>Team</DropdownMenuItem>
                 <DropdownMenuItem>Subscription</DropdownMenuItem>
+                <DropdownMenuItem><SignOutButton>Sign Out</SignOutButton></DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
           </SignedIn>
@@ -360,10 +374,9 @@ export default function Header() {
                   href={item.href}
                   className={`font-bold block py-2 px-4 rounded-lg
                     transition-all duration-200
-                    ${
-                      isDarkMode
-                        ? "text-white/85 hover:text-white hover:bg-white/5"
-                        : "text-gray-600 hover:text-gray-900 hover:bg-gray-100"
+                    ${isDarkMode
+                      ? "text-white/85 hover:text-white hover:bg-white/5"
+                      : "text-gray-600 hover:text-gray-900 hover:bg-gray-100"
                     }`}
                   onClick={() => setIsMobileMenuOpen(false)}
                   aria-label={item.description}
@@ -385,10 +398,9 @@ export default function Header() {
           <button
             onClick={toggleDarkMode}
             className={`p-2 rounded-full transition-colors
-              ${
-                isDarkMode
-                  ? "hover:bg-white/10 text-white/85"
-                  : "hover:bg-gray-100 text-gray-600"
+              ${isDarkMode
+                ? "hover:bg-white/10 text-white/85"
+                : "hover:bg-gray-100 text-gray-600"
               }`}
             aria-label={
               isDarkMode ? "Switch to light mode" : "Switch to dark mode"
@@ -407,10 +419,9 @@ export default function Header() {
           >
             <button
               className={`p-2 rounded-full transition-colors
-                ${
-                  isDarkMode
-                    ? "hover:bg-white/10 text-white/85"
-                    : "hover:bg-gray-100 text-gray-600"
+                ${isDarkMode
+                  ? "hover:bg-white/10 text-white/85"
+                  : "hover:bg-gray-100 text-gray-600"
                 }`}
               aria-label="Change language"
             >

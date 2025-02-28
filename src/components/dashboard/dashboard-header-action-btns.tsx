@@ -43,7 +43,7 @@ export default function ActionBtns() {
     },
   ];
   return (
-    <div className="flex items-center gap-1 p-1 bg-white/5 rounded-full">
+    <div className="flex items-center gap-1 p-1 bg-white/5 rounded-full h-5/6 flex-row">
       <button
         onClick={toggleDarkMode}
         className="p-1 xs:p-1.5 rounded-full hover:bg-gray-100 dark:hover:bg-white/10 transition-colors"
