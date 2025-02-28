@@ -151,6 +151,10 @@
     transform: translateY(-2px);
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
+.ShowResChart{
+    display: none;
+    padding: 8px;
+}
 
 
 
@@ -171,6 +175,21 @@
 
 
 
-
-
+@media screen and (max-width: 940px) {
+    .ShowResChart{
+        display: flex;
+    }
+    .contentTrade {
+        flex-flow: column wrap;
+        height: auto;
+        gap: 15px;
+        margin-bottom: 20pxs;
+    }
+    .contentTradeForm{
+        width: 100%;
+    }
+    .contentTradingView{
+        width: 100%;
+    }
+}
 

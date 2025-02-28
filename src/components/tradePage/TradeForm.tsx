@@ -196,11 +196,11 @@ const TradeForm: React.FC<TradeFormProps> = ({ currentPrice, onOpenPosition, sym
           name="amount"
           value={formData.amount}
           onChange={handleChange}
-          className="mt-1 px-1 block w-full rounded-lg border-gray-300 dark:border-gray-600 shadow-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-gray-700 dark:text-white"
+          className="mt-1 px-1 block w-full rounded-lg text-[#707070] dark:text-white border-gray-300 dark:border-gray-600 shadow-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-gray-700 dark:text-white"
           required
-          step="1"
+          step="0.01"
           min={0}
-          max={10000}
+          max={20000}
         />
       </div>
 
