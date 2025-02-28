@@ -1,0 +1,176 @@
+.header{
+    background: #202020;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 32px;
+    align-items: center;
+}
+.header > h3{
+    color: #fff;
+    margin: 0;
+}
+.contentTrade{
+    display: flex;
+    flex-flow: row-reverse nowrap;
+    width: 100%;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    height: 600px;
+}
+.contentTradingView{
+    width: 70%;
+    border-radius: 20px;
+    overflow: hidden;
+}
+.contentTradeForm{
+    width: 29%;
+    border-radius: 20px;
+    overflow: hidden;
+    color: #fff;
+    text-align: right;
+    font-size: 17px;
+    padding: 20px;
+}
+.CardContentTradeForm,.CardContentTradingView{
+    border: none;
+    margin: 0;
+    padding: 0;
+}
+.OptionHolder{
+    display: flex;
+    background-color: #000000 !important;
+    width: 200px;
+    padding: 0;
+    border-radius: 10px !important;
+}
+
+.OptionHolder >div{
+    background: #000 !important;
+}
+.option{
+    display: flex;
+    width: 100%;
+    flex-flow: row-reverse nowrap;
+    justify-content: right;
+    gap: 5px;
+    background-color: #000;
+}
+.option > img{
+    height: 24px;
+    width: 24px;
+    margin: auto 0;
+}
+.option > h1{
+    color: white !important;
+}
+.OptionHolder >div{
+    border: 0 none !important;
+    border-radius: 10px !important;
+    background-color: #000 !important;
+    box-shadow: none !important;
+    color: #fff !important;
+    display: flex;
+    gap: 10px;
+}
+.OptionHolder >span{
+    border-radius: 50px;
+    padding: 5px;
+    color: rgb(255, 255, 255) !important;
+}
+.positionOpen{
+    width: 100%;
+    height: 40px;
+    justify-content: space-between;
+    display: flex;
+    flex-flow: column wrap;
+    border-radius: 12px;
+    padding: 16px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+.positionHolder{
+    display: flex;
+    justify-content: right;
+    width: 100%;
+}
+
+.positionHolderFlex{
+    display: flex;
+    flex-flow: column wrap;
+    gap: 10px;
+}
+.OpenPositionTag{
+    border: 1px solid #fff;
+    background-color: rgb(31, 41, 55, 1) !important;
+    color: #fff;
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    font-weight: 600;
+    font-size: 20px;
+    padding: 5px;
+}
+.positions{
+    border-radius: 10px;
+    width: 95% !important;
+    border: 0 none !important;
+    padding: 10px !important;
+    margin: 0 !important;
+}
+.positions > div:last-child{
+    padding-bottom: 0;
+}
+
+.positions > div:first-child > div > div > div{
+    display: flex;
+    justify-content: right;
+    padding: 15px 5px 5px 5px ;
+    gap: 10px;
+}
+.positionsHolder{
+    max-width: 100%;
+    display: flex;
+    justify-content: center;
+    overflow-x: scroll;
+}
+.positionHolderFlex {
+    overflow-x: scroll;
+}
+.positionHolderFlex > div{
+    min-width: 350px;
+}
+.titlePositionCard{
+    font-size: 18px;
+}
+.historyCard {
+    background-color: rgba(255, 255, 255, 0.02);
+    border-width: 1px;
+    transition: all 0.3s ease;
+}
+
+.historyCard:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
