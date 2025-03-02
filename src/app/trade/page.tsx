@@ -5,6 +5,10 @@ import { Coin } from "@/types/trade";
 import { Position } from "@/types/trade";
 import { PriceMap } from "@/types/trade";
 import { ClosedPosition } from "@/types/trade";
+import html2canvas from 'html2canvas';
+import ImageLogo from '@/../public/image/LogoTradingAi.jpg';
+import { DownloadOutlined } from '@ant-design/icons';
+import toast, { Toaster } from 'react-hot-toast';
 
 // antd components
 import {
@@ -12,6 +16,7 @@ import {
     Card,
     ConfigProvider,
     Divider,
+    Image,
     Input,
     Layout,
     Modal,
@@ -30,6 +35,8 @@ import { useCallback, useEffect, useState, useRef } from "react";
 import TradeForm from "../../components/tradePage/TradeForm";
 import style from "./style.module.css";
 import { TradingViewWidgetDark } from '../../components/tradePage/TradingViewWidgetDark'
+import { useRouter } from "next/navigation";
+
 
 // typography
 const { Content } = Layout;
@@ -51,6 +58,7 @@ export default function TradePage() {
     const [isHistoryModalVisible, setIsHistoryModalVisible] = useState(false);
     const [closedPositions, setClosedPositions] = useState<ClosedPosition[]>([]);
     const [isLimitModalVisible, setIsLimitModalVisible] = useState(false);
+    const [showImage, setShowImage] = useState(false); // برای نمایش یا مخفی کردن modal تصویر
     const [selectedPosition, setSelectedPosition] = useState<Position | null>(null);
     const [tempLimits, setTempLimits] = useState<{
         takeProfit: { price: number | null; percent: number | null; } | null;
@@ -58,6 +66,28 @@ export default function TradePage() {
     }>({ takeProfit: null, stopLoss: null });
     const [showChart, setShowChart] = useState(false); // وضعیت چک‌باکس
     const [isMobile, setIsMobile] = useState(false); // وضعیت برای بررسی عرض صفحه
+    const [isDarkMode, setIsDarkMode] = useState(false);
+
+    useEffect(() => {
+        // بررسی تم ذخیره‌شده در LocalStorage
+        const storedTheme = localStorage.getItem("theme");
+        if (storedTheme === "dark") {
+            document.documentElement.classList.add("dark");
+            setIsDarkMode(true);
+        }
+    }, []);
+
+    const toggleDarkMode = () => {
+        if (isDarkMode) {
+            document.documentElement.classList.remove("dark");
+            localStorage.setItem("theme", "light");
+        } else {
+            document.documentElement.classList.add("dark");
+            localStorage.setItem("theme", "dark");
+        }
+        setIsDarkMode(!isDarkMode);
+    };
+    const router = useRouter();
 
     // بررسی تغییر عرض صفحه
     useEffect(() => {
@@ -472,6 +502,45 @@ export default function TradePage() {
         }
     };
 
+
+    const captureRef = useRef<HTMLDivElement>(null);
+
+    const downloadImage = async (format: 'png' | 'jpg') => {
+        if (captureRef.current) {
+            try {
+                // نمایش موقتی قبل از گرفتن عکس
+                captureRef.current.classList.remove('hidden');
+
+                // کمی تأخیر برای اطمینان از اعمال شدن تغییرات
+                await new Promise((resolve) => setTimeout(resolve, 300));
+
+                const canvas = await html2canvas(captureRef.current, {
+                    useCORS: true,
+                    scale: 2,
+                });
+
+                // بعد از گرفتن تصویر، دوباره مخفی کن
+                captureRef.current.classList.add('hidden');
+
+                const dataUrl =
+                    format === 'png'
+                        ? canvas.toDataURL('image/png')
+                        : canvas.toDataURL('image/jpeg', 0.95);
+
+                const link = document.createElement('a');
+                link.href = dataUrl;
+                link.download = `downloaded-image.${format}`;
+                link.click();
+            } catch (error) {
+                console.error('Error capturing image:', error);
+            }
+        }
+    };
+
+    const ClosePositionToast = () => toast.success('پوزیشن با موفقیت بسته شد');
+
+
+
     return (
         <ConfigProvider locale={fa_IR} direction="rtl">
             <Layout className="min-h-screen mt-16 bg-white dark:bg-black dark:text-white">
@@ -486,13 +555,15 @@ export default function TradePage() {
                                 onChange={handleCheckboxChange} // تغییر وضعیت چک‌باکس
                                 disabled={!isMobile}
                             />
+                            <div className={"cursor-pointer rounded-xl p-2 font-bold border border-black dark:border-white"} onClick={() => router.push(`/education`)}>
+                                <h1 className="text-black dark:text-white">آموزش trade</h1>
+                            </div>
                             <label
-                                className={`cursor-pointer rounded-xl p-2 font-bold text-black dark:text-white ${showChart ? 'bg-gray-500 dark:bg-gray-900' : 'bg-gray-400 dark:bg-gray-600'}`}
+                                className={`cursor-pointer rounded-xl p-2 font-bold ${showChart ? 'bg-gray-200 dark:bg-gray-900' : 'bg-gray-100 dark:bg-gray-600'}`}
                                 htmlFor='ShowResChart'
                             >
-                                نمایش نمودار
+                                <img className="w-[20px]" src="https://cdn-icons-png.flaticon.com/512/10799/10799630.png" />
                             </label>
-
                         </div>
                         <div className={`${style.contentTrade}  bg-white dark:bg-black`}>
                             <div
@@ -584,13 +655,20 @@ export default function TradePage() {
                                                     <Divider style={{ background: "#64748b", height: "1px", margin: "0 2px" }} />
                                                     <div className='flex justify-between'>
                                                         <Space className=' w-full flex justify-between'>
-                                                            <Statistic
-                                                                value={pnl.percentage}
-                                                                precision={2}
-                                                                valueStyle={{ color: isProfitable ? '#3f8600' : '#cf1322', fontSize: '20px' }}
-                                                                suffix="%"
-                                                                className="dark:text-white"
-                                                            />
+                                                            <div className="flex gap-2 ">
+                                                                <img className="cursor-pointer my-auto mr-[5px] w-[20px] h-[20px]" src="https://img.icons8.com/?size=100&id=71053&format=png&color=000000"
+                                                                    onClick={() => {
+                                                                        setSelectedPosition(position);
+                                                                        setShowImage(true);
+                                                                    }} />
+                                                                <Statistic
+                                                                    value={pnl.percentage}
+                                                                    precision={2}
+                                                                    valueStyle={{ color: isProfitable ? '#3f8600' : '#cf1322', fontSize: '20px' }}
+                                                                    suffix="%"
+                                                                    className="dark:text-white"
+                                                                />
+                                                            </div>
                                                             <Statistic
                                                                 suffix="$"
                                                                 value={Math.abs(pnl.amount)}
@@ -600,7 +678,6 @@ export default function TradePage() {
                                                             />
                                                         </Space>
                                                     </div>
-
                                                     <div className="grid grid-cols-2">
                                                         <div className="dark:text-white">
                                                             <p className='text-[14px] text-[#969696]'>اندازه</p>
@@ -638,7 +715,10 @@ export default function TradePage() {
                                                             block
                                                             type="primary"
                                                             className='bg-slate-500 dark:bg-gray-600 dark:text-white'
-                                                            onClick={() => closePosition(position.timestamp)}
+                                                            onClick={() => {
+                                                                ClosePositionToast();
+                                                                closePosition(position.timestamp);
+                                                            }}
                                                         >
                                                             بستن معامله
                                                         </Button>
@@ -691,13 +771,20 @@ export default function TradePage() {
                                                             {currentPrice || "!"}$
                                                         </td>
                                                         <td className="py-2 px-4">
-                                                            <div className='flex-col justify-[left] flex-wrap flex'>
-                                                                <span className='text-left text-black dark:text-white' style={{ color: isProfitable ? '#3f8600' : '#cf1322', fontSize: '16px' }}>
-                                                                    {Math.abs(pnl.amount).toFixed(2) + "USDT  "}
-                                                                </span>
-                                                                <span className='text-left text-black dark:text-white' style={{ color: isProfitable ? '#3f8600' : '#cf1322', fontSize: '16px' }}>
-                                                                    {pnl.percentage.toFixed(2)}%
-                                                                </span>
+                                                            <div className='flex gap-2' style={{ justifyContent: "left" }}>
+                                                                <img className="cursor-pointer my-auto w-[20px] h-[20px]" src="https://img.icons8.com/?size=100&id=71053&format=png&color=000000"
+                                                                    onClick={() => {
+                                                                        setSelectedPosition(position);
+                                                                        setShowImage(true);
+                                                                    }} />
+                                                                <div className='flex-col justify-[left] flex-wrap flex'>
+                                                                    <span className='text-left w-full text-black dark:text-white' style={{ color: isProfitable ? '#3f8600' : '#cf1322', fontSize: '16px' }}>
+                                                                        {Math.abs(pnl.amount).toFixed(2) + "USDT  "}
+                                                                    </span>
+                                                                    <span className='text-left text-black w-full dark:text-white' style={{ color: isProfitable ? '#3f8600' : '#cf1322', fontSize: '16px' }}>
+                                                                        {pnl.percentage.toFixed(2)}%
+                                                                    </span>
+                                                                </div>
                                                             </div>
                                                         </td>
                                                         <td className="py-2 px-4">
@@ -714,10 +801,14 @@ export default function TradePage() {
                                                                 <button
                                                                     style={{ background: isProfitable ? '#3f8600' : '#cf1322' }}
                                                                     className="bg-red-500 ml-auto text-white py-1 px-4 rounded"
-                                                                    onClick={() => closePosition(position.timestamp)}
+                                                                    onClick={() => {
+                                                                        ClosePositionToast();
+                                                                        closePosition(position.timestamp);
+                                                                    }}
                                                                 >
                                                                     بستن معامله
                                                                 </button>
+                                                                <Toaster />
                                                             </div>
                                                         </td>
                                                     </tr>
@@ -1083,6 +1174,104 @@ export default function TradePage() {
                         </div>
                     )}
                 </Modal>
+                <Modal
+                    title="  TradingAi"
+                    open={showImage}
+                    onCancel={() => setShowImage(false)}
+                    footer={null}
+                    className={style.positionModal}
+                >
+                    {selectedPosition && (() => {
+                        const currentPrice = prices[selectedPosition.symbol];
+                        const pnl = pnlState[selectedPosition.timestamp] || { amount: 0, percentage: 0 };
+                        const isProfitable = pnl.amount >= 0;
+
+                        return (
+                            <>
+                                <div className="flex flex-col flex-wrap gap-4 w-[100%] h-[472px] bg-black p-6 rounded-[20px]">
+                                    <span className="text-base xs:text-lg sm:text-xl lg:text-2xl font-bold mx-auto text-[#309eff]">TradingAI</span>
+                                    <div className="flex gap-[10px] ">
+                                        <span className={`${style.titlePositionCard}  font-semibold text-white`}>{selectedPosition.symbol}</span>
+                                        <span className={`${style.titlePositionCard}  font-semibold px-2 border-x border-[#292929]  ${selectedPosition.type === 'LONG' ? 'text-green-600' : 'text-red-600'}`}>{selectedPosition.type === 'LONG' ? 'long' : 'short'}</span>
+                                        <span className={`${style.titlePositionCard}  font-semibold text-white`}>{selectedPosition.leverage}X</span>
+                                    </div>
+                                    <div className=' w-full flex flex-col flex-wrap'>
+                                        <div>
+                                            <h1 style={{ color: isProfitable ? '#66ff00' : '#ff0000' }} className="text-right relative z-[100] text-[30px] text-white mr-2">
+                                                {pnl.percentage.toFixed(2)}%
+                                            </h1>
+                                            <h1 style={{ color: isProfitable ? '#66ff00' : '#ff0000' }} className="text-right relative z-[100] text-[25px] text-white mr-2">
+
+                                                ({Math.abs(pnl.amount).toFixed(2)}USDT)
+                                            </h1>
+                                        </div>
+                                    </div>
+                                    <div className="flex relative">
+                                        <div className="flex flex-col gap-[15px] flex-wrap">
+                                            <div className="flex flex-col flex-wrap gap-[0] text-white">
+                                                <p className='text-[14px] text-[#969696]'>مقدار</p>
+                                                <h1 className='text-[20px] mr-[5px]'>{selectedPosition.amount}$</h1>
+                                            </div>
+                                            <div className="flex flex-col flex-wrap gap-[0] text-white">
+                                                <p className='text-[14px] text-[#969696]'>قیمت ورود</p>
+                                                <h1 className='text-[20px] mr-[5px]'>{selectedPosition.entryPrice}$</h1>
+                                            </div>
+                                            <div className="flex flex-col flex-wrap gap-[0] text-white">
+                                                <p className='text-[14px] text-[#969696]'>قیمت لحظه ای</p>
+                                                <h1 className='text-[20px] mr-[5px]'>{currentPrice | "!"}$</h1>
+                                            </div>
+                                        </div>
+                                        <img className="absolute top-[-70px] left-px w-[250px] h-[250px]" src={ImageLogo.src} />
+                                    </div>
+                                </div>
+                                <div className="w-full flex justify-center">
+                                    <Button icon={<DownloadOutlined className=" text-[24px]" />} type="default" onClick={() => downloadImage('jpg')} className=" mt-4">
+                                        Download
+                                    </Button>
+                                </div>
+
+
+                                <div ref={captureRef} className="flex hidden flex-col flex-wrap gap-4 w-[472px] h-[472px] bg-black p-6">
+                                    <span className="text-base xs:text-lg sm:text-xl lg:text-2xl font-bold mx-auto text-[#309eff]">TradingAI</span>
+                                    <div className="flex gap-[10px] h-6 relative ">
+                                        <span className={`${style.titlePositionCard} right-px font-semibold text-white`}>{selectedPosition.symbol}</span>
+                                        <span className={`${style.titlePositionCard} right-[85px] font-semibold px-2  ${selectedPosition.type === 'LONG' ? 'text-green-600' : 'text-red-600'}`}>{selectedPosition.type === 'LONG' ? 'long' : 'short'}</span>
+                                        <span className={`${style.titlePositionCard} right-[150px] font-semibold text-white`}>{selectedPosition.leverage}X</span>
+                                    </div>
+                                    <div className=' w-full flex flex-col flex-wrap'>
+                                        <div>
+                                            <h1 style={{ color: isProfitable ? '#66ff00' : '#ff0000' }} className="text-right relative z-[100]  text-[30px] text-white mr-2">
+                                                {pnl.percentage.toFixed(2)}%
+                                            </h1>
+                                            <h1 style={{ color: isProfitable ? '#66ff00' : '#ff0000' }} className="text-right relative z-[100]  text-[25px] text-white mr-2">
+
+                                                ){Math.abs(pnl.amount).toFixed(2)}USDT(
+                                            </h1>
+                                        </div>
+                                    </div>
+                                    <div className="flex relative">
+                                        <div className="flex flex-col gap-[15px] flex-wrap">
+                                            <div className="flex flex-col flex-wrap gap-[0] text-white">
+                                                <p className='text-[14px] text-[#969696]'>مقدار</p>
+                                                <h1 className='text-[20px] mr-[5px] mt-[-19px]'>{selectedPosition.amount}$</h1>
+                                            </div>
+                                            <div className="flex flex-col flex-wrap gap-[0] text-white">
+                                                <p className='text-[14px] text-[#969696]'>قیمت ورود</p>
+                                                <h1 className='text-[20px] mr-[5px] mt-[-19px]'>{selectedPosition.entryPrice}$</h1>
+                                            </div>
+                                            <div className="flex flex-col flex-wrap gap-[0] text-white">
+                                                <p className='text-[14px] text-[#969696]'>قیمت لحظه ای</p>
+                                                <h1 className='text-[20px] mr-[5px] mt-[-19px]'>{prices[selectedPosition.symbol] | "!"}$</h1>
+                                            </div>
+                                        </div>
+                                        <img className="absolute top-[-70px] left-[-5px] w-[250px] h-[250px]" src={ImageLogo.src} />
+                                    </div>
+                                </div>
+                            </>
+                        );
+                    })()}
+                </Modal>
+
             </Layout>
         </ConfigProvider>
     );

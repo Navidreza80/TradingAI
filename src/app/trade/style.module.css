@@ -140,6 +140,7 @@
 }
 .titlePositionCard{
     font-size: 18px;
+    margin: 0;
 }
 .historyCard {
     background-color: rgba(255, 255, 255, 0.02);
@@ -154,8 +155,11 @@
 .ShowResChart{
     display: none;
     padding: 8px;
+    justify-content: space-between;
 }
-
+.positionModal{
+    max-height: 590px;
+}
 
 
 
