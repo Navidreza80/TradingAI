@@ -1,30 +1,15 @@
-"use client";
-
+import { toggleDarkMode } from "@/redux/themeSlice";
 import { LanguageIcon } from "@heroicons/react/24/outline";
-import { Dropdown, MenuProps } from "antd";
+import { Dropdown } from "antd";
+import { MenuProps } from "antd/lib";
 import { MoonIcon, SunIcon } from "lucide-react";
-import { useState } from "react";
 import { useTranslation } from "react-i18next";
+import { useDispatch, useSelector } from "react-redux";
 
-export default function ActionBtns() {
-  const [isDarkMode, setIsDarkMode] = useState(true);
-    const { i18n } = useTranslation();
-
-  // Handle language change
-  const handleLanguageChange = (lang: string) => {
-    i18n.changeLanguage(lang);
-    document.documentElement.lang = lang;
-    document.documentElement.dir =
-      lang === "fa" || lang === "ar" ? "rtl" : "ltr";
-  };
-
-  // Toggle dark mode
-  const toggleDarkMode = () => {
-    setIsDarkMode(!isDarkMode);
-    document.documentElement.classList.toggle("dark");
-  };
-
-  // Language menu items
+export default function ThemeNLanguage({responsive}) {
+  const dispatch = useDispatch();
+  const isDarkMode = useSelector((state) => state.theme.isDarkMode);
+  const { t, i18n } = useTranslation();
   const languageItems: MenuProps["items"] = [
     {
       key: "en",
@@ -42,10 +27,17 @@ export default function ActionBtns() {
       onClick: () => handleLanguageChange("ar"),
     },
   ];
+  // Handle language change
+  const handleLanguageChange = (lang: string) => {
+    i18n.changeLanguage(lang);
+    document.documentElement.lang = lang;
+    document.documentElement.dir =
+      lang === "fa" || lang === "ar" ? "rtl" : "ltr";
+  };
   return (
-    <div className="flex items-center gap-1 p-1 bg-white/5 rounded-full h-5/6 flex-row">
+    <div className={`items-center ${responsive} min-[900px]:flex gap-1 p-1 bg-white/5 rounded-full`}>
       <button
-        onClick={toggleDarkMode}
+        onClick={() => dispatch(toggleDarkMode())}
         className="p-1 xs:p-1.5 rounded-full hover:bg-gray-100 dark:hover:bg-white/10 transition-colors"
       >
         {isDarkMode ? (

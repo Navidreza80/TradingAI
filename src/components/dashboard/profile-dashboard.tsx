@@ -1,18 +1,16 @@
-import Image from "next/image";
-import { FaGithub, FaTwitter, FaLinkedin } from "react-icons/fa";
-import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
-import { useTranslation } from "react-i18next";
-import { motion, AnimatePresence } from "framer-motion";
-import { Bell, GlobeLock, Lock, Mail } from "lucide-react";
 import EditBanner from "@/components/dashboard/edit-banner";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { AnimatePresence, motion } from "framer-motion";
+import { GlobeLock } from "lucide-react";
+import Image from "next/image";
+import { useTranslation } from "react-i18next";
+import { FaGithub, FaLinkedin, FaTwitter } from "react-icons/fa";
+import { Switch } from "../ui/switch";
 import EditProfilePicture from "./edit-profile-picture";
-import EditUserName from "./edit-username";
 import EditRole from "./edit-role";
 import EditSocial from "./edit-social";
 import EditStrategy from "./edit-strategy";
-import { Switch } from "../ui/switch";
-import { Input } from "../ui/input";
-import { Button } from "../ui/button";
+import EditUserName from "./edit-username";
 
 interface ProfileCardProps {
   user: {
@@ -105,7 +103,7 @@ export default function ProfileCard({ user }: ProfileCardProps) {
       variants={containerVariants}
       initial="hidden"
       animate="visible"
-      className="min-h-screen bg-gradient-to-b dark:from-[#0a0a0a] dark:to-[#1a1a1a] from-gray-50 to-white w-full"
+      className="min-h-screen w-full"
     >
       {/* Profile Header */}
       <motion.div variants={itemVariants} className="relative h-[300px] w-full">
@@ -141,7 +139,7 @@ export default function ProfileCard({ user }: ProfileCardProps) {
 
             {/* Info */}
             <div className="flex-grow">
-              <div className="flex items-start justify-between">
+              <div className="flex items-start justify-between flex-wrap">
                 <div>
                   <h1
                     className={`text-3xl font-bold dark:text-white text-gray-900 flex flex-row gap-2 items-center`}
@@ -237,143 +235,17 @@ export default function ProfileCard({ user }: ProfileCardProps) {
 
           {/* Tabs */}
           <Tabs defaultValue="security" className="mt-12">
-            <TabsList className="flex justify-center space-x-2 bg-gray-100 dark:bg-gray-800 p-1 rounded-lg">
-              <TabsTrigger value="security" className="flex items-center gap-2">
-                <Lock className="w-5 h-5" />
-                {t("dashboard.profile.security")}
-              </TabsTrigger>
-              <TabsTrigger value="email" className="flex items-center gap-2">
-                <Mail className="w-5 h-5" />
-                {t("dashboard.profile.email")}
-              </TabsTrigger>
+            <TabsList className="flex flex-wrap justify-center gap-2 bg-gray-100 dark:bg-gray-800 p-1 rounded-lg">
               <TabsTrigger
-                value="notification"
-                className="flex items-center gap-2"
+                value="privacy"
+                className="flex items-center gap-2 whitespace-nowrap"
               >
-                <Bell className="w-5 h-5" />
-                {t("dashboard.profile.notification")}
-              </TabsTrigger>
-              <TabsTrigger value="privacy" className="flex items-center gap-2">
                 <GlobeLock className="w-5 h-5" />
                 {t("dashboard.profile.privacy")}
               </TabsTrigger>
             </TabsList>
 
             <AnimatePresence mode="wait">
-              {/* Security Tab */}
-              <TabsContent key={"security"} value="security">
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -20 }}
-                  transition={{ duration: 0.3 }}
-                  className="justify-start flex flex-col flex-wrap"
-                >
-                  <div className="flex flex-row w-full items-center flex-nowrap gap-1">
-                    <h2 className="text-gray-600 whitespace-nowrap">
-                      {" "}
-                      {t("dashboard.profile.auth")}
-                    </h2>
-                    <div className="w-full border border-[#9f9f9f90]"></div>
-                  </div>
-                  <div className="flex flex-row w-full items-center justify-between flex-nowrap gap-1 mt-6">
-                    <h2 className="dark:text-white text-black">
-                      {t("dashboard.profile.authInput")}
-                    </h2>
-                    <Switch />
-                  </div>
-                  <div className="flex flex-row w-full items-center flex-nowrap gap-1 mt-6">
-                    <h2 className="text-gray-600 whitespace-nowrap">
-                      {t("dashboard.profile.reset")}
-                    </h2>
-                    <div className="w-full border border-[#9f9f9f90]"></div>
-                  </div>
-                  <div className="flex flex-row w-full items-center justify-between flex-nowrap gap-1 mt-6">
-                    <h2 className="dark:text-white text-black">
-                      {" "}
-                      {t("dashboard.profile.old")}
-                    </h2>
-                    <Input className="w-1/6 dark:border-white border-black" />
-                  </div>
-                  <div className="flex flex-row w-full items-center justify-between flex-nowrap gap-1 mt-6">
-                    <h2 className="dark:text-white text-black">
-                      {" "}
-                      {t("dashboard.profile.new")}
-                    </h2>
-                    <Input className="w-1/6 dark:border-white border-black" />
-                  </div>
-                  <div className="flex flex-row w-full items-center justify-between flex-nowrap gap-1 mt-6">
-                    <h2 className="dark:text-white text-black">
-                      {t("dashboard.profile.confirm")}
-                    </h2>
-                    <Input className="w-1/6 dark:border-white border-black" />
-                  </div>
-                  <Button className="mt-3 w-32">
-                    {" "}
-                    {t("dashboard.profile.reset")}
-                  </Button>
-                </motion.div>
-              </TabsContent>
-
-              {/* Email Tab */}
-              <TabsContent key={"email"} value="email">
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -20 }}
-                  transition={{ duration: 0.3 }}
-                  className="justify-start flex flex-col flex-wrap"
-                >
-                  <div className="flex flex-row w-full items-center flex-nowrap gap-1">
-                    <h2 className="text-gray-600 whitespace-nowrap">
-                      {" "}
-                      {t("dashboard.profile.email")}
-                    </h2>
-                    <div className="w-full border border-[#9f9f9f90]"></div>
-                  </div>
-                  <div className="w-1/2 h-40 border dark:border-white border-black mt-6 rounded-md p-2">
-                    <Input
-                      className="w-1/2"
-                      defaultValue={"navidrezaabbaszadeh89@gmail.com"}
-                    />
-                    <li className="w-full text-lg text-gray-400 mt-4">
-                      {t("dashboard.profile.receives")}
-                    </li>
-                    <p className="text-md text-gray-600 ml-6">
-                      {t("dashboard.profile.receivesDesc")}
-                    </p>
-                    <div className="flex justify-end">
-                      <Button> {t("dashboard.profile.change")}</Button>
-                    </div>
-                  </div>
-                </motion.div>
-              </TabsContent>
-
-              {/* Notification Tab */}
-              <TabsContent key={"notification"} value="notification">
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -20 }}
-                  transition={{ duration: 0.3 }}
-                  className="justify-start flex flex-col flex-wrap"
-                >
-                  <div className="flex flex-row w-full items-center flex-nowrap gap-1">
-                    <h2 className="text-gray-600 whitespace-nowrap">
-                      {" "}
-                      {t("dashboard.profile.notification")}
-                    </h2>
-                    <div className="w-full border border-[#9f9f9f90]"></div>
-                  </div>
-                  <div className="flex flex-row w-full items-center justify-between flex-nowrap gap-1 mt-6">
-                    <h2 className="dark:text-white text-black">
-                      {t("dashboard.profile.notificationInput")}
-                    </h2>
-                    <Switch />
-                  </div>
-                </motion.div>
-              </TabsContent>
-
               {/* Privacy Tab */}
               <TabsContent key={"privacy"} value="privacy">
                 <motion.div
@@ -385,26 +257,24 @@ export default function ProfileCard({ user }: ProfileCardProps) {
                 >
                   <div className="flex flex-row w-full items-center flex-nowrap gap-1">
                     <h2 className="text-gray-600 whitespace-nowrap">
-                      {" "}
                       {t("dashboard.profile.privacy")}
                     </h2>
                     <div className="w-full border border-[#9f9f9f90]"></div>
                   </div>
                   <div className="flex flex-row w-full items-center justify-between flex-nowrap gap-1 mt-6">
-                    <h2 className="dark:text-white text-black">
+                    <h2 className="dark:text-white text-black whitespace-nowrap">
                       {t("dashboard.profile.hideW")}
                     </h2>
                     <Switch />
                   </div>
                   <div className="flex flex-row w-full items-center justify-between flex-nowrap gap-1 mt-6">
-                    <h2 className="dark:text-white text-black">
+                    <h2 className="dark:text-white text-black whitespace-nowrap">
                       {t("dashboard.profile.hideT")}
                     </h2>
                     <Switch />
                   </div>
                   <div className="flex flex-row w-full items-center justify-between flex-nowrap gap-1 mt-6">
-                    <h2 className="dark:text-white text-black">
-                      {" "}
+                    <h2 className="dark:text-white text-black whitespace-nowrap">
                       {t("dashboard.profile.hideP")}
                     </h2>
                     <Switch />

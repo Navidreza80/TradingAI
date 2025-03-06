@@ -280,7 +280,7 @@ const resources = {
         },
         stats: {
           likes: "Likes",
-          following: "Following",
+          following: "Followings",
           saved: "Saved",
           comments: "Comments",
         },
