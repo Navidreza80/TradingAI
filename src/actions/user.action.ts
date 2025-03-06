@@ -22,7 +22,8 @@ export async function syncUser() {
       data: {
         clerkId: userId,
         name: `${user.firstName || ""} ${user.lastName || ""}`,
-        username: user.username ?? user.emailAddresses[0].emailAddress.split("@")[0],
+        username:
+          user.username ?? user.emailAddresses[0].emailAddress.split("@")[0],
         email: user.emailAddresses[0].emailAddress,
         image: user.imageUrl,
       },
@@ -63,4 +64,27 @@ export async function getDbUser() {
 
   return user;
 }
-//new commit
+
+export async function calculateWinRate() {
+  try {
+    const userId = await getDbUserId();
+    const totalTrades = await prisma.trade.count({
+      where: { userId },
+    });
+
+    const totalWins = await prisma.trade.count({
+      where: { userId: userId, isWin: true },
+    });
+  
+    if (totalTrades === 0) {
+      return { winRate: 0, totalTrades, totalWins };
+    }
+
+    const winRate = (totalWins / totalTrades) * 100;
+
+    return { winRate, totalTrades, totalWins };
+  } catch (error) {
+    console.error("Error calculating win rate:", error);
+    return { winRate: 0, totalTrades: 0, totalWins: 0, error };
+  }
+}

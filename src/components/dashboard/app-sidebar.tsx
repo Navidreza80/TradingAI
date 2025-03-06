@@ -1,114 +1,111 @@
-"use client";
-
-import {
-  Book,
-  Heart,
-  LayoutDashboard,
-  MessageCircle,
-  User2,
-} from "lucide-react";
-import { FaMoneyBill } from "react-icons/fa";
-import { Button } from "../ui/button";
-import Image from "next/image";
-import { useTranslation } from "react-i18next";
+// components/Sidebar.js
+import React from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
-import {
-  Sheet,
-  SheetTrigger,
-  SheetContent,
-  SheetHeader,
-  SheetFooter,
-  SheetTitle,
-  SheetDescription,
-} from "@/components/ui/sheet"; // Import shadcn sheet components
-import { Menu } from "lucide-react"; // Icon for the sheet trigger button
 
-export default function AppSheet() {
-  const { t, i18n } = useTranslation();
-
-  // Menu items.
-  const items = [
+const Sidebar = ({ isOpen, onClose }) => {
+  const sidebarItems = [
     {
-      title: t("dashboard.side.dashboard"),
-      url: "/dashboard",
-      icon: LayoutDashboard,
+      iconLight: "bg-dashboardLM",
+      iconDark: "dark:bg-dashboardDM",
+      text: "Dashboard",
+      href: "/dashboard",
     },
     {
-      title: t("dashboard.side.profile"),
-      url: "/dashboard/profile",
-      icon: User2,
+      text: "Profile",
+      href: "/dashboard/profile",
+      iconLight: "bg-userLM",
+      iconDark: "dark:bg-userDM",
     },
     {
-      title: t("dashboard.side.subscriptions"),
-      url: "/dashboard/subscriptions",
-      icon: FaMoneyBill,
+      text: "Blogs",
+      href: "/dashboard/blogs",
+      iconLight: "bg-bookLM",
+      iconDark: "dark:bg-bookDM",
     },
     {
-      title: t("dashboard.side.blogs"),
-      url: "/dashboard/blogs",
-      icon: Book,
-    },
-    {
-      title: t("dashboard.side.comments"),
-      url: "/dashboard/comments",
-      icon: MessageCircle,
-    },
-    {
-      title: t("dashboard.side.likes"),
-      url: "/dashboard/likes",
-      icon: Heart,
+      text: "Subscription",
+      href: "/dashboard/subscriptions",
+      iconLight: "bg-coinLM",
+      iconDark: "dark:bg-coinDM",
     },
   ];
 
   return (
-    <Sheet>
-      {/* Sheet Trigger Button */}
-      <SheetTrigger asChild>
-        <div
-          className=" aspect-square" // Position the button
-        >
-          <Menu className="lg:w-6 lg:h-6 md:w-5 md:h-5 sm:w-5 sm:h-5 xs:w-5 xs:h-5 text-black dark:text-white" /> {/* Hamburger menu icon */}
-        </div>
-      </SheetTrigger>
+    <AnimatePresence>
+      {isOpen && (
+        <>
+          {/* Overlay */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={onClose}
+            className="fixed inset-0 bg-black bg-opacity-50 z-40"
+          />
 
-      {/* Sheet Content */}
-      <SheetContent
-        side={i18n.language == "fa" || i18n.language == "ar" ? "right" : "left"}
-        className="dark:bg-[#000000bd] bg-white border-r-[#53B1FB] w-[300px]"
-      >
-        <SheetHeader>
-          {/* Logo and Title */}
-          <div className="w-full flex justify-start flex-row flex-wrap items-center pt-3 pl-3">
-            <div className="relative w-9 h-9 flex justify-start items-center">
-              <Image
-                src="/image/Logo.svg"
-                alt="TradingAI Logo"
-                width={28}
-                height={28}
-                className="w-full h-full transition-all duration-300 group-hover:drop-shadow-[0_0_8px_rgba(24,144,255,0.5)]"
-                priority
-              />
-            </div>
-            <SheetTitle className="text-2xl font-bold ml-2 bg-gradient-to-r from-[#1890ff] to-[#69c0ff] bg-clip-text text-transparent">
+          {/* Sidebar */}
+          <motion.div
+            initial={{ x: -300 }}
+            animate={{ x: 0 }}
+            exit={{ x: -300 }}
+            transition={{ type: "spring", stiffness: 300, damping: 30 }}
+            className="fixed inset-y-0 left-0 bg-gradient-to-b from-[#F0F0F0] to-white dark:from-[#0A0A0A] dark:to-black text-black dark:text-white w-64 min-h-screen z-50 shadow-2xl"
+          >
+            {/* Sidebar Header */}
+            <div className="p-6 text-2xl font-bold border-b border-gray-700">
               TradingAI
-            </SheetTitle>
-          </div>
-        </SheetHeader>
+            </div>
 
-        {/* Sheet Menu Items */}
-        <div className="flex flex-col p-4 space-y-2">
-          {items.map((item) => (
-            <Link
-              key={item.title}
-              href={item.url}
-              className="flex items-center p-3 rounded hover:text-[#53B1FB] hover:bg-[#42424271] transition-all duration-500"
+            {/* Sidebar Navigation */}
+            <nav className="flex-1 mt-4">
+              {sidebarItems.map((item, index) => (
+                <motion.div
+                  key={index}
+                  whileTap={{ scale: 0.8 }}
+                  transition={{ type: "spring", stiffness: 300 }}
+                  className="flex items-center py-3 px-6 cursor-pointer hover:opacity-80 hover:scale-[0.99] transition-all duration-200"
+                >
+                  <span
+                    className={`text-xl mr-4 w-7 h-7 ${item.iconDark} ${item.iconLight} bg-cover`}
+                  ></span>
+                  <Link href={item.href} className="text-lg">
+                    {item.text}
+                  </Link>
+                </motion.div>
+              ))}
+            </nav>
+
+            {/* Sidebar Footer */}
+            <div className="p-6 text-sm text-gray-400 border-t border-gray-700">
+              © 2025 TradingAI
+            </div>
+
+            {/* Close Button */}
+            <button
+              onClick={onClose}
+              className="absolute top-4 right-4 p-2 text-white hover:text-gray-300 focus:outline-none"
             >
-              <item.icon className="w-6 h-6 mr-3" />
-              <span className="text-lg">{item.title}</span>
-            </Link>
-          ))}
-        </div>
-      </SheetContent>
-    </Sheet>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-6 w-6"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M6 18L18 6M6 6l12 12"
+                />
+              </svg>
+            </button>
+          </motion.div>
+        </>
+      )}
+    </AnimatePresence>
   );
-}
+};
+
+export default Sidebar;

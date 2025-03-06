@@ -8,6 +8,7 @@ import YourBlogCard from "@/components/dashboard/your-blog-card";
 import { Blog } from "@/types/blog";
 import { fetchUserBlogs } from "@/actions/blog.action";
 import Link from "next/link";
+import BlogsDropdown from "@/components/dashboard/dropdown-menu-blogs";
 
 interface BlogPost {
   id: number;
@@ -46,8 +47,8 @@ export default function BlogsPage() {
   );
 
   return (
-    <main className="min-h-screen bg-gradient-to-b dark:from-[#0a0a0a] dark:to-[#1a1a1a] from-white to-gray-50 pt-2 w-full">
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <main className="min-h-screen pt-2 w-full">
+      <div className="relative z-10 w-full">
         {/* Title Section */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -71,6 +72,7 @@ export default function BlogsPage() {
           >
             Manage your blogs here
           </p>
+          <BlogsDropdown />
           <Link href="/dashboard/blogs/create">
             <Button className="mt-2">
               <Plus /> Create Blog
