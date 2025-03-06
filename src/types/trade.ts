@@ -31,4 +31,5 @@ export interface ClosedPosition extends Position {
     amount: number;
     percentage: number;
   };
+  isWin: boolean;
 }

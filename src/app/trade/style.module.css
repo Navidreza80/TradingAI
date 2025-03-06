@@ -78,13 +78,13 @@
     color: rgb(255, 255, 255) !important;
 }
 .positionOpen{
+    max-width: 450px !important;
     width: 100%;
-    height: 40px;
     justify-content: space-between;
     display: flex;
     flex-flow: column wrap;
     border-radius: 12px;
-    padding: 16px;
+    padding: 8px;
     box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
 }
 .positionHolder{
@@ -140,6 +140,7 @@
 }
 .titlePositionCard{
     font-size: 18px;
+    margin: 0;
 }
 .historyCard {
     background-color: rgba(255, 255, 255, 0.02);
@@ -151,6 +152,14 @@
     transform: translateY(-2px);
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
+.ShowResChart{
+    display: none;
+    padding: 8px;
+    justify-content: space-between;
+}
+.positionModal{
+    max-height: 590px;
+}
 
 
 
@@ -170,7 +179,21 @@
 
 
 
-
-
-
+@media screen and (max-width: 940px) {
+    .ShowResChart{
+        display: flex;
+    }
+    .contentTrade {
+        flex-flow: column wrap;
+        height: auto;
+        gap: 15px;
+        margin-bottom: 20pxs;
+    }
+    .contentTradeForm{
+        width: 100%;
+    }
+    .contentTradingView{
+        width: 100%;
+    }
+}
 
