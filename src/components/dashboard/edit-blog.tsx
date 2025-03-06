@@ -47,11 +47,11 @@ export default function EditBlog({blog}) {
               htmlFor="Title"
               className="text-left text-lg dark:text-white text-gray-400 w-1/3"
             >
-              {blog.title}
+              Title
             </Label>
             <Input
               id="Title"
-              defaultValue="Understanding Bitcoin"
+              defaultValue={blog.title}
               className="col-span-3 w-2/3"
             />
           </div>
