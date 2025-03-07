@@ -3,79 +3,17 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { AnimatePresence, motion } from "framer-motion";
 import { GlobeLock } from "lucide-react";
 import Image from "next/image";
+import { useState } from "react";
 import { useTranslation } from "react-i18next";
-import { FaGithub, FaLinkedin, FaTwitter } from "react-icons/fa";
 import { Switch } from "../ui/switch";
 import EditProfilePicture from "./edit-profile-picture";
-import EditRole from "./edit-role";
-import EditSocial from "./edit-social";
-import EditStrategy from "./edit-strategy";
 import EditUserName from "./edit-username";
 
-interface ProfileCardProps {
-  user: {
-    name: string;
-    email: string;
-    role: string;
-    profilePicture: string;
-    coverImage: string;
-    bio: string;
-    location: string;
-    joinDate: Date;
-    tradingStyle: string;
-    winRate: number;
-    totalTrades: number;
-    profitLoss: number;
-    blogsLiked: BlogPost[];
-    commentsPosted: Comment[];
-    blogsShared: BlogPost[];
-    tradingSuggestions: TradingSuggestion[];
-    coursesPassed: Course[];
-    social: {
-      github?: string;
-      twitter?: string;
-      linkedin?: string;
-    };
-  };
-}
-
-interface BlogPost {
-  id: string;
-  title: string;
-  excerpt: string;
-  date: Date;
-  readTime: number;
-  likes: number;
-}
-
-interface Comment {
-  id: string;
-  content: string;
-  date: Date;
-  blogTitle: string;
-}
-
-interface TradingSuggestion {
-  id: string;
-  pair: string;
-  type: "LONG" | "SHORT";
-  entry: number;
-  target: number;
-  stopLoss: number;
-  date: Date;
-  status: "WIN" | "LOSS" | "PENDING";
-}
-
-interface Course {
-  id: string;
-  title: string;
-  provider: string;
-  completionDate: Date;
-  certificate: string;
-}
-
-export default function ProfileCard({ user }: ProfileCardProps) {
+export default function ProfileCard({ user, stats }) {
   const { t } = useTranslation();
+  const [username, setUsername] = useState("");
+  const [image, setImage] = useState("");
+  const [banner, setBanner] = useState("");
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -99,192 +37,165 @@ export default function ProfileCard({ user }: ProfileCardProps) {
   };
 
   return (
-    <motion.div
-      variants={containerVariants}
-      initial="hidden"
-      animate="visible"
-      className="min-h-screen w-full"
-    >
-      {/* Profile Header */}
-      <motion.div variants={itemVariants} className="relative h-[300px] w-full">
-        <EditBanner />
-        <Image
-          src={user.coverImage}
-          alt="Cover"
-          fill
-          className="object-cover"
-        />
-
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/50" />
-      </motion.div>
-
-      {/* Profile Info */}
+    user.username && (
       <motion.div
-        variants={itemVariants}
-        className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-32"
+        variants={containerVariants}
+        initial="hidden"
+        animate="visible"
+        className="min-h-screen w-full"
       >
-        <div className="relative z-10 bg-white dark:bg-gray-900 rounded-2xl shadow-xl p-8">
-          <div className="flex flex-col md:flex-row gap-8">
-            {/* Avatar */}
-            <div className="flex-shrink-0 relative">
-              <EditProfilePicture />
-              <Image
-                src={user.profilePicture}
-                alt={user.name}
-                width={160}
-                height={160}
-                className="rounded-2xl border-4 border-white dark:border-gray-800"
-              />
-            </div>
+        {/* Profile Header */}
+        <motion.div
+          variants={itemVariants}
+          className="relative h-[300px] w-full"
+        >
+          <EditBanner banner={banner} setBanner={setBanner} id={user.id} />
+          <Image
+            src={banner ? banner : user.coverImage}
+            alt="Cover"
+            fill
+            className="object-cover"
+          />
 
-            {/* Info */}
-            <div className="flex-grow">
-              <div className="flex items-start justify-between flex-wrap">
-                <div>
-                  <h1
-                    className={`text-3xl font-bold dark:text-white text-gray-900 flex flex-row gap-2 items-center`}
-                  >
-                    {user.name}
-                    <EditUserName />
-                  </h1>
-                  <p
-                    className={`text-lg dark:text-blue-400 text-blue-600 font-medium flex flex-row gap-2 items-center`}
-                  >
-                    {user.role}
-                    <EditRole />
-                  </p>
+          <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/50" />
+        </motion.div>
+
+        {/* Profile Info */}
+        <motion.div
+          variants={itemVariants}
+          className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-32"
+        >
+          <div className="relative z-10 bg-white dark:bg-gray-900 rounded-2xl shadow-xl p-8">
+            <div className="flex flex-col md:flex-row gap-8">
+              {/* Avatar */}
+              <div className="flex-shrink-0 relative">
+                <EditProfilePicture
+                  id={user.id}
+                  setImage={setImage}
+                  image={image}
+                />
+                <Image
+                  src={image !== "" ? image : user.image}
+                  alt={username !== "" ? username : user.username}
+                  width={160}
+                  height={160}
+                  className="rounded-2xl w-40 h-40 border-4 border-white dark:border-gray-800"
+                />
+              </div>
+
+              {/* Info */}
+              <div className="flex-grow">
+                <div className="flex items-start justify-between flex-wrap">
+                  <div>
+                    <h1
+                      className={`text-3xl font-bold dark:text-white text-gray-900 flex flex-row gap-2 items-center`}
+                    >
+                      {username !== "" ? username : user.username}
+                      <EditUserName
+                        id={user.id}
+                        username={username}
+                        setUsername={setUsername}
+                      />
+                    </h1>
+                  </div>
                 </div>
-                <div className="flex gap-4 items-center">
-                  <EditSocial />
-                  {user.social.github && (
-                    <a
-                      href={user.social.github}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors"
-                    >
-                      <FaGithub size={24} />
-                    </a>
+
+                {/* Trading Stats */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mt-6">
+                  {!user.hideWin && (
+                    <div className="p-4 rounded-xl dark:bg-gray-800 bg-gray-100">
+                      <div className="text-sm dark:text-gray-400 text-gray-600">
+                        {t("dashboard.profile.rate")}
+                      </div>
+                      <div className="text-xl font-bold dark:text-white text-gray-900">
+                        {Math.ceil(stats.winRate)}%
+                      </div>
+                    </div>
                   )}
-                  {user.social.twitter && (
-                    <a
-                      href={user.social.twitter}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors"
-                    >
-                      <FaTwitter size={24} />
-                    </a>
+                  {!user.hideTotal && (
+                    <div className="p-4 rounded-xl dark:bg-gray-800 bg-gray-100">
+                      <div className="text-sm dark:text-gray-400 text-gray-600">
+                        {t("dashboard.profile.total")}
+                      </div>
+                      <div className="text-xl font-bold dark:text-white text-gray-900">
+                        {stats.totalTrades}
+                      </div>
+                    </div>
                   )}
-                  {user.social.linkedin && (
-                    <a
-                      href={user.social.linkedin}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors"
-                    >
-                      <FaLinkedin size={24} />
-                    </a>
+                  {!user.hidePnL && (
+                    <div className="p-4 rounded-xl dark:bg-gray-800 bg-gray-100">
+                      <div className="text-sm dark:text-gray-400 text-gray-600">
+                        {t("dashboard.profile.pl")}
+                      </div>
+                      <div
+                        className={`text-xl font-bold ${
+                          stats.totalPnL >= 0
+                            ? "text-green-500"
+                            : "text-red-500"
+                        }`}
+                      >
+                        {stats.totalPnL >= 0 ? "+" : "-"}
+                        {stats.totalPnL}$
+                      </div>
+                    </div>
                   )}
                 </div>
               </div>
-
-              {/* Trading Stats */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mt-6">
-                <div className="p-4 rounded-xl dark:bg-gray-800 bg-gray-100">
-                  <div className="text-sm dark:text-gray-400 text-gray-600">
-                    {t("dashboard.profile.style")}
-                  </div>
-                  <div className="text-xl font-bold dark:text-white text-gray-900 flex gap-2">
-                    {user.tradingStyle}
-                    <EditStrategy />
-                  </div>
-                </div>
-                <div className="p-4 rounded-xl dark:bg-gray-800 bg-gray-100">
-                  <div className="text-sm dark:text-gray-400 text-gray-600">
-                    {t("dashboard.profile.rate")}
-                  </div>
-                  <div className="text-xl font-bold dark:text-white text-gray-900">
-                    {user.winRate}%
-                  </div>
-                </div>
-                <div className="p-4 rounded-xl dark:bg-gray-800 bg-gray-100">
-                  <div className="text-sm dark:text-gray-400 text-gray-600">
-                    {t("dashboard.profile.total")}
-                  </div>
-                  <div className="text-xl font-bold dark:text-white text-gray-900">
-                    {user.totalTrades}
-                  </div>
-                </div>
-                <div className="p-4 rounded-xl dark:bg-gray-800 bg-gray-100">
-                  <div className="text-sm dark:text-gray-400 text-gray-600">
-                    {t("dashboard.profile.pl")}
-                  </div>
-                  <div
-                    className={`text-xl font-bold ${
-                      user.profitLoss >= 0 ? "text-green-500" : "text-red-500"
-                    }`}
-                  >
-                    {user.profitLoss >= 0 ? "+" : ""}
-                    {user.profitLoss}%
-                  </div>
-                </div>
-              </div>
             </div>
-          </div>
 
-          {/* Tabs */}
-          <Tabs defaultValue="security" className="mt-12">
-            <TabsList className="flex flex-wrap justify-center gap-2 bg-gray-100 dark:bg-gray-800 p-1 rounded-lg">
-              <TabsTrigger
-                value="privacy"
-                className="flex items-center gap-2 whitespace-nowrap"
-              >
-                <GlobeLock className="w-5 h-5" />
-                {t("dashboard.profile.privacy")}
-              </TabsTrigger>
-            </TabsList>
-
-            <AnimatePresence mode="wait">
-              {/* Privacy Tab */}
-              <TabsContent key={"privacy"} value="privacy">
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -20 }}
-                  transition={{ duration: 0.3 }}
-                  className="justify-start flex flex-col flex-wrap"
+            {/* Tabs */}
+            <Tabs defaultValue="security" className="mt-12">
+              <TabsList className="flex flex-wrap justify-center gap-2 bg-gray-100 dark:bg-gray-800 p-1 rounded-lg">
+                <TabsTrigger
+                  value="privacy"
+                  className="flex items-center gap-2 whitespace-nowrap"
                 >
-                  <div className="flex flex-row w-full items-center flex-nowrap gap-1">
-                    <h2 className="text-gray-600 whitespace-nowrap">
-                      {t("dashboard.profile.privacy")}
-                    </h2>
-                    <div className="w-full border border-[#9f9f9f90]"></div>
-                  </div>
-                  <div className="flex flex-row w-full items-center justify-between flex-nowrap gap-1 mt-6">
-                    <h2 className="dark:text-white text-black whitespace-nowrap">
-                      {t("dashboard.profile.hideW")}
-                    </h2>
-                    <Switch />
-                  </div>
-                  <div className="flex flex-row w-full items-center justify-between flex-nowrap gap-1 mt-6">
-                    <h2 className="dark:text-white text-black whitespace-nowrap">
-                      {t("dashboard.profile.hideT")}
-                    </h2>
-                    <Switch />
-                  </div>
-                  <div className="flex flex-row w-full items-center justify-between flex-nowrap gap-1 mt-6">
-                    <h2 className="dark:text-white text-black whitespace-nowrap">
-                      {t("dashboard.profile.hideP")}
-                    </h2>
-                    <Switch />
-                  </div>
-                </motion.div>
-              </TabsContent>
-            </AnimatePresence>
-          </Tabs>
-        </div>
+                  <GlobeLock className="w-5 h-5" />
+                  {t("dashboard.profile.privacy")}
+                </TabsTrigger>
+              </TabsList>
+
+              <AnimatePresence mode="wait">
+                {/* Privacy Tab */}
+                <TabsContent key={"privacy"} value="privacy">
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -20 }}
+                    transition={{ duration: 0.3 }}
+                    className="justify-start flex flex-col flex-wrap"
+                  >
+                    <div className="flex flex-row w-full items-center flex-nowrap gap-1">
+                      <h2 className="text-gray-600 whitespace-nowrap">
+                        {t("dashboard.profile.privacy")}
+                      </h2>
+                      <div className="w-full border border-[#9f9f9f90]"></div>
+                    </div>
+                    <div className="flex flex-row w-full items-center justify-between flex-nowrap gap-1 mt-6">
+                      <h2 className="dark:text-white text-black whitespace-nowrap">
+                        {t("dashboard.profile.hideW")}
+                      </h2>
+                      <Switch defaultChecked={user.hideWin} />
+                    </div>
+                    <div className="flex flex-row w-full items-center justify-between flex-nowrap gap-1 mt-6">
+                      <h2 className="dark:text-white text-black whitespace-nowrap">
+                        {t("dashboard.profile.hideT")}
+                      </h2>
+                      <Switch defaultChecked={user.hideTotal} />
+                    </div>
+                    <div className="flex flex-row w-full items-center justify-between flex-nowrap gap-1 mt-6">
+                      <h2 className="dark:text-white text-black whitespace-nowrap">
+                        {t("dashboard.profile.hideP")}
+                      </h2>
+                      <Switch defaultChecked={user.hidePnL} />
+                    </div>
+                  </motion.div>
+                </TabsContent>
+              </AnimatePresence>
+            </Tabs>
+          </div>
+        </motion.div>
       </motion.div>
-    </motion.div>
+    )
   );
 }

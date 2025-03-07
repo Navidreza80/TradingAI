@@ -8,18 +8,22 @@ datasource db {
 }
 
 model User {
-  id        String    @id @default(cuid())
-  clerkId   String    @unique
-  email     String    @unique
-  name      String?
-  createdAt DateTime  @default(now())
-  updatedAt DateTime  @updatedAt
-  image     String?
-  username  String    @unique
-  role      String?
-  blogs     Blog[]
-  comments  Comment[]
-  trades    Trade[]
+  id         String    @id @default(cuid())
+  clerkId    String    @unique
+  email      String    @unique
+  name       String?
+  createdAt  DateTime  @default(now())
+  updatedAt  DateTime  @updatedAt
+  image      String?
+  username   String    @unique
+  role       String?
+  coverImage String?
+  hideWin    Boolean?  @default(false)
+  hideTotal  Boolean?  @default(false)
+  hidePnL    Boolean?  @default(false)
+  blogs      Blog[]
+  comments   Comment[]
+  trades     Trade[]
 }
 
 model Trade {

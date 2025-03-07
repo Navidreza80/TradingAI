@@ -65,26 +65,68 @@ export async function getDbUser() {
   return user;
 }
 
-export async function calculateWinRate() {
+export async function updateUsername(userId: string, newUsername: string) {
   try {
-    const userId = await getDbUserId();
-    const totalTrades = await prisma.trade.count({
-      where: { userId },
+    // Check if the new username is already taken
+    const existingUser = await prisma.user.findUnique({
+      where: { username: newUsername },
     });
 
-    const totalWins = await prisma.trade.count({
-      where: { userId: userId, isWin: true },
-    });
-  
-    if (totalTrades === 0) {
-      return { winRate: 0, totalTrades, totalWins };
+    if (existingUser) {
+      return { success: false, message: "Username is already taken" };
     }
 
-    const winRate = (totalWins / totalTrades) * 100;
+    // Update the username
+    const updatedUser = await prisma.user.update({
+      where: { id: userId },
+      data: { username: newUsername },
+    });
 
-    return { winRate, totalTrades, totalWins };
+    return {
+      success: true,
+      message: "Username updated successfully!!",
+      updatedUser,
+    };
   } catch (error) {
-    console.error("Error calculating win rate:", error);
-    return { winRate: 0, totalTrades: 0, totalWins: 0, error };
+    console.error("Error updating username:", error);
+    return { success: false, message: "An error occurred", error };
+  }
+}
+
+export async function updateUserImage(userId: string, url: string) {
+  try {
+    // Update the user image
+    const updatedUser = await prisma.user.update({
+      where: { id: userId },
+      data: { image: url },
+    });
+
+    return {
+      success: true,
+      message: "Avatar updated successfully!!",
+      updatedUser,
+    };
+  } catch (error) {
+    console.error("Error updating avatar:", error);
+    return { success: false, message: "An error occurred", error };
+  }
+}
+
+export async function updateUserBanner(userId: string, url: string) {
+  try {
+    // Update the user image
+    const updatedUser = await prisma.user.update({
+      where: { id: userId },
+      data: { coverImage: url },
+    });
+
+    return {
+      success: true,
+      message: "Banner updated successfully!!",
+      updatedUser,
+    };
+  } catch (error) {
+    console.error("Error updating banner:", error);
+    return { success: false, message: "An error occurred", error };
   }
 }

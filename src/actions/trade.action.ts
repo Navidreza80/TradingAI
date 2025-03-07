@@ -34,29 +34,32 @@ export async function closeTrade(tradeData) {
   }
 }
 
-export async function calculateWinRate(userId) {
+export async function calculateUserStats(userId: string) {
   try {
-    // شمارش تعداد کل معاملات کاربر
+    // Count total trades
     const totalTrades = await prisma.trade.count({
       where: { userId },
     });
 
-    // شمارش تعداد معاملات برنده
+    // Count total winning trades
     const totalWins = await prisma.trade.count({
       where: { userId, isWin: true },
     });
 
-    // جلوگیری از تقسیم بر صفر
-    if (totalTrades === 0) {
-      return { winRate: 0, totalTrades, totalWins };
-    }
+    // Calculate total profit/loss (sum of pnlAmount)
+    const totalPnLResult = await prisma.trade.aggregate({
+      where: { userId },
+      _sum: { pnlAmount: true },
+    });
 
-    // محاسبه نرخ برد
-    const winRate = (totalWins / totalTrades) * 100;
+    const totalPnL = totalPnLResult._sum.pnlAmount || 0;
 
-    return { winRate, totalTrades, totalWins };
+    // Avoid division by zero
+    const winRate = totalTrades > 0 ? (totalWins / totalTrades) * 100 : 0;
+
+    return { winRate, totalTrades, totalWins, totalPnL };
   } catch (error) {
-    console.error('Error calculating win rate:', error);
-    return { winRate: 0, totalTrades: 0, totalWins: 0, error };
+    console.error("Error calculating user stats:", error);
+    return { winRate: 0, totalTrades: 0, totalWins: 0, totalPnL: 0, error };
   }
 }

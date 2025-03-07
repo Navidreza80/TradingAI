@@ -2,11 +2,13 @@ import ChatAssistant from "@/components/dashboard/ai-assistant";
 import Headerdashboard from "@/components/dashboard/dashboard-header";
 import VoiceNavigation from "@/components/dashboard/mic";
 import "@uploadthing/react/styles.css";
+import { Toaster } from "react-hot-toast";
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <>
       <main className=" bg-[#F0F0F0] dark:bg-[#0A0A0A]">
+        <Toaster />
         <Headerdashboard />
         <ChatAssistant />
         <VoiceNavigation />

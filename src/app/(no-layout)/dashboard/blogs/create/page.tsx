@@ -5,7 +5,7 @@ import BlogCard from "@/components/dashboard/blog-card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { UploadButton } from "@/utils/uploadthing";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 export default function CreateBlog() {
   const [image, setImage] = useState("");
