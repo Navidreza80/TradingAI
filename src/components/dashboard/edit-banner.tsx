@@ -1,4 +1,5 @@
-import { Button } from "@/components/ui/button"
+import { updateUserBanner } from "@/actions/user.action";
+import { Button } from "@/components/ui/button";
 import {
   Dialog,
   DialogContent,
@@ -7,19 +8,21 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "@/components/ui/dialog"
+} from "@/components/ui/dialog";
+import { UploadButton } from "@/utils/uploadthing";
 import { Edit } from "lucide-react";
-import { Upload } from "./file-upload";
-import React from "react";
+import toast from "react-hot-toast";
 import { useTranslation } from "react-i18next";
 
-export default function EditBanner() {
-  const {t} = useTranslation()
-  const [uploadedFiles, setUploadedFiles] = React.useState([]);
-
-  const handleFilesUploaded = (files) => {
-    setUploadedFiles(files);
-    console.log("Uploaded Files:", files);
+export default function EditBanner({ banner, setBanner, id }) {
+  const { t } = useTranslation();
+  const handleUpload = async () => {
+    const request = await updateUserBanner(id, banner);
+    if (request.success) {
+      toast.success(request.message);
+    } else {
+      toast.error("Failed to change avatar.");
+    }
   };
   return (
     <Dialog>
@@ -28,18 +31,30 @@ export default function EditBanner() {
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
-          <DialogTitle className="text-gray-400 dark:text-white">{t('dashboard.modals.banner')}</DialogTitle>
+          <DialogTitle className="text-gray-400 dark:text-white">
+            {t("dashboard.modals.banner")}
+          </DialogTitle>
           <DialogDescription>
-          {t('dashboard.modals.bannerDesc')}
+            {t("dashboard.modals.bannerDesc")}
           </DialogDescription>
         </DialogHeader>
         <div className="py-4">
-          <Upload onFilesUploaded={handleFilesUploaded} /> {/* Add the file upload component here */}
+          <UploadButton
+            endpoint="imageUploader"
+            onClientUploadComplete={(res) => {
+              // Do something with the response
+              setBanner(res[0].url);
+            }}
+            onUploadError={(error: Error) => {
+              // Do something with the error.
+              alert(`ERROR! ${error.message}`);
+            }}
+          />
         </div>
         <DialogFooter>
-          <Button type="submit">{t('dashboard.modals.save')}</Button>
+          <Button onClick={handleUpload}>{t("dashboard.modals.save")}</Button>
         </DialogFooter>
       </DialogContent>
     </Dialog>
-  )
+  );
 }

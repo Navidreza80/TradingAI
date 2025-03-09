@@ -1,11 +1,13 @@
-import { useState } from "react";
-import { ChevronDown } from "lucide-react";
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { Button } from "@/components/ui/button";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { ChevronDown } from "lucide-react";
 
-export default function BlogsDropdown() {
-  const [selected, setSelected] = useState("Your blogs");
-
+export default function BlogsDropdown({ selected, setSelected }) {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -26,6 +28,12 @@ export default function BlogsDropdown() {
           onClick={() => setSelected("Your blogs")}
         >
           Your blogs
+        </DropdownMenuItem>
+        <DropdownMenuItem
+          className="cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-800 px-4 py-2 rounded-lg"
+          onClick={() => setSelected("Disliked blogs")}
+        >
+          Disliked blogs
         </DropdownMenuItem>
         <DropdownMenuItem
           className="cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-800 px-4 py-2 rounded-lg"

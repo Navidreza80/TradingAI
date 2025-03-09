@@ -20,6 +20,7 @@ export default function Headerdashboard() {
     const user = await getDbUser();
     setUser(user);
   };
+
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   const toggleSidebar = () => {
@@ -43,7 +44,7 @@ export default function Headerdashboard() {
         </div>
         <Navigation />
         <div className="flex gap-2 items-center">
-          <ThemeNLanguage responsive={"max-[900px]:hidden"}/>
+          <ThemeNLanguage responsive={"max-[900px]:hidden"} />
           <img
             src={currentUser?.imageUrl}
             className="max-[900px]:w-10 max-[900px]:h-10 w-8 h-8 rounded-full"

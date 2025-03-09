@@ -2,8 +2,11 @@
 import "./globals.css";
 import { I18nProvider } from "@/providers/i18n-provider";
 import { siteConfig } from "@/config/metadata";
-import { ClerkProvider } from '@clerk/nextjs'
+import { ClerkProvider } from "@clerk/nextjs";
 import HeaderServer from "@/components/Header/HeaderServer";
+import { Toaster } from "react-hot-toast";
+import VoiceNavigation from "@/components/dashboard/mic";
+import ChatAssistant from "@/components/dashboard/ai-assistant";
 
 // fonts
 
@@ -11,9 +14,9 @@ import HeaderServer from "@/components/Header/HeaderServer";
 export const viewport = {
   themeColor: [
     { media: "(prefers-color-scheme: light)", color: "white" },
-    { media: "(prefers-color-scheme: dark)", color: "#0a0a0a" }
+    { media: "(prefers-color-scheme: dark)", color: "#0a0a0a" },
   ],
-  width: 'device-width',
+  width: "device-width",
   initialScale: 1,
   maximumScale: 1,
 };
@@ -21,7 +24,7 @@ export const viewport = {
 // metadata
 
 export const metadata = {
-  metadataBase: new URL('https://tradingai.com'),
+  metadataBase: new URL("https://tradingai.com"),
   title: siteConfig.title,
   description: siteConfig.description,
   keywords: siteConfig.keywords,
@@ -31,12 +34,12 @@ export const metadata = {
   twitter: siteConfig.twitter,
   robots: siteConfig.robots,
   alternates: {
-    canonical: '/',
+    canonical: "/",
     languages: {
-      'en-US': '/en',
-      'fa-IR': '/fa',
-      'ar-SA': '/ar'
-    }
+      "en-US": "/en",
+      "fa-IR": "/fa",
+      "ar-SA": "/ar",
+    },
   },
   // manifest: '/manifest.json',
   // icons: {
@@ -58,18 +61,25 @@ export const metadata = {
 export default function RootLayout({
   children,
 }: {
-  children: React.ReactNode
+  children: React.ReactNode;
 }) {
   return (
     <html lang="en" dir="ltr" className="dark">
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link
+          rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossOrigin="anonymous"
+        />
       </head>
       <body>
+        <ChatAssistant />
+        <VoiceNavigation />
+        <Toaster />
         <ClerkProvider>
           <I18nProvider>
-          <HeaderServer />
+            <HeaderServer />
             {children}
           </I18nProvider>
         </ClerkProvider>

@@ -8,18 +8,23 @@ datasource db {
 }
 
 model User {
-  id        String    @id @default(cuid())
-  clerkId   String    @unique
-  email     String    @unique
-  name      String?
-  createdAt DateTime  @default(now())
-  updatedAt DateTime  @updatedAt
-  image     String?
-  username  String    @unique
-  role      String?
-  blogs     Blog[]
-  comments  Comment[]
-  trades    Trade[]
+  id            String        @id @default(cuid())
+  clerkId       String        @unique
+  email         String        @unique
+  name          String?
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
+  image         String?
+  username      String        @unique
+  coverImage    String?
+  hideWin       Boolean?      @default(false)
+  hideTotal     Boolean?      @default(false)
+  hidePnL       Boolean?      @default(false)
+  blogs         Blog[]
+  comments      Comment[]
+  trades        Trade[]
+  likedBlogs    BlogLike[]
+  dislikedBlogs BlogDislike[]
 }
 
 model Trade {
@@ -43,21 +48,18 @@ model Trade {
 }
 
 model Blog {
-  id               String    @id @default(cuid())
+  id               String        @id @default(cuid())
   title            String
   shortDescription String
   content          String?
-  likes            Int       @default(0)
-  dislikes         Int       @default(0)
-  isLiked          Boolean   @default(false)
-  isDisliked       Boolean   @default(false)
-  isSaved          Boolean   @default(false)
   blogThumbnail    String?
   publisherId      String
-  createdAt        DateTime  @default(now())
-  updatedAt        DateTime  @updatedAt
-  publisher        User      @relation(fields: [publisherId], references: [id])
+  createdAt        DateTime      @default(now())
+  updatedAt        DateTime      @updatedAt
+  publisher        User          @relation(fields: [publisherId], references: [id])
   comments         Comment[]
+  likes            BlogLike[]
+  dislikes         BlogDislike[]
 }
 
 model Comment {
@@ -70,4 +72,24 @@ model Comment {
   dislikes  Int?     @default(0)
   blog      Blog     @relation(fields: [blogId], references: [id])
   user      User     @relation(fields: [userId], references: [id])
+}
+
+model BlogLike {
+  id     String @id @default(cuid())
+  userId String
+  blogId String
+  user   User   @relation(fields: [userId], references: [id])
+  blog   Blog   @relation(fields: [blogId], references: [id])
+
+  @@unique([userId, blogId]) // Prevent duplicate likes from the same user
+}
+
+model BlogDislike {
+  id     String @id @default(cuid())
+  userId String
+  blogId String
+  user   User   @relation(fields: [userId], references: [id])
+  blog   Blog   @relation(fields: [blogId], references: [id])
+
+  @@unique([userId, blogId]) // Prevent duplicate dislikes from the same user
 }

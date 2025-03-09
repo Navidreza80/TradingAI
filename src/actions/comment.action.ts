@@ -72,7 +72,7 @@ export async function fetchCommentsForBlog(blogId: string) {
         },
       });
   
-      return newComment;
+      return {newComment, success: true, message: "Comment Added Successfully!!"};
     } catch (error) {
       console.error('Error creating comment:', error);
       throw new Error('Failed to create comment');

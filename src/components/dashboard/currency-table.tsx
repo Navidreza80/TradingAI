@@ -1,18 +1,20 @@
-"use client"
+"use client";
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { motion } from "framer-motion";
 import Image from "next/image";
+import { fetchMostTradedCurrencies } from "@/actions/user.action";
 
 export default function MostTradedCryptos() {
-  const data = [
-    { currency: "BTC", icon: "/image/crypto/btc.svg", trades: 150, volume: "$2,000,000" },
-    { currency: "ETH", icon: "/image/crypto/eth.svg", trades: 130, volume: "$1,800,000" },
-    { currency: "BNB", icon: "/image/crypto/bnb.svg", trades: 110, volume: "$1,400,000" },
-    { currency: "SOL", icon: "/image/crypto/sol.svg", trades: 95, volume: "$1,100,000" },
-    { currency: "ADA", icon: "/image/crypto/ada.svg", trades: 80, volume: "$900,000" },
-  ];
+  const [data, setData] = useState();
+  const getUserData = async () => {
+    const request = await fetchMostTradedCurrencies();
+    setData(request);
+  };
+  useEffect(() => {
+    getUserData();
+  }, []);
 
   return (
     <motion.div
@@ -31,25 +33,35 @@ export default function MostTradedCryptos() {
             <table className="w-full border-collapse text-left text-sm">
               <thead>
                 <tr className="border-b border-gray-400 dark:border-gray-600 text-lg">
-                  <th className="p-4 text-gray-700 dark:text-gray-300">Crypto</th>
-                  <th className="p-4 text-gray-700 dark:text-gray-300">Trades</th>
-                  <th className="p-4 text-gray-700 dark:text-gray-300">Volume</th>
+                  <th className="p-4 text-gray-700 dark:text-gray-300">
+                    Crypto
+                  </th>
+                  <th className="p-4 text-gray-700 dark:text-gray-300">
+                    Trades
+                  </th>
+                  <th className="p-4 text-gray-700 dark:text-gray-300">
+                    Volume
+                  </th>
                 </tr>
               </thead>
               <tbody>
-                {data.map((item, index) => (
-                  <tr
-                    key={index}
-                    className="border-b border-gray-300 dark:border-gray-700 hover:bg-gray-200 dark:hover:bg-gray-900 transition duration-300 text-base md:text-lg"
-                  >
-                    <td className="p-4 flex items-center space-x-3 text-gray-900 dark:text-gray-100 font-semibold">
-                      <Image src={item.icon} alt={item.currency} width={24} height={24} />
-                      <span>{item.currency}</span>
-                    </td>
-                    <td className="p-4 text-gray-900 dark:text-gray-100">{item.trades}</td>
-                    <td className="p-4 text-gray-900 dark:text-gray-100">{item.volume}</td>
-                  </tr>
-                ))}
+                {data &&
+                  data.map((item, index) => (
+                    <tr
+                      key={index}
+                      className="border-b border-gray-300 dark:border-gray-700 hover:bg-gray-200 dark:hover:bg-gray-900 transition duration-300 text-base md:text-lg"
+                    >
+                      <td className="p-4 flex items-center space-x-3 text-gray-900 dark:text-gray-100 font-semibold">
+                        <span>{item.currency}</span>
+                      </td>
+                      <td className="p-4 text-gray-900 dark:text-gray-100">
+                        {item.trades}
+                      </td>
+                      <td className="p-4 text-gray-900 dark:text-gray-100">
+                        {item.volume}$
+                      </td>
+                    </tr>
+                  ))}
               </tbody>
             </table>
           </div>
