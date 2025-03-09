@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   BarChart,
   Bar,
@@ -14,17 +14,19 @@ import {
 import { Card, CardContent } from "@/components/ui/card";
 import { motion } from "framer-motion";
 import { useSelector } from "react-redux";
+import { getUserProfits } from "@/actions/user.action";
 
 export default function AnalyticsChart() {
   const isDarkMode = useSelector((state) => state.theme.isDarkMode);
-  const data = [
-    { name: "Jan", profit$: 400 },
-    { name: "Feb", profit$: 300 },
-    { name: "Mar", profit$: 500 },
-    { name: "Apr", profit$: 700 },
-    { name: "May", profit$: 600 },
-    { name: "Jun", profit$: 900 },
-  ];
+  const [data, setData] = useState();
+  const getUserData = async () => {
+    const request = await getUserProfits();
+    setData(request);
+  };
+  useEffect(() => {
+    getUserData();
+  }, []);
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}

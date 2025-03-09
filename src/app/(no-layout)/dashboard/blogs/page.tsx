@@ -6,9 +6,14 @@ import { Button } from "@/components/ui/button";
 import { Plus } from "lucide-react";
 import YourBlogCard from "@/components/dashboard/your-blog-card";
 import { Blog } from "@/types/blog";
-import { fetchUserBlogs } from "@/actions/blog.action";
+import {
+  fetchDislikedBlogs,
+  fetchLikedBlogs,
+  fetchUserBlogs,
+} from "@/actions/blog.action";
 import Link from "next/link";
 import BlogsDropdown from "@/components/dashboard/dropdown-menu-blogs";
+import BlogCard from "@/components/blog-card";
 
 interface BlogPost {
   id: number;
@@ -30,21 +35,33 @@ interface BlogPost {
 }
 
 export default function BlogsPage() {
+  const [selected, setSelected] = useState("Your blogs");
   const [searchQuery] = useState("");
   const [blogs, setBlogs] = useState<Blog[]>([]);
 
   const fetchBlog = async () => {
-    const data = await fetchUserBlogs();
-    setBlogs(data);
+    if (selected === "Your blogs") {
+      const data = await fetchUserBlogs();
+      setBlogs(data);
+    } else if (selected === "Liked blogs") {
+      const data = await fetchLikedBlogs();
+      setBlogs(data);
+    } else if (selected === "Disliked blogs") {
+      const data = await fetchDislikedBlogs();
+      setBlogs(data);
+      console.log(data);
+    }
   };
 
   useEffect(() => {
     fetchBlog();
-  }, []);
+  }, [selected]);
 
-  const filteredBlogs = blogs.filter((blog) =>
-    blog.title.toLowerCase().includes(searchQuery.toLowerCase())
-  );
+  const filteredBlogs =
+    blogs.length > 0 &&
+    blogs.filter((blog) =>
+      blog.title.toLowerCase().includes(searchQuery.toLowerCase())
+    );
 
   return (
     <main className="min-h-screen pt-2 w-full">
@@ -72,7 +89,7 @@ export default function BlogsPage() {
           >
             Manage your blogs here
           </p>
-          <BlogsDropdown />
+          <BlogsDropdown selected={selected} setSelected={setSelected} />
           <Link href="/dashboard/blogs/create">
             <Button className="mt-2">
               <Plus /> Create Blog
@@ -81,16 +98,22 @@ export default function BlogsPage() {
         </motion.div>
 
         {/* Blogs Grid */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.5, delay: 0.2 }}
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
-        >
-          {filteredBlogs.map((blog, index) => (
-            <YourBlogCard key={index} blog={blog} />
-          ))}
-        </motion.div>
+        {filteredBlogs.length > 0 && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+          >
+            {selected == "Your blogs"
+              ? filteredBlogs.map((blog, index) => (
+                  <YourBlogCard key={index} blog={blog} />
+                ))
+              : filteredBlogs.map((blog, index) => (
+                  <BlogCard key={index} blog={blog} />
+                ))}
+          </motion.div>
+        )}
       </div>
     </main>
   );

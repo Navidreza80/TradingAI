@@ -1,4 +1,4 @@
-"use server"
+"use server";
 
 import prisma from "@/lib/prisma";
 import { getDbUserId } from "./user.action";
@@ -21,7 +21,7 @@ export async function closeTrade(tradeData) {
         takeProfit: tradeData.takeProfit || null,
         stopLoss: tradeData.stopLoss || null,
         timestamp: tradeData.timestamp,
-        closeTime: BigInt(Date.now()),
+        closeTime: Date.now(),
         isWin: tradeData.isWin,
         userId: userId,
       },

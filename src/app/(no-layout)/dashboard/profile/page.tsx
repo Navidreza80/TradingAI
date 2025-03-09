@@ -1,4 +1,4 @@
-'use client'
+"use client";
 
 import { calculateUserStats } from "@/actions/trade.action";
 import { getDbUser, getDbUserId } from "@/actions/user.action";
@@ -23,23 +23,40 @@ const staticUser = {
   social: {
     github: "https://github.com/sarahj",
     twitter: "https://twitter.com/sarahj_trader",
-    linkedin: "https://linkedin.com/in/sarahj"
-  }
+    linkedin: "https://linkedin.com/in/sarahj",
+  },
 };
 
 export default function UserProfilePage() {
-  const [user, setUser] = useState({})
-  const [stats, setStats] = useState({})
+  const [user, setUser] = useState({});
+  const [stats, setStats] = useState({});
+  const [hideWin, setHideWin] = useState(false);
+  const [hideTotal, setHideTotal] = useState(false);
+  const [hidePnL, setHidePnL] = useState(false);
   const fetchUser = async () => {
     const userId = await getDbUserId();
-    const stats = await calculateUserStats(userId)
-    const data = await getDbUser()
-    setUser(data)
-    setStats(stats)
-  }
+    const stats = await calculateUserStats(userId);
+    const data = await getDbUser();
+    setUser(data);
+    setStats(stats);
+    setHideWin(data.hideWin);
+    setHideTotal(data.hideTotal);
+    setHidePnL(data.hidePnL);
+  };
   useEffect(() => {
-    fetchUser()
-  }, [])
-  
-  return <ProfileCard user={user} stats={stats} />;
+    fetchUser();
+  }, []);
+
+  return (
+    <ProfileCard
+      user={user}
+      stats={stats}
+      setHideWin={setHideWin}
+      hideWin={hideWin}
+      hideTotal={hideTotal}
+      setHideTotal={setHideTotal}
+      hidePnL={hidePnL}
+      setHidePnL={setHidePnL}
+    />
+  );
 }

@@ -149,7 +149,6 @@ export default function ProfileCard({ user }: ProfileCardProps) {
                   <p className={`text-lg dark:text-blue-400 text-blue-600 font-medium
                      
                     `}>
-                    {user.role}
                   </p>
                 </div>
                 <div className="flex gap-4">

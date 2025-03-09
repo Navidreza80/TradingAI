@@ -8,8 +8,23 @@ import { useTranslation } from "react-i18next";
 import { Switch } from "../ui/switch";
 import EditProfilePicture from "./edit-profile-picture";
 import EditUserName from "./edit-username";
+import {
+  updatePnL,
+  updateTotalTrades,
+  updateWinRate,
+} from "@/actions/user.action";
+import toast from "react-hot-toast";
 
-export default function ProfileCard({ user, stats }) {
+export default function ProfileCard({
+  user,
+  stats,
+  hideWin,
+  setHideWin,
+  hideTotal,
+  setHideTotal,
+  hidePnL,
+  setHidePnL,
+}) {
   const { t } = useTranslation();
   const [username, setUsername] = useState("");
   const [image, setImage] = useState("");
@@ -102,7 +117,7 @@ export default function ProfileCard({ user, stats }) {
 
                 {/* Trading Stats */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mt-6">
-                  {!user.hideWin && (
+                  {!hideWin && (
                     <div className="p-4 rounded-xl dark:bg-gray-800 bg-gray-100">
                       <div className="text-sm dark:text-gray-400 text-gray-600">
                         {t("dashboard.profile.rate")}
@@ -112,7 +127,7 @@ export default function ProfileCard({ user, stats }) {
                       </div>
                     </div>
                   )}
-                  {!user.hideTotal && (
+                  {!hideTotal && (
                     <div className="p-4 rounded-xl dark:bg-gray-800 bg-gray-100">
                       <div className="text-sm dark:text-gray-400 text-gray-600">
                         {t("dashboard.profile.total")}
@@ -122,7 +137,7 @@ export default function ProfileCard({ user, stats }) {
                       </div>
                     </div>
                   )}
-                  {!user.hidePnL && (
+                  {!hidePnL && (
                     <div className="p-4 rounded-xl dark:bg-gray-800 bg-gray-100">
                       <div className="text-sm dark:text-gray-400 text-gray-600">
                         {t("dashboard.profile.pl")}
@@ -175,19 +190,46 @@ export default function ProfileCard({ user, stats }) {
                       <h2 className="dark:text-white text-black whitespace-nowrap">
                         {t("dashboard.profile.hideW")}
                       </h2>
-                      <Switch defaultChecked={user.hideWin} />
+                      <Switch
+                        defaultChecked={hideWin}
+                        onCheckedChange={async (e) => {
+                          const request = await updateWinRate(user.id, e);
+                          if (request.success) {
+                            toast.success(request.message);
+                            setHideWin(e);
+                          }
+                        }}
+                      />
                     </div>
                     <div className="flex flex-row w-full items-center justify-between flex-nowrap gap-1 mt-6">
                       <h2 className="dark:text-white text-black whitespace-nowrap">
                         {t("dashboard.profile.hideT")}
                       </h2>
-                      <Switch defaultChecked={user.hideTotal} />
+                      <Switch
+                        defaultChecked={hideTotal}
+                        onCheckedChange={async (e) => {
+                          const request = await updateTotalTrades(user.id, e);
+                          if (request.success) {
+                            toast.success(request.message);
+                            setHideTotal(e);
+                          }
+                        }}
+                      />
                     </div>
                     <div className="flex flex-row w-full items-center justify-between flex-nowrap gap-1 mt-6">
                       <h2 className="dark:text-white text-black whitespace-nowrap">
                         {t("dashboard.profile.hideP")}
                       </h2>
-                      <Switch defaultChecked={user.hidePnL} />
+                      <Switch
+                        defaultChecked={hidePnL}
+                        onCheckedChange={async (e) => {
+                          const request = await updatePnL(user.id, e);
+                          if (request.success) {
+                            toast.success(request.message);
+                            setHidePnL(e);
+                          }
+                        }}
+                      />
                     </div>
                   </motion.div>
                 </TabsContent>

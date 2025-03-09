@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   BarChart,
   Bar,
@@ -14,16 +14,17 @@ import {
 import { Card, CardContent } from "@/components/ui/card";
 import { motion } from "framer-motion";
 import { useSelector } from "react-redux";
+import { fetchUserWinLoss } from "@/actions/user.action";
 
 export default function TradesAnalyticsChart() {
-  const data = [
-    { name: "Jan", wins: 10, losses: 3 },
-    { name: "Feb", wins: 7, losses: 5 },
-    { name: "Mar", wins: 12, losses: 4 },
-    { name: "Apr", wins: 15, losses: 6 },
-    { name: "May", wins: 11, losses: 7 },
-    { name: "Jun", wins: 18, losses: 5 },
-  ];
+  const [data, setData] = useState();
+  const getUserData = async () => {
+    const request = await fetchUserWinLoss();
+    setData(request);
+  };
+  useEffect(() => {
+    getUserData();
+  }, []);
   const isDarkMode = useSelector((state) => state.theme.isDarkMode);
 
   return (
@@ -31,7 +32,7 @@ export default function TradesAnalyticsChart() {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
-      className="w-1/2 h-full md:w-1/2 sm:w-full xs:w-full sm:h-1/2 xs:h-1/2" 
+      className="w-1/2 h-full md:w-1/2 sm:w-full xs:w-full sm:h-1/2 xs:h-1/2"
     >
       <Card className="p-2 shadow-xl rounded-2xl border border-[#4b4b4b61] bg-white dark:bg-black border-gray-200 dark:border-gray-800 w-full">
         <CardContent>
