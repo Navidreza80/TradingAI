@@ -1,5 +1,4 @@
-// imports
-
+// Third party components
 import Features from "@/components/Landing/Features";
 import HeroSection from "@/components/Landing/HeroSection";
 import Stats from "@/components/Landing/Stats";

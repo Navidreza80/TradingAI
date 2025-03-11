@@ -1,25 +1,17 @@
 'use client'
-
+// Framer motion imports for user animation
 import { motion } from 'framer-motion';
+// i18n imports for translation
 import { useTranslation } from 'react-i18next';
+// Next imports
 import Image from 'next/image';
+// Icons imports
 import { StarIcon } from '@heroicons/react/24/solid';
 import { StarIcon as StarOutline } from '@heroicons/react/24/outline';
 
-/**
- * UserExperience Section Component
- * 
- * Displays user testimonials and reviews with modern design and animations.
- * Features:
- * - Animated testimonial cards
- * - Star rating system
- * - User avatars
- * - RTL support
- * - Theme support
- * - Glass morphism effects
- */
 export default function UserExperience() {
-  const { t, i18n } = useTranslation();
+  // i18n hooks for translation
+  const { t } = useTranslation();
 
   // Testimonials data
   const testimonials = [

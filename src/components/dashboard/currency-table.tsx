@@ -34,7 +34,7 @@ export default function MostTradedCryptos() {
               <thead>
                 <tr className="border-b border-gray-400 dark:border-gray-600 text-lg">
                   <th className="p-4 text-gray-700 dark:text-gray-300">
-                    Crypto
+                    Asset
                   </th>
                   <th className="p-4 text-gray-700 dark:text-gray-300">
                     Trades
