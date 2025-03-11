@@ -9,12 +9,24 @@ const resources = {
       nav: {
         home: "Home",
         blogs: "Blogs",
-        suggestions: "Suggestions",
+        signals: "Signals",
         about: "About",
+        trade: "Trade",
+        strategies: "Strategies",
         homeDesc: "Return to homepage",
-        blogsDesc: "Explore our trading features",
-        suggestionsDesc: "View our pricing plans",
+        blogsDesc: "Explore latest crypto news",
+        signalsDesc: "View our signals powered by AI",
         aboutDesc: "Learn more about TradingAI",
+        tradeDesc: "Execute your trades",
+        strategiesDesc: "Educate yourself on trading strategies",
+      },
+      dropdown: {
+        myAcc: "My Account",
+        dash: "Dashboard",
+        profile: "Profile",
+        blogs: "Blogs",
+        sub: "Subscriptions",
+        out: "Sign Out",
       },
       auth: {
         login: "Log In",
@@ -344,20 +356,31 @@ const resources = {
           hideP: "Hide P&L",
         },
       },
-      
     },
   },
   fa: {
     translation: {
       nav: {
-        home: "خانه",
-        blogs: "بلاگ ها",
-        suggestions: "پیشنهادات",
+        home: "صفحه اصلی",
+        blogs: "مقالات",
+        signals: "سیگنال‌ها",
         about: "درباره ما",
+        trade: "معامله",
+        strategies: "استراتژی‌ها",
         homeDesc: "بازگشت به صفحه اصلی",
-        blogsDesc: "مشاهده امکانات معاملاتی",
-        suggestionsDesc: "مشاهده تعرفه‌ها",
-        aboutDesc: "درباره TradingAI",
+        blogsDesc: "آخرین اخبار ارزهای دیجیتال را بررسی کنید",
+        signalsDesc: "مشاهده سیگنال‌های ما با پشتیبانی از هوش مصنوعی",
+        aboutDesc: "بیشتر درباره TradingAI بدانید",
+        tradeDesc: "معاملات خود را انجام دهید",
+        strategiesDesc: "آموزش استراتژی‌های معاملاتی",
+      },
+      dropdown: {
+        myAcc: "حساب من",
+        dash: "داشبورد",
+        profile: "نمایه",
+        blogs: "مقالات",
+        sub: "اشتراک‌ها",
+        out: "خروج",
       },
       auth: {
         login: "ورود",
@@ -432,8 +455,8 @@ const resources = {
             name: "دیوید چن",
             role: "سرمایه‌گذار ارز دیجیتال",
             content:
-              "توقعات الذكاء الاصطناعي في المنصة ساعدتني على تحقيق أرباح مستمرة في سوق العملات الرقمية. رابط کاربری بسیار ساده است و تیم پشتیبانی عالی است.",
-          },
+              "پیش‌بینی‌های هوش مصنوعی این پلتفرم به من کمک کرده‌اند تا در بازار کریپتو سودهای پایداری کسب کنم. رابط کاربری بسیار روان است و تیم پشتیبانی عالی عمل می‌کند.",
+          },          
           user3: {
             name: "محمد الرشید",
             role: "معامله‌گر فارکس",
@@ -693,12 +716,24 @@ const resources = {
       nav: {
         home: "الرئيسية",
         blogs: "المدونات",
-        suggestions: "التوصيات",
-        about: "حول",
+        signals: "الإشارات",
+        about: "من نحن",
+        trade: "التداول",
+        strategies: "الاستراتيجيات",
         homeDesc: "العودة إلى الصفحة الرئيسية",
-        blogsDesc: "استكشف ميزات التداول",
-        suggestionsDesc: "عرض خطط التوصيات",
-        aboutDesc: "تعرف على TradingAI",
+        blogsDesc: "استكشف آخر أخبار العملات الرقمية",
+        signalsDesc: "عرض إشاراتنا المدعومة بالذكاء الاصطناعي",
+        aboutDesc: "تعرف على المزيد حول TradingAI",
+        tradeDesc: "قم بتنفيذ صفقاتك",
+        strategiesDesc: "تعلم استراتيجيات التداول",
+      },
+      dropdown: {
+        myAcc: "حسابي",
+        dash: "لوحة التحكم",
+        profile: "الملف الشخصي",
+        blogs: "المدونات",
+        sub: "الاشتراكات",
+        out: "تسجيل الخروج",
       },
       auth: {
         login: "الدخول",
@@ -716,18 +751,23 @@ const resources = {
         title: "الميزات القوية",
         subtitle:
           "الميزات المتقدمة مدعومة بالذكاء الاصطناعي لمساعدتك في اتخاذ قرارات تداول أفضل",
-        realtime: {
-          title: "تحليل في الوقت الحقيقي",
-        },
-        ai: {
-          title: "هوش مصنوعي",
-        },
-        secure: {
-          title: "امنية التداول",
-        },
-        advanced: {
-          title: "الميزات المتقدمة",
-        },
+          realtime: {
+            title: "التحليل اللحظي",
+            description: "احصل على تحليل فوري للسوق وإشارات تداول بناءً على البيانات في الوقت الحقيقي",
+          },
+          ai: {
+            title: "رؤى مدعومة بالذكاء الاصطناعي",
+            description: "استخدم الذكاء الاصطناعي لإنشاء إشارات التداول",
+          },
+          secure: {
+            title: "تداول آمن",
+            description: "أصولك محمية بتشفير عسكري وإجراءات أمان متقدمة",
+          },
+          advanced: {
+            title: "ميزات متقدمة",
+            description: "أدوات وميزات متطورة مدعومة بالذكاء الاصطناعي لمساعدتك على اتخاذ قرارات تداول أفضل",
+          }
+          
       },
       stats: {
         title: "موثوق به من قبل المتداولين حول العالم",

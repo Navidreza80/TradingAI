@@ -1,15 +1,24 @@
+// Redux imports
 import { toggleDarkMode } from "@/redux/themeSlice";
+import { useDispatch, useSelector } from "react-redux";
+// Icons imports
 import { LanguageIcon } from "@heroicons/react/24/outline";
+import { MoonIcon, SunIcon } from "lucide-react";
+// Antd Style library imports
 import { Dropdown } from "antd";
 import { MenuProps } from "antd/lib";
-import { MoonIcon, SunIcon } from "lucide-react";
+// i18n imports for translation
 import { useTranslation } from "react-i18next";
-import { useDispatch, useSelector } from "react-redux";
 
-export default function ThemeNLanguage({responsive}) {
+export default function ThemeNLanguage({responsive}: {responsive: string}) {
+  // Redux states for recognizing the app theme
   const dispatch = useDispatch();
   const isDarkMode = useSelector((state) => state.theme.isDarkMode);
-  const { t, i18n } = useTranslation();
+
+  // i18n hooks for translation
+  const { i18n } = useTranslation();
+
+  // Language menu items
   const languageItems: MenuProps["items"] = [
     {
       key: "en",
@@ -27,6 +36,7 @@ export default function ThemeNLanguage({responsive}) {
       onClick: () => handleLanguageChange("ar"),
     },
   ];
+  
   // Handle language change
   const handleLanguageChange = (lang: string) => {
     i18n.changeLanguage(lang);

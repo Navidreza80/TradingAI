@@ -1,29 +1,21 @@
 'use client'
-
+// i18n imports for translation
 import { useTranslation } from 'react-i18next';
+// Next imports
 import Link from 'next/link';
 import Image from 'next/image';
+// Icons imports
 import { 
   GlobeAltIcon,
   PhoneIcon,
   EnvelopeIcon 
 } from '@heroicons/react/24/outline';
 
-/**
- * Footer Component
- * 
- * A professional footer with multiple sections, social links and contact info
- * Features:
- * - Multiple columns layout
- * - Social media links
- * - Contact information
- * - Newsletter subscription
- * - RTL support
- * - Theme support
- */
 export default function Footer() {
+  // i18n hooks for translation
   const { t, i18n } = useTranslation();
 
+  // Footer section items to map over them
   const footerSections = [
     {
       title: t('footer.product.title'),

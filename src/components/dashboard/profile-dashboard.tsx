@@ -149,8 +149,8 @@ export default function ProfileCard({
                             : "text-red-500"
                         }`}
                       >
-                        {stats.totalPnL >= 0 ? "+" : "-"}
-                        {stats.totalPnL}$
+                        {stats.totalPnL >= 0 ? "+" : ""}
+                        {Math.ceil(stats.totalPnL)}$
                       </div>
                     </div>
                   )}

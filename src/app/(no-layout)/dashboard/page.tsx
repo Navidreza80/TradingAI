@@ -14,7 +14,7 @@ export default function Dashboard() {
         <TradesAnalyticsChart />
       </div>
       <div className="flex flex-row lg:flex-nowrap md:flex-wrap sm:flex-wrap xs:flex-wrap sm:gap-y-3 xs:gap-y-3 gap-3 w-full">
-        <div className="flex flex-row justify-between lg:flex-nowrap md:flex-nowrap gap-3 w-1/2 md:w-full sm:w-full xs:w-full sm:flex-wrap xs:flex-wrap">
+        <div className="flex flex-row justify-between lg:flex-nowrap md:flex-nowrap gap-3 w-1/2 md:w-full sm:w-full xs:w-full sm:flex-wrap xs:flex-wrap h-[350px]">
           <UserPlan />
           <MostTradedCurrencies />
         </div>
