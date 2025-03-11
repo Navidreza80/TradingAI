@@ -11,7 +11,7 @@ export default function Home() {
 
   // jsx return
   return (
-    <main className="min-h-screen bg-[#0a0a0a] text-white flex flex-col">
+    <main className="min-h-screen bg-[#0a0a0a] dark:bg-black text-white flex flex-col">
 
       {/* Hero Section */}
       <HeroSection />

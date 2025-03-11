@@ -1,0 +1,162 @@
+.holder{
+  min-height: 100%;
+}
+.quizContainer {
+  font-family: Arial, sans-serif;
+  max-width: 900px;
+  margin: auto;
+  text-align: center;
+  padding: 20px;
+  border-radius: 10px;
+  margin-top: 68px;
+}
+
+.question {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.options {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+}
+
+.option {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  margin: 5px 0;
+  width: 100%;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  cursor: pointer;
+  justify-content: right;
+  text-align: right;
+}
+
+.option input {
+  margin-right: 10px;
+}
+
+.correct {
+  background: #d4edda !important;
+  color: #155724 !important;
+}
+
+.incorrect {
+  background: #f8d7da !important;
+  color: #721c24 !important;
+}
+
+.buttons {
+  display: flex;
+  justify-content: center;
+}
+
+.navButton {
+  background: #007bff;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  margin: 5px;
+  cursor: pointer;
+}
+
+.navButton:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+}
+
+.submitButton {
+  background: #28a745;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.submitButton:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+}
+
+.result {
+  margin-top: 20px;
+}
+
+.review {
+  text-align: right;
+  font-size: 16px;
+  cursor: pointer;
+  padding: 5px;
+  border-radius: 5px;
+  display: flex;
+  justify-content: right;
+}
+
+.review:hover {
+  background: #7b7b7b;
+}
+
+.reviewDetails {
+  background: #383838;
+  padding: 10px;
+  border-radius: 5px;
+  margin-bottom: 17px;
+  margin-top: 3px;
+  border: 1px solid #ccc;
+}
+
+.review {
+  cursor: pointer;
+  font-weight: bold;
+  padding: 5px;
+  transition: background-color 0.3s ease;
+}
+
+.review.active {
+  background: #7b7b7b;
+  border-radius: 5px;
+}
+
+.congratulations {
+  font-size: 18px;
+  font-weight: bold;
+  color: #92ff92;
+}
+
+
+
+
+
+
+
+@media (max-width: 768px) {
+  .quizContainer {
+    width: 90%;
+    padding: 12px;
+  }
+
+  .question {
+    font-size: clamp(0.9rem, 2.2vw, 1rem);
+  }
+
+  .option {
+    font-size: clamp(0.8rem, 2vw, 0.9rem);
+    padding: 8px;
+  }
+
+  .submitButton, .navButton, .tradeButton {
+    font-size: clamp(0.8rem, 2vw, 0.9rem);
+    padding: 8px 12px;
+  }
+}
+@media (max-width: 376px) {
+  .quizContainer {
+    margin-top: 64px;
+  }
+}
