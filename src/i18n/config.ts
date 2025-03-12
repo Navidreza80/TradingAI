@@ -2,6 +2,9 @@
 
 import i18n from "i18next";
 import { initReactI18next } from "react-i18next";
+import { education } from './locales/education';
+import { indicators } from './locales/indicators';
+import { technical } from './locales/technical';
 
 const resources = {
   en: {
@@ -263,6 +266,9 @@ const resources = {
           lastMonth: "Last Month"
         },
       },
+      education: education.en.education,
+      indicators: indicators.en.indicators,
+      technical: technical.en.technical,
     },
   },
   fa: {
@@ -522,6 +528,9 @@ const resources = {
           lastMonth: "ماه اخیر"
         },
       },
+      education: education.fa.education,
+      indicators: indicators.fa.indicators,
+      technical: technical.fa.technical,
     },
   },
   ar: {
@@ -766,6 +775,9 @@ const resources = {
           comments: "التعليقات",
         },
       },
+      education: education.ar.education,
+      indicators: indicators.ar.indicators,
+      technical: technical.ar.technical,
     },
   },
 };
