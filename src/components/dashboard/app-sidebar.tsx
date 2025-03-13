@@ -35,6 +35,12 @@ export default function Sidebar({ isOpen, onClose }) {
       iconLight: "bg-coinLM",
       iconDark: "dark:bg-coinDM",
     },
+    {
+      text: t("dashboard.sidebar.sub"),
+      href: "/dashboard/comments",
+      iconLight: "bg-coinLM",
+      iconDark: "dark:bg-coinDM",
+    },
   ];
 
   return (
