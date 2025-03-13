@@ -2,7 +2,7 @@
 // Sever actions
 import { fetchUserWinLoss } from "@/actions/user.action";
 // Shadcn components
-import { Card, CardContent } from "@/components/UI/card";
+import { Card, CardContent } from "@/components/ui/card";
 // Framer motion
 import { motion } from "framer-motion";
 // React built in hooks

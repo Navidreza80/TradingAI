@@ -2,7 +2,7 @@
 // Server actions
 import { calculateUserStats } from "@/actions/trade.action";
 // Shadcn components
-import { Card, CardContent } from "@/components/UI/card";
+import { Card, CardContent } from "@/components/ui/card";
 // Framer motion for animation
 import { motion } from "framer-motion";
 // Icons

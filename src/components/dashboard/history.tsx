@@ -2,7 +2,7 @@
 // React built in hooks
 import { useState, useEffect } from "react";
 // Shadcn components
-import { Card } from "@/components/UI/card";
+import { Card } from "@/components/ui/card";
 import {
   Table,
   TableBody,
@@ -10,7 +10,7 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@/components/UI/table";
+} from "@/components/ui/table";
 // Next built in hooks
 import { useTheme } from "next-themes";
 // Framer motion for animation

@@ -11,7 +11,7 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "../UI/dropdown-menu";
+} from "../ui/dropdown-menu";
 // i18n imports
 import { useTranslation } from "react-i18next";
 
