@@ -100,7 +100,8 @@
 .Form {
     display: flex;
     flex-flow: column wrap;
-    gap: 25px;
+    justify-content: space-between;
+    gap: 17px;
 }
 
 .ShortButton {
