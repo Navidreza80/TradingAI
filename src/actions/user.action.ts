@@ -34,6 +34,8 @@ export async function syncUser() {
   } catch (error) {
     console.log("Error in syncUser", error);
     return
+  } finally {
+    return
   }
 }
 

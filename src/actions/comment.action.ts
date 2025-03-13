@@ -102,3 +102,25 @@ export async function editComment(commentId: string, newContent: string) {
     return { success: false, message: "Failed to update comment." };
   }
 }
+
+export async function deleteComment(commentId: string) {
+  try {
+    const userId = getDbUserId()
+    // Check if the user owns the comment
+    const comment = await prisma.comment.findFirst({
+      where: { id: commentId, userId },
+    });
+
+    if (!comment) {
+      return { success: false, message: "Comment not found or unauthorized." };
+    }
+
+    // Delete the comment
+    await prisma.comment.delete({ where: { id: commentId } });
+
+    return { success: true, message: "Comment deleted successfully." };
+  } catch (error) {
+    console.error("Error deleting comment:", error);
+    return { success: false, message: "Failed to delete comment." };
+  }
+}

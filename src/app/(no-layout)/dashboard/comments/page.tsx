@@ -14,7 +14,7 @@ import {
 // React built in hooks
 import React from "react";
 // Server actions
-import { fetchUserComment } from "@/actions/comment.action";
+import { deleteComment, fetchUserComment } from "@/actions/comment.action";
 // Shadcn components
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -27,8 +27,10 @@ import {
   TableRow,
 } from "@/components/ui/table";
 // i18n for translation
-import { useTranslation } from "react-i18next";
 import EditComment from "@/components/dashboard/edit-comment";
+import { Trash } from "lucide-react";
+import { useTranslation } from "react-i18next";
+import toast from "react-hot-toast";
 
 export default function DataTableDemo() {
   // i18n hook for translation
@@ -55,13 +57,18 @@ export default function DataTableDemo() {
   React.useEffect(() => {
     fetchComments();
   }, []);
+  // Function to delete users comment
+  const handleDelete = async (id) => {
+    const request = await deleteComment(id)
+    if(request.success)toast.success("Comment deleted successfully!!")
+  }
   // Tables column items
   const columns = [
     {
       accessorKey: "id",
       enableHiding: true,
       header: "",
-      cell: ""
+      cell: "",
     },
     {
       accessorKey: "content",
@@ -103,7 +110,13 @@ export default function DataTableDemo() {
       accessorKey: "actions",
       header: t("dashboard.commentsPage.actions"),
       cell: ({ row }) => (
-        <EditComment content={row.getValue("content")} commentId={row.getValue("id")}  />
+        <div className="flex gap-1">
+          <EditComment
+            content={row.getValue("content")}
+            commentId={row.getValue("id")}
+          />
+          <Trash onClick={() => handleDelete(row.getValue("id"))} className="hover:text-gray-400 cursor-pointer rounded-full dark:text-black text-white bg-black dark:bg-white p-2 w-8 h-8" />
+        </div>
       ),
     },
   ];
