@@ -1,19 +1,28 @@
+// Icons
 import {
   ChatBubbleLeftIcon,
   HandThumbDownIcon,
   HandThumbUpIcon,
 } from "@heroicons/react/24/outline";
+// Framer motion for animation
 import { motion } from "framer-motion";
+// Next components
 import Image from "next/image";
 import Link from "next/link";
+// React built in hooks
 import { useState } from "react";
+// Third party components
 import EditBlog from "./edit-blog";
+import DeleteBlog from "./delete-blog";
 
-const YourBlogCard = ({ blog }) => {
+const YourBlogCard = ({ blog, setBlogs }) => {
+  // State to save blogs title
   const [title, setTitle] = useState(blog.title);
+  // State to save blogs short description
   const [shortDescription, setShortDescription] = useState(
     blog.shortDescription
   );
+  // State to save blogs thumbnail
   const [blogThumbnail, setBlogThumbnail] = useState(blog.blogThumbnail);
   return (
     <motion.div
@@ -34,6 +43,7 @@ const YourBlogCard = ({ blog }) => {
         blog={blog}
         setBlogThumbnail={setBlogThumbnail}
       />
+      <DeleteBlog id={blog.id} setBlogs={setBlogs} blog={blog} />
       <Link href={`/blogs/${blog.id}`} className="relative z-0">
         <div className="cursor-pointer w-full">
           <div

@@ -53,7 +53,7 @@ export default function BlogsPage() {
         <BlogsHeader selected={selected} setSelected={setSelected} />
 
         {/* Blogs Grid */}
-        <BlogsGrid filteredBlogs={filteredBlogs} blog={blogs} selected={selected} />
+        <BlogsGrid filteredBlogs={filteredBlogs} setBlogs={setBlogs} selected={selected} />
       </div>
     </main>
   );

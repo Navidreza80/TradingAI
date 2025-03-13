@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import YourBlogCard from "./your-blog-card";
 import BlogCard from "../blog-card";
 
-export default function BlogsGrid({ filteredBlogs, selected, blog}) {
+export default function BlogsGrid({ filteredBlogs, selected, setBlogs}) {
   return (
     filteredBlogs.length > 0 && (
       <motion.div
@@ -15,7 +15,7 @@ export default function BlogsGrid({ filteredBlogs, selected, blog}) {
       >
         {selected == "Your blogs"
           ? filteredBlogs.map((blog, index) => (
-              <YourBlogCard key={index} blog={blog} />
+              <YourBlogCard setBlogs={setBlogs} key={index} blog={blog} />
             ))
           : filteredBlogs.map((blog, index) => (
               <BlogCard key={index} blog={blog} />

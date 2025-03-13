@@ -21,7 +21,6 @@ import { Comment } from "@/types/comment";
 import {
   CalendarIcon,
   ChatBubbleLeftIcon,
-  ClockIcon,
   HandThumbDownIcon,
   HandThumbUpIcon,
   ShareIcon,
@@ -140,7 +139,7 @@ export default function BlogDetailPage() {
             `}
           >
             {/* Add your blog content here */}
-            <p>{detail.content}</p>
+            <p className="text-black dark:text-white">{detail.content}</p>
             {/* More content... */}
           </motion.div>
 

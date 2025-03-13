@@ -19,6 +19,7 @@ export default function CreateBlog() {
     <div className="flex flex-row xl:w-2/3 lg:w-2/3 md:w-3/4 sm:w-11/12 sm:flex-wrap xs:flex-wrap justify-center xs:w-11/12 gap-2 lg:flex-nowrap p-5 mx-auto">
       {/* New Blog Form */}
       <CreateNewBlog
+        image={image}
         setImage={setImage}
         setContent={setContent}
         setTitle={setTitle}

@@ -18,6 +18,7 @@ export default function CreateNewBlog({
   content,
   setContent,
   setImage,
+  image,
 }) {
   // i18n hook fot translation
   const { t } = useTranslation();
