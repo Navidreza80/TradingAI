@@ -30,8 +30,6 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import EditComment from "@/components/dashboard/edit-comment";
-import ViewReplies from "@/components/dashboard/view-replies";
 import { fetchUserComment } from "@/actions/comment.action";
 
 export const columns = [
@@ -75,7 +73,6 @@ export const columns = [
     accessorKey: "actions",
     header: "Actions",
     enableHiding: false,
-    cell: () => <EditComment />,
   },
 ];
 
