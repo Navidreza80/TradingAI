@@ -28,23 +28,24 @@ model User {
 }
 
 model Trade {
-  id         String  @id @default(cuid())
-  symbol     String
-  type       String
-  amount     Int
-  leverage   Int
-  mode       String
-  entryPrice Float
-  takeProfit Float?
-  stopLoss   Float?
-  timestamp  BigInt
-  closePrice Float
-  closeTime  BigInt
-  pnlAmount  Float
-  pnlPercent Float
-  userId     String
-  isWin      Boolean
-  user       User    @relation(fields: [userId], references: [id])
+  id            String   @id @default(cuid())
+  symbol        String
+  type          String
+  amount        Int
+  leverage      Int
+  mode          String
+  entryPrice    Float
+  takeProfit    Float?
+  stopLoss      Float?
+  timestamp     BigInt
+  closePrice    Float
+  closeTime     BigInt
+  closeTimeDate DateTime @default(now())
+  pnlAmount     Float
+  pnlPercent    Float
+  userId        String
+  isWin         Boolean
+  user          User     @relation(fields: [userId], references: [id])
 }
 
 model Blog {

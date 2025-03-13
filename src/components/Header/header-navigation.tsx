@@ -1,19 +1,20 @@
 "use client";
-
+// Next imports
 import Link from "next/link";
+// i18n imports for translation
 import { useTranslation } from "react-i18next";
 
 export default function Navigation() {
+  // i18n hooks for translation
   const [t, i18n] = useTranslation();
+
   // Navigation items with translations
   const navItems = [
     { name: t("nav.home"), href: "/", description: t("nav.homeDesc") },
     { name: t("nav.blogs"), href: "/blogs", description: t("nav.blogsDesc") },
-    {
-      name: t("nav.suggestions"),
-      href: "/suggestions",
-      description: t("nav.suggestionsDesc"),
-    },
+    { name: t("nav.signals"), href: "/signals", description: t("nav.signalsDesc") },
+    { name: t("nav.trade"), href: "/trade", description: t("nav.tradeDesc") },
+    { name: t("nav.strategies"), href: "/education", description: t("nav.strategiesDesc") },
     { name: t("nav.about"), href: "/about", description: t("nav.aboutDesc") },
   ];
 

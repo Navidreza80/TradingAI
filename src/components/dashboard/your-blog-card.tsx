@@ -1,20 +1,28 @@
-import { motion } from "framer-motion";
-import EditBlog from "./edit-blog";
-import Image from "next/image";
-import Link from "next/link";
+// Icons
 import {
   ChatBubbleLeftIcon,
   HandThumbDownIcon,
   HandThumbUpIcon,
 } from "@heroicons/react/24/outline";
-import { BookmarkIcon } from "lucide-react";
+// Framer motion for animation
+import { motion } from "framer-motion";
+// Next components
+import Image from "next/image";
+import Link from "next/link";
+// React built in hooks
 import { useState } from "react";
+// Third party components
+import EditBlog from "./edit-blog";
+import DeleteBlog from "./delete-blog";
 
-const YourBlogCard = ({ blog }) => {
+const YourBlogCard = ({ blog, setBlogs }) => {
+  // State to save blogs title
   const [title, setTitle] = useState(blog.title);
+  // State to save blogs short description
   const [shortDescription, setShortDescription] = useState(
     blog.shortDescription
   );
+  // State to save blogs thumbnail
   const [blogThumbnail, setBlogThumbnail] = useState(blog.blogThumbnail);
   return (
     <motion.div
@@ -27,6 +35,7 @@ const YourBlogCard = ({ blog }) => {
                 dark:hover:shadow-[0_0_30px_rgba(24,144,255,0.1)]
                 hover:shadow-[0_0_30px_rgba(24,144,255,0.2)]"
     >
+      {/* Modal To Edit Blog Details and Info */}
       <EditBlog
         id={blog.id}
         setTitle={setTitle}
@@ -34,6 +43,7 @@ const YourBlogCard = ({ blog }) => {
         blog={blog}
         setBlogThumbnail={setBlogThumbnail}
       />
+      <DeleteBlog id={blog.id} setBlogs={setBlogs} blog={blog} />
       <Link href={`/blogs/${blog.id}`} className="relative z-0">
         <div className="cursor-pointer w-full">
           <div
@@ -74,10 +84,6 @@ const YourBlogCard = ({ blog }) => {
                         `}
                   >
                     {blog.publisher.username}
-                  </p>
-                  <p className="text-xs dark:text-gray-400 text-gray-600">
-                    {/* {new Date(blog.date).toLocaleDateString()} · {blog.readTime}{" "} */}
-                    min read
                   </p>
                 </div>
               </div>

@@ -1,38 +1,24 @@
 "use client";
-
+// Server actions
 import { calculateUserStats } from "@/actions/trade.action";
 import { getDbUser, getDbUserId } from "@/actions/user.action";
+// Third party components
 import ProfileCard from "@/components/dashboard/profile-dashboard";
+// React built in hooks
 import { useEffect, useState } from "react";
 
-const staticUser = {
-  name: "Sarah Johnson",
-  email: "sarah.j@tradingai.com",
-  role: "Professional Crypto Trader",
-  profilePicture: "/image/8b167af653c2399dd93b952a48740620.jpg",
-  coverImage: "/image/trade.png",
-  bio: "Professional crypto trader with 5+ years of experience. Specialized in technical analysis and algorithmic trading.",
-  location: "Singapore",
-  joinDate: new Date("2021-06-15"),
-  tradingStyle: "Swing Trading",
-  winRate: 76.5,
-  totalTrades: 1247,
-  profitLoss: 324.5,
-
-  // Social media links
-  social: {
-    github: "https://github.com/sarahj",
-    twitter: "https://twitter.com/sarahj_trader",
-    linkedin: "https://linkedin.com/in/sarahj",
-  },
-};
-
 export default function UserProfilePage() {
+  // State to save user details and information
   const [user, setUser] = useState({});
+  // State to save user status: total trades, win rate, total profit
   const [stats, setStats] = useState({});
+  // State to either hide win rate of user or not
   const [hideWin, setHideWin] = useState(false);
+  // State to either hide user total trades or not
   const [hideTotal, setHideTotal] = useState(false);
+  // State to either hide user profits or not
   const [hidePnL, setHidePnL] = useState(false);
+  // function to fetch all of the user information
   const fetchUser = async () => {
     const userId = await getDbUserId();
     const stats = await calculateUserStats(userId);
@@ -43,6 +29,7 @@ export default function UserProfilePage() {
     setHideTotal(data.hideTotal);
     setHidePnL(data.hidePnL);
   };
+  // useEffect to fetch user information when the component is mounting
   useEffect(() => {
     fetchUser();
   }, []);

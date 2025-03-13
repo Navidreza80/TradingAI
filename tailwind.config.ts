@@ -26,6 +26,8 @@ const config: Config = {
         bookDM: "url('/image/book-dark-mode.svg')",
         coinLM: "url('/image/coin-light-mode.svg')",
         coinDM: "url('/image/coin-dark-mode.svg')",
+        commentLM: "url('/image/comment-light-mode.svg')",
+        commentDM: "url('/image/comment-dark-mode.svg')",
       },
       screens: {
         xs: "375px",

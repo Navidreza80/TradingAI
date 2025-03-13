@@ -1,30 +1,38 @@
 "use client";
-
-import React, { useEffect, useState } from "react";
-import {
-  BarChart,
-  Bar,
-  XAxis,
-  YAxis,
-  CartesianGrid,
-  Tooltip,
-  ResponsiveContainer,
-  Legend,
-} from "recharts";
-import { Card, CardContent } from "@/components/ui/card";
-import { motion } from "framer-motion";
-import { useSelector } from "react-redux";
+// Sever actions
 import { fetchUserWinLoss } from "@/actions/user.action";
+// Shadcn components
+import { Card, CardContent } from "@/components/ui/card";
+// Framer motion
+import { motion } from "framer-motion";
+// React built in hooks
+import { useEffect, useState } from "react";
+// Redux for state management
+import { useSelector } from "react-redux";
+// Icons
+import {
+  Bar,
+  BarChart,
+  CartesianGrid,
+  Legend,
+  ResponsiveContainer,
+  Tooltip,
+  XAxis
+} from "recharts";
 
 export default function TradesAnalyticsChart() {
+  // State to save users winning and loosing trades past 6 months
   const [data, setData] = useState();
+  // Function to fetch user winning and loosing trades past 6 months
   const getUserData = async () => {
     const request = await fetchUserWinLoss();
     setData(request);
   };
+  // Call back function to get user data when the components is mounting
   useEffect(() => {
     getUserData();
   }, []);
+  // Redux isDarkMode hook to recognize app theme
   const isDarkMode = useSelector((state) => state.theme.isDarkMode);
 
   return (

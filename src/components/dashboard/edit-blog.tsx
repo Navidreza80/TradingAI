@@ -1,5 +1,7 @@
+// Server action
 import { updateBlog } from "@/actions/blog.action";
 import { getDbUserId } from "@/actions/user.action";
+// Shadcn components
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -10,13 +12,18 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { UploadButton } from "@/utils/uploadthing";
-import { Edit } from "lucide-react";
-import { useState } from "react";
-import toast from "react-hot-toast";
-import { useTranslation } from "react-i18next";
 import { Input } from "../ui/input";
 import { Label } from "../ui/label";
+// UploadThing components for converting file to URL
+import { UploadButton } from "@/utils/uploadthing";
+// Icons
+import { Edit } from "lucide-react";
+// React built in hooks
+import { useState } from "react";
+// React hot toast for creating toasts
+import toast from "react-hot-toast";
+// i18n for translation
+import { useTranslation } from "react-i18next";
 
 export default function EditBlog({
   id,
@@ -25,26 +32,30 @@ export default function EditBlog({
   setShortDescription,
   setBlogThumbnail,
 }) {
+  // i18n hook for translation
   const { t } = useTranslation();
+  // State to save the value of blogs title
   const [titleValue, setTitleValue] = useState("");
+  // State to save the value of blogs short Description
   const [shortDescriptionValue, setShortDescriptionValue] = useState("");
+  // State to save the value of blogs thumbnail
   const [blogThumbnailValue, setBlogThumbnailValue] = useState("");
+  // State to save the value of blogs content
   const [content, setContent] = useState("");
   return (
     <Dialog>
       <DialogTrigger asChild>
         <Button className="absolute z-10 top-2 right-2">
-          <Edit /> Edit Blog
+          {/* Icon */}
+          <Edit /> {t("dashboard.blogs.edit.edit")}
         </Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
           <DialogTitle className="dark:text-white text-gray-400">
-            Edit Blog
+            {t("dashboard.blogs.edit.edit")}
           </DialogTitle>
-          <DialogDescription>
-            Make changes to your blog, click save changes to apply.
-          </DialogDescription>
+          <DialogDescription>{t("dashboard.blogs.edit.change")}</DialogDescription>
         </DialogHeader>
         <div className="flex flex-row flex-wrap justify-center py-4">
           <div className="flex flex-row gap-5 w-full justify-center">
@@ -52,7 +63,7 @@ export default function EditBlog({
               htmlFor="Title"
               className="text-left text-lg dark:text-white text-gray-400 w-1/3"
             >
-              Title
+              {t("dashboard.blogs.edit.title")}
             </Label>
             <Input
               id="Title"
@@ -66,7 +77,7 @@ export default function EditBlog({
               htmlFor="Desc"
               className="text-left text-lg dark:text-white text-gray-400 w-1/3"
             >
-              Content
+              {t("dashboard.blogs.edit.content")}
             </Label>
             <Input
               className="col-span-3 w-2/3"
@@ -79,7 +90,7 @@ export default function EditBlog({
               htmlFor="Desc"
               className="text-left text-lg dark:text-white text-gray-400 w-1/3"
             >
-              short description
+              {t("dashboard.blogs.edit.short")}
             </Label>
             <Input
               className="col-span-3 w-2/3"
@@ -89,7 +100,7 @@ export default function EditBlog({
           </div>
           <div className="flex flex-row gap-5 w-full justify-center mt-2 flex-wrap">
             <h2 className="text-left text-lg dark:text-white text-gray-400 w-full">
-              Thumbnail
+              {t("dashboard.blogs.edit.thumb")}
             </h2>
             <UploadButton
               endpoint="imageUploader"

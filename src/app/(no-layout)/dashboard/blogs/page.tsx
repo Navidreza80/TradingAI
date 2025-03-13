@@ -1,44 +1,26 @@
 "use client";
-
+// React built in hooks
 import { useEffect, useState } from "react";
-import { motion } from "framer-motion";
-import { Button } from "@/components/ui/button";
-import { Plus } from "lucide-react";
-import YourBlogCard from "@/components/dashboard/your-blog-card";
+// Types
 import { Blog } from "@/types/blog";
+// Server actions
 import {
   fetchDislikedBlogs,
   fetchLikedBlogs,
   fetchUserBlogs,
 } from "@/actions/blog.action";
-import Link from "next/link";
-import BlogsDropdown from "@/components/dashboard/dropdown-menu-blogs";
-import BlogCard from "@/components/blog-card";
-
-interface BlogPost {
-  id: number;
-  title: string;
-  description: string;
-  thumbnail: string;
-  likes: number;
-  dislikes: number;
-  comments: number;
-  isLiked: boolean;
-  isDisliked: boolean;
-  isFavorite: boolean;
-  date: Date;
-  readTime: number;
-  author: {
-    name: string;
-    avatar: string;
-  };
-}
+// Third party components
+import BlogsHeader from "@/components/dashboard/blog-header";
+import BlogsGrid from "@/components/dashboard/blogs-grid";
 
 export default function BlogsPage() {
+  // State that save the selected options from blog dropdown menu to filter
   const [selected, setSelected] = useState("Your blogs");
+  // State to save the value of users input to search over the blogs title
   const [searchQuery] = useState("");
+  // State to save the blogs array
   const [blogs, setBlogs] = useState<Blog[]>([]);
-
+  // Function to fetch blogs from database
   const fetchBlog = async () => {
     if (selected === "Your blogs") {
       const data = await fetchUserBlogs();
@@ -52,11 +34,12 @@ export default function BlogsPage() {
       console.log(data);
     }
   };
-
+  // useEffect with callback function to fetch blogs data when the
+  // component is mounting and when the selected value changes
   useEffect(() => {
     fetchBlog();
   }, [selected]);
-
+  // Function to search over the blogs title
   const filteredBlogs =
     blogs.length > 0 &&
     blogs.filter((blog) =>
@@ -66,54 +49,11 @@ export default function BlogsPage() {
   return (
     <main className="min-h-screen pt-2 w-full">
       <div className="relative z-10 w-full">
-        {/* Title Section */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          className="text-center mb-6"
-        >
-          <h1
-            className={`text-3xl sm:text-4xl lg:text-5xl font-bold p-2
-            bg-gradient-to-r dark:from-white dark:to-gray-400 from-gray-900 to-gray-600 
-            bg-clip-text text-transparent 
-             
-            `}
-          >
-            Your Blogs
-          </h1>
-          <p
-            className={`text-lg dark:text-gray-400 text-gray-600 max-w-3xl mx-auto p-2
-             
-            `}
-          >
-            Manage your blogs here
-          </p>
-          <BlogsDropdown selected={selected} setSelected={setSelected} />
-          <Link href="/dashboard/blogs/create">
-            <Button className="mt-2">
-              <Plus /> Create Blog
-            </Button>
-          </Link>
-        </motion.div>
+        {/* Blog Header Section */}
+        <BlogsHeader selected={selected} setSelected={setSelected} />
 
         {/* Blogs Grid */}
-        {filteredBlogs.length > 0 && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
-          >
-            {selected == "Your blogs"
-              ? filteredBlogs.map((blog, index) => (
-                  <YourBlogCard key={index} blog={blog} />
-                ))
-              : filteredBlogs.map((blog, index) => (
-                  <BlogCard key={index} blog={blog} />
-                ))}
-          </motion.div>
-        )}
+        <BlogsGrid filteredBlogs={filteredBlogs} setBlogs={setBlogs} selected={selected} />
       </div>
     </main>
   );
