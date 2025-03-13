@@ -1,4 +1,6 @@
+// Sever actions
 import { updateUserImage } from "@/actions/user.action";
+// Shadcn components
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -9,13 +11,19 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
+// UploadThing to convert file to URL
 import { UploadButton } from "@/utils/uploadthing";
+// Icons
 import { Edit } from "lucide-react";
+// React hot toast to create toasts
 import toast from "react-hot-toast";
+// i18n for translation
 import { useTranslation } from "react-i18next";
 
 export default function EditProfilePicture({ setImage, id, image }) {
+  // i18n hooks for translation
   const { t } = useTranslation();
+  // Function that edits user profile picture by passing the photo URL
   const handleUpload = async () => {
     const request = await updateUserImage(id, image);
     if (request.success) {
@@ -33,7 +41,6 @@ export default function EditProfilePicture({ setImage, id, image }) {
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
           <DialogTitle className="dark:text-white text-gray-400">
-            {" "}
             {t("dashboard.modals.avatar")}
           </DialogTitle>
           <DialogDescription>
