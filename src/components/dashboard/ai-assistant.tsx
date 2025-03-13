@@ -2,9 +2,9 @@
 
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Input } from '@/components/ui/input';
-import { Button } from '@/components/ui/button';
-import { Card } from '@/components/ui/card';
+import { Input } from '@/components/UI/input';
+import { Button } from '@/components/UI/Button';
+import { Card } from '@/components/UI/card';
 import { MessageSquare, Send, MessageCircle, X } from 'lucide-react';
 import { useTheme } from 'next-themes';
 
