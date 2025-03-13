@@ -1,8 +1,8 @@
 // UploadThing component to convert file to URL
 import { UploadButton } from "@/utils/uploadthing";
 // Shadcn components
-import { Button } from "../ui/button";
-import { Input } from "../ui/input";
+import { Button } from "../UI/Button";
+import { Input } from "../UI/input";
 // i18n for translation
 import { useTranslation } from "react-i18next";
 // Server actions

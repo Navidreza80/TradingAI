@@ -1,7 +1,7 @@
 // Server actions
 import { updateUserBanner } from "@/actions/user.action";
 // Shadcn components
-import { Button } from "@/components/ui/button";
+import { Button } from "@/components/UI/Button";
 import {
   Dialog,
   DialogContent,
@@ -10,7 +10,7 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "@/components/ui/dialog";
+} from "@/components/UI/dialog";
 // UploadThing components to convert file to URL
 import { UploadButton } from "@/utils/uploadthing";
 // Icons

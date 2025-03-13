@@ -2,7 +2,7 @@
 // Server actions
 import { getUserProfits } from "@/actions/user.action";
 // Shadcn components
-import { Card, CardContent } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/UI/card";
 // Framer motion for animation
 import { motion } from "framer-motion";
 // React built in hooks
