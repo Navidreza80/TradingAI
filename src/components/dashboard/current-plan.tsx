@@ -1,11 +1,12 @@
 "use client"
-
-import React from "react";
+// Shadcn components
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+// Framer motion for animation
 import { motion } from "framer-motion";
 
 export default function UserPlan() {
+  // Mock Plan Object
   const currentPlan = {
     name: "Basic Plan",
     price: "$9.99/month",
@@ -17,7 +18,7 @@ export default function UserPlan() {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
-      className="w-1/2 md:w-full sm:w-full xs:w-full flex justify-center"
+      className="w-1/2 md:w-full sm:w-full xs:w-full flex justify-center h-[350px]"
     >
       <Card className="w-full p-6 shadow-2xl rounded-2xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-black relative overflow-hidden">
         <div className="absolute inset-0 opacity-10 dark:opacity-20 bg-gradient-to-br from-gray-300 to-gray-100 dark:from-gray-900 dark:to-gray-800" />

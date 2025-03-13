@@ -24,7 +24,7 @@ export async function createBlog(input: CreateBlogInput) {
       },
     });
 
-    return newBlog;
+    return { data: newBlog, success: true };
   } catch (error) {
     console.error("Error creating blog:", error);
     throw new Error("Failed to create blog");

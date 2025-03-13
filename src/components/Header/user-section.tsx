@@ -36,7 +36,7 @@ export default function UserSection() {
           <DropdownMenuLabel> {t("dropdown.myAcc")}</DropdownMenuLabel>
           <DropdownMenuSeparator />
           <DropdownMenuItem>
-            <Link href="/dashboard/profile">{t("dropdown.dash")}</Link>
+            <Link href="/dashboard">{t("dropdown.dash")}</Link>
           </DropdownMenuItem>
           <DropdownMenuItem>
             <Link href="/dashboard/profile">{t("dropdown.profile")}</Link>

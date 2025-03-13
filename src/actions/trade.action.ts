@@ -34,8 +34,9 @@ export async function closeTrade(tradeData) {
   }
 }
 
-export async function calculateUserStats(userId: string) {
+export async function calculateUserStats() {
   try {
+    const userId = await getDbUserId();
     // Count total trades
     const totalTrades = await prisma.trade.count({
       where: { userId },

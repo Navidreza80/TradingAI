@@ -228,17 +228,8 @@ const resources = {
         },
         team: {
           title: "Meet Our Team",
-          roles: {
-            ceo: {
-              title: "Chief Executive Officer",
-            },
-            cto: {
-              title: "Chief Technology Officer",
-            },
-            product: {
-              title: "Product Manager",
-            },
-          },
+          navid: "Front & Back-End Developer",
+          taha: "Front-End Developer",
         },
       },
       profile: {
@@ -291,10 +282,9 @@ const resources = {
           title: "Your Comments",
         },
         stats: {
-          likes: "Likes",
-          following: "Followings",
-          saved: "Saved",
-          comments: "Comments",
+          trades: "Total Trades",
+          profits: "Total Profits",
+          win: "Win Rate",
         },
         course: {
           title: "Latest Course",
@@ -355,6 +345,31 @@ const resources = {
           hideT: "Hide Total Trades",
           hideP: "Hide P&L",
         },
+        sidebar: {
+          dash: "Dashboard",
+          prof: "Profile",
+          blogs: "Blogs",
+          sub: "Subscription",
+        },
+        blogs: {
+          your: "Your Blogs",
+          manage: "Manage your blogs here",
+          create: "Create Blog",
+          dropdown: {
+            your: "Your blogs",
+            disliked: "Disliked blogs",
+            liked: "Liked blogs",
+          },
+          edit: {
+            edit: "Edit Blog",
+            change: "Make changes to your blog, click save changes to apply.",
+            title: "Title",
+            content: "Content",
+            short: "Short Description",
+            thumb: "Thumbnail",
+          },
+        },
+        subscription: "Choose Your Plan",
       },
     },
   },
@@ -456,7 +471,7 @@ const resources = {
             role: "سرمایه‌گذار ارز دیجیتال",
             content:
               "پیش‌بینی‌های هوش مصنوعی این پلتفرم به من کمک کرده‌اند تا در بازار کریپتو سودهای پایداری کسب کنم. رابط کاربری بسیار روان است و تیم پشتیبانی عالی عمل می‌کند.",
-          },          
+          },
           user3: {
             name: "محمد الرشید",
             role: "معامله‌گر فارکس",
@@ -579,18 +594,9 @@ const resources = {
             "دموکراتیزه کردن معاملات با ارائه ابزارها و بینش‌های پیشرفته مبتنی بر هوش مصنوعی به معامله‌گران در تمام سطوح، کمک به آنها برای تصمیم‌گیری آگاهانه‌تر در بازار ارزهای دیجیتال.",
         },
         team: {
-          title: "تیم ما",
-          roles: {
-            ceo: {
-              title: "مدیرعامل",
-            },
-            cto: {
-              title: "مدیر فنی",
-            },
-            product: {
-              title: "مدیر محصول",
-            },
-          },
+          title: "با تیم ما آشنا شوید",
+          navid: "توسعه‌دهنده فرانت‌اند و بک‌اند",
+          taha: "توسعه‌دهنده فرانت‌اند",
         },
       },
       profile: {
@@ -643,10 +649,9 @@ const resources = {
           title: "دیدگاه‌های شما",
         },
         stats: {
-          likes: "پسندیده‌ها",
-          following: "دنبال‌کنندگان",
-          saved: "ذخیره‌شده‌ها",
-          comments: "دیدگاه‌ها",
+          trades: "مجموع معاملات",
+          profits: "کل سود",
+          win: "نرخ برد",
         },
         course: {
           title: "دوره اخیر",
@@ -708,6 +713,32 @@ const resources = {
           hideT: "پنهان کردن تعداد معاملات",
           hideP: "پنهان کردن سود و زیان",
         },
+        sidebar: {
+          dash: "داشبورد",
+          prof: "نمایه",
+          blogs: "مقالات",
+          sub: "اشتراک",
+        },
+        blogs: {
+          your: "وبلاگ‌های شما",
+          manage: "وبلاگ‌های خود را در اینجا مدیریت کنید",
+          create: "ایجاد وبلاگ",
+          dropdown: {
+            your: "وبلاگ‌های شما",
+            disliked: "وبلاگ‌های نپسندیده",
+            liked: "وبلاگ‌های پسندیده",
+          },
+          edit: {
+            edit: "ویرایش وبلاگ",
+            change:
+              "تغییرات مورد نظر را در وبلاگ خود اعمال کنید و روی ذخیره تغییرات کلیک کنید.",
+            title: "عنوان",
+            content: "محتوا",
+            short: "توضیح کوتاه",
+            thumb: "تصویر شاخص",
+          },
+        },
+        subscription: "طرح خود را انتخاب کنید",
       },
     },
   },
@@ -751,23 +782,24 @@ const resources = {
         title: "الميزات القوية",
         subtitle:
           "الميزات المتقدمة مدعومة بالذكاء الاصطناعي لمساعدتك في اتخاذ قرارات تداول أفضل",
-          realtime: {
-            title: "التحليل اللحظي",
-            description: "احصل على تحليل فوري للسوق وإشارات تداول بناءً على البيانات في الوقت الحقيقي",
-          },
-          ai: {
-            title: "رؤى مدعومة بالذكاء الاصطناعي",
-            description: "استخدم الذكاء الاصطناعي لإنشاء إشارات التداول",
-          },
-          secure: {
-            title: "تداول آمن",
-            description: "أصولك محمية بتشفير عسكري وإجراءات أمان متقدمة",
-          },
-          advanced: {
-            title: "ميزات متقدمة",
-            description: "أدوات وميزات متطورة مدعومة بالذكاء الاصطناعي لمساعدتك على اتخاذ قرارات تداول أفضل",
-          }
-          
+        realtime: {
+          title: "التحليل اللحظي",
+          description:
+            "احصل على تحليل فوري للسوق وإشارات تداول بناءً على البيانات في الوقت الحقيقي",
+        },
+        ai: {
+          title: "رؤى مدعومة بالذكاء الاصطناعي",
+          description: "استخدم الذكاء الاصطناعي لإنشاء إشارات التداول",
+        },
+        secure: {
+          title: "تداول آمن",
+          description: "أصولك محمية بتشفير عسكري وإجراءات أمان متقدمة",
+        },
+        advanced: {
+          title: "ميزات متقدمة",
+          description:
+            "أدوات وميزات متطورة مدعومة بالذكاء الاصطناعي لمساعدتك على اتخاذ قرارات تداول أفضل",
+        },
       },
       stats: {
         title: "موثوق به من قبل المتداولين حول العالم",
@@ -930,18 +962,9 @@ const resources = {
             "إضفاء الطابع الديمقراطي على التداول من خلال توفير أدوات ورؤى متقدمة مدعومة بالذكاء الاصطناعي للمتداولين من جميع المستويات، ومساعدتهم على اتخاذ قرارات أكثر استنارة في سوق العملات الرقمية.",
         },
         team: {
-          title: "فريقنا",
-          roles: {
-            ceo: {
-              title: "الرئيس التنفيذي",
-            },
-            cto: {
-              title: "المدير التقني",
-            },
-            product: {
-              title: "مدير المنتج",
-            },
-          },
+          title: "تعرف على فريقنا",
+          navid: "مطور الواجهة الأمامية والخلفية",
+          taha: "مطور الواجهة الأمامية",
         },
       },
       profile: {
@@ -986,10 +1009,9 @@ const resources = {
           title: "تعليقاتك",
         },
         stats: {
-          likes: "الإعجابات",
-          following: "المتابعون",
-          saved: "المحفوظة",
-          comments: "التعليقات",
+          trades: "إجمالي الصفقات",
+          profits: "إجمالي الأرباح",
+          win: "نسبة النجاح",
         },
         course: {
           title: "أحدث دورة",
@@ -1051,6 +1073,32 @@ const resources = {
           hideT: "إخفاء إجمالي الصفقات",
           hideP: "إخفاء الربح والخسارة",
         },
+        sidebar: {
+          dash: "لوحة التحكم",
+          prof: "الملف الشخصي",
+          blogs: "المدونات",
+          sub: "الاشتراك",
+        },
+        blogs: {
+          your: "مدوناتك",
+          manage: "قم بإدارة مدوناتك هنا",
+          create: "إنشاء مدونة",
+          dropdown: {
+            your: "مدوناتك",
+            disliked: "المدونات غير المحبوبة",
+            liked: "المدونات المحبوبة",
+          },
+          edit: {
+            edit: "تعديل المدونة",
+            change:
+              "قم بإجراء التعديلات على مدونتك، ثم انقر على حفظ التغييرات لتطبيقها.",
+            title: "العنوان",
+            content: "المحتوى",
+            short: "وصف قصير",
+            thumb: "الصورة المصغرة",
+          },
+        },
+        subscription: "اختر خطتك",
       },
     },
   },

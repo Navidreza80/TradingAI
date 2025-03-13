@@ -1,14 +1,13 @@
-import { motion } from "framer-motion";
-import EditBlog from "./edit-blog";
-import Image from "next/image";
-import Link from "next/link";
 import {
   ChatBubbleLeftIcon,
   HandThumbDownIcon,
   HandThumbUpIcon,
 } from "@heroicons/react/24/outline";
-import { BookmarkIcon } from "lucide-react";
+import { motion } from "framer-motion";
+import Image from "next/image";
+import Link from "next/link";
 import { useState } from "react";
+import EditBlog from "./edit-blog";
 
 const YourBlogCard = ({ blog }) => {
   const [title, setTitle] = useState(blog.title);
@@ -27,6 +26,7 @@ const YourBlogCard = ({ blog }) => {
                 dark:hover:shadow-[0_0_30px_rgba(24,144,255,0.1)]
                 hover:shadow-[0_0_30px_rgba(24,144,255,0.2)]"
     >
+      {/* Modal To Edit Blog Details and Info */}
       <EditBlog
         id={blog.id}
         setTitle={setTitle}
@@ -74,10 +74,6 @@ const YourBlogCard = ({ blog }) => {
                         `}
                   >
                     {blog.publisher.username}
-                  </p>
-                  <p className="text-xs dark:text-gray-400 text-gray-600">
-                    {/* {new Date(blog.date).toLocaleDateString()} · {blog.readTime}{" "} */}
-                    min read
                   </p>
                 </div>
               </div>

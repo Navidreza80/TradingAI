@@ -1,25 +1,36 @@
 "use client";
-
+// Server actions
 import { fetchBlogs } from "@/actions/blog.action";
+// Third party components
 import BlogCard from "@/components/blog-card";
+import SearchBlogs from "@/components/blog-search";
+// Types
 import { Blog } from "@/types/blog";
-import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
+// Icons
+// Framer motion for animation
 import { motion } from "framer-motion";
+// React built in hooks
 import { useEffect, useState } from "react";
+// i18n for translation
 import { useTranslation } from "react-i18next";
 
 export default function BlogsPage() {
+  // i18n hooks for translation
   const { t } = useTranslation();
+  // Search query state for searching through blogs
   const [searchQuery, setSearchQuery] = useState("");
+  // Save blogs in state variable
   const [blogs, setBlogs] = useState<Blog[]>([]);
+  // Fetching blogs function
   const fetch = async (): Promise<void> => {
     const blogs = await fetchBlogs();
     setBlogs(blogs);
-    console.log(blogs)
   };
+  // Callback function to fetch blogs at the mounting
   useEffect(() => {
     fetch();
   }, []);
+  // Function to search through blogs
   const filteredBlogs = blogs.filter((blog) =>
     blog.title.toLowerCase().includes(searchQuery.toLowerCase())
   );
@@ -53,31 +64,7 @@ export default function BlogsPage() {
         </motion.div>
 
         {/* Search Section */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.2 }}
-          className="mb-12"
-        >
-          <div className="relative max-w-2xl mx-auto">
-            <input
-              type="text"
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder={t("blogs.searchPlaceholder")}
-              className={`w-full px-4 py-3 pl-12 rounded-xl
-                dark:bg-white/5 bg-white
-                dark:text-white text-gray-900
-                dark:border-white/10 border-gray-200 border
-                focus:outline-none focus:ring-2 focus:ring-[#1890ff]
-                placeholder:dark:text-gray-500 placeholder:text-gray-400
-                transition-all duration-200
-                 
-                `}
-            />
-            <MagnifyingGlassIcon className="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 dark:text-gray-400 text-gray-500" />
-          </div>
-        </motion.div>
+        <SearchBlogs searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
 
         {/* Blogs Grid */}
         <motion.div

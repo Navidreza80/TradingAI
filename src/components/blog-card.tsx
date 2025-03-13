@@ -1,9 +1,12 @@
+// Icons
 import {
   ChatBubbleLeftIcon,
   HandThumbDownIcon,
   HandThumbUpIcon,
 } from "@heroicons/react/24/outline";
+// Framer motion for imports
 import { motion } from "framer-motion";
+// Next built in components
 import Image from "next/image";
 import Link from "next/link";
 

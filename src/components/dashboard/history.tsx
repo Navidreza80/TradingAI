@@ -1,6 +1,7 @@
 "use client";
-
+// React built in hooks
 import { useState, useEffect } from "react";
+// Shadcn components
 import { Card } from "@/components/ui/card";
 import {
   Table,
@@ -10,18 +11,24 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+// Next built in hooks
 import { useTheme } from "next-themes";
+// Framer motion for animation
 import { motion } from "framer-motion";
+// Server actions
 import { fetchClosedTrades } from "@/actions/trade.action";
 
 export default function TradeHistory() {
+  // Next useTheme hook to recognize app theme
   const { theme } = useTheme();
+  // State tot save user Closed-Trade history
   const [tradeHistory, setTradeHistory] = useState([]);
+  // Function to fetch user Closed-Trade history
   const fetchTrades = async () => {
     const data = await fetchClosedTrades();
     setTradeHistory(data);
   };
-
+  // useEffect with callback function to fetch user Closed-Trade history past 6 months
   useEffect(() => {
     fetchTrades();
   }, []);
@@ -31,15 +38,15 @@ export default function TradeHistory() {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
-      className="w-1/2 h-[300px] overflow-y-scroll md:w-full sm:w-full xs:w-full sm:h-1/2 xs:h-1/2 max-w-5xl mx-auto"
+      className="w-1/2 h-[350px] overflow-scroll md:w-full sm:w-full xs:w-full max-w-5xl mx-auto"
     >
       <Card
         className={`p-4 rounded-xl shadow-lg overflow-auto ${
           theme === "dark" ? "bg-gray-900 text-white" : "bg-white text-black"
         }`}
       >
-        <div className="overflow-x-auto">
-          <Table className="w-full min-w-[600px]">
+        <div className="overflow-x-auto h-full">
+          <Table className="w-full min-w-[600px] h-full">
             <TableHeader>
               <TableRow>
                 <TableHead>Asset</TableHead>
@@ -51,7 +58,7 @@ export default function TradeHistory() {
             </TableHeader>
             <TableBody>
               {tradeHistory.length > 0 ? (
-                tradeHistory.map((trade) => (
+                tradeHistory.slice(0, 6).map((trade) => (
                   <TableRow key={trade.id}>
                     <TableCell>{trade.symbol}</TableCell>
                     <TableCell
