@@ -1,7 +1,7 @@
 "use client"
 // Shadcn components
-import { Card, CardContent } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/UI/card";
+import { Button } from "@/components/UI/Button";
 // Framer motion for animation
 import { motion } from "framer-motion";
 
