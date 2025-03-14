@@ -30,6 +30,7 @@ import fa_IR from "antd/locale/fa_IR";
 
 // react hooks
 import { useCallback, useEffect, useState, useRef } from "react";
+import { useTranslation } from 'react-i18next';
 
 // components
 import TradeForm from "../../components/tradePage/TradeForm";
@@ -71,6 +72,7 @@ export default function TradePage() {
   const [showChart, setShowChart] = useState(false); // وضعیت چک‌باکس
   const [isMobile, setIsMobile] = useState(false); // وضعیت برای بررسی عرض صفحه
   const [isDarkMode, setIsDarkMode] = useState(false);
+  const { t, i18n } = useTranslation();
 
   useEffect(() => {
     // بررسی تم ذخیره‌شده در LocalStorage
@@ -544,7 +546,8 @@ export default function TradePage() {
   const ClosePositionToast = () => toast.success("پوزیشن با موفقیت بسته شد");
 
   return (
-    <ConfigProvider locale={fa_IR} direction="rtl">
+    <div dir={i18n.dir()}>
+      <ConfigProvider locale={i18n.language === 'fa' ? fa_IR : undefined}>
       <Layout className="min-h-screen mt-16 bg-white dark:bg-black dark:text-white">
         <Content className="p-6 bg-white dark:bg-black">
           <div className="bg-white dark:bg-black">
@@ -563,7 +566,7 @@ export default function TradePage() {
                 }
                 onClick={() => router.push(`/education`)}
               >
-                <h1 className="text-black dark:text-white">آموزش trade</h1>
+                  <h1 className="text-black dark:text-white">{t("education")}</h1>
               </div>
               <label
                 className={`cursor-pointer rounded-xl p-2 font-bold ${
@@ -591,25 +594,13 @@ export default function TradePage() {
                   symbol={selectedSymbol}
                   onPriceChange={setCurrentPrice}
                 />
-
-                {/* {darkMode == true ? (      NavidRezaBug
-                                    <TradingViewWidgetDark
-                                        symbol={selectedSymbol}
-                                        onPriceChange={setCurrentPrice}
-                                    />
-                                ) : (
-                                    <TradingViewWidget
-                                        symbol={selectedSymbol}
-                                        onPriceChange={setCurrentPrice}
-                                    />
-                                )} */}
               </div>
               <div
                 className={`${style.contentTradeForm}  bg-[#f1f1f1] dark:bg-[#202020]`}
               >
                 <div className="flex justify-[right] gap-3 mb-[20px]">
                   <label className="block text-[18px] font-semibold text-gray-700 dark:text-gray-200">
-                    نماد:
+                      {t("symbol")}:
                   </label>
                   <Select
                     value={selectedSymbol}
@@ -647,7 +638,7 @@ export default function TradePage() {
               <div className="flex text-white mb-1 justify-between items-center mb-4">
                 <div className="flex gap-1.5">
                   <span className="text-black text-[16px] font-[700] dark:text-white">
-                    معاملات فعال:
+                      {t("activeTrades")}:
                   </span>
                   <span
                     className={` text-[17px] font-bold  border border-black dark:border-white text-black dark:text-white px-1 rounded bg-white dark:bg-black`}
@@ -660,7 +651,7 @@ export default function TradePage() {
                   className="border-none gap-1 flex bg-black p-1 rounded-[8px] bg-white dark:bg-black"
                 >
                   <h1 className="text-[#202020] text-[16px] flex dark:text-white">
-                    history
+                      {t("history")}
                   </h1>
                   <img
                     className="w-6 h-6"
@@ -805,11 +796,10 @@ export default function TradePage() {
                               type="primary"
                               className="bg-slate-500 dark:bg-gray-600 dark:text-white"
                               onClick={() => {
-                                ClosePositionToast();
                                 closePosition(position.timestamp);
                               }}
                             >
-                              بستن معامله
+                                {t("closePosition")}
                             </Button>
                           </div>
                         </div>
@@ -824,30 +814,32 @@ export default function TradePage() {
                     <thead>
                       <tr>
                         <th className="text-center text-black dark:text-white py-2 px-4">
-                          Symbol
+                            {t("symbol")}
                         </th>
                         <th className="text-center text-black dark:text-white py-2 px-4">
-                          Type
+                            {t("type")}
                         </th>
                         <th className="text-center text-black dark:text-white py-2 px-4">
-                          Mode
+                            {t("mode")}
                         </th>
                         <th className="text-center text-black dark:text-white py-2 px-4">
-                          Leverage
+                            {t("leverage")}
                         </th>
                         <th className="text-center text-black dark:text-white py-2 px-4">
-                          Amount
+                            {t("amount")}
                         </th>
                         <th className="text-center text-black dark:text-white py-2 px-4">
-                          Entry Price
+                            {t("entryPrice")}
                         </th>
                         <th className="text-center text-black dark:text-white py-2 px-4">
-                          Current Price
+                            {t("currentPrice")}
                         </th>
                         <th className="text-left text-black dark:text-white py-2 px-4">
-                          PNL
+                            {t("pnl")}
                         </th>
-                        <th className="text-center text-black dark:text-white py-2 px-4"></th>
+                          <th className="text-center text-black dark:text-white py-2 px-4">
+
+                          </th>
                       </tr>
                     </thead>
                     <tbody>
@@ -937,7 +929,7 @@ export default function TradePage() {
                             <td className="py-2 px-4">
                               <div className="flex gap-2">
                                 <button
-                                  className="bg-blue-500 mr-auto text-white py-1 px-4 rounded"
+                                  className={`bg-blue-500 text-white py-1 px-4 rounded ${i18n.language === 'fa' || i18n.language === 'ar' ? 'mr-auto' : 'ml-auto'}`}
                                   onClick={() => {
                                     setSelectedPosition(position);
                                     setIsLimitModalVisible(true);
@@ -951,13 +943,12 @@ export default function TradePage() {
                                       ? "#3f8600"
                                       : "#cf1322",
                                   }}
-                                  className="bg-red-500 ml-auto text-white py-1 px-4 rounded"
+                                  className={`bg-red-500 text-white py-1 px-4 rounded ${i18n.language === 'fa' || i18n.language === 'ar' ? 'ml-auto' : 'mr-auto'}`}
                                   onClick={() => {
-                                    ClosePositionToast();
                                     closePosition(position.timestamp);
                                   }}
                                 >
-                                  بستن معامله
+                                    {t("closePosition")}
                                 </button>
                                 <Toaster />
                               </div>
@@ -970,7 +961,7 @@ export default function TradePage() {
                 )
               ) : (
                 <div className={`flex justify-center w-full dark:text-white`}>
-                  هیچ معامله‌ای باز نیست
+                  {t("NoOpenTrade")}
                 </div>
               )}
             </div>
@@ -978,7 +969,7 @@ export default function TradePage() {
         </Content>
 
         <Modal
-          title="تاریخچه معاملات"
+            title={t("history")}
           open={isHistoryModalVisible}
           onCancel={() => setIsHistoryModalVisible(false)}
           footer={null}
@@ -1011,7 +1002,7 @@ export default function TradePage() {
                           {position.mode}
                         </Tag>
                         <Tag color={position.type === "LONG" ? "green" : "red"}>
-                          {position.type === "LONG" ? "لانگ" : "شورت"}
+                            {position.type === "LONG" ? t("long") : t("short")}
                         </Tag>
                       </Space>
                       <Text
@@ -1032,7 +1023,7 @@ export default function TradePage() {
                     <div className="grid grid-cols-3 gap-4">
                       <div>
                         <h1 className="text-black text-[14px]  dark:text-white">
-                          قیمت ورود:
+                            {t("entryPrice")}:
                         </h1>
                         <div className="dark:text-white">
                           ${position.entryPrice}
@@ -1040,7 +1031,7 @@ export default function TradePage() {
                       </div>
                       <div>
                         <h1 className="text-black text-[14px]  dark:text-white">
-                          قیمت خروج:
+                            {t("exitPrice")}:
                         </h1>
                         <div className="dark:text-white">
                           ${position.closePrice}
@@ -1048,7 +1039,7 @@ export default function TradePage() {
                       </div>
                       <div>
                         <h1 className="text-black text-[14px]  dark:text-white">
-                          سود/ضرر:
+                            {t("profitLoss")}:
                         </h1>
                         <div
                           className={
@@ -1062,7 +1053,7 @@ export default function TradePage() {
                       </div>
                       <div>
                         <h1 className="text-black text-[14px]  dark:text-white">
-                          مقدار:
+                            {t("quantity")}:
                         </h1>
                         <div className="dark:text-white">
                           ${position.amount}
@@ -1070,7 +1061,7 @@ export default function TradePage() {
                       </div>
                       <div>
                         <h1 className="text-black text-[14px]  dark:text-white">
-                          اهرم:
+                            {t("leverage")}:
                         </h1>
                         <div className="dark:text-white">
                           {position.leverage}x
@@ -1078,7 +1069,7 @@ export default function TradePage() {
                       </div>
                       <div>
                         <h1 className="text-black text-[14px]  dark:text-white">
-                          تاریخ بسته شدن:
+                            {t("closeTime")}:
                         </h1>
                         <div className="dark:text-white">
                           {new Date(position.closeTime).toLocaleString("fa-IR")}
@@ -1089,14 +1080,14 @@ export default function TradePage() {
                 ))
             ) : (
               <div className="text-center text-gray-500 py-8 dark:text-gray-400">
-                تاریخچه‌ای وجود ندارد
+                  {t("noHistory")}
               </div>
             )}
           </div>
         </Modal>
 
         <Modal
-          title="تنظیم حد سود و ضرر"
+            title={t("setLimits")}
           open={isLimitModalVisible}
           onCancel={() => {
             setIsLimitModalVisible(false);
@@ -1113,7 +1104,7 @@ export default function TradePage() {
               }}
               className="dark:bg-gray-700 dark:text-white"
             >
-              انصراف
+                {t("cancel")}
             </Button>,
             <Button
               key="apply"
@@ -1122,7 +1113,7 @@ export default function TradePage() {
               style={{ backgroundColor: "#1890ff" }}
               className="dark:bg-blue-600 dark:text-white"
             >
-              اعمال تغییرات
+                {t("applyChanges")}
             </Button>,
           ]}
           width={600}
@@ -1133,12 +1124,12 @@ export default function TradePage() {
               <div className="bg-gray-800 p-4 rounded-lg">
                 <div className="mb-4">
                   <Text strong className="text-gray-300 mb-2 block">
-                    حد سود:
+                      {t("takeProfit")}:
                   </Text>
                   <div className="grid grid-cols-2 gap-4">
                     <div>
                       <Text className="text-gray-400 mb-1 block">
-                        قیمت (USDT)
+                          {t("priceUsdt")}
                       </Text>
                       <Input
                         value={
@@ -1168,7 +1159,7 @@ export default function TradePage() {
                       />
                     </div>
                     <div>
-                      <Text className="text-gray-400 mb-1 block">درصد</Text>
+                        <Text className="text-gray-400 mb-1 block">{t("percent")}</Text>
                       <Input
                         value={
                           tempLimits.takeProfit?.percent?.toFixed(2) ||
@@ -1176,9 +1167,7 @@ export default function TradePage() {
                           ""
                         }
                         onChange={(e) => {
-                          const percentWithLeverage = parseFloat(
-                            e.target.value
-                          );
+                            const percentWithLeverage = parseFloat(e.target.value);
                           if (!isNaN(percentWithLeverage)) {
                             const actualPercent =
                               percentWithLeverage / selectedPosition.leverage;
@@ -1205,7 +1194,7 @@ export default function TradePage() {
                   {(tempLimits.takeProfit?.price ||
                     selectedPosition.takeProfit?.price) && (
                     <div className="mt-2 text-green-500">
-                      سود تخمینی: $
+                        {t("estimatedProfit")}: $
                       {calculateEstimatedPnL(
                         selectedPosition,
                         tempLimits.takeProfit?.price ||
@@ -1218,12 +1207,12 @@ export default function TradePage() {
 
                 <div>
                   <Text strong className="text-gray-300 mb-2 block">
-                    حد ضرر:
+                      {t("stopLoss")}:
                   </Text>
                   <div className="grid grid-cols-2 gap-4">
                     <div>
                       <Text className="text-gray-400 mb-1 block">
-                        قیمت (USDT)
+                          {t("priceUsdt")}
                       </Text>
                       <Input
                         value={
@@ -1253,7 +1242,7 @@ export default function TradePage() {
                       />
                     </div>
                     <div>
-                      <Text className="text-gray-400 mb-1 block">درصد</Text>
+                        <Text className="text-gray-400 mb-1 block">{t("percent")}</Text>
                       <Input
                         value={
                           tempLimits.stopLoss?.percent?.toFixed(2) ||
@@ -1306,7 +1295,7 @@ export default function TradePage() {
                         fontSize: "20px",
                       }}
                     >
-                      ضرر تخمینی: $
+                        {t("estimatedLoss")}: $
                       {Math.abs(
                         calculateEstimatedPnL(
                           selectedPosition,
@@ -1323,11 +1312,12 @@ export default function TradePage() {
           )}
         </Modal>
         <Modal
-          title="  TradingAi"
+          title="TradingAi"
           open={showImage}
           onCancel={() => setShowImage(false)}
           footer={null}
           className={style.positionModal}
+          style={{direction:"rtl"}}
         >
           {selectedPosition &&
             (() => {
@@ -1390,26 +1380,16 @@ export default function TradePage() {
                     <div className="flex relative">
                       <div className="flex flex-col gap-[15px] flex-wrap">
                         <div className="flex flex-col flex-wrap gap-[0] text-white">
-                          <p className="text-[14px] text-[#969696]">مقدار</p>
-                          <h1 className="text-[20px] mr-[5px]">
-                            {selectedPosition.amount}$
-                          </h1>
+                            <p className="text-[14px] text-[#969696]">{t("quantity")}</p>
+                            <h1 className="text-[20px] mr-[5px]">{selectedPosition.amount}$</h1>
                         </div>
                         <div className="flex flex-col flex-wrap gap-[0] text-white">
-                          <p className="text-[14px] text-[#969696]">
-                            قیمت ورود
-                          </p>
-                          <h1 className="text-[20px] mr-[5px]">
-                            {selectedPosition.entryPrice}$
-                          </h1>
+                            <p className="text-[14px] text-[#969696]">{t("entryPrice")}</p>
+                            <h1 className="text-[20px] mr-[5px]">{selectedPosition.entryPrice}$</h1>
                         </div>
                         <div className="flex flex-col flex-wrap gap-[0] text-white">
-                          <p className="text-[14px] text-[#969696]">
-                            قیمت لحظه ای
-                          </p>
-                          <h1 className="text-[20px] mr-[5px]">
-                            {currentPrice | "!"}$
-                          </h1>
+                            <p className="text-[14px] text-[#969696]">{t("currentPrice")}</p>
+                            <h1 className="text-[20px] mr-[5px]">{currentPrice | "!"}$</h1>
                         </div>
                       </div>
                       <img
@@ -1428,7 +1408,6 @@ export default function TradePage() {
                       Download
                     </Button>
                   </div>
-
                   <div
                     ref={captureRef}
                     className="flex hidden flex-col flex-wrap gap-4 w-[472px] h-[472px] bg-black p-6"
@@ -1482,14 +1461,14 @@ export default function TradePage() {
                     <div className="flex relative">
                       <div className="flex flex-col gap-[15px] flex-wrap">
                         <div className="flex flex-col flex-wrap gap-[0] text-white">
-                          <p className="text-[14px] text-[#969696]">مقدار</p>
+                          <p className="text-[14px] text-[#969696]">{t("quantity")}</p>
                           <h1 className="text-[20px] mr-[5px] mt-[-19px]">
                             {selectedPosition.amount}$
                           </h1>
                         </div>
                         <div className="flex flex-col flex-wrap gap-[0] text-white">
                           <p className="text-[14px] text-[#969696]">
-                            قیمت ورود
+                          {t("entryPrice")}
                           </p>
                           <h1 className="text-[20px] mr-[5px] mt-[-19px]">
                             {selectedPosition.entryPrice}$
@@ -1497,7 +1476,7 @@ export default function TradePage() {
                         </div>
                         <div className="flex flex-col flex-wrap gap-[0] text-white">
                           <p className="text-[14px] text-[#969696]">
-                            قیمت لحظه ای
+                          {t("currentPrice")}
                           </p>
                           <h1 className="text-[20px] mr-[5px] mt-[-19px]">
                             {prices[selectedPosition.symbol] | "!"}$
@@ -1516,5 +1495,6 @@ export default function TradePage() {
         </Modal>
       </Layout>
     </ConfigProvider>
+    </div>
   );
 }
