@@ -1,0 +1,230 @@
+.returnRes {
+    display: none !important;
+    background: #00000000;
+    box-shadow: none;
+    border: 0 none;
+}
+
+.listEducation {
+    display: flex;
+    justify-content: space-between !important;
+}
+
+.CardListEducationHolder {
+    width: 23%;
+}
+
+.CardListEducation {
+    width: 100% !important;
+    height: 250px;
+}
+
+.ImageHolderList {
+    height: 250px !important;
+    display: flex;
+    flex-flow: column wrap;
+}
+
+.ImageHolderList>div>img {
+    height: 192px !important;
+}
+
+.titlCardList {
+    padding: 0 !important;
+    height: 20px !important;
+    overflow: hidden !important;
+}
+
+@media screen and (max-width: 1166px) {
+    .titleTop {
+        font-size: 24px !important;
+    }
+
+    .Header {
+        padding: 0 36px !important;
+    }
+}
+
+@media screen and (max-width: 900px) {
+    .CardListEducationHolder {
+        width: 30%;
+    }
+
+    .CardListEducation {
+        width: 100% !important;
+        height: 200px;
+    }
+
+    .ImageHolderList {
+        height: 200px !important;
+    }
+
+    .ImageHolderList>div>img {
+        height: 150px !important;
+    }
+
+    .titlCardList {
+        padding: 0 !important;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .Header {
+        padding: 0 24px !important;
+    }
+
+    .CardHolder>div>div {
+        width: 100% !important;
+        padding: 5px !important;
+    }
+
+    .titleTop {
+        font-size: 20px !important;
+
+    }
+
+    .ImageHolder {
+        height: 375px !important;
+    }
+
+    .ParagraphDesc {
+        font-size: 14px;
+    }
+
+    .titleDesc {
+        font-size: 16px;
+    }
+
+    .indicator {
+        font-size: 15px;
+    }
+
+
+
+
+    .CardListEducationHolder {
+        width: 30%;
+    }
+
+    .CardListEducation {
+        width: 100% !important;
+        height: 150px;
+    }
+
+    .ImageHolderList {
+        height: 150px !important;
+    }
+
+    .ImageHolderList>div>img {
+        height: 120px !important;
+    }
+
+    .titlCardList {
+        font-size: 10px;
+    }
+}
+
+@media screen and (max-width:700px) {
+    .CardListEducationHolder {
+        width: 48%;
+    }
+
+    .CardListEducation {
+        width: 100% !important;
+        height: 150px;
+    }
+
+    .ImageHolderList {
+        height: 150px !important;
+    }
+
+    .ImageHolderList>div>img {
+        height: 120px !important;
+    }
+
+    .titlCardList {
+        font-size: 10px;
+    }
+}
+
+@media screen and (max-width: 586px) {
+    .return {
+        display: none;
+    }
+
+    .returnRes {
+        display: flex !important;
+    }
+
+    .titleTop {
+        font-size: 16px !important;
+    }
+
+    .ImageHolder {
+        height: 355px !important;
+    }
+
+    .ParagraphDesc {
+        font-size: 12px;
+    }
+
+    .titleDesc {
+        font-size: 14px;
+    }
+
+    .indicator {
+        font-size: 13px;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .ImageHolder {
+        height: 250px !important;
+    }
+}
+
+@media screen and (max-width: 400px) {
+    .titleTop {
+        font-size: 16px !important;
+    }
+
+    .ImageHolder {
+        height: 250px !important;
+    }
+
+    .ParagraphDesc {
+        font-size: 9px;
+    }
+
+    .titleDesc {
+        font-size: 11px;
+    }
+
+    .indicator {
+        padding: 0px 5px;
+        font-size: 8px;
+    }
+}
+
+@media screen and (max-width: 350px) {
+    .titleTop {
+        font-size: 13px !important;
+    }
+
+    .ImageHolder {
+        height: 200px !important;
+    }
+
+    .ParagraphDesc {
+        font-size: 7px;
+    }
+
+    .titleDesc {
+        font-size: 9px;
+    }
+
+    .indicator {
+        padding: 0px 5px;
+        font-size: 8px;
+    }
+}
