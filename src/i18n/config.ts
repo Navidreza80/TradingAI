@@ -2,6 +2,7 @@
 
 import i18n from "i18next";
 import { initReactI18next } from "react-i18next";
+import { education } from "./locales/education";
 
 const resources = {
   en: {
@@ -417,6 +418,7 @@ const resources = {
       internetConnectionWarning:
         "Please ensure your internet connection and VPN are active.",
       NoOpenTrade: "There is no open trade",
+      education: education.en.education,
     },
   },
   fa: {
@@ -837,6 +839,7 @@ const resources = {
       TP_SL: "TP/SL",
       internetConnectionWarning: "از اتصال اینترنت و فیلترشکن مطمئن شوید.",
       NoOpenTrade: "هیچ معامله‌ای باز نیست",
+      education: education.fa.education,
     },
   },
   ar: {
@@ -1245,6 +1248,7 @@ const resources = {
       TP_SL: "TP/SL",
       internetConnectionWarning: "يرجى التأكد من اتصال الإنترنت ووجود VPN.",
       NoOpenTrade: "لا توجد أي صفقة مفتوحة",
+      education: education.ar.education,
     },
   },
 };
