@@ -1,7 +1,7 @@
 // Server action
 import { updateBlog } from "@/actions/blog.action";
 import { getDbUserId } from "@/actions/user.action";
-// Shadcn components
+// ShadCn components
 import { Button } from "@/components/ui/button";
 import {
   Dialog,

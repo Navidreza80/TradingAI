@@ -1,13 +1,16 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+// Theme interface
 interface ThemeState {
   isDarkMode: boolean;
 }
 
+// Theme initial state
 const initialState: ThemeState = {
   isDarkMode: true,
 };
 
+// Function to create theme slice
 const themeSlice = createSlice({
   name: "theme",
   initialState,

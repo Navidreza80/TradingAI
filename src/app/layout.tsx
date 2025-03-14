@@ -1,14 +1,17 @@
-// imports
+// global styles
 import "./globals.css";
+// Providers
 import { I18nProvider } from "@/providers/i18n-provider";
+// Configs
 import { siteConfig } from "@/config/metadata";
+// Clerk for authentication
 import { ClerkProvider } from "@clerk/nextjs";
+// Third party components
 import HeaderServer from "@/components/Header/HeaderServer";
-import { Toaster } from "react-hot-toast";
 import VoiceNavigation from "@/components/dashboard/mic";
 import ChatAssistant from "@/components/dashboard/ai-assistant";
-
-// fonts
+// React hot toast provider
+import { Toaster } from "react-hot-toast";
 
 // Viewport configuration
 export const viewport = {
@@ -22,7 +25,6 @@ export const viewport = {
 };
 
 // metadata
-
 export const metadata = {
   metadataBase: new URL("https://tradingai.com"),
   title: siteConfig.title,

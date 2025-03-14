@@ -1,4 +1,4 @@
-// Shadcn components
+// ShadCn components
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -9,10 +9,10 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-// Icons
-import { Edit } from "lucide-react";
 import { Input } from "../ui/input";
 import { Label } from "../ui/label";
+// Icons
+import { Edit } from "lucide-react";
 // i18n for translation
 import { useTranslation } from "react-i18next";
 // React built in hooks

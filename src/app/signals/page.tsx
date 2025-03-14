@@ -10,6 +10,7 @@ import SymbolDropDown from "@/components/signals/symbol-dropdown";
 import TimeFrameDropDown from "@/components/signals/timeframe-dropdown";
 // Icons
 import { FaChartLine } from "react-icons/fa";
+import { Signals } from "@/types/trade";
 
 export default function TradingSignal() {
   // State to save the symbol that user selected
@@ -19,11 +20,11 @@ export default function TradingSignal() {
   // State to save the number of the candles that user selected
   const [candles, setCandles] = useState("100");
   // State to save the signal that AI generated
-  const [signal, setSignal] = useState(null);
+  const [signal, setSignal] = useState<Signals | null>(null);
   // State to save the status of the current request
   const [loading, setLoading] = useState(false);
   // State to save the error of the current request
-  const [error, setError] = useState();
+  const [error, setError] = useState<null | string | unknown>();
 
   // Function to get the signal from AI
   const getSignal = async () => {
@@ -157,7 +158,7 @@ export default function TradingSignal() {
               <span className="ml-2">Fetching data...</span>
             </div>
           )}
-          {error && <p className="text-red-500">{error}</p>}
+          {typeof error == "string" && <p className="text-red-500">{error}</p>}
           {!loading && !signal && (
             <p className="text-gray-600 dark:text-gray-400">
               No signal generated yet.

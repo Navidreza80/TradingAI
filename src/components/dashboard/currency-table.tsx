@@ -14,7 +14,8 @@ export default function MostTradedCryptos() {
   // Function to fetch users most traded currencies
   const getUserData = async () => {
     const request = await fetchMostTradedCurrencies();
-    setData(request);
+    if(request == "User not authenticated") return
+    else setData(request);
   };
   // UseEffect with callback function to fetch user most traded currencies when the component is mounting
   useEffect(() => {

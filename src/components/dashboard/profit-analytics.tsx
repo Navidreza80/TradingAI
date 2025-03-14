@@ -17,7 +17,7 @@ import {
   Legend,
   ResponsiveContainer,
   Tooltip,
-  XAxis
+  XAxis,
 } from "recharts";
 
 export default function AnalyticsChart() {
@@ -28,7 +28,8 @@ export default function AnalyticsChart() {
   // Function to fetch user profit in past 6 months
   const getUserData = async () => {
     const request = await getUserProfits();
-    setData(request);
+    if (request == "User not authenticated") return;
+    else setData(request);
   };
   // Callback function to execute when the component is mounting
   useEffect(() => {

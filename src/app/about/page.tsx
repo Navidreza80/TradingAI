@@ -1,9 +1,9 @@
 "use client";
 // Third party components
-import Team from "./team";
+import Team from "../../components/about/team";
 import StatsGrid from "@/components/about/stats";
-import Mission from "./mission";
-import Hero from "./hero";
+import Mission from "../../components/about/mission";
+import Hero from "../../components/about/hero";
 
 export default function AboutPage() {
   return (

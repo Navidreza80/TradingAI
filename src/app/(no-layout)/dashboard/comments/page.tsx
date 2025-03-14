@@ -15,7 +15,7 @@ import {
 import React from "react";
 // Server actions
 import { deleteComment, fetchUserComment } from "@/actions/comment.action";
-// Shadcn components
+// ShadCn components
 import { Button } from "../../../../components/ui/button";
 import { Input } from "../../../../components/ui/input";
 import {
@@ -60,7 +60,8 @@ export default function DataTableDemo() {
   // Function to delete users comment
   const handleDelete = async (id) => {
     const request = await deleteComment(id)
-    if(request.success)toast.success("Comment deleted successfully!!")
+    if(request == "User not authenticated") toast.error("User not authenticated")
+    else if(request.success)toast.success("Comment deleted successfully!!")
   }
   // Tables column items
   const columns = [

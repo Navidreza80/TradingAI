@@ -1,7 +1,7 @@
 "use client";
 // React built in hooks
 import { useState, useEffect } from "react";
-// Shadcn components
+// ShadCn components
 import { Card } from "@/components/ui/card";
 import {
   Table,
@@ -26,7 +26,8 @@ export default function TradeHistory() {
   // Function to fetch user Closed-Trade history
   const fetchTrades = async () => {
     const data = await fetchClosedTrades();
-    setTradeHistory(data);
+    if(data == "User not authenticated") return
+    else setTradeHistory(data);
   };
   // useEffect with callback function to fetch user Closed-Trade history past 6 months
   useEffect(() => {

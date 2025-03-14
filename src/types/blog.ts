@@ -22,3 +22,10 @@ export interface Blog {
   createdAt: Date;
   updatedAt: Date;
 }
+
+export interface CreateBlogInput {
+  title: string;
+  shortDescription: string;
+  content?: string;
+  blogThumbnail?: string;
+}

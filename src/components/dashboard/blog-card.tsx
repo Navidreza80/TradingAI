@@ -65,8 +65,8 @@ export default function BlogCard({ title, shortDescription, image }) {
             <div className="p-6">
               {/* Author Info */}
               <div className="flex items-center gap-3 mb-4">
-                {user.image != '' && <Image
-                  src={user.image ? user.image : null}
+                {typeof user.image !== "string" && <Image
+                  src={user.image}
                   alt={user.username}
                   width={32}
                   height={32}

@@ -1,4 +1,4 @@
-// Shadcn components
+// ShadCn components
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -30,10 +30,8 @@ export default function EditComment({commentId, content}) {
   // Function that edit and updates users username by passing the username string value
   const updateComment = async () => {
     const data = await editComment(commentId, value)
-    if(data.success)toast.success('Comment updated successfully!!')
-    else{
-      toast.error('Failed to update comment.')
-    }
+    if(data == "User not authenticated") toast.error("User not authenticated")
+    else if(data.success)toast.success('Comment updated successfully!!')
   }
   return (
     <Dialog>

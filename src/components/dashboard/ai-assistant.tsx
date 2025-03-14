@@ -1,38 +1,53 @@
-'use client';
-
-import { useState } from 'react';
-import { motion } from 'framer-motion';
-import { Input } from '../ui/input';
-import { Button } from '../ui/button';
-import { Card } from '../ui/card';
-import { MessageSquare, Send, MessageCircle, X } from 'lucide-react';
-import { useTheme } from 'next-themes';
+"use client";
+// React built in hooks
+import { useState } from "react";
+// Framer motion for animation
+import { motion } from "framer-motion";
+// ShadCn components
+import { Input } from "../ui/input";
+import { Button } from "../ui/button";
+import { Card } from "../ui/card";
+// Icons
+import { MessageSquare, Send, MessageCircle, X } from "lucide-react";
+// App theme
+import { useTheme } from "next-themes";
 
 const ChatAssistant = () => {
+  // Theme hook
   const { theme } = useTheme();
+  // State to save message of the user
   const [messages, setMessages] = useState([]);
-  const [input, setInput] = useState('');
+  // State to save the value of the input
+  const [input, setInput] = useState("");
+  // State to save the status of the loading
   const [loading, setLoading] = useState(false);
+  // State to save the value of the isOpen for ai-assistant chat
   const [isOpen, setIsOpen] = useState(false);
 
+  // Function to post user message to AI assistant
   const sendMessage = async () => {
     if (!input.trim()) return;
-    const userMessage = { role: 'user', content: input };
+    const userMessage = { role: "user", content: input };
     setMessages((prev) => [...prev, userMessage]);
-    setInput('');
+    setInput("");
     setLoading(true);
-
+    // Get the API key from .env
+    const apiKey = process.env.NEXT_PUBLIC_OPENROUTER_API_KEY;
     try {
-      const response = await fetch('https://openrouter.ai/api/v1/chat/completions', {
-        method: 'POST',
-        headers: {
-          'Authorization': `Bearer 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`,
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          model: 'google/gemini-2.0-flash-thinking-exp:free',
-          messages: [
-            { role: 'system', content: `You are a useful trading expert. Guide the user to make better trading decisions and help navigate the TradingAI website.
+      const response = await fetch(
+        "https://openrouter.ai/api/v1/chat/completions",
+        {
+          method: "POST",
+          headers: {
+            Authorization: `Bearer ${apiKey}`,
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            model: "google/gemini-2.0-flash-thinking-exp:free",
+            messages: [
+              {
+                role: "system",
+                content: `You are a useful trading expert. Guide the user to make better trading decisions and help navigate the TradingAI website.
               Website information:
               - Home: [Home](localhost3000)
               - Blogs: [Blogs](/blogs)
@@ -40,17 +55,22 @@ const ChatAssistant = () => {
               - About: [About](/about)
               - Dashboard: [Dashboard](/dashboard)
               - Market & Trade: [Market & Trade](/trade)
-              - Education: [Education](/education)` },
-            ...messages,
-            userMessage
-          ],
-        }),
-      });
+              - Education: [Education](/education)`,
+              },
+              ...messages,
+              userMessage,
+            ],
+          }),
+        }
+      );
       const data = await response.json();
-      const aiMessage = { role: 'assistant', content: data.choices[0]?.message?.content || '...' };
+      const aiMessage = {
+        role: "assistant",
+        content: data.choices[0]?.message?.content || "...",
+      };
       setMessages((prev) => [...prev, aiMessage]);
     } catch (error) {
-      console.error('Error fetching AI response:', error);
+      console.error("Error fetching AI response:", error);
     } finally {
       setLoading(false);
     }
@@ -65,28 +85,53 @@ const ChatAssistant = () => {
       >
         <MessageCircle size={24} />
       </button>
-      
+
       {/* Chat Window */}
       {isOpen && (
-        <div className={`fixed bottom-20 right-6 z-50 w-80 p-4 border rounded-2xl shadow-lg transition-all ${theme === 'dark' ? 'bg-gray-900 text-white border-gray-700' : 'bg-white text-black border-gray-300'}`}>
+        <div
+          className={`fixed bottom-20 right-6 z-50 w-80 p-4 border rounded-2xl shadow-lg transition-all ${
+            theme === "dark"
+              ? "bg-gray-900 text-white border-gray-700"
+              : "bg-white text-black border-gray-300"
+          }`}
+        >
           <div className="flex justify-between items-center mb-2">
-            <h2 className="text-lg font-bold flex items-center gap-2"><MessageSquare /> Chat with AI</h2>
-            <button onClick={() => setIsOpen(false)} className="text-gray-500 hover:text-gray-700 dark:hover:text-gray-300">
+            <h2 className="text-lg font-bold flex items-center gap-2">
+              <MessageSquare /> Chat with AI
+            </h2>
+            <button
+              onClick={() => setIsOpen(false)}
+              className="text-gray-500 hover:text-gray-700 dark:hover:text-gray-300"
+            >
               <X size={20} />
             </button>
           </div>
-          <Card className={`p-4 space-y-3 h-80 overflow-y-auto rounded-xl shadow-inner ${theme === 'dark' ? 'bg-gray-800 border-gray-700' : 'bg-gray-100 border-gray-300'}`}>
+          <Card
+            className={`p-4 space-y-3 h-80 overflow-y-auto rounded-xl shadow-inner ${
+              theme === "dark"
+                ? "bg-gray-800 border-gray-700"
+                : "bg-gray-100 border-gray-300"
+            }`}
+          >
             {messages.map((msg, index) => (
               <motion.div
                 key={index}
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
-                className={`p-2 rounded-lg ${msg.role === 'user' ? 'bg-blue-500 text-white ml-auto' : theme === 'dark' ? 'bg-gray-700 text-white' : 'bg-gray-200 text-black'} max-w-[75%]`}
+                className={`p-2 rounded-lg ${
+                  msg.role === "user"
+                    ? "bg-blue-500 text-white ml-auto"
+                    : theme === "dark"
+                    ? "bg-gray-700 text-white"
+                    : "bg-gray-200 text-black"
+                } max-w-[75%]`}
               >
                 {msg.content}
               </motion.div>
             ))}
-            {loading && <p className="text-gray-500 text-sm">AI is thinking...</p>}
+            {loading && (
+              <p className="text-gray-500 text-sm">AI is thinking...</p>
+            )}
           </Card>
           <div className="flex gap-2 mt-2">
             <Input

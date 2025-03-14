@@ -1,14 +1,17 @@
-"use client"; // Required for client-side functionality
-
+"use client";
+// React built in hooks
 import { useEffect, useState } from "react";
+// Next imports
 import { useRouter } from "next/navigation";
+// Icons
 import { Mic } from "lucide-react";
 
 export default function VoiceNavigation() {
+  // Use router hook
   const router = useRouter();
+  // State to save the status of isListening
   const [isListening, setIsListening] = useState(false);
   let recognition;
-
   useEffect(() => {
     if (typeof window === "undefined") return;
     
@@ -28,9 +31,11 @@ export default function VoiceNavigation() {
       // **Route Navigation in Next.js**
       if (transcript.includes("go to home")) router.push("/");
       else if (transcript.includes("go to blogs")) router.push("/blogs");
-      else if (transcript.includes("go to suggestions")) router.push("/suggestion");
+      else if (transcript.includes("go to signals")) router.push("/signals");
       else if (transcript.includes("go to trade")) router.push("/trade");
-      else if (transcript.includes("go to education")) router.push("/education");
+      else if (transcript.includes("go to strategies")) router.push("/education");
+      else if (transcript.includes("go to market")) router.push("/market");
+      else if (transcript.includes("go to about")) router.push("/about");
 
       // **Window Navigation**
       else if (transcript.includes("reload page")) window.location.reload();

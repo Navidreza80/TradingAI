@@ -1,6 +1,6 @@
 // Sever actions
 import { updateUserImage } from "@/actions/user.action";
-// Shadcn components
+// ShadCn components
 import { Button } from "@/components/ui/button";
 import {
   Dialog,

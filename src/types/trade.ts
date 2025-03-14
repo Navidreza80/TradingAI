@@ -33,3 +33,33 @@ export interface ClosedPosition extends Position {
   };
   isWin: boolean;
 }
+
+export interface ClosedTrade {
+  symbol: string;
+  type: string;
+  amount: number;
+  leverage: number;
+  mode: string;
+  entryPrice: number;
+  closePrice: number;
+  pnl: {
+    amount: number;
+    percentage: number;
+  };
+  pnlAmount: number;
+  pnlPercent: number;
+  takeProfit: number | null;
+  stopLoss: number | null;
+  timestamp: number;
+  closeTime: number;
+  isWin: boolean;
+  userId: string;
+}
+
+export interface Signals {
+  confidenceLevel: string;
+  stopLoss: string;
+  takeProfit: string;
+  reason: string;
+  entryPrice: string;
+}

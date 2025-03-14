@@ -30,7 +30,8 @@ export default function CreateNewBlog({
       content: content,
       blogThumbnail: image,
     });
-    if (newBlog.success == true) toast.success("Blog Created Successfully!!");
+    if(newBlog == "User not authenticated")toast.error("User not authenticated");
+    else if (newBlog.success == true) toast.success("Blog Created Successfully!!");
   };
   return (
     <div className="flex flex-col flex-wrap lg:w-1/2 md:w-full sm:w-full xs:w-full lg:h-full md:h-1/2 sm:h-1/2 xs:h-1/2 p-5 border rounded-2xl items-start dark:border-gray-400 dark:bg-[#4b4b4b5b] bg-white border-[#4b4b4b61]">

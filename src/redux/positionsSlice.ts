@@ -1,14 +1,19 @@
+// Redux for state management
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+// Types for type safety
 import { Position } from '../types';
 
+// Position interface
 interface PositionsState {
   positions: Position[];
 }
 
+// Position initial value
 const initialState: PositionsState = {
   positions: [],
 };
 
+// Function to create slice
 const positionsSlice = createSlice({
   name: 'positions',
   initialState,

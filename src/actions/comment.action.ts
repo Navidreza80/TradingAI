@@ -1,8 +1,12 @@
 "use server";
-
+// Prisma client import
 import prisma from "@/lib/prisma";
+// Server actions
 import { getDbUserId } from "./user.action";
+// Types fot type safety
+import { CreateCommentInput } from "@/types/comment";
 
+// Action to fetch comments of the blog
 export async function fetchCommentsForBlog(blogId: string) {
   try {
     const comments = await prisma.comment.findMany({
@@ -19,16 +23,15 @@ export async function fetchCommentsForBlog(blogId: string) {
 
     return comments;
   } catch (error) {
-    console.error("Error fetching comments for blog:", error);
-    throw new Error("Failed to fetch comments");
-  } finally {
-    await prisma.$disconnect(); // Disconnect the Prisma Client
+    return { error, message: "failed to fetch comments", success: false };
   }
 }
 
+// Action to fetch all comments of the user
 export async function fetchUserComment() {
   try {
-    const userId = getDbUserId();
+    const userId = await getDbUserId();
+    if (!userId) return "User not authenticated";
     const comments = await prisma.comment.findMany({
       where: {
         userId: userId, // Filter comments by user ID
@@ -43,25 +46,16 @@ export async function fetchUserComment() {
 
     return comments;
   } catch (error) {
-    console.error("Error fetching comments for blog:", error);
-    throw new Error("Failed to fetch comments");
-  } finally {
-    await prisma.$disconnect(); // Disconnect the Prisma Client
+    return { error, message: "failed to fetch user comments", success: false };
   }
 }
 
-interface CreateCommentInput {
-  content: string;
-  blogId: string;
-}
-
+// Action to create a comment
 export async function createComment(input: CreateCommentInput) {
   try {
     const id = await getDbUserId();
 
-    if (!id) {
-      throw new Error("User not authenticated.");
-    }
+    if (!id) return "User not authenticated";
 
     const newComment = await prisma.comment.create({
       data: {
@@ -77,16 +71,15 @@ export async function createComment(input: CreateCommentInput) {
       message: "Comment Added Successfully!!",
     };
   } catch (error) {
-    console.error("Error creating comment:", error);
-    throw new Error("Failed to create comment");
-  } finally {
-    await prisma.$disconnect(); // Disconnect the Prisma Client
+    return { error, message: "failed to create new comment", success: false };
   }
 }
 
+// Action to update or edit comment
 export async function editComment(commentId: string, newContent: string) {
   try {
     const userId = await getDbUserId();
+    if (!userId) return "User not authenticated";
     const updatedComment = await prisma.comment.updateMany({
       where: { id: commentId, userId }, // Ensures only the comment owner can edit
       data: { content: newContent },
@@ -98,14 +91,15 @@ export async function editComment(commentId: string, newContent: string) {
 
     return { success: true, message: "Comment updated successfully." };
   } catch (error) {
-    console.error("Error updating comment:", error);
-    return { success: false, message: "Failed to update comment." };
+    return { error, message: "failed to update comment", success: false };
   }
 }
 
+// Action to delete comment
 export async function deleteComment(commentId: string) {
   try {
-    const userId = getDbUserId()
+    const userId = await getDbUserId();
+    if (!userId) return "User not authenticated";
     // Check if the user owns the comment
     const comment = await prisma.comment.findFirst({
       where: { id: commentId, userId },
@@ -120,7 +114,6 @@ export async function deleteComment(commentId: string) {
 
     return { success: true, message: "Comment deleted successfully." };
   } catch (error) {
-    console.error("Error deleting comment:", error);
-    return { success: false, message: "Failed to delete comment." };
+    return { success: false, message: "Failed to delete comment.", error };
   }
 }

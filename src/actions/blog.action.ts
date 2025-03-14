@@ -1,16 +1,15 @@
 "use server";
-
+// Prisma client import
 import prisma from "@/lib/prisma";
+// Server actions
 import { getDbUserId } from "./user.action";
-interface CreateBlogInput {
-  title: string;
-  shortDescription: string;
-  content?: string;
-  blogThumbnail?: string;
-}
+// Payload interface for type safety
+import { CreateBlogInput } from "@/types/blog";
 
+// Action to create a blog
 export async function createBlog(input: CreateBlogInput) {
   try {
+    // Get the id of the user
     const userId = await getDbUserId();
     if (!userId) return "User not authenticated";
 
@@ -26,13 +25,11 @@ export async function createBlog(input: CreateBlogInput) {
 
     return { data: newBlog, success: true };
   } catch (error) {
-    console.error("Error creating blog:", error);
-    throw new Error("Failed to create blog");
-  } finally {
-    await prisma.$disconnect(); // Disconnect the Prisma Client
+    return { success: false, error: error, message: "Failed to create blog" };
   }
 }
 
+// Action to fetch all blogs
 export async function fetchBlogs() {
   try {
     const blogs = await prisma.blog.findMany({
@@ -53,13 +50,11 @@ export async function fetchBlogs() {
 
     return blogs;
   } catch (error) {
-    console.error("Error fetching blogs:", error);
-    throw new Error("Failed to fetch blogs");
-  } finally {
-    await prisma.$disconnect(); // Disconnect the Prisma Client
+    return { success: false, error: error, message: "Failed to fetch blog" };
   }
 }
 
+// Action to fetch detail of the blog
 export async function fetchBlogById(id: string) {
   try {
     const blog = await prisma.blog.findUnique({
@@ -84,16 +79,19 @@ export async function fetchBlogById(id: string) {
 
     return blog;
   } catch (error) {
-    console.error("Error fetching blog by ID:", error);
-    throw new Error("Failed to fetch blog");
-  } finally {
-    await prisma.$disconnect(); // Disconnect the Prisma Client
+    return {
+      success: false,
+      error: error,
+      message: "Failed to fetch blog detail",
+    };
   }
 }
 
+// Action to fetch all of the blogs from a user
 export async function fetchUserBlogs() {
   try {
     const userId = await getDbUserId();
+    if (!userId) return "User not authenticated";
     const blogs = await prisma.blog.findMany({
       where: {
         publisherId: userId, // Filter blogs by the user's ID
@@ -115,13 +113,15 @@ export async function fetchUserBlogs() {
 
     return blogs;
   } catch (error) {
-    console.error("Error fetching user blogs:", error);
-    throw new Error("Failed to fetch user blogs");
-  } finally {
-    await prisma.$disconnect(); // Disconnect the Prisma Client
+    return {
+      success: false,
+      error: error,
+      message: "Failed to fetch user blog",
+    };
   }
 }
 
+// Action to update or edit blogs detail and information
 export async function updateBlog(
   userId: string,
   blogId: string,
@@ -161,16 +161,17 @@ export async function updateBlog(
       updatedBlog,
     };
   } catch (error) {
-    console.error("Error updating blog:", error);
-    return { success: false, message: "An error occurred", error };
+    return { success: false, message: "Failed to update blog", error };
   }
 }
 
+// Action to add reaction for blog
 export async function toggleBlogReaction(
   blogId: string,
   action: "like" | "dislike"
 ) {
   const userId = await getDbUserId();
+  if (!userId) return "User not authenticated";
   try {
     // Check if the user has already liked or disliked the blog
     const existingLike = await prisma.blogLike.findUnique({
@@ -223,11 +224,11 @@ export async function toggleBlogReaction(
       }
     }
   } catch (error) {
-    console.error("Error toggling blog reaction:", error);
-    return { success: false, message: "Error toggling reaction", error };
+    return { success: false, message: "Error toggling reaction", error: error };
   }
 }
 
+// Action to get the blog likes and dislikes
 export async function getBlogReaction(userId: string, blogId: string) {
   try {
     // Check if user liked the blog
@@ -245,14 +246,15 @@ export async function getBlogReaction(userId: string, blogId: string) {
       disliked: !!disliked, // Returns true if the blog is disliked, otherwise false
     };
   } catch (error) {
-    console.error("Error fetching blog reaction:", error);
     return { liked: false, disliked: false, error };
   }
 }
 
+// Action to fetch user liked blogs
 export async function fetchLikedBlogs() {
   try {
     const userId = await getDbUserId();
+    if (!userId) return "User not authenticated";
     const likedBlogs = await prisma.blog.findMany({
       where: {
         likes: {
@@ -276,13 +278,19 @@ export async function fetchLikedBlogs() {
 
     return likedBlogs;
   } catch (error) {
-    console.error("Error fetching liked blogs:", error);
+    return {
+      success: false,
+      error: error,
+      message: "Failed to fetch liked blog",
+    };
   }
 }
 
+// Action to fetch user disliked blogs
 export async function fetchDislikedBlogs() {
   try {
     const userId = await getDbUserId();
+    if (!userId) return "User not authenticated";
     const dislikedBlogs = await prisma.blog.findMany({
       where: {
         dislikes: {
@@ -306,13 +314,19 @@ export async function fetchDislikedBlogs() {
 
     return dislikedBlogs;
   } catch (error) {
-    console.error("Error fetching disliked blogs:", error);
+    return {
+      success: false,
+      error: error,
+      message: "Failed to fetch disliked blog",
+    };
   }
 }
 
+// Action to delete blog
 export async function deleteBlog(blogId: string) {
   try {
     const userId = await getDbUserId();
+    if (!userId) return "User not authenticated";
     await prisma.comment.deleteMany({ where: { blogId } });
     await prisma.blogLike.deleteMany({ where: { blogId } });
     await prisma.blogDislike.deleteMany({ where: { blogId } });
@@ -327,7 +341,6 @@ export async function deleteBlog(blogId: string) {
 
     return { success: true, message: "Blog deleted successfully." };
   } catch (error) {
-    console.error("Error deleting blog:", error);
-    return { success: false, message: "Failed to delete blog." };
+    return { success: false, error: error, message: "Failed to delete blog" };
   }
 }

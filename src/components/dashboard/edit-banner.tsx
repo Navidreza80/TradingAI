@@ -1,6 +1,6 @@
 // Server actions
 import { updateUserBanner } from "@/actions/user.action";
-// Shadcn components
+// ShadCn components
 import { Button } from "@/components/ui/button";
 import {
   Dialog,

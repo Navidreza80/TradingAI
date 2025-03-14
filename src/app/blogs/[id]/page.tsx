@@ -24,7 +24,7 @@ import {
   HandThumbDownIcon,
   HandThumbUpIcon,
   ShareIcon,
-  UserIcon
+  UserIcon,
 } from "@heroicons/react/24/outline";
 // React built in hooks
 import { useEffect, useState } from "react";
@@ -43,38 +43,47 @@ export default function BlogDetailPage() {
   // State to save user submitted comment content
   const [commentContent, setCommentContent] = useState("");
   // States to save blog reactions
-  const [isLiked, setIsLiked] = useState();
-  const [isDisLiked, setIsDisLiked] = useState();
+  const [isLiked, setIsLiked] = useState<boolean>();
+  const [isDisLiked, setIsDisLiked] = useState<boolean>();
   // Function to fetch detail of the blog
   const fetchDetail = async () => {
-    const data = await fetchBlogById(id);
-    setDetail(data);
+    if (typeof id == "string") {
+      const data = await fetchBlogById(id);
+      setDetail(data);
+    }
   };
   // Function to fetch comments of the blog
   const fetchDetailComment = async () => {
-    const data = await fetchCommentsForBlog(id);
-    setComments(data);
+    if (typeof id == "string") {
+      const data = await fetchCommentsForBlog(id);
+      setComments(data);
+    }
   };
   // Function to submit the comment and post it to the database
   const handleCommentSubmit = async () => {
-    const data = await createComment({
-      content: commentContent,
-      blogId: id,
-    });
-    console.log(data.newComment);
-    if (data.success) {
-      setComments([...comments, data.newComment]);
-      toast.success(data.message);
+    if (typeof id == "string") {
+      const data = await createComment({
+        content: commentContent,
+        blogId: id,
+      });
+      if (typeof data !== "string") {
+        if (data.success) {
+          setComments([...comments, data.newComment]);
+          toast.success(data.message);
+        }
+      }
     }
   };
   // Function to fetch reactions of the blog
   const fetchInteraction = async () => {
     const userId = await getDbUserId();
     if (userId) {
-      const request = await getBlogReaction(userId, id);
-      console.log(request);
-      setIsDisLiked(request.disliked);
-      setIsLiked(request.liked);
+      if (typeof id == "string") {
+        const request = await getBlogReaction(userId, id);
+        console.log(request);
+        setIsDisLiked(request.disliked);
+        setIsLiked(request.liked);
+      }
     }
   };
   // Callback function to fetch detail when the component is mounting
@@ -118,9 +127,9 @@ export default function BlogDetailPage() {
 
             {/* Featured Image */}
             <div className="relative h-[400px] w-full rounded-2xl overflow-hidden mb-8">
-              {detail.blogThumbnail && (
+              {typeof detail.blogThumbnail == "string" && (
                 <Image
-                  src={detail.blogThumbnail ? detail.blogThumbnail : null}
+                  src={detail.blogThumbnail}
                   alt={detail.title}
                   fill
                   className="object-cover"
@@ -155,10 +164,14 @@ export default function BlogDetailPage() {
               <button
                 className="flex items-center gap-2 text-sm"
                 onClick={async () => {
-                  const request = await toggleBlogReaction(id, "like");
-                  if (request?.success) toast.success(request.message);
-                  setIsLiked(true);
-                  setIsDisLiked(false);
+                  if (typeof id == "string") {
+                    const request = await toggleBlogReaction(id, "like");
+                    if (request == "User not authenticated")
+                      toast.error("User not authenticated");
+                    else if (request?.success) toast.success(request.message);
+                    setIsLiked(true);
+                    setIsDisLiked(false);
+                  }
                 }}
               >
                 {isLiked ? (
@@ -175,10 +188,14 @@ export default function BlogDetailPage() {
               <button
                 className="flex items-center gap-2 text-sm"
                 onClick={async () => {
-                  const request = await toggleBlogReaction(id, "dislike");
-                  if (request?.success) toast.success(request.message);
-                  setIsLiked(false);
-                  setIsDisLiked(true);
+                  if (typeof id == "string") {
+                    const request = await toggleBlogReaction(id, "dislike");
+                    if (request == "User not authenticated")
+                      toast.error("User not authenticated");
+                    else if (request?.success) toast.success(request.message);
+                    setIsLiked(false);
+                    setIsDisLiked(true);
+                  }
                 }}
               >
                 {isDisLiked ? (
@@ -265,15 +282,15 @@ export default function BlogDetailPage() {
                   dark:bg-white/5 bg-white/80"
                       >
                         <div className="flex items-start gap-4">
-                          <Image
-                            src={
-                              comment.user?.image ? comment.user?.image : null
-                            }
-                            alt={comment.user?.username}
-                            width={40}
-                            height={40}
-                            className="rounded-full w-10 h-10"
-                          />
+                          {typeof comment.user.image == "string" && (
+                            <Image
+                              src={comment.user.image}
+                              alt={comment.user?.username}
+                              width={40}
+                              height={40}
+                              className="rounded-full w-10 h-10"
+                            />
+                          )}
                           <div className="flex-1">
                             <div className="flex items-center justify-between mb-2">
                               <h3

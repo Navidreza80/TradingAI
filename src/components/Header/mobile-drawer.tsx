@@ -12,7 +12,6 @@ import { Button, Drawer } from "antd";
 // Redux imports
 import { useSelector } from "react-redux";
 import { SignedOut } from "@clerk/nextjs";
-import UserSection from "./user-section";
 
 export default function MobileDrawer({
   setIsMobileMenuOpen,

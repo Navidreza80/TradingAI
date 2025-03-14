@@ -5,8 +5,10 @@ import Link from "next/link";
 import { useTranslation } from "react-i18next";
 // Third party components
 import ThemeNLanguage from "../theme-n-language";
+// Type
+import { MouseEventHandler } from "react";
 
-export default function Sidebar({ isOpen, onClose }) {
+export default function Sidebar({ isOpen, onClose }: {isOpen: boolean; onClose: MouseEventHandler<HTMLButtonElement> | undefined}) {
   // i18n hooks for translation
   const { t, i18n } = useTranslation();
   // Sidebar items to map over them

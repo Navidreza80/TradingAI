@@ -1,4 +1,4 @@
-// Shadcn components
+// ShadCn components
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,

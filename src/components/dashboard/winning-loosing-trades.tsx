@@ -26,6 +26,7 @@ export default function TradesAnalyticsChart() {
   // Function to fetch user winning and loosing trades past 6 months
   const getUserData = async () => {
     const request = await fetchUserWinLoss();
+    if(request == "User not authenticated")return
     setData(request);
   };
   // Call back function to get user data when the components is mounting
