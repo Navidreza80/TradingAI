@@ -1,6 +1,7 @@
 "use client";
-
+// React built in hooks
 import { useState, useEffect } from "react";
+// Shadcn components
 import { Card } from "@/components/ui/card";
 import {
   Table,
@@ -10,46 +11,26 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+// Next built in hooks
 import { useTheme } from "next-themes";
+// Framer motion for animation
 import { motion } from "framer-motion";
+// Server actions
+import { fetchClosedTrades } from "@/actions/trade.action";
 
 export default function TradeHistory() {
+  // Next useTheme hook to recognize app theme
   const { theme } = useTheme();
+  // State tot save user Closed-Trade history
   const [tradeHistory, setTradeHistory] = useState([]);
-
+  // Function to fetch user Closed-Trade history
+  const fetchTrades = async () => {
+    const data = await fetchClosedTrades();
+    setTradeHistory(data);
+  };
+  // useEffect with callback function to fetch user Closed-Trade history past 6 months
   useEffect(() => {
-    // Simulated fetch request (replace with actual API call)
-    setTimeout(() => {
-      setTradeHistory([
-        {
-          id: 1,
-          asset: "BTC/USD",
-          type: "Buy",
-          amount: "0.5 BTC",
-          price: "$45,000",
-          profit: "+$500",
-          date: "2024-03-06",
-        },
-        {
-          id: 2,
-          asset: "ETH/USD",
-          type: "Sell",
-          amount: "2 ETH",
-          price: "$3,200",
-          profit: "-$100",
-          date: "2024-03-05",
-        },
-        {
-          id: 3,
-          asset: "XRP/USD",
-          type: "Buy",
-          amount: "1000 XRP",
-          price: "$0.50",
-          profit: "+$200",
-          date: "2024-03-04",
-        },
-      ]);
-    }, 1000);
+    fetchTrades();
   }, []);
 
   return (
@@ -57,32 +38,29 @@ export default function TradeHistory() {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
-      className="w-1/2 h-full md:w-full sm:w-full xs:w-full sm:h-1/2 xs:h-1/2 max-w-5xl mx-auto"
+      className="w-1/2 h-[350px] overflow-scroll md:w-full sm:w-full xs:w-full max-w-5xl mx-auto"
     >
       <Card
         className={`p-4 rounded-xl shadow-lg overflow-auto ${
           theme === "dark" ? "bg-gray-900 text-white" : "bg-white text-black"
         }`}
       >
-        <div className="overflow-x-auto">
-          <Table className="w-full min-w-[600px]">
+        <div className="overflow-x-auto h-full">
+          <Table className="w-full min-w-[600px] h-full">
             <TableHeader>
               <TableRow>
-                <TableHead>ID</TableHead>
                 <TableHead>Asset</TableHead>
                 <TableHead>Type</TableHead>
                 <TableHead>Amount</TableHead>
-                <TableHead>Price</TableHead>
                 <TableHead>Profit/Loss</TableHead>
                 <TableHead>Date</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
               {tradeHistory.length > 0 ? (
-                tradeHistory.map((trade) => (
+                tradeHistory.slice(0, 6).map((trade) => (
                   <TableRow key={trade.id}>
-                    <TableCell>{trade.id}</TableCell>
-                    <TableCell>{trade.asset}</TableCell>
+                    <TableCell>{trade.symbol}</TableCell>
                     <TableCell
                       className={
                         trade.type === "Buy" ? "text-green-500" : "text-red-500"
@@ -90,18 +68,18 @@ export default function TradeHistory() {
                     >
                       {trade.type}
                     </TableCell>
-                    <TableCell>{trade.amount}</TableCell>
-                    <TableCell>{trade.price}</TableCell>
+                    <TableCell>{trade.amount}$</TableCell>
                     <TableCell
                       className={
-                        trade.profit.startsWith("+")
-                          ? "text-green-500"
-                          : "text-red-500"
+                        trade.pnlAmount > 0 ? "text-green-500" : "text-red-500"
                       }
                     >
-                      {trade.profit}
+                      {Math.ceil(trade.pnlAmount)}
                     </TableCell>
-                    <TableCell>{trade.date}</TableCell>
+                    <TableCell>
+                      {" "}
+                      {new Date(trade.closeTimeDate).toLocaleDateString()}
+                    </TableCell>
                   </TableRow>
                 ))
               ) : (

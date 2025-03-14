@@ -1,3 +1,4 @@
+// Shadcn components
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -8,17 +9,25 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
+// Icons
 import { Edit } from "lucide-react";
 import { Input } from "../ui/input";
 import { Label } from "../ui/label";
+// i18n for translation
 import { useTranslation } from "react-i18next";
+// React built in hooks
 import { useState } from "react";
+// Server actions
 import { updateUsername } from "@/actions/user.action";
+// React hot toast fot creating toasts
 import toast from "react-hot-toast";
 
 export default function EditUserName({id, username, setUsername}) {
+  // i18n hooks for translation
   const { t } = useTranslation();
+  // State to save the value of users username
   const [value, setValue] = useState(username)
+  // Function that edit and updates users username by passing the username string value
   const updateUserName = async () => {
     const data = await updateUsername(id, value)
     if(data.success){
@@ -48,7 +57,7 @@ export default function EditUserName({id, username, setUsername}) {
             </Label>
             <Input id="username" defaultValue={username} onChange={(e) => setValue(e.currentTarget.value)} className="col-span-3" />
           </div>
-        </div>{" "}
+        </div>
         <div className="py-4"></div>
         <DialogFooter>
           <Button onClick={updateUserName}>{t('dashboard.modals.save')}</Button>

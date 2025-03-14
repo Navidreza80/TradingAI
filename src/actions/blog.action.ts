@@ -24,7 +24,7 @@ export async function createBlog(input: CreateBlogInput) {
       },
     });
 
-    return newBlog;
+    return { data: newBlog, success: true };
   } catch (error) {
     console.error("Error creating blog:", error);
     throw new Error("Failed to create blog");
@@ -307,5 +307,27 @@ export async function fetchDislikedBlogs() {
     return dislikedBlogs;
   } catch (error) {
     console.error("Error fetching disliked blogs:", error);
+  }
+}
+
+export async function deleteBlog(blogId: string) {
+  try {
+    const userId = await getDbUserId();
+    await prisma.comment.deleteMany({ where: { blogId } });
+    await prisma.blogLike.deleteMany({ where: { blogId } });
+    await prisma.blogDislike.deleteMany({ where: { blogId } });
+    // Ensure only the blog owner can delete it
+    const deletedBlog = await prisma.blog.deleteMany({
+      where: { id: blogId, publisherId: userId },
+    });
+
+    if (deletedBlog.count === 0) {
+      return { success: false, message: "Blog not found or unauthorized." };
+    }
+
+    return { success: true, message: "Blog deleted successfully." };
+  } catch (error) {
+    console.error("Error deleting blog:", error);
+    return { success: false, message: "Failed to delete blog." };
   }
 }

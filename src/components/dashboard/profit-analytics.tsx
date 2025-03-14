@@ -1,28 +1,36 @@
 "use client";
-
-import React, { useEffect, useState } from "react";
-import {
-  BarChart,
-  Bar,
-  XAxis,
-  YAxis,
-  CartesianGrid,
-  Tooltip,
-  ResponsiveContainer,
-  Legend,
-} from "recharts";
-import { Card, CardContent } from "@/components/ui/card";
-import { motion } from "framer-motion";
-import { useSelector } from "react-redux";
+// Server actions
 import { getUserProfits } from "@/actions/user.action";
+// Shadcn components
+import { Card, CardContent } from "@/components/ui/card";
+// Framer motion for animation
+import { motion } from "framer-motion";
+// React built in hooks
+import { useEffect, useState } from "react";
+// Redux hooks for state managements
+import { useSelector } from "react-redux";
+// Chart components
+import {
+  Bar,
+  BarChart,
+  CartesianGrid,
+  Legend,
+  ResponsiveContainer,
+  Tooltip,
+  XAxis
+} from "recharts";
 
 export default function AnalyticsChart() {
+  // Redux isDarkMode hook to recognize app theme
   const isDarkMode = useSelector((state) => state.theme.isDarkMode);
+  // State to save profit of user in past 6 months
   const [data, setData] = useState();
+  // Function to fetch user profit in past 6 months
   const getUserData = async () => {
     const request = await getUserProfits();
     setData(request);
   };
+  // Callback function to execute when the component is mounting
   useEffect(() => {
     getUserData();
   }, []);
@@ -32,7 +40,7 @@ export default function AnalyticsChart() {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
-      className="w-1/2 h-full md:w-1/2 sm:w-full xs:w-full sm:h-1/2 xs:h-1/2"
+      className="lg:w-1/2 h-full md:w-1/2 sm:w-full xs:w-full sm:h-1/2 xs:h-1/2"
     >
       <Card className="shadow-xl rounded-2xl border border-[#4b4b4b61] bg-white dark:bg-black border-gray-200 dark:border-gray-800 w-full">
         <CardContent>

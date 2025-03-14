@@ -1,30 +1,24 @@
 'use client'
-
+// Framer motion imports for animation
 import { motion } from 'framer-motion';
+// i18n imports for translation
 import { useTranslation } from 'react-i18next';
+// Icons imports
 import { 
   UserGroupIcon,
   CurrencyDollarIcon,
   ChartBarIcon,
   GlobeAltIcon 
 } from '@heroicons/react/24/outline';
+// Count up for stats
 import CountUp from 'react-countup';
+// Date convertor
 import { convertToLocaleNumber } from '@/lib/utils';
+// Global style
 import './Style.css';
 
-/**
- * Stats Section Component
- * 
- * Displays key statistics and metrics with animations and modern design.
- * Features:
- * - Animated counters
- * - Responsive grid layout
- * - Equal height/width cards
- * - Theme support
- * - RTL support
- * - Glass morphism effects
- */
 export default function Stats() {
+  // i18n hooks for translation
   const { t, i18n } = useTranslation();
 
   // Format number based on locale
@@ -47,8 +41,7 @@ export default function Stats() {
       value: 1000000,
       formattedValue: formatNumber(1000000),
       title: t('stats.volume.title'),
-      prefix: '$',
-      suffix: i18n.language === 'fa' || i18n.language === 'ar' ? 'م' : 'M',
+      suffix: i18n.language === 'fa' || i18n.language === 'ar' ? '' : 'M',
       color: 'from-purple-500 to-pink-500'
     },
     {

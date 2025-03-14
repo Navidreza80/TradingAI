@@ -1,17 +1,22 @@
 "use client";
-
-import React, { useEffect, useState } from "react";
-import { Card, CardContent } from "@/components/ui/card";
-import { motion } from "framer-motion";
-import Image from "next/image";
+// Server actions
 import { fetchMostTradedCurrencies } from "@/actions/user.action";
+// Shadcn components
+import { Card, CardContent } from "@/components/ui/card";
+// Framer motion for animation
+import { motion } from "framer-motion";
+// React built in hooks
+import { useEffect, useState } from "react";
 
 export default function MostTradedCryptos() {
+  // State to save user most traded currencies
   const [data, setData] = useState();
+  // Function to fetch users most traded currencies
   const getUserData = async () => {
     const request = await fetchMostTradedCurrencies();
     setData(request);
   };
+  // UseEffect with callback function to fetch user most traded currencies when the component is mounting
   useEffect(() => {
     getUserData();
   }, []);
@@ -34,7 +39,7 @@ export default function MostTradedCryptos() {
               <thead>
                 <tr className="border-b border-gray-400 dark:border-gray-600 text-lg">
                   <th className="p-4 text-gray-700 dark:text-gray-300">
-                    Crypto
+                    Asset
                   </th>
                   <th className="p-4 text-gray-700 dark:text-gray-300">
                     Trades

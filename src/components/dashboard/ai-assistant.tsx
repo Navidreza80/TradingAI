@@ -2,9 +2,9 @@
 
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Input } from '@/components/UI/input';
-import { Button } from '@/components/UI/Button';
-import { Card } from '@/components/UI/card';
+import { Input } from '../ui/input';
+import { Button } from '../ui/button';
+import { Card } from '../ui/card';
 import { MessageSquare, Send, MessageCircle, X } from 'lucide-react';
 import { useTheme } from 'next-themes';
 
@@ -26,7 +26,7 @@ const ChatAssistant = () => {
       const response = await fetch('https://openrouter.ai/api/v1/chat/completions', {
         method: 'POST',
         headers: {
-          'Authorization': `Bearer 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`,
+          'Authorization': `Bearer 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`,
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({

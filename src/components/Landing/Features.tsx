@@ -1,45 +1,23 @@
 'use client'
-
-// imports
-import { motion } from 'framer-motion';
-import { useTranslation } from 'react-i18next';
-import { 
-  ChartBarIcon, 
-  CpuChipIcon, 
-  BoltIcon, 
-  ShieldCheckIcon 
+// Icons imports
+import {
+  BoltIcon,
+  ChartBarIcon,
+  CpuChipIcon,
+  ShieldCheckIcon
 } from '@heroicons/react/24/outline';
+// Framer motion imports for animation
+import { motion } from 'framer-motion';
+// i18n imports for translation
+import { useTranslation } from 'react-i18next';
+// Global style
 import './Style.css';
-import { useState } from 'react';
 
-/**
- * Features Section Component
- * 
- * A responsive section showcasing the main features of the platform with modern design,
- * animations, and theme support.
- * 
- * Features:
- * - Responsive grid layout
- * - Framer Motion animations
- * - Dark/Light theme support
- * - Glass morphism effects
- * - Hover animations
- * - RTL support for Arabic and Persian
- * - Equal height cards
- * - Gradient backgrounds and text
- */
 export default function Features() {
-  const { t, i18n } = useTranslation();
-  const [isDarkMode, setIsDarkMode] = useState(true);
+  // i18n hooks for translation
+  const { t } = useTranslation();
 
-  /**
-   * Feature cards data structure
-   * Each feature includes:
-   * - icon: Heroicon component
-   * - title: Translated title key
-   * - description: Translated description key
-   * - color: Gradient color scheme
-   */
+  // Features items object
   const features = [
     {
       icon: <ChartBarIcon className="w-8 h-8" />,

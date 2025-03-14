@@ -1,21 +1,28 @@
 "use client";
-
+// Sever actions
 import { getDbUser } from "@/actions/user.action";
+// Icons
 import {
   ChatBubbleLeftIcon,
   HandThumbDownIcon,
   HandThumbUpIcon,
 } from "@heroicons/react/24/outline";
+// Framer motion
 import { motion } from "framer-motion";
+// Next built in components
 import Image from "next/image";
+// React built in hooks
 import { useEffect, useState } from "react";
 
 export default function BlogCard({ title, shortDescription, image }) {
+  // State to save user detail
   const [user, setUser] = useState({});
+  // Function to fetch users detail
   const fetchUser = async () => {
     const data = await getDbUser();
     setUser(data);
   };
+  // uesEffect with callback function to fetch users detail when the component is mounting
   useEffect(() => {
     fetchUser();
   }, []);

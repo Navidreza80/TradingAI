@@ -34,8 +34,9 @@ export async function closeTrade(tradeData) {
   }
 }
 
-export async function calculateUserStats(userId: string) {
+export async function calculateUserStats() {
   try {
+    const userId = await getDbUserId();
     // Count total trades
     const totalTrades = await prisma.trade.count({
       where: { userId },
@@ -61,5 +62,20 @@ export async function calculateUserStats(userId: string) {
   } catch (error) {
     console.error("Error calculating user stats:", error);
     return { winRate: 0, totalTrades: 0, totalWins: 0, totalPnL: 0, error };
+  }
+}
+
+export async function fetchClosedTrades() {
+  try {
+    const userId = await getDbUserId();
+    const closedTrades = await prisma.trade.findMany({
+      where: { userId },
+      orderBy: { closeTime: "desc" }, // Orders by most recent closed trades
+    });
+
+    return closedTrades;
+  } catch (error) {
+    console.error("Error fetching closed trades:", error);
+    return [];
   }
 }

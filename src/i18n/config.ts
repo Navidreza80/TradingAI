@@ -9,12 +9,24 @@ const resources = {
       nav: {
         home: "Home",
         blogs: "Blogs",
-        suggestions: "Suggestions",
+        signals: "Signals",
         about: "About",
+        trade: "Trade",
+        strategies: "Strategies",
         homeDesc: "Return to homepage",
-        blogsDesc: "Explore our trading features",
-        suggestionsDesc: "View our pricing plans",
+        blogsDesc: "Explore latest crypto news",
+        signalsDesc: "View our signals powered by AI",
         aboutDesc: "Learn more about TradingAI",
+        tradeDesc: "Execute your trades",
+        strategiesDesc: "Educate yourself on trading strategies",
+      },
+      dropdown: {
+        myAcc: "My Account",
+        dash: "Dashboard",
+        profile: "Profile",
+        blogs: "Blogs",
+        sub: "Subscriptions",
+        out: "Sign Out",
       },
       auth: {
         login: "Log In",
@@ -216,17 +228,8 @@ const resources = {
         },
         team: {
           title: "Meet Our Team",
-          roles: {
-            ceo: {
-              title: "Chief Executive Officer",
-            },
-            cto: {
-              title: "Chief Technology Officer",
-            },
-            product: {
-              title: "Product Manager",
-            },
-          },
+          navid: "Front & Back-End Developer",
+          taha: "Front-End Developer",
         },
       },
       profile: {
@@ -248,12 +251,8 @@ const resources = {
           dashboard: "dashboard",
           profile: "profile",
           blogs: "blogs",
-          courses: "courses",
-          saved: "saved",
-          likes: "likes",
           subscriptions: "subscriptions",
           comments: "comments",
-          signout: "Sign Out",
         },
         welcome: {
           welcome: "Welcome back,",
@@ -279,10 +278,9 @@ const resources = {
           title: "Your Comments",
         },
         stats: {
-          likes: "Likes",
-          following: "Followings",
-          saved: "Saved",
-          comments: "Comments",
+          trades: "Total Trades",
+          profits: "Total Profits",
+          win: "Win Rate",
         },
         course: {
           title: "Latest Course",
@@ -343,6 +341,47 @@ const resources = {
           hideT: "Hide Total Trades",
           hideP: "Hide P&L",
         },
+        sidebar: {
+          dash: "Dashboard",
+          prof: "Profile",
+          blogs: "Blogs",
+          sub: "Subscription",
+        },
+        blogs: {
+          your: "Your Blogs",
+          manage: "Manage your blogs here",
+          create: "Create Blog",
+          dropdown: {
+            your: "Your blogs",
+            disliked: "Disliked blogs",
+            liked: "Liked blogs",
+          },
+          edit: {
+            edit: "Edit Blog",
+            change: "Make changes to your blog, click save changes to apply.",
+            title: "Title",
+            content: "Content",
+            short: "Short Description",
+            thumb: "Thumbnail",
+          },
+        },
+        subscription: "Choose Your Plan",
+        commentsPage: {
+          content: "Content",
+          likes: "Likes",
+          dislikes: "Dislikes",
+          created: "Created At",
+          actions: "Actions",
+          filter: "Filter comments...",
+          no: "No results.",
+          prev: "Previous",
+          next: "Next",
+          edit: {
+            title: "Edit Comment",
+            desc: "Make changes to your comment here, click save when you're done",
+            content: "Content",
+          },
+        },
       },
       history: "History",
       activeTrades: "Active Trades",
@@ -375,21 +414,34 @@ const resources = {
       tradeType: "Trade Type",
       tradeMode: "Trade Mode",
       TP_SL: "TP/SL",
-      internetConnectionWarning: "Please ensure your internet connection and VPN are active.",
+      internetConnectionWarning:
+        "Please ensure your internet connection and VPN are active.",
       NoOpenTrade: "There is no open trade",
     },
   },
   fa: {
     translation: {
       nav: {
-        home: "خانه",
-        blogs: "بلاگ ها",
-        suggestions: "پیشنهادات",
+        home: "صفحه اصلی",
+        blogs: "مقالات",
+        signals: "سیگنال‌ها",
         about: "درباره ما",
+        trade: "معامله",
+        strategies: "استراتژی‌ها",
         homeDesc: "بازگشت به صفحه اصلی",
-        blogsDesc: "مشاهده امکانات معاملاتی",
-        suggestionsDesc: "مشاهده تعرفه‌ها",
-        aboutDesc: "درباره TradingAI",
+        blogsDesc: "آخرین اخبار ارزهای دیجیتال را بررسی کنید",
+        signalsDesc: "مشاهده سیگنال‌های ما با پشتیبانی از هوش مصنوعی",
+        aboutDesc: "بیشتر درباره TradingAI بدانید",
+        tradeDesc: "معاملات خود را انجام دهید",
+        strategiesDesc: "آموزش استراتژی‌های معاملاتی",
+      },
+      dropdown: {
+        myAcc: "حساب من",
+        dash: "داشبورد",
+        profile: "نمایه",
+        blogs: "مقالات",
+        sub: "اشتراک‌ها",
+        out: "خروج",
       },
       auth: {
         login: "ورود",
@@ -464,7 +516,7 @@ const resources = {
             name: "دیوید چن",
             role: "سرمایه‌گذار ارز دیجیتال",
             content:
-              "توقعات الذكاء الاصطناعي في المنصة ساعدتني على تحقيق أرباح مستمرة في سوق العملات الرقمية. رابط کاربری بسیار ساده است و تیم پشتیبانی عالی است.",
+              "پیش‌بینی‌های هوش مصنوعی این پلتفرم به من کمک کرده‌اند تا در بازار کریپتو سودهای پایداری کسب کنم. رابط کاربری بسیار روان است و تیم پشتیبانی عالی عمل می‌کند.",
           },
           user3: {
             name: "محمد الرشید",
@@ -588,18 +640,9 @@ const resources = {
             "دموکراتیزه کردن معاملات با ارائه ابزارها و بینش‌های پیشرفته مبتنی بر هوش مصنوعی به معامله‌گران در تمام سطوح، کمک به آنها برای تصمیم‌گیری آگاهانه‌تر در بازار ارزهای دیجیتال.",
         },
         team: {
-          title: "تیم ما",
-          roles: {
-            ceo: {
-              title: "مدیرعامل",
-            },
-            cto: {
-              title: "مدیر فنی",
-            },
-            product: {
-              title: "مدیر محصول",
-            },
-          },
+          title: "با تیم ما آشنا شوید",
+          navid: "توسعه‌دهنده فرانت‌اند و بک‌اند",
+          taha: "توسعه‌دهنده فرانت‌اند",
         },
       },
       profile: {
@@ -652,10 +695,9 @@ const resources = {
           title: "دیدگاه‌های شما",
         },
         stats: {
-          likes: "پسندیده‌ها",
-          following: "دنبال‌کنندگان",
-          saved: "ذخیره‌شده‌ها",
-          comments: "دیدگاه‌ها",
+          trades: "مجموع معاملات",
+          profits: "کل سود",
+          win: "نرخ برد",
         },
         course: {
           title: "دوره اخیر",
@@ -713,11 +755,55 @@ const resources = {
             "این آدرس ایمیل به‌طور پیش‌فرض برای TradingAI استفاده می‌شود.",
           change: "تغییر ایمیل",
           notificationInput: "اجازه اعلان‌ها",
-          hideW: "إخفاء معدل الفوز",
-          hideT: "إخفاء إجمالي الصفقات",
-          hideP: "إخفاء الربح والخسارة",
+          hideW: "پنهان کردن نرخ برد",
+          hideT: "پنهان کردن تعداد معاملات",
+          hideP: "پنهان کردن سود و زیان",
+        },
+        sidebar: {
+          dash: "داشبورد",
+          prof: "نمایه",
+          blogs: "مقالات",
+          sub: "اشتراک",
+        },
+        blogs: {
+          your: "وبلاگ‌های شما",
+          manage: "وبلاگ‌های خود را در اینجا مدیریت کنید",
+          create: "ایجاد وبلاگ",
+          dropdown: {
+            your: "وبلاگ‌های شما",
+            disliked: "وبلاگ‌های نپسندیده",
+            liked: "وبلاگ‌های پسندیده",
+          },
+          edit: {
+            edit: "ویرایش وبلاگ",
+            change:
+              "تغییرات مورد نظر را در وبلاگ خود اعمال کنید و روی ذخیره تغییرات کلیک کنید.",
+            title: "عنوان",
+            content: "محتوا",
+            short: "توضیح کوتاه",
+            thumb: "تصویر شاخص",
+          },
+        },
+        subscription: "طرح خود را انتخاب کنید",
+        commentsPage: {
+          content: "محتوا",
+          likes: "پسندها",
+          dislikes: "نپسندها",
+          created: "ایجاد شده در",
+          actions: "عملیات",
+          no: "نتیجه‌ای یافت نشد.",
+          prev: "قبلی",
+          next: "بعدی",
+          edit: {
+            title: "ویرایش دیدگاه",
+            desc: "تغییرات مورد نظر خود را در اینجا اعمال کنید و پس از اتمام، روی ذخیره کلیک کنید",
+            content: "محتوا",
+          },
         },
       },
+      hideW: "إخفاء معدل الفوز",
+      hideT: "إخفاء إجمالي الصفقات",
+      hideP: "إخفاء الربح والخسارة",
       history: "تاریخچه",
       activeTrades: "معاملات فعال",
       openPosition: "باز کردن معامله",
@@ -758,12 +844,24 @@ const resources = {
       nav: {
         home: "الرئيسية",
         blogs: "المدونات",
-        suggestions: "التوصيات",
-        about: "حول",
+        signals: "الإشارات",
+        about: "من نحن",
+        trade: "التداول",
+        strategies: "الاستراتيجيات",
         homeDesc: "العودة إلى الصفحة الرئيسية",
-        blogsDesc: "استكشف ميزات التداول",
-        suggestionsDesc: "عرض خطط التوصيات",
-        aboutDesc: "تعرف على TradingAI",
+        blogsDesc: "استكشف آخر أخبار العملات الرقمية",
+        signalsDesc: "عرض إشاراتنا المدعومة بالذكاء الاصطناعي",
+        aboutDesc: "تعرف على المزيد حول TradingAI",
+        tradeDesc: "قم بتنفيذ صفقاتك",
+        strategiesDesc: "تعلم استراتيجيات التداول",
+      },
+      dropdown: {
+        myAcc: "حسابي",
+        dash: "لوحة التحكم",
+        profile: "الملف الشخصي",
+        blogs: "المدونات",
+        sub: "الاشتراكات",
+        out: "تسجيل الخروج",
       },
       auth: {
         login: "الدخول",
@@ -782,16 +880,22 @@ const resources = {
         subtitle:
           "الميزات المتقدمة مدعومة بالذكاء الاصطناعي لمساعدتك في اتخاذ قرارات تداول أفضل",
         realtime: {
-          title: "تحليل في الوقت الحقيقي",
+          title: "التحليل اللحظي",
+          description:
+            "احصل على تحليل فوري للسوق وإشارات تداول بناءً على البيانات في الوقت الحقيقي",
         },
         ai: {
-          title: "هوش مصنوعي",
+          title: "رؤى مدعومة بالذكاء الاصطناعي",
+          description: "استخدم الذكاء الاصطناعي لإنشاء إشارات التداول",
         },
         secure: {
-          title: "امنية التداول",
+          title: "تداول آمن",
+          description: "أصولك محمية بتشفير عسكري وإجراءات أمان متقدمة",
         },
         advanced: {
-          title: "الميزات المتقدمة",
+          title: "ميزات متقدمة",
+          description:
+            "أدوات وميزات متطورة مدعومة بالذكاء الاصطناعي لمساعدتك على اتخاذ قرارات تداول أفضل",
         },
       },
       stats: {
@@ -955,18 +1059,9 @@ const resources = {
             "إضفاء الطابع الديمقراطي على التداول من خلال توفير أدوات ورؤى متقدمة مدعومة بالذكاء الاصطناعي للمتداولين من جميع المستويات، ومساعدتهم على اتخاذ قرارات أكثر استنارة في سوق العملات الرقمية.",
         },
         team: {
-          title: "فريقنا",
-          roles: {
-            ceo: {
-              title: "الرئيس التنفيذي",
-            },
-            cto: {
-              title: "المدير التقني",
-            },
-            product: {
-              title: "مدير المنتج",
-            },
-          },
+          title: "تعرف على فريقنا",
+          navid: "مطور الواجهة الأمامية والخلفية",
+          taha: "مطور الواجهة الأمامية",
         },
       },
       profile: {
@@ -1011,10 +1106,9 @@ const resources = {
           title: "تعليقاتك",
         },
         stats: {
-          likes: "الإعجابات",
-          following: "المتابعون",
-          saved: "المحفوظة",
-          comments: "التعليقات",
+          trades: "إجمالي الصفقات",
+          profits: "إجمالي الأرباح",
+          win: "نسبة النجاح",
         },
         course: {
           title: "أحدث دورة",
@@ -1075,6 +1169,47 @@ const resources = {
           hideW: "إخفاء معدل الفوز",
           hideT: "إخفاء إجمالي الصفقات",
           hideP: "إخفاء الربح والخسارة",
+        },
+        sidebar: {
+          dash: "لوحة التحكم",
+          prof: "الملف الشخصي",
+          blogs: "المدونات",
+          sub: "الاشتراك",
+        },
+        blogs: {
+          your: "مدوناتك",
+          manage: "قم بإدارة مدوناتك هنا",
+          create: "إنشاء مدونة",
+          dropdown: {
+            your: "مدوناتك",
+            disliked: "المدونات غير المحبوبة",
+            liked: "المدونات المحبوبة",
+          },
+          edit: {
+            edit: "تعديل المدونة",
+            change:
+              "قم بإجراء التعديلات على مدونتك، ثم انقر على حفظ التغييرات لتطبيقها.",
+            title: "العنوان",
+            content: "المحتوى",
+            short: "وصف قصير",
+            thumb: "الصورة المصغرة",
+          },
+        },
+        subscription: "اختر خطتك",
+        commentsPage: {
+          content: "المحتوى",
+          likes: "الإعجابات",
+          dislikes: "عدم الإعجاب",
+          created: "تاريخ الإنشاء",
+          actions: "الإجراءات",
+          no: "لا توجد نتائج.",
+          prev: "السابق",
+          next: "التالي",
+          edit: {
+            title: "تعديل التعليق",
+            desc: "قم بإجراء التعديلات على تعليقك هنا، ثم انقر على حفظ عند الانتهاء",
+            content: "المحتوى",
+          },
         },
       },
       history: "تاريخ",

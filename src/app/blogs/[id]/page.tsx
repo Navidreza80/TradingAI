@@ -1,50 +1,61 @@
 "use client";
-
+// Framer motion imports for animation
 import { motion } from "framer-motion";
+// i18n for translation
 import { useTranslation } from "react-i18next";
+// Next built in components and hooks
 import Image from "next/image";
 import { useParams } from "next/navigation";
-import {
-  HandThumbUpIcon,
-  HandThumbDownIcon,
-  BookmarkIcon,
-  ShareIcon,
-  ChatBubbleLeftIcon,
-  ClockIcon,
-  UserIcon,
-  CalendarIcon,
-} from "@heroicons/react/24/outline";
+// Server actions
 import {
   fetchBlogById,
   getBlogReaction,
   toggleBlogReaction,
 } from "@/actions/blog.action";
-import { useEffect, useState } from "react";
 import { createComment, fetchCommentsForBlog } from "@/actions/comment.action";
-import { Comment } from "@/types/comment";
-import { Blog } from "@/types/blog";
 import { getDbUserId } from "@/actions/user.action";
+// Types
+import { Blog } from "@/types/blog";
+import { Comment } from "@/types/comment";
+// Icons
+import {
+  CalendarIcon,
+  ChatBubbleLeftIcon,
+  HandThumbDownIcon,
+  HandThumbUpIcon,
+  ShareIcon,
+  UserIcon
+} from "@heroicons/react/24/outline";
+// React built in hooks
+import { useEffect, useState } from "react";
+// React hot toast
 import toast from "react-hot-toast";
 
 export default function BlogDetailPage() {
+  // i18n hooks for translation
   const { t } = useTranslation();
+  // Getting id of the blog from the params
   const { id } = useParams();
+  // State to save the data of the blog
   const [detail, setDetail] = useState<Blog>({} as Blog);
+  // State to save the comments of the blog
   const [comments, setComments] = useState<Comment[]>([]);
+  // State to save user submitted comment content
   const [commentContent, setCommentContent] = useState("");
+  // States to save blog reactions
   const [isLiked, setIsLiked] = useState();
   const [isDisLiked, setIsDisLiked] = useState();
-
+  // Function to fetch detail of the blog
   const fetchDetail = async () => {
     const data = await fetchBlogById(id);
     setDetail(data);
   };
-
+  // Function to fetch comments of the blog
   const fetchDetailComment = async () => {
     const data = await fetchCommentsForBlog(id);
     setComments(data);
   };
-
+  // Function to submit the comment and post it to the database
   const handleCommentSubmit = async () => {
     const data = await createComment({
       content: commentContent,
@@ -56,6 +67,7 @@ export default function BlogDetailPage() {
       toast.success(data.message);
     }
   };
+  // Function to fetch reactions of the blog
   const fetchInteraction = async () => {
     const userId = await getDbUserId();
     if (userId) {
@@ -65,6 +77,7 @@ export default function BlogDetailPage() {
       setIsLiked(request.liked);
     }
   };
+  // Callback function to fetch detail when the component is mounting
   useEffect(() => {
     fetchDetail();
     fetchDetailComment();
@@ -101,10 +114,6 @@ export default function BlogDetailPage() {
                 <CalendarIcon className="w-5 h-5" />
                 <span>{new Date(detail.createdAt).toLocaleDateString()}</span>
               </div>
-              <div className="flex items-center gap-2">
-                <ClockIcon className="w-5 h-5" />
-                <span>8 {t("blogs.readTime")}</span>
-              </div>
             </div>
 
             {/* Featured Image */}
@@ -130,7 +139,7 @@ export default function BlogDetailPage() {
             `}
           >
             {/* Add your blog content here */}
-            <p>{detail.content}</p>
+            <p className="text-black dark:text-white">{detail.content}</p>
             {/* More content... */}
           </motion.div>
 
