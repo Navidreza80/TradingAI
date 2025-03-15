@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import { useTranslation } from "react-i18next";
 // Next built in components and hooks
 import Image from "next/image";
+import Link from "next/link";
 import { useParams } from "next/navigation";
 // Server actions
 import {
@@ -117,7 +118,12 @@ export default function BlogDetailPage() {
             <div className="flex flex-wrap items-center gap-4 mb-6 text-sm dark:text-gray-400 text-gray-600">
               <div className="flex items-center gap-2">
                 <UserIcon className="w-5 h-5" />
-                <span>{detail.publisher?.username}</span>
+                <Link
+                  href={`/Users/${detail.publisher.id}`}
+                  className="hover:opacity-85 cursor-pointer"
+                >
+                  {detail.publisher?.username}
+                </Link>
               </div>
               <div className="flex items-center gap-2">
                 <CalendarIcon className="w-5 h-5" />
@@ -293,13 +299,15 @@ export default function BlogDetailPage() {
                           )}
                           <div className="flex-1">
                             <div className="flex items-center justify-between mb-2">
-                              <h3
-                                className={`font-bold dark:text-white text-gray-900
+                              <Link href={`/Users/${comment.user.id}`}>
+                                <h3
+                                  className={`font-bold dark:text-white cursor-pointer text-gray-900
                          
                         `}
-                              >
-                                {comment.user.username}
-                              </h3>
+                                >
+                                  {comment.user.username}
+                                </h3>
+                              </Link>
                               <span className="text-sm dark:text-gray-400 text-gray-600">
                                 {new Date(
                                   comment.createdAt

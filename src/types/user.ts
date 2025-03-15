@@ -7,10 +7,18 @@ export interface User {
     username: string;
     clerkId: string;
     name?: string;
+    coverImage: string;
     image?: string;
     createdAt: Date;
-    updatedAt: Date;
-    role? : string;
     blogs: Blog[];
-    comments: Comment
+    comments: Comment;
+    hideWin: boolean;
+    hideTotal: boolean;
+    hidePnL: boolean;
+}
+
+export interface Stats {
+    winRate: number;
+    totalTrades: number;
+    totalPnL: number;
 }

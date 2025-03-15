@@ -73,6 +73,38 @@ export async function getDbUser() {
   return user;
 }
 
+// Action to get user by id
+export async function getUserById(userId: string) {
+  try {
+    const user = await prisma.user.findUnique({
+      where: { id: userId },
+      select: {
+        id: true,
+        username: true,
+        clerkId: true,
+        email: true,
+        name: true,
+        image: true,
+        coverImage: true,
+        createdAt: true,
+        hideWin: true,
+        hideTotal: true,
+        hidePnL: true,
+        blogs: true,
+        comments: true,
+      },
+    });
+
+    if (!user) {
+      return { success: false, message: "User not found." };
+    }
+
+    return { success: true, user };
+  } catch (error) {
+    return { success: false, message: "Failed to fetch user.", error };
+  }
+}
+
 // Action to update users username
 export async function updateUsername(userId: string, newUsername: string) {
   try {
