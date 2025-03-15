@@ -10,9 +10,14 @@ import SymbolDropDown from "@/components/signals/symbol-dropdown";
 import TimeFrameDropDown from "@/components/signals/timeframe-dropdown";
 // Icons
 import { FaChartLine } from "react-icons/fa";
+// Types for type safety
 import { Signals } from "@/types/trade";
+// i18n for translation
+import { useTranslation } from "react-i18next";
 
 export default function TradingSignal() {
+  // i18n for translation
+  const { t } = useTranslation();
   // State to save the symbol that user selected
   const [symbol, setSymbol] = useState("BTCUSDT");
   // State to save the timeframe that user selected
@@ -112,15 +117,15 @@ export default function TradingSignal() {
           className="col-span-1 p-6 bg-white dark:bg-gray-800 rounded-xl shadow-lg"
         >
           <h2 className="text-xl font-semibold mb-4 flex items-center gap-2">
-            <FaChartLine className="text-blue-500" /> Trading Pair
+            <FaChartLine className="text-blue-500" /> {t('signals.pair')}
           </h2>
           <label className="block mb-2 text-gray-600 dark:text-gray-400">
-            Symbol:
+          {t('signals.symbol')}
           </label>
           <SymbolDropDown symbol={symbol} setSymbol={setSymbol} />
 
           <label className="block mt-4 mb-2 text-gray-600 dark:text-gray-400">
-            Time Frame:
+          {t('signals.time')}
           </label>
           <TimeFrameDropDown
             timeFrame={timeFrame}
@@ -128,7 +133,7 @@ export default function TradingSignal() {
           />
 
           <label className="block mt-4 mb-2 text-gray-600 dark:text-gray-400">
-            Number of Candles:
+          {t('signals.candles')}
           </label>
           <CandlesSlider candles={candles} setCandles={setCandles} />
 
@@ -150,18 +155,18 @@ export default function TradingSignal() {
           className="col-span-2 p-6 bg-white dark:bg-gray-800 rounded-xl shadow-lg"
         >
           <h2 className="text-xl font-semibold mb-4 flex items-center gap-2">
-            <FaChartLine className="text-blue-500" /> Trading Signal
+            <FaChartLine className="text-blue-500" /> {t('signals.signal')}
           </h2>
           {loading && (
             <div className="flex items-center justify-center">
               <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-500"></div>
-              <span className="ml-2">Fetching data...</span>
+              <span className="ml-2">{t('signals.fetching')}</span>
             </div>
           )}
           {typeof error == "string" && <p className="text-red-500">{error}</p>}
           {!loading && !signal && (
             <p className="text-gray-600 dark:text-gray-400">
-              No signal generated yet.
+              {t('signals.no')}
             </p>
           )}
           {!loading && signal && (
@@ -172,19 +177,19 @@ export default function TradingSignal() {
               className="space-y-4"
             >
               <p>
-                <strong>Entry Price:</strong> {signal.entryPrice}
+                <strong>{t('signals.entry')}</strong> {signal.entryPrice}
               </p>
               <p>
-                <strong>Take Profit:</strong> {signal.takeProfit}
+                <strong>{t('signals.profit')}</strong> {signal.takeProfit}
               </p>
               <p>
-                <strong>Stop Loss:</strong> {signal.stopLoss}
+                <strong>{t('signals.loss')}</strong> {signal.stopLoss}
               </p>
               <p>
-                <strong>Confidence Level:</strong> {signal.confidenceLevel}
+                <strong>{t('signals.level')}</strong> {signal.confidenceLevel}
               </p>
               <p>
-                <strong>Reason:</strong> {signal.reason}
+                <strong>{t('signals.reason')}</strong> {signal.reason}
               </p>
             </motion.div>
           )}

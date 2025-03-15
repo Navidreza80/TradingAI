@@ -8,7 +8,6 @@ import { siteConfig } from "@/config/metadata";
 import { ClerkProvider } from "@clerk/nextjs";
 // Third party components
 import HeaderServer from "@/components/Header/HeaderServer";
-import VoiceNavigation from "@/components/dashboard/mic";
 import ChatAssistant from "@/components/dashboard/ai-assistant";
 // React hot toast provider
 import { Toaster } from "react-hot-toast";
@@ -63,7 +62,6 @@ export default function RootLayout({
       </head>
       <body className="bg-[#F0F0F0] dark:bg-[#0A0A0A]">
         <ChatAssistant />
-        <VoiceNavigation />
         <Toaster />
         <ClerkProvider>
           <I18nProvider>

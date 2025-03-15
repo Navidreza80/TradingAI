@@ -67,11 +67,11 @@ export default function BlogDetailPage() {
         content: commentContent,
         blogId: id,
       });
-      if (typeof data !== "string") {
-        if (data.success) {
-          setComments([...comments, data.newComment]);
-          toast.success(data.message);
-        }
+      if (data == "User not authenticated")
+        toast.error("User not authenticated");
+      else if (data.success) {
+        setComments([...comments, data.newComment]);
+        toast.success(data.message);
       }
     }
   };

@@ -10,12 +10,6 @@ const config: Config = {
   theme: {
     extend: {
       backgroundImage: {
-        wave: "url('/image/gesture.png')",
-        waveDark: "url('/image/gestureDark.png')",
-        comments: "url('/image/comments.png')",
-        likes: "url('/image/likes.png')",
-        user: "url('/image/user.png')",
-        save: "url('/image/saved.png')",
         sidebarDM: "url('/image/sidebar-dark-mode.svg')",
         sidebarLM: "url('/image/sidebar-light-mode.svg')",
         dashboardDM: "url('/image/dashboard-dark-mode.svg')",

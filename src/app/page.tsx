@@ -8,24 +8,23 @@ import Footer from "@/components/Footer/Footer";
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-[#0a0a0a] text-white flex flex-col">
+      <main className="min-h-screen bg-[#0a0a0a] text-white flex flex-col">
+        {/* Hero Section */}
+        <HeroSection />
 
-      {/* Hero Section */}
-      <HeroSection />
+        {/* Features Section */}
+        <Features />
 
-      {/* Features Section */}
-      <Features />
+        {/* Stats Section */}
+        <Stats />
 
-      {/* Stats Section */}
-      <Stats />
+        {/* User Experience Section */}
+        <UserExperience />
 
-      {/* User Experience Section */}
-      <UserExperience />
+        {/* Start Trading Section */}
+        <StartTrading />
 
-      {/* Start Trading Section */}
-      <StartTrading />
-
-      <Footer />
-    </main>
-  );
+        <Footer />
+      </main>
+    )
 }

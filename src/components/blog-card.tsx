@@ -92,9 +92,9 @@ export default function BlogCard({ blog }) {
                   {/* Like Button */}
                   <button className="flex items-center gap-1 text-sm">
                     <HandThumbUpIcon
-                      className={`w-5 h-5 transition-colors duration-200 dark:text-gray-400 text-gray-600"`}
+                      className="w-5 h-5 transition-colors duration-200 dark:text-gray-400 text-black"
                     />
-                    <span className="dark:text-gray-400 text-gray-600">
+                    <span className="dark:text-gray-400 text-black">
                       {blog._count.likes}
                     </span>
                   </button>
@@ -102,17 +102,17 @@ export default function BlogCard({ blog }) {
                   {/* Dislike Button */}
                   <button className="flex items-center gap-1 text-sm">
                     <HandThumbDownIcon
-                      className={`w-5 h-5 transition-colors duration-200 dark:text-gray-400 text-gray-600"`}
+                      className="w-5 h-5 transition-colors duration-200 dark:text-gray-400 text-black"
                     />
-                    <span className="dark:text-gray-400 text-gray-600">
+                    <span className="dark:text-gray-400 text-black">
                       {blog._count.dislikes}
                     </span>
                   </button>
 
                   {/* Comments */}
                   <div className="flex items-center gap-1 text-sm">
-                    <ChatBubbleLeftIcon className="w-5 h-5 dark:text-gray-400 text-gray-600" />
-                    <span className="dark:text-gray-400 text-gray-600">
+                    <ChatBubbleLeftIcon className="w-5 h-5 dark:text-gray-400 text-black" />
+                    <span className="dark:text-gray-400 text-black">
                       {blog.comments?.length}
                     </span>
                   </div>

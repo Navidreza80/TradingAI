@@ -356,6 +356,7 @@ const resources = {
             disliked: "Disliked blogs",
             liked: "Liked blogs",
           },
+          delete: "Delete",
           edit: {
             edit: "Edit Blog",
             change: "Make changes to your blog, click save changes to apply.",
@@ -417,6 +418,22 @@ const resources = {
       internetConnectionWarning:
         "Please ensure your internet connection and VPN are active.",
       NoOpenTrade: "There is no open trade",
+      signals: {
+        pair: "Trading Pair",
+        symbol: "Symbol:",
+        time: "Time Frame:",
+        candles: "Number of Candles",
+        signal: "Trading Signal",
+        fetching: "Fetching data...",
+        no: "No signal generated yet.",
+        entry: "Entry Price:",
+        profit: "Take Profit:",
+        loss: "Stop Loss:",
+        level: "Confidence Level:",
+        reason: "Reason:",
+        title: "Crypto Trading Signal",
+        desc: "Get AI-powered trading signals for your favorite crypto pairs.",
+      },
     },
   },
   fa: {
@@ -774,6 +791,7 @@ const resources = {
             disliked: "وبلاگ‌های نپسندیده",
             liked: "وبلاگ‌های پسندیده",
           },
+          delete: "حذف",
           edit: {
             edit: "ویرایش وبلاگ",
             change:
@@ -837,6 +855,22 @@ const resources = {
       TP_SL: "TP/SL",
       internetConnectionWarning: "از اتصال اینترنت و فیلترشکن مطمئن شوید.",
       NoOpenTrade: "هیچ معامله‌ای باز نیست",
+      signals: {
+        pair: "جفت معاملاتی",
+        symbol: "نماد:",
+        time: "بازه زمانی:",
+        candles: "تعداد شمع‌ها",
+        signal: "سیگنال معاملاتی",
+        fetching: "در حال دریافت داده‌ها...",
+        no: "هنوز سیگنالی تولید نشده است.",
+        entry: "قیمت ورود:",
+        profit: "سود هدف:",
+        loss: "حد ضرر:",
+        level: "سطح اطمینان:",
+        reason: "دلیل:",
+        title: "سیگنال معاملاتی کریپتو",
+        desc: "سیگنال‌های معاملاتی مبتنی بر هوش مصنوعی برای جفت‌های کریپتویی مورد علاقه شما.",
+      },
     },
   },
   ar: {
@@ -1185,6 +1219,7 @@ const resources = {
             disliked: "المدونات غير المحبوبة",
             liked: "المدونات المحبوبة",
           },
+          delete: "حذف",
           edit: {
             edit: "تعديل المدونة",
             change:
@@ -1245,6 +1280,22 @@ const resources = {
       TP_SL: "TP/SL",
       internetConnectionWarning: "يرجى التأكد من اتصال الإنترنت ووجود VPN.",
       NoOpenTrade: "لا توجد أي صفقة مفتوحة",
+      signals: {
+        pair: "زوج التداول",
+        symbol: "الرمز:",
+        time: "الإطار الزمني:",
+        candles: "عدد الشموع",
+        signal: "إشارة التداول",
+        fetching: "جارٍ جلب البيانات...",
+        no: "لم يتم توليد إشارة بعد.",
+        entry: "سعر الدخول:",
+        profit: "جني الأرباح:",
+        loss: "وقف الخسارة:",
+        level: "مستوى الثقة:",
+        reason: "السبب:",
+        title: "إشارة تداول العملات الرقمية",
+        desc: "احصل على إشارات تداول مدعومة بالذكاء الاصطناعي لأزواج العملات الرقمية المفضلة لديك.",
+      },
     },
   },
 };
