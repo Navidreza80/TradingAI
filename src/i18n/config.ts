@@ -3,6 +3,8 @@
 import i18n from "i18next";
 import { initReactI18next } from "react-i18next";
 import { education } from "./locales/education";
+import { indicators } from './locales/indicators';
+import { technical } from './locales/technical';
 
 const resources = {
   en: {
@@ -435,6 +437,8 @@ const resources = {
       volume: "24h Volume",
       change: "Change",
       education: education.en.education,
+      indicators: indicators.en.indicators,
+      technical: technical.en.technical,
     },
   },
   fa: {
@@ -872,6 +876,8 @@ const resources = {
       volume: "حجم ۲۴ ساعته",
       change: "تغییرات ",
       education: education.fa.education,
+      indicators: indicators.fa.indicators,
+      technical: technical.fa.technical,
     },
   },
   ar: {
@@ -1297,6 +1303,8 @@ const resources = {
       volume: "حجم 24 ساعة",
       change: "تغيير ",
       education: education.ar.education,
+      indicators: indicators.ar.indicators,
+      technical: technical.ar.technical,
     },
   },
 };
