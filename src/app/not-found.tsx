@@ -4,20 +4,28 @@ import React, { useEffect, useState } from 'react';
 // Next built in components
 import Head from 'next/head';
 import Link from 'next/link';
+import { motion } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
 
 export default function NotFoundPage() {
-  // State to move SVG eye and mouth
-  const [eyeOffset, setEyeOffset] = useState(0);
-  const [mouthOffset, setMouthOffset] = useState(0);
+  const { t } = useTranslation();
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
 
-  // useEffect to move SVG elements
   useEffect(() => {
-    const interval = setInterval(() => {
-      setEyeOffset(Math.random() * 2 - 1);
-      setMouthOffset(Math.random() * 2 - 1);
-    }, 1000);
+    const handleMouseMove = (e: MouseEvent) => {
+      const { clientX, clientY } = e;
+      const centerX = window.innerWidth / 2;
+      const centerY = window.innerHeight / 2;
+      
+      // Calculate normalized offset from center (-1 to 1)
+      const offsetX = (clientX - centerX) / centerX;
+      const offsetY = (clientY - centerY) / centerY;
+      
+      setMousePosition({ x: offsetX * 20, y: offsetY * 20 });
+    };
 
-    return () => clearInterval(interval);
+    window.addEventListener('mousemove', handleMouseMove);
+    return () => window.removeEventListener('mousemove', handleMouseMove);
   }, []);
 
   return (
@@ -25,36 +33,127 @@ export default function NotFoundPage() {
       <Head>
         <title>404 - Page Not Found</title>
       </Head>
-      <div className="min-h-screen flex flex-col justify-center items-center px-4 relative overflow-hidden bg-gray-50 dark:bg-gray-900">
-        <div className="relative z-10 mb-4">
-          <svg className="w-24 h-24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-            <circle cx="12" cy="12" r="10"></circle>
-            <circle cx={`${9 + eyeOffset}`} cy="10" r="1"></circle>
-            <circle cx={`${15 + eyeOffset}`} cy="10" r="1"></circle>
-            <path d={`M8 16c1.5-2 4.5-${2 + mouthOffset} 6 0`}></path>
-          </svg>
+      <div className="min-h-screen flex flex-col justify-center items-center px-4 relative overflow-hidden bg-gradient-to-b from-gray-900 to-black">
+        {/* Animated background elements */}
+        <div className="absolute inset-0 overflow-hidden">
+          {[...Array(20)].map((_, i) => (
+            <motion.div
+              key={i}
+              className="absolute w-[2px] h-[2px] bg-blue-500/30"
+              initial={{ opacity: 0.1, scale: 0 }}
+              animate={{
+                opacity: [0.1, 0.5, 0.1],
+                scale: [0, 1, 0],
+                x: [Math.random() * window.innerWidth, Math.random() * window.innerWidth],
+                y: [Math.random() * window.innerHeight, Math.random() * window.innerHeight],
+              }}
+              transition={{
+                duration: Math.random() * 3 + 2,
+                repeat: Infinity,
+                repeatType: "reverse",
+              }}
+            />
+          ))}
         </div>
-        <div className="text-center relative z-10">
-          <h1 className="text-7xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-purple-500 to-pink-500 dark:from-indigo-400 dark:to-blue-400 drop-shadow-[0_5px_15px_rgba(0,0,0,0.4)]">
-            404
-          </h1>
-          <p className="text-2xl font-semibold text-gray-800 dark:text-gray-200 mt-4 drop-shadow-[0_3px_8px_rgba(0,0,0,0.3)]">
-            Page Not Found
-          </p>
-          <p className="text-gray-600 dark:text-gray-400 mt-2 drop-shadow-[0_2px_6px_rgba(0,0,0,0.25)]">
-            {`The page you're looking for doesn't exist.`}
-          </p>
-          <div className="mt-8">
-            <Link href="/" className="bg-gradient-to-r from-purple-500 to-pink-500 dark:from-indigo-400 dark:to-blue-400 text-white font-semibold px-6 py-3 rounded-full hover:shadow-2xl transition-all duration-300 shadow-lg">
-              Go Home
+
+        {/* Main content */}
+        <motion.div 
+          className="relative z-10 text-center"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+        >
+          {/* Animated 404 SVG */}
+          <motion.div 
+            className="relative mb-8"
+            style={{
+              transform: `perspective(1000px) rotateX(${mousePosition.y}deg) rotateY(${mousePosition.x}deg)`,
+            }}
+          >
+            <svg className="w-48 h-48 mx-auto" viewBox="0 0 24 24" fill="none">
+              <motion.circle 
+                cx="12" 
+                cy="12" 
+                r="10" 
+                stroke="url(#gradient)" 
+                strokeWidth="1.5"
+                initial={{ pathLength: 0 }}
+                animate={{ pathLength: 1 }}
+                transition={{ duration: 2, ease: "easeInOut" }}
+              />
+              <motion.circle 
+                cx={`${9 + mousePosition.x * 0.05}`} 
+                cy="10" 
+                r="1" 
+                fill="#60A5FA"
+              />
+              <motion.circle 
+                cx={`${15 + mousePosition.x * 0.05}`} 
+                cy="10" 
+                r="1" 
+                fill="#60A5FA"
+              />
+              <motion.path 
+                d={`M8 ${16 + mousePosition.y * 0.05}c1.5-2 4.5-2 6 0`}
+                stroke="#60A5FA"
+                strokeWidth="1.5"
+                strokeLinecap="round"
+              />
+              <defs>
+                <linearGradient id="gradient" x1="0" y1="0" x2="24" y2="24">
+                  <stop offset="0%" stopColor="#60A5FA" />
+                  <stop offset="100%" stopColor="#3B82F6" />
+                </linearGradient>
+              </defs>
+            </svg>
+          </motion.div>
+
+          {/* Text content */}
+          <motion.h1 
+            className="text-8xl font-black mb-8 relative"
+            initial={{ opacity: 0, scale: 0.5 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+          >
+            <span className="relative inline-block">
+              <span className="absolute inset-0 bg-gradient-to-r from-blue-600 to-blue-400 blur-xl opacity-50" />
+              <span className="relative bg-gradient-to-r from-blue-600 to-blue-400 text-transparent bg-clip-text">
+                404
+              </span>
+            </span>
+          </motion.h1>
+
+          <motion.p 
+            className="text-2xl font-medium text-gray-300 mb-4"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.5, delay: 0.4 }}
+          >
+            {t('notFound.title')}
+          </motion.p>
+
+          <motion.p 
+            className="text-gray-400 mb-8"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.5, delay: 0.6 }}
+          >
+            {t('notFound.description')}
+          </motion.p>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.8 }}
+          >
+            <Link 
+              href="/" 
+              className="inline-block px-8 py-4 rounded-full bg-gradient-to-r from-blue-600 to-blue-400 text-white font-medium transition-all duration-300 hover:shadow-lg hover:shadow-blue-500/25 hover:scale-105"
+            >
+              {t('notFound.backHome')}
             </Link>
-          </div>
-        </div>
-        <div className="mt-16 text-center relative z-10">
-          <p className="text-sm text-gray-500 dark:text-gray-600 drop-shadow-[0_2px_5px_rgba(0,0,0,0.2)]">
-            If you believe this is an error, please contact us.
-          </p>
-        </div>
+          </motion.div>
+        </motion.div>
       </div>
     </>
   );

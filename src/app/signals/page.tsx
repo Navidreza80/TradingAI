@@ -1,19 +1,25 @@
 "use client";
 // React built in hooks
-import { useState } from "react";
+import { useState, useEffect } from "react";
 // Framer motion for animation
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 // Third party components
 import CandlesSlider from "@/components/signals/candles-slider";
 import HeaderSignals from "@/components/signals/header-signals";
 import SymbolDropDown from "@/components/signals/symbol-dropdown";
 import TimeFrameDropDown from "@/components/signals/timeframe-dropdown";
 // Icons
-import { FaChartLine } from "react-icons/fa";
+import { HiOutlineChartBar, HiOutlineCog, HiOutlineShieldCheck, HiOutlineTrendingUp, HiOutlineVolumeUp } from "react-icons/hi";
 // Types for type safety
 import { Signals } from "@/types/trade";
 // i18n for translation
 import { useTranslation } from "react-i18next";
+
+const fadeInUp = {
+  initial: { opacity: 0, y: 20 },
+  animate: { opacity: 1, y: 0 },
+  exit: { opacity: 0, y: -20 }
+};
 
 export default function TradingSignal() {
   // i18n for translation
@@ -26,6 +32,13 @@ export default function TradingSignal() {
   const [candles, setCandles] = useState("100");
   // State to save the signal that AI generated
   const [signal, setSignal] = useState<Signals | null>(null);
+  // Add new states for market stats
+  const [marketStats, setMarketStats] = useState({
+    accuracy: '',
+    trend: '',
+    volume: '',
+    risk: ''
+  });
   // State to save the status of the current request
   const [loading, setLoading] = useState(false);
   // State to save the error of the current request
@@ -63,13 +76,19 @@ export default function TradingSignal() {
             messages: [
               {
                 role: "system",
-                content: `You are a trading expert. Provide signals for crypto trades that user wants based on technical analysis and market data. Only generate signals that are 1:2 risk to rewards minimum. Provide take profit, stop loss, the reason why this trade should be taken and the confidence level of the trade.: 
+                content: `You are a trading expert. Provide signals for crypto trades that user wants based on technical analysis and market data. Only generate signals that are 1:2 risk to rewards minimum. Provide take profit, stop loss, the reason why this trade should be taken, confidence level of the trade, and market statistics.: 
               {
                 stopLoss: "",
                 takeProfit: "",
                 reason: "",
                 confidenceLevel: "",
-                entryPrice: ""
+                entryPrice: "",
+                marketStats: {
+                  accuracy: "",
+                  trend: "",
+                  volume: "",
+                  risk: ""
+                }
               } this is the schema of the response you should return JSON`,
               },
               {
@@ -92,10 +111,14 @@ export default function TradingSignal() {
       const obj = JSON.parse(jsonString);
       // Save the signal in a state
       setSignal(obj);
+      // Update market stats
+      if (obj.marketStats) {
+        setMarketStats(obj.marketStats);
+      }
       console.log(aiMessage.content);
     } catch (error) {
       // Save the error of the request in a state
-      setError(error);
+      setError(t('signals.error'));
     } finally {
       // At the end set the status of the loading to false
       setLoading(false);
@@ -103,98 +126,201 @@ export default function TradingSignal() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b dark:from-[#0a0a0a] dark:to-[#1a1a1a] from-white to-gray-50 text-gray-900 dark:text-white transition-colors duration-300">
+    <div className="min-h-screen bg-gradient-to-br dark:from-black dark:via-gray-900 dark:to-black from-gray-50 via-white to-gray-50 text-gray-900 dark:text-white transition-all duration-500">
       {/* Header */}
       <HeaderSignals />
 
-      {/* Main Content */}
-      <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-6 p-6">
-        {/* Left Side: Controls */}
-        <motion.div
-          initial={{ opacity: 0, x: -50 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.5 }}
-          className="col-span-1 p-6 bg-white dark:bg-gray-800 rounded-xl shadow-lg"
-        >
-          <h2 className="text-xl font-semibold mb-4 flex items-center gap-2">
-            <FaChartLine className="text-blue-500" /> {t('signals.pair')}
-          </h2>
-          <label className="block mb-2 text-gray-600 dark:text-gray-400">
-          {t('signals.symbol')}
-          </label>
-          <SymbolDropDown symbol={symbol} setSymbol={setSymbol} />
+      <motion.div 
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.5 }}
+        className="max-w-7xl mx-auto px-4 py-8"
+      >
 
-          <label className="block mt-4 mb-2 text-gray-600 dark:text-gray-400">
-          {t('signals.time')}
-          </label>
-          <TimeFrameDropDown
-            timeFrame={timeFrame}
-            setTimeFrame={setTimeFrame}
-          />
-
-          <label className="block mt-4 mb-2 text-gray-600 dark:text-gray-400">
-          {t('signals.candles')}
-          </label>
-          <CandlesSlider candles={candles} setCandles={setCandles} />
-
-          <motion.button
-            onClick={getSignal}
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            className="w-full mt-6 p-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg shadow-md transition duration-300"
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          {/* Settings Panel */}
+          <motion.div
+            variants={fadeInUp}
+            initial="initial"
+            animate="animate"
+            className="lg:col-span-1 space-y-6"
           >
-            {loading ? "Loading..." : "Get Signal"}
-          </motion.button>
-        </motion.div>
+            <div className="bg-white dark:bg-black/40 rounded-2xl shadow-xl p-6 backdrop-blur-lg backdrop-filter">
+              <div className="flex items-center gap-3 mb-6">
+                <HiOutlineCog className="w-6 h-6 text-blue-500" />
+                <h2 className="text-xl font-semibold">{t('signals.settings')}</h2>
+              </div>
 
-        {/* Right Side: Signal Output */}
-        <motion.div
-          initial={{ opacity: 0, x: 50 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.5 }}
-          className="col-span-2 p-6 bg-white dark:bg-gray-800 rounded-xl shadow-lg"
-        >
-          <h2 className="text-xl font-semibold mb-4 flex items-center gap-2">
-            <FaChartLine className="text-blue-500" /> {t('signals.signal')}
-          </h2>
-          {loading && (
-            <div className="flex items-center justify-center">
-              <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-500"></div>
-              <span className="ml-2">{t('signals.fetching')}</span>
+              <div className="space-y-6">
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                    {t('signals.symbol')}
+                  </label>
+                  <SymbolDropDown symbol={symbol} setSymbol={setSymbol} />
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                    {t('signals.time')}
+                  </label>
+                  <TimeFrameDropDown timeFrame={timeFrame} setTimeFrame={setTimeFrame} />
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                    {t('signals.candles')}
+                  </label>
+                  <CandlesSlider candles={candles} setCandles={setCandles} />
+                </div>
+
+                <motion.button
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                  onClick={getSignal}
+                  disabled={loading}
+                  className={`w-full py-3 px-4 rounded-xl font-semibold text-white transition-all duration-300 ${
+                    loading
+                      ? 'bg-gray-400 cursor-not-allowed'
+                      : 'bg-gradient-to-r from-blue-500 to-purple-600 hover:shadow-lg hover:shadow-blue-500/25'
+                  }`}
+                >
+                  {loading ? t('signals.loading') : t('signals.getSignal')}
+                </motion.button>
+              </div>
             </div>
-          )}
-          {typeof error == "string" && <p className="text-red-500">{error}</p>}
-          {!loading && !signal && (
-            <p className="text-gray-600 dark:text-gray-400">
-              {t('signals.no')}
-            </p>
-          )}
-          {!loading && signal && (
+
+            {/* Market Stats */}
             <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.3 }}
-              className="space-y-4"
+              variants={fadeInUp}
+              className="bg-white dark:bg-black/40 rounded-2xl shadow-xl p-6"
             >
-              <p>
-                <strong>{t('signals.entry')}</strong> {signal.entryPrice}
-              </p>
-              <p>
-                <strong>{t('signals.profit')}</strong> {signal.takeProfit}
-              </p>
-              <p>
-                <strong>{t('signals.loss')}</strong> {signal.stopLoss}
-              </p>
-              <p>
-                <strong>{t('signals.level')}</strong> {signal.confidenceLevel}
-              </p>
-              <p>
-                <strong>{t('signals.reason')}</strong> {signal.reason}
-              </p>
+              <div className="grid grid-cols-2 gap-4">
+                <div className="flex items-center gap-2">
+                  <HiOutlineShieldCheck className="w-5 h-5 text-green-500" />
+                  <div>
+                    <p className="text-sm text-gray-500 dark:text-gray-400">{t('signals.accuracy')}</p>
+                    <p className="font-semibold">{marketStats.accuracy || '...'}</p>
+                  </div>
+                </div>
+                <div className="flex items-center gap-2">
+                  <HiOutlineTrendingUp className="w-5 h-5 text-blue-500" />
+                  <div>
+                    <p className="text-sm text-gray-500 dark:text-gray-400">{t('signals.trend')}</p>
+                    <p className="font-semibold">{marketStats.trend || '...'}</p>
+                  </div>
+                </div>
+                <div className="flex items-center gap-2">
+                  <HiOutlineVolumeUp className="w-5 h-5 text-purple-500" />
+                  <div>
+                    <p className="text-sm text-gray-500 dark:text-gray-400">{t('signals.volume')}</p>
+                    <p className="font-semibold">{marketStats.volume || '...'}</p>
+                  </div>
+                </div>
+                <div className="flex items-center gap-2">
+                  <HiOutlineChartBar className="w-5 h-5 text-red-500" />
+                  <div>
+                    <p className="text-sm text-gray-500 dark:text-gray-400">{t('signals.risk')}</p>
+                    <p className="font-semibold">{marketStats.risk || '...'}</p>
+                  </div>
+                </div>
+              </div>
             </motion.div>
-          )}
-        </motion.div>
-      </div>
+          </motion.div>
+
+          {/* Signal Output */}
+          <motion.div
+            variants={fadeInUp}
+            initial="initial"
+            animate="animate"
+            className="lg:col-span-2"
+          >
+            <div className="bg-white dark:bg-black/40 rounded-2xl shadow-xl p-6 h-full">
+              <div className="flex items-center gap-3 mb-6">
+                <HiOutlineChartBar className="w-6 h-6 text-blue-500" />
+                <h2 className="text-xl font-semibold">{t('signals.analysis')}</h2>
+              </div>
+
+              <AnimatePresence mode="wait">
+                {loading && (
+                  <motion.div
+                    key="loading"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    className="flex flex-col items-center justify-center h-[400px]"
+                  >
+                    <div className="w-16 h-16 border-4 border-blue-500 border-t-transparent rounded-full animate-spin mb-4" />
+                    <p className="text-gray-600 dark:text-gray-300">{t('signals.loading')}</p>
+                  </motion.div>
+                )}
+
+                {error && (
+                  <motion.div
+                    key="error"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    className="flex items-center justify-center h-[400px]"
+                  >
+                    <p className="text-red-500">{error?.toString()}</p>
+                  </motion.div>
+                )}
+
+                {!loading && !error && !signal && (
+                  <motion.div
+                    key="empty"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    className="flex items-center justify-center h-[400px]"
+                  >
+                    <p className="text-gray-600 dark:text-gray-300">{t('signals.no')}</p>
+                  </motion.div>
+                )}
+
+                {!loading && !error && signal && (
+                  <motion.div
+                    key="signal"
+                    variants={fadeInUp}
+                    initial="initial"
+                    animate="animate"
+                    exit="exit"
+                    className="space-y-6"
+                  >
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                      <div className="bg-gray-50 dark:bg-black/60 p-4 rounded-xl">
+                        <p className="text-sm text-gray-500 dark:text-gray-400">{t('signals.entry')}</p>
+                        <p className="text-xl font-semibold">{signal.entryPrice}</p>
+                      </div>
+                      <div className="bg-gray-50 dark:bg-black/60 p-4 rounded-xl">
+                        <p className="text-sm text-gray-500 dark:text-gray-400">{t('signals.profit')}</p>
+                        <p className="text-xl font-semibold text-green-500">{signal.takeProfit}</p>
+                      </div>
+                      <div className="bg-gray-50 dark:bg-black/60 p-4 rounded-xl">
+                        <p className="text-sm text-gray-500 dark:text-gray-400">{t('signals.loss')}</p>
+                        <p className="text-xl font-semibold text-red-500">{signal.stopLoss}</p>
+                      </div>
+                      <div className="bg-gray-50 dark:bg-black/60 p-4 rounded-xl">
+                        <p className="text-sm text-gray-500 dark:text-gray-400">{t('signals.level')}</p>
+                        <p className="text-xl font-semibold text-blue-500">{signal.confidenceLevel}</p>
+                      </div>
+                    </div>
+
+                    <div className="bg-gray-50 dark:bg-black/60 p-4 rounded-xl">
+                      <p className="text-sm text-gray-500 dark:text-gray-400 mb-2">{t('signals.reason')}</p>
+                      <p className="text-gray-800 dark:text-gray-200">{signal.reason}</p>
+                    </div>
+
+                    <p className="text-sm text-gray-500 dark:text-gray-400 text-center mt-4">
+                      {t('signals.disclaimer')}
+                    </p>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
+          </motion.div>
+        </div>
+      </motion.div>
     </div>
   );
 }
