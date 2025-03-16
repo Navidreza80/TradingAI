@@ -4,15 +4,15 @@ import { useState, useRef, useEffect } from "react";
 // Framer motion for animation
 import { motion, AnimatePresence } from "framer-motion";
 // ShadCn components
-import { Input } from "../ui/input";
-import { Button } from "../ui/button";
-import { Card } from "../ui/card";
+import { Input } from "../UI/input";
+import { Button } from "../UI/Button";
+import { Card } from "../UI/card";
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
-} from "../ui/tooltip";
+} from "../UI/tooltip";
 // Icons
 import { MessageSquare, Send, MessageCircle, X, Loader2 } from "lucide-react";
 // App theme

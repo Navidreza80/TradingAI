@@ -5,8 +5,8 @@ import {
   updateWinRate,
 } from "@/actions/user.action";
 // Shadcn components
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Switch } from "../ui/switch";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/UI/tabs";
+import { Switch } from "../UI/switch";
 // Framer motion for animation
 import { AnimatePresence, motion } from "framer-motion";
 // Icons

@@ -1,5 +1,5 @@
 // ShadCn components
-import { Button } from "@/components/ui/button";
+import { Button } from "@/components/UI/Button";
 import {
   Dialog,
   DialogContent,
@@ -8,9 +8,9 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "@/components/ui/dialog";
-import { Input } from "../ui/input";
-import { Label } from "../ui/label";
+} from "@/components/UI/dialog";
+import { Input } from "../UI/input";
+import { Label } from "../UI/label";
 // Icons
 import { Edit } from "lucide-react";
 // i18n for translation

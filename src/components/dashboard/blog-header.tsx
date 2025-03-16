@@ -3,7 +3,7 @@ import Link from "next/link";
 // Third party components
 import BlogsDropdown from "./dropdown-menu-blogs";
 // Shadcn components
-import { Button } from "../ui/button";
+import { Button } from "../UI/Button";
 // Icons
 import { Plus } from "lucide-react";
 // Framer motion

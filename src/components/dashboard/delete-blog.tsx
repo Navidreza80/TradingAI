@@ -1,7 +1,7 @@
 // Icons
 import { Trash } from "lucide-react";
 // ShadCn components
-import { Button } from "../ui/button";
+import { Button } from "../UI/Button";
 // Server actions
 import { deleteBlog } from "@/actions/blog.action";
 // React hot toast for creating toasts

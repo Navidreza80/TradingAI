@@ -16,8 +16,8 @@ import React from "react";
 // Server actions
 import { deleteComment, fetchUserComment } from "@/actions/comment.action";
 // ShadCn components
-import { Button } from "../../../../components/ui/button";
-import { Input } from "../../../../components/ui/input";
+import { Button } from "../../../../components/UI/Button";
+import { Input } from "../../../../components/UI/input";
 import {
   Table,
   TableBody,
@@ -25,7 +25,7 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "../../../../components/ui/table";
+} from "../../../../components/UI/table";
 // i18n for translation
 import EditComment from "@/components/dashboard/edit-comment";
 import { Trash } from "lucide-react";
