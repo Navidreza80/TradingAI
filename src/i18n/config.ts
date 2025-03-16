@@ -6,6 +6,8 @@ import { initReactI18next } from "react-i18next";
 const resources = {
   en: {
     translation: {
+      chat: "Chat with AI",
+      message: "Type your message...",
       nav: {
         home: "Home",
         blogs: "Blogs",
@@ -438,6 +440,8 @@ const resources = {
   },
   fa: {
     translation: {
+      chat: "چت با هوش مصنوعی",
+      message: "پیام خود را تایپ کنید...",
       nav: {
         home: "صفحه اصلی",
         blogs: "مقالات",
@@ -875,6 +879,8 @@ const resources = {
   },
   ar: {
     translation: {
+      chat: "الدردشة مع الذكاء الاصطناعي",
+      message: "اكتب رسالتك...",
       nav: {
         home: "الرئيسية",
         blogs: "المدونات",

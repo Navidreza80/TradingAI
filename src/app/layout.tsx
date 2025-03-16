@@ -61,11 +61,11 @@ export default function RootLayout({
         />
       </head>
       <body className="bg-[#F0F0F0] dark:bg-[#0A0A0A]">
-        <ChatAssistant />
         <Toaster />
         <ClerkProvider>
           <I18nProvider>
             <HeaderServer />
+            <ChatAssistant />
             {children}
           </I18nProvider>
         </ClerkProvider>

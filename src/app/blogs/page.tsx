@@ -24,6 +24,7 @@ export default function BlogsPage() {
   // Fetching blogs function
   const fetch = async (): Promise<void> => {
     const blogs = await fetchBlogs();
+    console.log(blogs);
     setBlogs(blogs);
   };
   // Callback function to fetch blogs at the mounting
@@ -31,7 +32,7 @@ export default function BlogsPage() {
     fetch();
   }, []);
   // Function to search through blogs
-  const filteredBlogs = blogs.filter((blog) =>
+  const filteredBlogs = blogs.length > 0 && blogs.filter((blog) =>
     blog.title.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
@@ -73,7 +74,7 @@ export default function BlogsPage() {
           transition={{ duration: 0.5, delay: 0.2 }}
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
         >
-          {filteredBlogs.map((blog, index) => (
+          {filteredBlogs.length > 0 && filteredBlogs.map((blog, index) => (
             <BlogCard key={index} blog={blog} />
           ))}
         </motion.div>
