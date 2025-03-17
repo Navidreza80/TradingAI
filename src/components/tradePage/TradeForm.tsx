@@ -15,10 +15,11 @@ interface TradeFormProps {
   currentPrice?: number; // قیمت فعلی نماد
   onOpenPosition?: (position: any) => void; // تابعی برای باز کردن پوزیشن
   symbol?: string; // نماد معاملاتی
+  isDarkMode?: boolean;
 }
 
 // کامپوننت اصلی فرم معامله
-const TradeForm: React.FC<TradeFormProps> = ({ currentPrice, onOpenPosition, symbol }) => {
+const TradeForm: React.FC<TradeFormProps> = ({ currentPrice, onOpenPosition, symbol, isDarkMode = true }) => {
   const dispatch = useDispatch();
   const { t, i18n } = useTranslation();
 
@@ -133,128 +134,137 @@ const TradeForm: React.FC<TradeFormProps> = ({ currentPrice, onOpenPosition, sym
 
   return (
     <form onSubmit={handleSubmit} className={`${style.Form} text-${i18n.language === 'fa' || i18n.language === 'ar' ? 'right' : 'left'}`} dir={i18n.dir()}>
-        {/* بخش حالت معامله و اهرم*/}
-        <div className={style.CrossOrIsolatedHolder}>
-          <div className='w-[40%]'>
-            <label className="block text-sm font-semibold text-gray-700 dark:text-gray-200 mb-2">{t("tradeMode")}:</label>
-            <div className={style.CrossOrIsolated}>
-              <select className="w-24 text-center text-[#394353] dark:text-[#c7cbd4] dark:bg-[#374151] px-1 rounded-xs bg-white" name="mode" onChange={handleModeChange}>
-                <option value="cross">cross</option>
-                <option value="isolated">isolated</option>
-              </select>
-            </div>
-          </div>
-          <div className='w-[60%]'>
-            <label className="block text-sm font-semibold text-gray-700 dark:text-gray-200 mb-2">{t("leverage")}: {leverage}x</label>
-            <div className="flex items-center mt-2.5 gap-2">
-              <span className="text-sm text-gray-500 dark:text-gray-400">1x</span>
-              <input
-                type="range"
-                min="1"
-                max="150"
-                value={leverage}
-                onChange={(e) => setLeverage(Number(e.target.value))}
-                className="w-full h-2 bg-white rounded-lg appearance-none cursor-pointer dark:bg-gray-700 [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-4 [&::-webkit-slider-thumb]:h-4 [&::-webkit-slider-thumb]:bg-blue-500 [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:cursor-pointer [&::-webkit-slider-thumb]:transition-all [&::-webkit-slider-thumb]:hover:bg-blue-600"
-              />
-              <span className="text-sm text-gray-500 dark:text-gray-400">150x</span>
-            </div>
-          </div>
+      {/* نمایش قیمت فعلی */}
+      <div className="bg-gray-200 dark:bg-[#1a1a1a] rounded-lg p-4 mb-4 transition-colors duration-300">
+        <div className="flex justify-between items-center">
+          <h1 className='text-[16px] font-semibold text-black dark:text-white transition-colors duration-300'>{t("currentPrice")}</h1>
+          <h1 className='text-[20px] font-bold text-black dark:text-white transition-colors duration-300'>
+            ${currentPrice || "—"}
+          </h1>
         </div>
+      </div>
 
-        {/* نمایش قیمت فعلی */}
-        <div className="bg-gray-400 dark:bg-gray-800 rounded-lg p-4">
-          <div className="dark:text-white">
-            <h1 className='text-[20px] mb-2 text-black font-bold dark:text-white'>{t("currentPrice")}</h1>
-            <h1 className='text-[15px] text-[#202020] dark:text-gray-200'>
-              {currentPrice || t("internetConnectionWarning")}
-            </h1>
-          </div>
-        </div>
-
-        {/* بخش نوع معامله */}
-        <div>
-          <label className="block text-sm font-semibold text-gray-700 dark:text-gray-200 mb-2">{t("tradeType")}:</label>
-          <div className="grid grid-cols-2 gap-2">
-            <button
-              type="button"
-              onClick={() => handleTypeChange('LONG')}
-              className={`py-2 px-4 rounded-lg font-medium transition-all text-white ${formData.type === 'LONG' ? 'bg-[#448717] ' : 'bg-[#1fff70] '} ${i18n.language === 'fa' || i18n.language === 'ar' ? 'mr-auto' : 'ml-auto'}`}
-            >
-              {t("long")}
-            </button>
-            <button
-              type="button"
-              onClick={() => handleTypeChange('SHORT')}
-              className={`py-2 px-4 rounded-lg font-medium transition-all text-white ${formData.type === 'SHORT' ? 'bg-red-600 ' : 'bg-red-300  '} ${i18n.language === 'fa' || i18n.language === 'ar' ? 'ml-auto' : 'mr-auto'}`}
-            >
-              {t("short")}
-            </button>
-          </div>
-        </div>
-
-        {/* بخش مقدار معامله */}
-        <div>
-          <label className="block text-sm font-semibold text-gray-700 dark:text-gray-200 mb-2">{t("amount")}:</label>
-          <input
-            type="number"
-            name="amount"
-            value={formData.amount}
-            onChange={handleChange}
-            className="mt-1 px-1 block w-full rounded-lg text-[#707070] dark:text-white border-gray-300 dark:border-gray-600 shadow-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-gray-700 dark:text-white"
-            required
-            step="0.01"
-            min={0}
-            max={20000}
-          />
-        </div>
-
-        {/* بخش قیمت حد سود و ضرر */}
-        <div className={`${style.TargetHolderAndStopHolderHolder}`}>
-          <div className='flex w-full gap-1 cursor-pointer'>
-            <input
-              type='checkbox'
-              className='cursor-pointer bg-black'
-              id='inputTPSL'
-              onChange={(e) => setTPSL(e.target.checked)}
-            />
-            <label className='text-black dark:text-white cursor-pointer' htmlFor="inputTPSL">{t("TP_SL")}</label>
-          </div>
-          {TPSL && (
-            <div className={style.checkedTPSL}>
-              <div className={style.TargetStopHolder}>
-                <div className={style.TargetStopHolderInputTitle}>
-                  <input
-                    type="text"
-                    value={takeProfitPrice}
-                    onChange={(e) => handlePriceChange(e.target.value, setTakeProfitPrice)}
-                    placeholder={t("takeProfit")}
-                    className="mt-1 block w-full rounded-lg border-gray-300 dark:border-gray-600 shadow-sm focus:border-green-500 focus:ring-green-500 dark:bg-gray-700 dark:text-white dark:focus:border-green-500 dark:focus:ring-green-500"
-                  />
-                </div>
-              </div>
-              <div className={style.TargetStopHolder}>
-                <div className={style.TargetStopHolderInputTitle}>
-                  <input
-                    type="text"
-                    value={stopLossPrice}
-                    onChange={(e) => handlePriceChange(e.target.value, setStopLossPrice)}
-                    placeholder={t("stopLoss")}
-                    className="mt-1 block w-full rounded-lg border-gray-300 dark:border-gray-600 shadow-sm focus:border-red-500 focus:ring-red-500 dark:bg-gray-700 dark:text-white dark:focus:border-red-500 dark:focus:ring-red-500"
-                  />
-                </div>
-              </div>
-            </div>
-          )}
-        </div>
-
-        {/* دکمه ارسال فرم */}
-        <button
-          type="submit"
-          className={`w-full py-3 px-4 rounded-lg font-medium transition-all ${formData.type === 'LONG' ? style.ShortButton : style.LongButton
+      {/* بخش نوع معامله */}
+      <div className="mb-4">
+        <label className="block text-[14px] text-gray-600 dark:text-[#8c8c8c] mb-2 transition-colors duration-300">{t("tradeType")}:</label>
+        <div className="grid grid-cols-2 gap-2">
+          <button
+            type="button"
+            onClick={() => handleTypeChange('LONG')}
+            className={`py-2 px-4 rounded-lg font-medium transition-all ${
+              formData.type === 'LONG' 
+                ? 'bg-[#00c087] text-white' 
+                : 'bg-white dark:bg-[#1a1a1a] text-[#00c087] border border-[#00c087] transition-colors duration-300'
             }`}
-        >
-          {t("openPosition")}
-        </button>
+          >
+            {t("long")}
+          </button>
+          <button
+            type="button"
+            onClick={() => handleTypeChange('SHORT')}
+            className={`py-2 px-4 rounded-lg font-medium transition-all ${
+              formData.type === 'SHORT' 
+                ? 'bg-[#ff4343] text-white' 
+                : 'bg-white dark:bg-[#1a1a1a] text-[#ff4343] border border-[#ff4343] transition-colors duration-300'
+            }`}
+          >
+            {t("short")}
+          </button>
+        </div>
+      </div>
+
+      {/* بخش حالت معامله و اهرم*/}
+      <div className="grid grid-cols-2 gap-4 mb-4">
+        <div>
+          <label className="block text-[14px] text-gray-600 dark:text-[#8c8c8c] mb-2 transition-colors duration-300">{t("tradeMode")}:</label>
+          <select 
+            className="w-full bg-white dark:bg-[#1a1a1a] text-black dark:text-white border border-gray-300 dark:border-[#2a2a2a] rounded-lg p-2 transition-colors duration-300" 
+            name="mode" 
+            onChange={handleModeChange}
+          >
+            <option value="cross">cross</option>
+            <option value="isolated">isolated</option>
+          </select>
+        </div>
+        <div>
+          <label className="block text-[14px] text-gray-600 dark:text-[#8c8c8c] mb-2 transition-colors duration-300">{t("leverage")}: {leverage}x</label>
+          <div className="flex items-center gap-2">
+            <span className="text-sm text-gray-600 dark:text-[#8c8c8c] transition-colors duration-300">1x</span>
+            <input
+              type="range"
+              min="1"
+              max="150"
+              value={leverage}
+              onChange={(e) => setLeverage(Number(e.target.value))}
+              className="w-full h-2 bg-gray-300 dark:bg-[#2a2a2a] rounded-lg appearance-none cursor-pointer [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-4 [&::-webkit-slider-thumb]:h-4 [&::-webkit-slider-thumb]:bg-blue-600 dark:[&::-webkit-slider-thumb]:bg-[#00a0ff] [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:cursor-pointer transition-colors duration-300"
+            />
+            <span className="text-sm text-gray-600 dark:text-[#8c8c8c] transition-colors duration-300">150x</span>
+          </div>
+        </div>
+      </div>
+
+      {/* بخش مقدار معامله */}
+      <div className="mb-4">
+        <label className="block text-[14px] text-gray-600 dark:text-[#8c8c8c] mb-2 transition-colors duration-300">{t("amount")}:</label>
+        <input
+          type="number"
+          name="amount"
+          value={formData.amount}
+          onChange={handleChange}
+          className="w-full bg-white dark:bg-[#1a1a1a] text-black dark:text-white border border-gray-300 dark:border-[#2a2a2a] rounded-lg p-2 transition-colors duration-300"
+          required
+          step="0.01"
+          min={0}
+          max={20000}
+        />
+      </div>
+
+      {/* بخش قیمت حد سود و ضرر */}
+      <div className="mb-4">
+        <div className='flex items-center gap-2 mb-2 cursor-pointer'>
+          <input
+            type='checkbox'
+            className='cursor-pointer'
+            id='inputTPSL'
+            onChange={(e) => setTPSL(e.target.checked)}
+          />
+          <label className='text-[14px] text-gray-600 dark:text-[#8c8c8c] cursor-pointer transition-colors duration-300' htmlFor="inputTPSL">{t("TP_SL")}</label>
+        </div>
+        {TPSL && (
+          <div className="grid grid-cols-2 gap-4">
+            <div>
+              <input
+                type="text"
+                value={takeProfitPrice}
+                onChange={(e) => handlePriceChange(e.target.value, setTakeProfitPrice)}
+                placeholder={t("takeProfit")}
+                className="w-full bg-white dark:bg-[#1a1a1a] text-black dark:text-white border border-gray-300 dark:border-[#2a2a2a] rounded-lg p-2 focus:border-[#00c087] transition-colors duration-300"
+              />
+            </div>
+            <div>
+              <input
+                type="text"
+                value={stopLossPrice}
+                onChange={(e) => handlePriceChange(e.target.value, setStopLossPrice)}
+                placeholder={t("stopLoss")}
+                className="w-full bg-white dark:bg-[#1a1a1a] text-black dark:text-white border border-gray-300 dark:border-[#2a2a2a] rounded-lg p-2 focus:border-[#ff4343] transition-colors duration-300"
+              />
+            </div>
+          </div>
+        )}
+      </div>
+
+      {/* دکمه ارسال فرم */}
+      <button
+        type="submit"
+        className={`w-full py-3 px-4 rounded-lg font-medium transition-all ${
+          formData.type === 'LONG' 
+            ? 'bg-[#00c087] text-white hover:bg-[#00a876]' 
+            : 'bg-[#ff4343] text-white hover:bg-[#e53935]'
+        }`}
+      >
+        {t("openPosition")}
+      </button>
     </form>
   );
 };

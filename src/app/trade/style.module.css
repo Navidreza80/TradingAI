@@ -15,12 +15,12 @@
     width: 100%;
     justify-content: space-between;
     margin-bottom: 20px;
-    height: 600px;
 }
 .contentTradingView{
     width: 70%;
     border-radius: 20px;
     overflow: hidden;
+    height: 600px;
 }
 .contentTradeForm{
     width: 29%;

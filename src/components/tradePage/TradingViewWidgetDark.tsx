@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
 let tvScriptLoadingPromise: Promise<void> | null = null;
 
@@ -10,9 +10,10 @@ let tvScriptLoadingPromise: Promise<void> | null = null;
  * @property {string} symbol - نماد جفت ارز (مثال: 'BTCUSDT')
  * @property {function} onPriceChange - تابع کالبک برای تغییرات قیمت
  */
-interface TradingViewWidgetProps {
+interface TradingViewWidgetDarkProps {
   symbol: string;
-  onPriceChange: (price: number) => void;
+  onPriceChange?: (price: number) => void;
+  theme?: string;
 }
 
 /**
@@ -90,7 +91,8 @@ const widgetConfig = {
     "delete_button_in_legend",
     "context_menus",
     "border_around_the_chart",
-    "chart_property_page_trading"
+    "chart_property_page_trading",
+    "header_fullscreen_button", // فعال کردن دکمه تمام صفحه داخلی TradingView
   ],
 
   // رنگ‌بندی چارت
@@ -126,172 +128,102 @@ const widgetConfig = {
  * کامپوننت TradingViewWidget
  * نمایش چارت TradingView با به‌روزرسانی قیمت لحظه‌ای
  */
-export const TradingViewWidgetDark = ({ symbol, onPriceChange }: TradingViewWidgetProps) => {
-  const onLoadScriptRef = useRef<(() => void) | null>(null);
+export const TradingViewWidgetDark: React.FC<TradingViewWidgetDarkProps> = ({
+  symbol,
+  onPriceChange,
+  theme = "dark"
+}) => {
   const containerRef = useRef<HTMLDivElement>(null);
+  const scriptRef = useRef<HTMLScriptElement | null>(null);
+  const [isFullscreen, setIsFullscreen] = useState(false);
 
+  // اضافه کردن event listener برای تشخیص خروج از حالت تمام صفحه
   useEffect(() => {
-    onLoadScriptRef.current = createWidget;
+    const handleFullscreenChange = () => {
+      setIsFullscreen(!!document.fullscreenElement);
+    };
 
-    if (!tvScriptLoadingPromise) {
-      tvScriptLoadingPromise = new Promise((resolve) => {
-        const script = document.createElement('script');
-        script.id = 'tradingview-widget-loading-script';
-        script.src = 'https://s3.tradingview.com/tv.js';
-        script.type = 'text/javascript';
-        script.onload = resolve as () => void;
-        document.head.appendChild(script);
-      });
-    }
-
-    tvScriptLoadingPromise.then(() => onLoadScriptRef.current?.());
+    document.addEventListener('fullscreenchange', handleFullscreenChange);
+    document.addEventListener('webkitfullscreenchange', handleFullscreenChange);
+    document.addEventListener('mozfullscreenchange', handleFullscreenChange);
+    document.addEventListener('MSFullscreenChange', handleFullscreenChange);
 
     return () => {
-      onLoadScriptRef.current = null;
-      if (containerRef.current) {
-        containerRef.current.innerHTML = '';
-      }
+      document.removeEventListener('fullscreenchange', handleFullscreenChange);
+      document.removeEventListener('webkitfullscreenchange', handleFullscreenChange);
+      document.removeEventListener('mozfullscreenchange', handleFullscreenChange);
+      document.removeEventListener('MSFullscreenChange', handleFullscreenChange);
     };
-  }, [symbol]);
+  }, []);
 
-  function createWidget() {
+  useEffect(() => {
+    // تبدیل فرمت نماد به فرمت مورد نیاز TradingView
+    const formattedSymbol = symbol.replace("/", "");
+    
+    // حذف اسکریپت قبلی اگر وجود داشته باشد
+    if (scriptRef.current) {
+      scriptRef.current.remove();
+      scriptRef.current = null;
+    }
+
+    // پاک کردن محتوای کانتینر
     if (containerRef.current) {
       containerRef.current.innerHTML = '';
-      const widget = new (window as any).TradingView.widget({
-        width: "100%",
-        height: "600px",
-        symbol: `BINANCE:${symbol}`,
-        interval: "5",
-        timezone: "Asia/Tehran",
-        theme: "dark",
-        style: "1",
-        locale: "fa_IR",
-        toolbar_bg: "#131722",
-        enable_publishing: false,
-        withdateranges: true,
-        hide_side_toolbar: false,
-        allow_symbol_change: false,
-        container_id: containerRef.current.id,
-        hide_volume: false,
-        library_path: "/charting_library/",
-        enable_trading: true,
-        trading_options: {
-          show_trading_panel: true,
-          trading_panel_position: 'right',
-        },
-
-        drawings_access: {
-          type: 'all',
-          tools: [
-            { name: "Trend Line" },
-            { name: "Fibonacci Retracement" },
-            { name: "Horizontal Line" },
-            { name: "Vertical Line" },
-            { name: "Rectangle" },
-            { name: "Text" }
-          ]
-        },
-
-        disabled_features: [
-          "header_widget",
-          "left_toolbar",
-          "header_symbol_search",
-          "symbol_search_hot_key",
-          "header_compare",
-          "header_undo_redo",
-          "header_screenshot",
-          "header_saveload",
-          "show_logo_on_all_charts",
-          "caption_buttons_text_if_possible",
-          "header_settings",
-          "header_fullscreen_button",
-          "widget_logo",
-          "hotlist_widget",
-          "dom_widget",
-          "legend_widget"
-        ],
-
-        enabled_features: [
-          "trading_panel",
-          "order_panel",
-          "trading_account_manager",
-          "trading_order_panel",
-          "side_toolbar_in_fullscreen_mode",
-          "create_volume_indicator_by_default",
-          "display_market_status",
-          "chart_property_page_trading",
-          "timeframes_toolbar",
-          "bottom_toolbar",
-          "use_localstorage_for_settings"
-        ],
-
-        overrides: {
-          "mainSeriesProperties.candleStyle.upColor": "#26a69a",
-          "mainSeriesProperties.candleStyle.downColor": "#ef5350",
-          "mainSeriesProperties.candleStyle.drawWick": true,
-          "mainSeriesProperties.candleStyle.drawBorder": true,
-          "mainSeriesProperties.candleStyle.borderUpColor": "#26a69a",
-          "mainSeriesProperties.candleStyle.borderDownColor": "#ef5350",
-          "mainSeriesProperties.candleStyle.wickUpColor": "#26a69a",
-          "mainSeriesProperties.candleStyle.wickDownColor": "#ef5350",
-          "paneProperties.background": "#131722",
-          "paneProperties.vertGridProperties.color": "#363c4e",
-          "paneProperties.horzGridProperties.color": "#363c4e",
-          "scalesProperties.textColor": "#AAA"
-        },
-
-        timeframes: [
-          { text: "1m", resolution: "1" },
-          { text: "5m", resolution: "5" },
-          { text: "15m", resolution: "15" },
-          { text: "30m", resolution: "30" },
-          { text: "1h", resolution: "60" },
-          { text: "4h", resolution: "240" },
-          { text: "1D", resolution: "1D" },
-          { text: "1W", resolution: "1W" },
-          { text: "1M", resolution: "1M" }
-        ],
-
-        time_frames: [
-          { text: "1m", resolution: "1", description: "1 Minute" },
-          { text: "5m", resolution: "5", description: "5 Minutes" },
-          { text: "15m", resolution: "15", description: "15 Minutes" },
-          { text: "30m", resolution: "30", description: "30 Minutes" },
-          { text: "1h", resolution: "60", description: "1 Hour" },
-          { text: "4h", resolution: "240", description: "4 Hours" },
-          { text: "1D", resolution: "1D", description: "1 Day" },
-          { text: "1W", resolution: "1W", description: "1 Week" },
-          { text: "1M", resolution: "1M", description: "1 Month" }
-        ],
-
-        loading_screen: { backgroundColor: "#131722" },
-        time_frames_position: 'bottom',
-
-        onReady: () => {
-          const chart = widget.chart();
-          chart.onSymbolChanged().subscribe(null, () => {
-            const symbolInfo = chart.symbolExt();
-            if (symbolInfo && symbolInfo.last_price) {
-              onPriceChange(symbolInfo.last_price);
-            }
-          });
-
-          chart.onDataLoaded().subscribe(null, () => {
-            const symbolInfo = chart.symbolExt();
-            if (symbolInfo && symbolInfo.last_price) {
-              onPriceChange(symbolInfo.last_price);
-            }
-          });
-        }
-      });
     }
-  }
+
+    // ایجاد اسکریپت جدید
+    const script = document.createElement("script");
+    script.src = "https://s3.tradingview.com/tv.js";
+    script.async = true;
+    script.onload = () => {
+      if (window.TradingView && containerRef.current) {
+        new window.TradingView.widget({
+          autosize: true,
+          symbol: `BINANCE:${formattedSymbol}`,
+          interval: "1",
+          timezone: "Etc/UTC",
+          theme: theme,
+        style: "1",
+          locale: "en",
+          toolbar_bg: theme === 'dark' ? "#2a2e39" : "#f1f3f6",
+        enable_publishing: false,
+          allow_symbol_change: false, // غیرفعال کردن تغییر نماد
+          container_id: "tradingview_widget",
+        hide_side_toolbar: false,
+        disabled_features: [
+            "header_symbol_search", // حذف جستجوی نماد
+            "symbol_search_hot_key", // حذف کلید میانبر جستجو
+            "header_compare", // حذف مقایسه نمادها
+          ],
+        enabled_features: [
+            "header_fullscreen_button", // فعال کردن دکمه تمام صفحه داخلی TradingView
+          ],
+        });
+      }
+    };
+
+    // ذخیره مرجع اسکریپت و اضافه کردن به DOM
+    scriptRef.current = script;
+    document.head.appendChild(script);
+
+    return () => {
+      // پاکسازی در هنگام unmount
+      if (scriptRef.current) {
+        scriptRef.current.remove();
+      }
+    };
+  }, [symbol, theme]);
 
   return (
     <div
-      id='tradingview_widget_container'
       ref={containerRef}
-      style={{ width: '100%' }}
+      id="tradingview_widget" 
+      style={{ 
+        height: isFullscreen ? "100vh" : "100%", 
+        width: "100%",
+        transition: "all 0.3s ease"
+      }}
+      className={isFullscreen ? "fixed top-0 left-0 z-50" : ""}
     />
   );
 };
