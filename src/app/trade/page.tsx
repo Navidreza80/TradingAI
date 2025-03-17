@@ -49,7 +49,7 @@ const POSITIONS_STORAGE_KEY = "trading_positions"; // کلید ذخیره‌سا
 
 // کامپوننت تابعی React
 export default function TradePage() {
-  const [selectedSymbol, setSelectedSymbol] = useState<string>("NOTUSDT"); // نماد انتخاب شده
+  const [selectedSymbol, setSelectedSymbol] = useState<string>("BTCUSDT"); // نماد انتخاب شده
   const [coins, setCoins] = useState([]); // لیست ارزها
   const [prices, setPrices] = useState<PriceMap>({}); // قیمت‌ها
   const [priceChanges, setPriceChanges] = useState<{ [key: string]: number }>({}); // تغییرات قیمت
@@ -1495,7 +1495,7 @@ export default function TradePage() {
                           </div>
                         </div>
                         <div className="mt-2 text-xs text-[#8c8c8c]">
-                          {t("currentPrice")}: ${prices[selectedPosition.symbol]?.toFixed(2) || "—"}
+                          {t("currentPrice")}: ${prices[selectedPosition.symbol] || "—"}
                         </div>
                       </div>
                     )}
@@ -1599,7 +1599,7 @@ export default function TradePage() {
                           </div>
                         </div>
                         <div className="mt-2 text-xs text-[#8c8c8c]">
-                          {t("currentPrice")}: ${prices[selectedPosition.symbol]?.toFixed(2) || "—"}
+                          {t("currentPrice")}: ${prices[selectedPosition.symbol] || "—"}
                         </div>
                       </div>
                     )}
@@ -1735,7 +1735,7 @@ export default function TradePage() {
                         <div>
                           <h1
                             style={{
-                              color: isProfitable ? "#66ff00" : "#ff0000",
+                              color: isProfitable ? "#51ff6c" : "#ff0000",
                             }}
                             className="text-right relative z-[100]  text-[30px] text-white mr-2"
                           >
@@ -1743,7 +1743,7 @@ export default function TradePage() {
                           </h1>
                           <h1
                             style={{
-                              color: isProfitable ? "#66ff00" : "#ff0000",
+                              color: isProfitable ? "#51ff6c" : "#ff0000",
                             }}
                             className="text-right relative z-[100]  text-[25px] text-white mr-2"
                           >
