@@ -42,6 +42,69 @@ const resources = {
         getStarted: "Get Started",
         learnMore: "Learn More",
       },
+      strategies: {
+        title: "Master Trading Strategies",
+        description: "Learn professional trading strategies and test your knowledge with interactive exercises and comprehensive exams",
+        courses: "Trading Courses",
+        coursesDesc: "Professional trading courses from basic to advanced",
+        exercises: "Practice Exercises",
+        exercisesDesc: "Interactive exercises to master trading skills",
+        certificates: "Certificates",
+        certificatesDesc: "Professional trading certificates",
+        students: "Active Students",
+        studentsDesc: "Successful traders in our community",
+        startLearning: "Start Learning",
+        takeTest: "Take a Test"
+      },
+      trading: {
+        title: "Professional Trading Tools",
+        description: "Experience the power of AI-driven trading with our advanced tools and real-time analytics",
+        aiSignals: "AI Signals",
+        aiSignalsDesc: "Get accurate trading signals powered by advanced machine learning algorithms",
+        performance: "Performance Tracking",
+        performanceDesc: "Track your trading performance with detailed analytics and insights",
+        tracking: "Progress Analysis",
+        trackingDesc: "Monitor your learning progress and trading improvement over time",
+        analytics: "Advanced Analytics",
+        analyticsDesc: "Deep dive into your trading patterns with professional analytics tools",
+        accuracy: "Signal Accuracy",
+        profitRate: "Profit Rate",
+        startNow: "Start Trading Now"
+      },
+      news: {
+        explore: "Explore News",
+        read: "Read Blogs",
+        latest: {
+          title: "Stay Updated",
+          description: "Get the latest financial market news and updates in real-time",
+        },
+        impact: {
+          title: "Market Impact",
+          description: "See how news affects market trends and make informed decisions",
+        },
+        blogs: {
+          title: "Market Insights",
+          description: "Read interesting blogs about market analysis and trading strategies",
+        },
+        share: {
+          title: "Share Knowledge",
+          description: "Share your trading insights and experiences with the community",
+        },
+      },
+      analyze: {
+        title: "Monitor Your Trading Growth",
+        description: "Leverage our advanced tools and AI-powered insights to analyze your trading journey and optimize your strategy.",
+        execute: "Demo Trade",
+        analyze: "Analyze Yourself",
+        demo: "Demo Trade",
+        desc: "Analyze market and execute your trades in demo mode.",
+        titleR: "AI Mentor",
+        descR: "Look how you performed on your last trades",
+        titleM: "Track Your Progress",
+        descM: "Track your progress in your trading journey with our professional analytics tools",
+        titleF: "Share Your Profits",
+        descF: "Share your profits with your friends and invite them to our site!"
+      },
       features: {
         title: "Powerful Features for Smart Trading",
         subtitle:
@@ -311,69 +374,6 @@ const resources = {
         title: "Loading...",
         subtitle: "Please wait a moment",
       },
-      strategies: {
-        title: "Master Trading Strategies",
-        description: "Learn professional trading strategies and test your knowledge with interactive exercises and comprehensive exams",
-        courses: "Trading Courses",
-        coursesDesc: "Professional trading courses from basic to advanced",
-        exercises: "Practice Exercises",
-        exercisesDesc: "Interactive exercises to master trading skills",
-        certificates: "Certificates",
-        certificatesDesc: "Professional trading certificates",
-        students: "Active Students",
-        studentsDesc: "Successful traders in our community",
-        startLearning: "Start Learning",
-        takeTest: "Take a Test"
-      },
-      trading: {
-        title: "Professional Trading Tools",
-        description: "Experience the power of AI-driven trading with our advanced tools and real-time analytics",
-        aiSignals: "AI Signals",
-        aiSignalsDesc: "Get accurate trading signals powered by advanced machine learning algorithms",
-        performance: "Performance Tracking",
-        performanceDesc: "Track your trading performance with detailed analytics and insights",
-        tracking: "Progress Analysis",
-        trackingDesc: "Monitor your learning progress and trading improvement over time",
-        analytics: "Advanced Analytics",
-        analyticsDesc: "Deep dive into your trading patterns with professional analytics tools",
-        accuracy: "Signal Accuracy",
-        profitRate: "Profit Rate",
-        startNow: "Start Trading Now"
-      },
-      news: {
-        explore: "Explore News",
-        read: "Read Blogs",
-        latest: {
-          title: "Stay Updated",
-          description: "Get the latest financial market news and updates in real-time",
-        },
-        impact: {
-          title: "Market Impact",
-          description: "See how news affects market trends and make informed decisions",
-        },
-        blogs: {
-          title: "Market Insights",
-          description: "Read interesting blogs about market analysis and trading strategies",
-        },
-        share: {
-          title: "Share Knowledge",
-          description: "Share your trading insights and experiences with the community",
-        },
-      },
-      analyze: {
-        title: "Monitor Your Trading Growth",
-        description: "Leverage our advanced tools and AI-powered insights to analyze your trading journey and optimize your strategy.",
-        execute: "Demo Trade",
-        analyze: "Analyze Yourself",
-        demo: "Demo Trade",
-        desc: "Analyze market and execute your trades in demo mode.",
-        titleR: "AI Mentor",
-        descR: "Look how you performed on your last trades",
-        titleM: "Track Your Progress",
-        descM: "Track your progress in your trading journey with our professional analytics tools",
-        titleF: "Share Your Profits",
-        descF: "Share your profits with your friends and invite them to our site!"
-      },
     },
   },
   fa: {
@@ -393,6 +393,20 @@ const resources = {
         aboutDesc: "بیشتر درباره TradingAI بدانید",
         tradeDesc: "معاملات خود را انجام دهید",
         strategiesDesc: "آموزش استراتژی‌های معاملاتی",
+      },
+      analyze: {
+        title: "رشد معاملاتی خود را نظارت کنید",
+        description: "از ابزارهای پیشرفته و تحلیل‌های مبتنی بر هوش مصنوعی ما برای بررسی مسیر معاملاتی خود و بهینه‌سازی استراتژی‌های خود استفاده کنید.",
+        execute: "معامله آزمایشی",
+        analyze: "خود را تحلیل کنید",
+        demo: "معامله آزمایشی",
+        desc: "بازار را تحلیل کنید و معاملات خود را در حالت آزمایشی اجرا کنید.",
+        titleR: "مربی هوش مصنوعی",
+        descR: "مشاهده کنید که در معاملات اخیر خود چگونه عملکرد داشته‌اید",
+        titleM: "پیشرفت خود را پیگیری کنید",
+        descM: "با استفاده از ابزارهای تحلیلی حرفه‌ای، مسیر پیشرفت معاملاتی خود را دنبال کنید",
+        titleF: "سودهای خود را به اشتراک بگذارید",
+        descF: "سودهای خود را با دوستانتان به اشتراک بگذارید و آنها را به سایت ما دعوت کنید!"
       },
       dropdown: {
         myAcc: "حساب من",
@@ -415,28 +429,24 @@ const resources = {
         learnMore: "بیشتر بدانید",
       },
       features: {
-        title: "امکانات قوی برای تداول با هوش مصنوعی",
-        subtitle:
-          "امکانات پیشرفته مدعوم با هوش مصنوعی برای کمک به تصمیم‌گیری بهتر در معاملات",
+        title: "ویژگی‌های قدرتمند برای معامله هوشمندانه",
+        subtitle: "ابزارهای پیشرفته مبتنی بر هوش مصنوعی برای کمک به تصمیم‌گیری بهتر معاملاتی",
         realtime: {
-          title: "تحلیل لحظه‌ای",
-          description:
-            "دریافت تحلیل لحظه‌ای و سیگنال‌های معاملاتی بر اساس داده‌های لحظه‌ای",
+          title: "تحلیل در زمان واقعی",
+          description: "دریافت تحلیل‌های لحظه‌ای و سیگنال‌های معاملاتی بر اساس داده‌های واقعی بازار"
         },
-        ai: {
-          title: "آموزش و آزمون",
-          description: "تسلط بر استراتژی‌های معاملاتی از طریق دوره‌های تعاملی و آزمون دانش خود با آزمون‌های جامع",
+        learn: {
+          title: "یادگیری و آزمون",
+          description: "با دوره‌های تعاملی استراتژی‌های معاملاتی را بیاموزید و دانش خود را بسنجید"
         },
-        secure: {
-          title: "به‌روز بمانید",
-          description:
-            "آخرین اخبار ارزهای دیجیتال، تحلیل بازار و دیدگاه‌های کارشناسان را از طریق بخش اخبار و بلاگ‌های به‌روز شده ما دریافت کنید",
+        update: {
+          title: "بروز بمانید",
+          description: "جدیدترین اخبار و تحلیل‌های کریپتو را مطالعه کنید"
         },
         advanced: {
-          title: "امکانات پیشرفته",
-          description:
-            "امکانات پیشرفته مدعوم با هوش مصنوعی برای کمک به تصمیم‌گیری بهتر در معاملات",
-        },
+          title: "ویژگی‌های پیشرفته",
+          description: "ابزارهای حرفه‌ای برای تحلیل و تصمیم‌گیری بهتر"
+        }
       },
       stats: {
         title: "مورد اعتماد معامله‌گران در سراسر جهان",
@@ -822,7 +832,11 @@ const resources = {
         accuracy: "دقت سیگنال",
         risk: "سطح ریسک",
         trend: "روند بازار",
-        volume: "حجم معاملات"
+        volume: "حجم معاملات",
+        selectP: "انتخاب جفت‌ارز",
+        selectT: "انتخاب بازه زمانی",
+        adjustC: "تنظیم تعداد کندل‌ها",
+        generateS: "تولید سیگنال"
       },
       notFound: {
         title: "صفحه یافت نشد",
@@ -864,6 +878,8 @@ const resources = {
         startNow: "شروع معاملات"
       },
       news: {
+        explore: "کاوش اخبار",
+        read: "خواندن وبلاگ‌ها",
         latest: {
           title: "به‌روز باشید",
           description: "آخرین اخبار و به‌روزرسانی‌های بازار مالی را به صورت لحظه‌ای دریافت کنید",
@@ -901,6 +917,20 @@ const resources = {
         tradeDesc: "قم بتنفيذ صفقاتك",
         strategiesDesc: "تعلم استراتيجيات التداول",
       },
+      analyze: {
+        title: "راقب نمو تداولك",
+        description: "استفد من أدواتنا المتقدمة ورؤى الذكاء الاصطناعي لتحليل مسيرتك في التداول وتحسين استراتيجيتك.",
+        execute: "تداول تجريبي",
+        analyze: "حلل نفسك",
+        demo: "تداول تجريبي",
+        desc: "قم بتحليل السوق ونفّذ صفقاتك في الوضع التجريبي.",
+        titleR: "المرشد بالذكاء الاصطناعي",
+        descR: "شاهد كيف كان أداؤك في تداولاتك الأخيرة",
+        titleM: "تتبع تقدمك",
+        descM: "تتبع تقدمك في رحلتك التداولية باستخدام أدوات التحليل الاحترافية",
+        titleF: "شارك أرباحك",
+        descF: "شارك أرباحك مع أصدقائك وادعهم إلى موقعنا!"
+      },
       dropdown: {
         myAcc: "حسابي",
         dash: "لوحة التحكم",
@@ -922,74 +952,27 @@ const resources = {
         learnMore: "اعرف المزيد",
       },
       features: {
-        title: "الميزات القوية",
+        title: "ميزات قوية لتداول ذكي",
         subtitle:
-          "الميزات المتقدمة مدعومة بالذكاء الاصطناعي لمساعدتك في اتخاذ قرارات تداول أفضل",
+          "أدوات وميزات متقدمة مدعومة بالذكاء الاصطناعي لمساعدتك على اتخاذ قرارات تداول أفضل",
         realtime: {
-          title: "التحليل اللحظي",
+          title: "تحليل لحظي",
           description:
-            "احصل على تحليل فوري للسوق وإشارات تداول بناءً على البيانات في الوقت الحقيقي",
+            "احصل على تحليل فوري للسوق وإشارات تداول مبنية على بيانات لحظية",
         },
-        ai: {
+        learn: {
           title: "تعلم واختبر",
-          description: "تسلط بر استراتژی‌های معاملاتی از طریق دوره‌های تعاملی و آزمون دانش خود با آزمون‌های جامع",
+          description: "أتقن استراتيجيات التداول من خلال الدورات التفاعلية واختبر معرفتك بالاختبارات الشاملة",
         },
-        secure: {
-          title: "ابق على اطلاع",
+        update: {
+          title: "ابقَ على اطلاع",
           description:
-            "احصل على آخر أخبار العملات الرقمية وتحليلات السوق ورؤى الخبراء من خلال قسم المدونات والأخبار المحدثة بانتظام",
+            "احصل على آخر أخبار العملات الرقمية وتحليلات السوق ورؤى الخبراء من خلال مدوناتنا وقسم الأخبار المحدث باستمرار",
         },
         advanced: {
           title: "ميزات متقدمة",
           description:
-            "أدوات وميزات متطورة مدعومة بالذكاء الاصطناعي لمساعدتك على اتخاذ قرارات تداول أفضل",
-        },
-      },
-      stats: {
-        title: "موثوق به من قبل المتداولين حول العالم",
-        subtitle:
-          "انضم إلى الآلاف من المتداولين الذين يثقون بـ TradingAI في قراراتهم التجارية",
-        users: {
-          title: "المستخدمون النشطون",
-        },
-        volume: {
-          title: "التداولات اليومية",
-        },
-        accuracy: {
-          title: "دقة الإشارات",
-        },
-        countries: {
-          title: "الدول",
-        },
-        uptime: {
-          title: "وقت التشغيل",
-        },
-        support: {
-          title: "دعم العملاء",
-        },
-      },
-      experience: {
-        title: "ماذا يقول مستخدمونا",
-        subtitle: "اقرأ ما يقوله المتداولين حول العالم عن تجربتهم مع TradingAI",
-        testimonials: {
-          user1: {
-            name: "سارة جونسون",
-            role: "متداولة محترفة",
-            content:
-              "TradingAI غيّرت استراتيجيتي في التداول بشكل كامل. إشارات الذكاء الاصطناعي دقيقة للغاية، والتحليل الفوري يساعدني في اتخاذ قرارات أفضل.",
-          },
-          user2: {
-            name: "ديفيد تشين",
-            role: "مستثمر في العملات الرقمية",
-            content:
-              "توقعات الذكاء الاصطناعي في المنصة ساعدتني على تحقيق أرباح مستمرة في سوق العملات الرقمية. رابط المستخدم بسيرين وفريق الدعم ممتاز.",
-          },
-          user3: {
-            name: "محمد الراشد",
-            role: "متداول فوركس",
-            content:
-              "من پلتفرم‌های معاملاتی زیادی را امتحان کرده‌ام، اما TradingAI تتميز بميزاتها المتقدمة وإشاراتها الموثوقة. أصبحت أداة أساسية لتداولي اليومي.",
-          },
+            "أدوات وميزات متقدمة مدعومة بالذكاء الاصطناعي لمساعدتك على اتخاذ قرارات تداول أفضل",
         },
       },
       startTrading: {
@@ -1317,7 +1300,11 @@ const resources = {
         accuracy: "دقة الإشارة",
         risk: "مستوى المخاطرة",
         trend: "اتجاه السوق",
-        volume: "حجم التداول"
+        volume: "حجم التداول",
+        selectP: "اختيار زوج العملات",
+        selectT: "اختيار الإطار الزمني",
+        adjustC: "تعديل عدد الشموع",
+        generateS: "إنشاء الإشارة",
       },
       notFound: {
         title: "الصفحة غير موجودة",
@@ -1359,6 +1346,8 @@ const resources = {
         startNow: "ابدأ التداول الآن"
       },
       news: {
+        explore: "استكشاف الأخبار",
+        read: "قراءة المدونات",
         latest: {
           title: "ابق على اطلاع",
           description: "احصل على آخر أخبار السوق المالية وتحديثاتها في الوقت الفعلي",

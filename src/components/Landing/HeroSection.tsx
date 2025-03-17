@@ -23,7 +23,7 @@ export default function HeroSection() {
   const isMobile = useMediaQuery({ maxWidth: 768 });
   const isTablet = useMediaQuery({ minWidth: 768, maxWidth: 1024 });
   // i18n hooks for translation
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const modelScale = 0.2;
 
   return (
