@@ -41,13 +41,12 @@ export default function NewsSection() {
     },
   ];
 
-  // Animation variants
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
-      transition: { staggerChildren: 0.2 },
-    },
+      transition: { staggerChildren: 0.2 }
+    }
   };
 
   const itemVariants = {
@@ -57,13 +56,13 @@ export default function NewsSection() {
       y: 0,
       transition: {
         duration: 0.5,
-        ease: "easeOut",
-      },
-    },
+        ease: "easeOut"
+      }
+    }
   };
 
   return (
-    <section className="relative py-11 dark:bg-background-dark bg-background-light overflow-hidden">
+    <section className="relative py-11 bg-background-light dark:bg-background-dark overflow-hidden">
 
       {/* Content Container */}
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -78,7 +77,7 @@ export default function NewsSection() {
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold p-3 text-primary-light dark:text-primary-dark">
             {t("features.update.title")}
           </h2>
-          <p className="mt-6 text-lg sm:text-xl text-secondary-light dark:text-secondary-dark max-w-3xl mx-auto font-medium">
+          <p className="mt-4 text-lg sm:text-xl text-secondary-light dark:text-secondary-dark max-w-3xl mx-auto font-medium">
             {t("features.update.description")}
           </p>
           <div className="flex justify-center gap-4 mt-8">
@@ -103,31 +102,37 @@ export default function NewsSection() {
           </div>
         </motion.div>
 
-        {/* Features Grid */}
+        {/* News Grid */}
         <motion.div
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8"
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8"
         >
           {features.map((feature, index) => (
             <motion.div
               key={index}
               variants={itemVariants}
-              className="relative group h-full"
+              className="relative group"
             >
-              <div className="relative z-10 p-8 rounded-2xl dark:border-white/10 border-black/5 border backdrop-blur-xl dark:hover:bg-white/10 hover:bg-white/90 transition-all duration-300 hover:scale-[1.02] dark:hover:shadow-[0_0_30px_rgba(24,144,255,0.1)] hover:shadow-[0_0_30px_rgba(24,144,255,0.2)] h-full flex flex-col items-center">
-                {/* Icon */}
-                <div className={`w-14 h-14 rounded-xl bg-gradient-to-r ${feature.color} flex items-center justify-center`}>
+              <div className="relative z-10 p-8 rounded-2xl 
+                dark:border-white/10 border-black/5 border
+                backdrop-blur-xl 
+                dark:hover:bg-white/10 hover:bg-white/90
+                transition-all duration-300 hover:scale-[1.02]
+                dark:hover:shadow-[0_0_30px_rgba(24,144,255,0.1)]
+                hover:shadow-[0_0_30px_rgba(24,144,255,0.2)]
+                h-full flex flex-col items-center text-center">
+
+                <div className={`inline-flex p-3 rounded-xl bg-gradient-to-r ${feature.color} shadow-lg`}>
                   {feature.icon}
                 </div>
 
-                {/* Content */}
-                <h3 className="mt-6 text-xl font-bold dark:text-primary-dark text-primary-light">
+                <h3 className="text-xl font-bold dark:text-primary-dark text-primary-light my-2">
                   {feature.title}
                 </h3>
-                <p className="mt-4 flex-grow dark:text-secondary-dark text-secondary-light text-center">
+                <p className="text-sm dark:text-secondary-dark text-secondary-light">
                   {feature.description}
                 </p>
 

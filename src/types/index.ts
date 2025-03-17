@@ -29,3 +29,10 @@ export interface FormData {
   type: 'LONG' | 'SHORT';
   amount: string;
 } 
+
+export interface ModelProps {
+  url: string;
+  position: [number, number, number];
+  rotation: [number, number, number];
+  scale: number;
+}

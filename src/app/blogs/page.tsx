@@ -4,6 +4,7 @@ import { fetchBlogs } from "@/actions/blog.action";
 // Third party components
 import BlogCard from "@/components/blog-card";
 import SearchBlogs from "@/components/blog-search";
+import BlogCardSkeleton from "@/components/blogs/BlogSkeleton";
 // Types
 import { Blog } from "@/types/blog";
 // Icons
@@ -74,9 +75,7 @@ export default function BlogsPage() {
           transition={{ duration: 0.5, delay: 0.2 }}
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
         >
-          {filteredBlogs.length > 0 && filteredBlogs.map((blog, index) => (
-            <BlogCard key={index} blog={blog} />
-          ))}
+          {filteredBlogs.length > 0 ? filteredBlogs.map((blog, index) => (<BlogCard key={index} blog={blog} />)) :  Array.from({ length: 6 }).map((_, index) => <BlogCardSkeleton key={index} />)}
         </motion.div>
       </div>
     </main>

@@ -72,10 +72,10 @@ export default function TradingStrategies() {
 
   return (
     <section className="relative py-11 bg-background-light dark:bg-background-dark overflow-hidden">
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(24,144,255,0.1)_1px,transparent_1px)] 
-        bg-[length:20px_20px] opacity-50 dark:opacity-50" />
 
+      {/* Content Container */}
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Section Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -113,6 +113,7 @@ export default function TradingStrategies() {
           </div>
         </motion.div>
 
+        {/* Strategies Grid */}
         <motion.div
           variants={containerVariants}
           initial="hidden"
@@ -134,9 +135,8 @@ export default function TradingStrategies() {
                 dark:hover:shadow-[0_0_30px_rgba(24,144,255,0.1)]
                 hover:shadow-[0_0_30px_rgba(24,144,255,0.2)]
                 h-full flex flex-col items-center text-center">
-                
-                <div className={`inline-flex p-3 rounded-xl bg-gradient-to-r ${feature.color}
-                  shadow-lg mb-6`}>
+
+                <div className={`inline-flex p-3 rounded-xl bg-gradient-to-r ${feature.color} shadow-lg mb-6`}>
                   {feature.icon}
                 </div>
 
@@ -147,7 +147,7 @@ export default function TradingStrategies() {
                 <h3 className="text-xl font-bold dark:text-primary-dark text-primary-light mb-2">
                   {feature.title}
                 </h3>
-                
+
                 <p className="text-sm dark:text-secondary-dark text-secondary-light">
                   {feature.description}
                 </p>

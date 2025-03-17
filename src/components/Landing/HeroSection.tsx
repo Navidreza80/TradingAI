@@ -8,49 +8,20 @@ import Link from "next/link";
 // Global style
 import "./Style.css";
 // i18n imports for translation
-import { OrbitControls, useGLTF } from '@react-three/drei';
-import { Canvas, useFrame } from '@react-three/fiber';
-import { Suspense, useRef } from 'react';
 import { useTranslation } from "react-i18next";
-import * as THREE from 'three';
-
-interface ModelProps {
-  url: string;
-  position: [number, number, number];
-  rotation: [number, number, number];
-  scale: number;
-}
-
-function Model({ url, position, rotation, scale }: ModelProps) {
-  const { scene } = useGLTF(url) as { scene: THREE.Object3D };
-  const meshRef = useRef<THREE.Object3D>();
-
-  useFrame((state) => {
-    if (meshRef.current) {
-      meshRef.current.rotation.y += 0.005;
-      meshRef.current.position.y = position[1];
-    }
-  });
-
-  // Set uniform scale and size
-  scene.scale.set(scale, scale, scale);
-  const box = new THREE.Box3().setFromObject(scene);
-  const size = box.getSize(new THREE.Vector3());
-  const targetSize = 70;
-  const scaleFactor = Math.min(targetSize / size.x, targetSize / size.y) * 0.015;
-  scene.scale.multiplyScalar(scaleFactor);
-
-  return (
-    <primitive
-      ref={meshRef}
-      object={scene}
-      position={position}
-      rotation={rotation}
-    />
-  );
-}
+// 3D imports
+import { OrbitControls } from '@react-three/drei';
+import { Canvas } from '@react-three/fiber';
+import { Suspense } from 'react';
+import Model from "../model";
+// responsive
+import { useMediaQuery } from "react-responsive";
 
 export default function HeroSection() {
+  // responsive hooks
+  const isSmall = useMediaQuery({ maxWidth: 440 });
+  const isMobile = useMediaQuery({ maxWidth: 768 });
+  const isTablet = useMediaQuery({ minWidth: 768, maxWidth: 1024 });
   // i18n hooks for translation
   const { t } = useTranslation();
   const modelScale = 0.2;
@@ -66,27 +37,31 @@ export default function HeroSection() {
           <ambientLight intensity={2} />
           <pointLight position={[10, 10, 10]} />
           <Suspense fallback={null}>
+            {/* Bitcoin Model */}
             <Model
               url="/models/bitcoin.glb"
-              position={[-7, 3.5, 0]} // Top-Left with Margin
+              position={isSmall ? [-2, 3.5, -3] : isMobile ? [-4, 3.5, -2.5] : isTablet ? [-6, 3.5, -2] : [-7, 3.5, 0]} // Top-Left with Margin
               rotation={[0, 0, 0]}
               scale={modelScale}
             />
+            {/* Chart Model */}
             <Model
               url="/models/chart.glb"
-              position={[7, 3.5, 0]} // Top-Right with Margin
+              position={isSmall ? [2, 3.5, -3] : isMobile ? [4, 3.5, -2.5] : isTablet ? [6, 3.5, -2] : [7, 3.5, 0]} // Top-Right with Margin
               rotation={[0, 0, 0]}
               scale={modelScale}
             />
+            {/* AI Robot Model */}
             <Model
               url="/models/robot.glb"
-              position={[-7, -3.5, 0]} // Bottom-Left with Margin
+              position={isSmall ? [-2, -3.5, -3] : isMobile ? [-4, -3.5, -2.5] : isTablet ? [-6, -3.5, -2] : [-7, -3.5, 0]} // Bottom-Left with Margin
               rotation={[0, 0, 0]}
               scale={modelScale}
             />
+            {/* Crypto Model */}
             <Model
               url="/models/graph.glb"
-              position={[7, -3.5, 0]} // Bottom-Right with Margin
+              position={isSmall ? [2, -3.5, -3] : isMobile ? [4, -3.5, -2.5] : isTablet ? [6, -3.5, -2] : [7, -3.5, 0]} // Bottom-Right with Margin
               rotation={[0, 0, 0]}
               scale={modelScale}
             />
@@ -141,7 +116,7 @@ export default function HeroSection() {
             transition={{ duration: 0.8, delay: 0.6 }}
             className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6 w-full"
           >
-            <Link href="/trade" className="w-full sm:w-auto">
+            <Link href="/trade" className="sm:w-auto">
               <Button
                 type="primary"
                 size="large"
@@ -150,7 +125,7 @@ export default function HeroSection() {
                 {t("hero.getStarted")}
               </Button>
             </Link>
-            <Link href="/about" className="w-full sm:w-auto">
+            <Link href="/about" className="sm:w-auto">
               <Button
                 size="large"
                 className="w-full sm:w-auto h-12 sm:h-14 px-6 sm:px-8 text-base sm:text-lg font-bold rounded-xl bg-button-secondary-light dark:bg-button-secondary-dark border-none hover:scale-105 transition-all duration-300"
