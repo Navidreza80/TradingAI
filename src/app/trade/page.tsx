@@ -905,15 +905,15 @@ export default function TradePage() {
                                 <div className="grid grid-cols-2 gap-3 mb-3">
                                   <div>
                                     <p className="text-xs text-gray-500 dark:text-gray-400 mb-1">{t("entryPrice")}</p>
-                                    <p className="text-sm font-medium text-black dark:text-white">${(position.entryPrice != null ? position.entryPrice : 0).toFixed(2)}</p>
+                                    <p className="text-sm font-medium text-black dark:text-white">${(position.entryPrice != null ? position.entryPrice : 0)}</p>
                                   </div>
                                   <div>
                                     <p className="text-xs text-gray-500 dark:text-gray-400 mb-1">{t("currentPrice")}</p>
-                                    <p className="text-sm font-medium text-black dark:text-white">${prices[position.symbol]?.toFixed(2) || "—"}</p>
+                                    <p className="text-sm font-medium text-black dark:text-white">${prices[position.symbol] || "—"}</p>
                                   </div>
                                   <div>
                                     <p className="text-xs text-gray-500 dark:text-gray-400 mb-1">{t("amount")}</p>
-                                    <p className="text-sm font-medium text-black dark:text-white">${(position.amount != null ? position.amount : 0).toFixed(2)}</p>
+                                    <p className="text-sm font-medium text-black dark:text-white">${(position.amount != null ? position.amount : 0)}</p>
                                   </div>
                                   <div>
                                     <p className="text-xs text-gray-500 dark:text-gray-400 mb-1">{t("mode")}</p>
@@ -1024,13 +1024,13 @@ export default function TradePage() {
                                   {position.mode}
                                 </td>
                                 <td className={`p-3 text-sm text-black dark:text-white border-b border-gray-200 dark:border-[#2a2a2a] ${i18n.language === 'fa' || i18n.language === 'ar' ? 'text-right' : 'text-left'}`}>
-                                  ${(position.entryPrice != null ? position.entryPrice : 0).toFixed(2)}
+                                  ${(position.entryPrice != null ? position.entryPrice : 0)}
                                 </td>
                                 <td className={`p-3 text-sm text-black dark:text-white border-b border-gray-200 dark:border-[#2a2a2a] ${i18n.language === 'fa' || i18n.language === 'ar' ? 'text-right' : 'text-left'}`}>
-                                  ${prices[position.symbol]?.toFixed(2) || "—"}
+                                  ${prices[position.symbol] || "—"}
                                 </td>
                                 <td className={`p-3 text-sm text-black dark:text-white border-b border-gray-200 dark:border-[#2a2a2a] ${i18n.language === 'fa' || i18n.language === 'ar' ? 'text-right' : 'text-left'}`}>
-                                  ${(position.amount != null ? position.amount : 0).toFixed(2)}
+                                  ${(position.amount != null ? position.amount : 0)}
                                 </td>
                                 <td className={`p-3 border-b border-gray-200 dark:border-[#2a2a2a] ${i18n.language === 'fa' || i18n.language === 'ar' ? 'text-right' : 'text-left'}`}>
                                   <div>
@@ -1233,13 +1233,13 @@ export default function TradePage() {
                                 </span>
                               </td>
                               <td className="p-4">
-                                <span className="text-white">${(position.entryPrice != null ? position.entryPrice : 0).toFixed(2)}</span>
+                                <span className="text-white">${(position.entryPrice != null ? position.entryPrice : 0)}</span>
                               </td>
                               <td className="p-4">
-                                <span className="text-white">${(position.closePrice != null ? position.closePrice : 0).toFixed(2)}</span>
+                                <span className="text-white">${(position.closePrice != null ? position.closePrice : 0)}</span>
                               </td>
                               <td className="p-4">
-                                <span className="text-white">${(position.amount != null ? position.amount : 0).toFixed(2)}</span>
+                                <span className="text-white">${(position.amount != null ? position.amount : 0)}</span>
                               </td>
                               <td className="p-4">
                                 <span className="text-white">{position.leverage}x</span>
@@ -1316,7 +1316,7 @@ export default function TradePage() {
                             <div className="grid grid-cols-2 gap-3 text-sm">
                               <div>
                                 <p className="text-xs text-gray-400">{t("entryPrice")}</p>
-                                <p className="font-medium text-white">${(position.entryPrice != null ? position.entryPrice : 0).toFixed(2)}</p>
+                                <p className="font-medium text-white">${(position.entryPrice != null ? position.entryPrice : 0)}</p>
                               </div>
                               <div>
                                 <p className="text-xs text-gray-400">{t("closePrice")}</p>
