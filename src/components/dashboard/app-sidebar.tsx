@@ -38,7 +38,7 @@ export default function Sidebar({ isOpen, onClose }: {isOpen: boolean; onClose: 
       iconDark: "dark:bg-coinDM",
     },
     {
-      text: t("dashboard.side.comments"),
+      text: t("dashboard.sidebar.comments"),
       href: "/dashboard/comments",
       iconLight: "bg-commentLM",
       iconDark: "dark:bg-commentDM",

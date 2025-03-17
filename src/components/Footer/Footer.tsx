@@ -63,7 +63,7 @@ export default function Footer() {
   ];
 
   return (
-    <footer className="relative bg-gradient-to-b dark:from-[#0a0a0a] dark:to-[#1a1a1a] from-white to-gray-50">
+    <footer className="relative bg-background-light dark:bg-background-dark">
       {/* Background Pattern */}
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(24,144,255,0.1)_1px,transparent_1px)] 
         bg-[length:20px_20px] opacity-50 dark:opacity-50" />

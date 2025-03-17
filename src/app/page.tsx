@@ -1,10 +1,11 @@
 // Third party components
+import Footer from "@/components/Footer/Footer";
+import AnalyzeYourself from "@/components/Landing/AnalyzeYourself";
 import Features from "@/components/Landing/Features";
 import HeroSection from "@/components/Landing/HeroSection";
-import Stats from "@/components/Landing/Stats";
-import UserExperience from "@/components/Landing/UserExperience";
-import StartTrading from "@/components/Landing/StartTrading";
-import Footer from "@/components/Footer/Footer";
+import NewsSection from "@/components/Landing/NewsSection";
+import TradingStrategies from "@/components/Landing/Strategies";
+import TradingSignals from "@/components/Landing/TradingSignals";
 
 export default function Home() {
   return (
@@ -16,15 +17,16 @@ export default function Home() {
         <Features />
 
         {/* Stats Section */}
-        <Stats />
+        <TradingSignals />
 
         {/* User Experience Section */}
-        <UserExperience />
+        <TradingStrategies />
 
-        {/* Start Trading Section */}
-        <StartTrading />
+        {/* News Section */}
+        <NewsSection />
 
-        <Footer />
+        {/* Analyse Yourself Section */}
+        <AnalyzeYourself />
       </main>
     )
 }

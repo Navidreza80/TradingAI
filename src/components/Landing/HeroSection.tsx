@@ -2,82 +2,169 @@
 // Framer motion imports for animation
 import { motion } from "framer-motion";
 // Antd style library imports
-import { Space, Button } from "antd";
-import Title from "antd/es/typography/Title";
-import Paragraph from "antd/es/typography/Paragraph";
+import { Button } from "antd";
 // Next imports
 import Link from "next/link";
 // Global style
 import "./Style.css";
 // i18n imports for translation
+import { OrbitControls, useGLTF } from '@react-three/drei';
+import { Canvas, useFrame } from '@react-three/fiber';
+import { Suspense, useRef } from 'react';
 import { useTranslation } from "react-i18next";
+import * as THREE from 'three';
+
+interface ModelProps {
+  url: string;
+  position: [number, number, number];
+  rotation: [number, number, number];
+  scale: number;
+}
+
+function Model({ url, position, rotation, scale }: ModelProps) {
+  const { scene } = useGLTF(url) as { scene: THREE.Object3D };
+  const meshRef = useRef<THREE.Object3D>();
+
+  useFrame((state) => {
+    if (meshRef.current) {
+      meshRef.current.rotation.y += 0.005;
+      meshRef.current.position.y = position[1];
+    }
+  });
+
+  // Set uniform scale and size
+  scene.scale.set(scale, scale, scale);
+  const box = new THREE.Box3().setFromObject(scene);
+  const size = box.getSize(new THREE.Vector3());
+  const targetSize = 70;
+  const scaleFactor = Math.min(targetSize / size.x, targetSize / size.y) * 0.015;
+  scene.scale.multiplyScalar(scaleFactor);
+
+  return (
+    <primitive
+      ref={meshRef}
+      object={scene}
+      position={position}
+      rotation={rotation}
+    />
+  );
+}
 
 export default function HeroSection() {
   // i18n hooks for translation
   const { t } = useTranslation();
+  const modelScale = 0.2;
+
   return (
-    <motion.div
-      className="hero-section h-screen flex items-center justify-center relative overflow-hidden z-1"
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ duration: 1 }}
-    >
-      <div className="text-center max-w-[900px] relative z-1 py-5">
-        <motion.div
-          initial={{ y: 50 }}
-          animate={{ y: 0 }}
-          transition={{ delay: 0.2 }}
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden dark:bg-background-dark bg-background-light">
+      {/* 3D Objects Canvas */}
+      <div className="absolute inset-0 z-0">
+        <Canvas
+          camera={{ position: [0, 0, 15], fov: 40 }}
+          gl={{ alpha: true, antialias: true }}
         >
-          {/* Hero Section Title */}
-          <Title
-            level={1}
-            className="hero-section-title mb-8 p-2 text-center relative"
+          <ambientLight intensity={2} />
+          <pointLight position={[10, 10, 10]} />
+          <Suspense fallback={null}>
+            <Model
+              url="/models/bitcoin.glb"
+              position={[-7, 3.5, 0]} // Top-Left with Margin
+              rotation={[0, 0, 0]}
+              scale={modelScale}
+            />
+            <Model
+              url="/models/chart.glb"
+              position={[7, 3.5, 0]} // Top-Right with Margin
+              rotation={[0, 0, 0]}
+              scale={modelScale}
+            />
+            <Model
+              url="/models/robot.glb"
+              position={[-7, -3.5, 0]} // Bottom-Left with Margin
+              rotation={[0, 0, 0]}
+              scale={modelScale}
+            />
+            <Model
+              url="/models/graph.glb"
+              position={[7, -3.5, 0]} // Bottom-Right with Margin
+              rotation={[0, 0, 0]}
+              scale={modelScale}
+            />
+          </Suspense>
+          <OrbitControls
+            enableZoom={false}
+            enablePan={false}
+            minPolarAngle={Math.PI / 2}
+            maxPolarAngle={Math.PI / 2}
+          />
+        </Canvas>
+      </div>
+
+      {/* Content Container */}
+      <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+          className="flex flex-col items-center justify-center text-center space-y-12 max-w-4xl mx-auto"
+        >
+          {/* Main Title */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            className="space-y-6 w-full"
           >
-            {t("hero.title")} <br /> {t("hero.title2")}
-          </Title>
-        </motion.div>
+            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black tracking-tight leading-none">
+              <span className="inline-block text-headline-light dark:text-headline-dark pb-2 dark:text-primary-dark text-primary-light">
+                {t("hero.title")}
+              </span>
+              <br />
+              <span className="inline-block text-headline-light dark:text-headline-dark dark:text-primary-dark text-primary-light">
+                {t("hero.title2")}
+              </span>
+            </h1>
+            <motion.p
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.8, delay: 0.4 }}
+              className="text-subtitle-light text-secondary-light dark:text-secondary-dark dark:text-subtitle-dark max-w-3xl mx-auto text-base sm:text-lg md:text-xl lg:text-2xllight:text-gray-600 font-medium px-4"
+            >
+              {t("hero.description")}
+            </motion.p>
+          </motion.div>
 
-        <motion.div
-          initial={{ y: 50, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          transition={{ delay: 0.4 }}
-        >
-          {/* Hero Section Subtitle */}
-          <Paragraph className="hero-section-subtitle lg:text-[20px] md:[17px] sm:text-[14px] xs:text-[12px] text-center mb-12 text-[#bfbfbf]">
-            {t("hero.description")}
-          </Paragraph>
-        </motion.div>
-
-        <motion.div
-          initial={{ y: 50, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          transition={{ delay: 0.6 }}
-        >
-          {/* Hero section buttons */}
-          <Space size="large" className="hero-buttons">
-            {/* Start Trading Now Button */}
-            <Link href="/trade">
+          {/* CTA Buttons */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.6 }}
+            className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6 w-full"
+          >
+            <Link href="/trade" className="w-full sm:w-auto">
               <Button
                 type="primary"
                 size="large"
-                className="h-14 px-4 py-3 text-[1rem] font-semibold rounded-[18px] get-started-btn"
+                className="bounce-button w-full text-subtitle-light dark:text-subtitle-dark sm:w-auto h-12 sm:h-14 px-6 sm:px-8 text-base sm:text-lg font-bold rounded-xl bg-button-primary-light dark:bg-button-primary-dark border-none transition-all duration-300"
               >
                 {t("hero.getStarted")}
               </Button>
             </Link>
-
-            {/* Watch Demo Button */}
-            <Link href="/about">
+            <Link href="/about" className="w-full sm:w-auto">
               <Button
                 size="large"
-                className="learn-more-btn h-14 px-8 font-[1rem] font-semibold rounded-[18px] text-[#1890ff]"
+                className="w-full sm:w-auto h-12 sm:h-14 px-6 sm:px-8 text-base sm:text-lg font-bold rounded-xl bg-button-secondary-light dark:bg-button-secondary-dark border-none hover:scale-105 transition-all duration-300"
               >
                 {t("hero.learnMore")}
               </Button>
             </Link>
-          </Space>
+          </motion.div>
         </motion.div>
       </div>
-    </motion.div>
+
+      {/* Decorative Elements */}
+      <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#1890ff]/20 to-transparent dark:via-[#1890ff]/20 light:via-[#1890ff]/10" />
+      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-1/2 h-[1px] bg-[#1890ff]/10 blur-sm dark:bg-[#1890ff]/10 light:bg-[#1890ff]/5" />
+    </section>
   );
 }
