@@ -791,7 +791,7 @@ export default function TradePage() {
                             onClick={showSymbolModal}
                             className="flex items-center justify-between w-full p-2 bg-[#1a1a1a] border border-[#2a2a2a] rounded-lg text-white hover:bg-[#252525] focus:bg-[#252525] transition-colors"
                           >
-                            <div className="flex justify-between gap-2 ">
+                            <div className="flex justify-between gap-6 ">
                               {selectedSymbol && (
                                 <span className="font-medium text-white">{selectedSymbol}</span>
                               )}
