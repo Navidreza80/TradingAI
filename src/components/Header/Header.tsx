@@ -4,8 +4,8 @@ import { usePathname } from "next/navigation";
 // React imports
 import { useEffect, useState } from "react";
 // Third party components
-import Logo from "../Logo";
-import ThemeNLanguage from "../theme-n-language";
+import Logo from "./Logo";
+import ThemeNLanguage from "./theme-n-language";
 import AuthButtons from "./auth-buttons";
 import Navigation from "./header-navigation";
 import MobileDrawer from "./mobile-drawer";

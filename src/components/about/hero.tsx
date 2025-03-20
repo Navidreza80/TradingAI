@@ -14,19 +14,11 @@ export default function Hero() {
       className="text-center mb-20"
     >
       <h1
-        className={`text-4xl sm:text-5xl lg:text-6xl font-bold mb-6 p-2
-          bg-gradient-to-r dark:from-white dark:to-gray-400 from-gray-900 to-gray-600 
-          bg-clip-text text-transparent 
-           
-          `}
-      >
+        className='text-4xl sm:text-5xl lg:text-6xl font-bold mb-6 p-2 text-primary-light dark:text-primary-dark'>
         {t("about.title")}
       </h1>
       <p
-        className={`text-xl dark:text-gray-400 text-gray-600 max-w-3xl mx-auto p-2
-           
-          `}
-      >
+        className='text-xl max-w-3xl mx-auto p-2 text-secondary-light dark:text-secondary-dark'>
         {t("about.subtitle")}
       </p>
     </motion.div>

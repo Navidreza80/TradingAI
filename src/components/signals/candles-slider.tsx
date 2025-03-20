@@ -4,7 +4,7 @@ import { FaSlidersH } from "react-icons/fa";
 export default function CandlesSlider({ candles, setCandles }) {
   return (
     <div className="flex items-center gap-4">
-      <FaSlidersH className="text-gray-400" />
+      <FaSlidersH className="text-secondary-light dark:text-secondary-dark" />
       <input
         type="range"
         min="100"

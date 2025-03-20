@@ -96,7 +96,9 @@ export default function BlogDetailPage() {
 
   return (
     detail.title && (
-      <main className="min-h-screen bg-gradient-to-b dark:from-[#0a0a0a] dark:to-[#1a1a1a] from-white to-gray-50 pt-24 pb-12">
+      // Blog Detail Page
+      <main className="min-h-screen bg-background-light dark:bg-background-dark pt-24 pb-12">
+        {/* Container */}
         <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Blog Header */}
           <motion.div
@@ -105,19 +107,18 @@ export default function BlogDetailPage() {
             transition={{ duration: 0.5 }}
             className="mb-8"
           >
-            <h1
-              className={`text-3xl sm:text-4xl font-bold mb-4
-            dark:text-white text-gray-900
-             
-            `}
-            >
+            {/* Blog Title */}
+            <h1 className='text-3xl sm:text-4xl font-bold mb-4 dark:text-primary-dark text-primary-light'>
               {detail.title}
             </h1>
 
-            {/* Meta Info */}
-            <div className="flex flex-wrap items-center gap-4 mb-6 text-sm dark:text-gray-400 text-gray-600">
+            {/* User Info */}
+            <div className="flex flex-wrap items-center gap-4 mb-6 text-sm text-secondary-light dark:text-secondary-dark">
+              {/* Container */}
               <div className="flex items-center gap-2">
+                {/* User Icon */}
                 <UserIcon className="w-5 h-5" />
+                {/* Link That Navigates To User Page */}
                 <Link
                   href={`/Users/${detail.publisher.id}`}
                   className="hover:opacity-85 cursor-pointer"
@@ -125,15 +126,19 @@ export default function BlogDetailPage() {
                   {detail.publisher?.username}
                 </Link>
               </div>
+              {/* Container */}
               <div className="flex items-center gap-2">
+                {/* Calender Icon */}
                 <CalendarIcon className="w-5 h-5" />
+                {/* Blog Published Date */}
                 <span>{new Date(detail.createdAt).toLocaleDateString()}</span>
               </div>
             </div>
 
-            {/* Featured Image */}
+            {/* Image Container */}
             <div className="relative h-[400px] w-full rounded-2xl overflow-hidden mb-8">
               {typeof detail.blogThumbnail == "string" && (
+                // Blog Image
                 <Image
                   src={detail.blogThumbnail}
                   alt={detail.title}
@@ -144,18 +149,14 @@ export default function BlogDetailPage() {
             </div>
           </motion.div>
 
-          {/* Blog Content */}
+          {/* Blog Content Container */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.2 }}
-            className={`prose prose-lg max-w-none dark:prose-invert mb-12
-             
-            `}
-          >
-            {/* Add your blog content here */}
-            <p className="text-black dark:text-white">{detail.content}</p>
-            {/* More content... */}
+            className='prose prose-lg max-w-none dark:prose-invert mb-12'>
+            {/* Blog Content */}
+            <p className="text-primary-light dark:text-primary-dark">{detail.content}</p>
           </motion.div>
 
           {/* Action Buttons */}
@@ -165,6 +166,7 @@ export default function BlogDetailPage() {
             transition={{ duration: 0.5, delay: 0.3 }}
             className="flex flex-wrap items-center justify-between gap-4 mb-12 pb-8 border-b dark:border-white/10 border-gray-200"
           >
+            {/* Container */}
             <div className="flex items-center gap-4">
               {/* Like Button */}
               <button
@@ -181,10 +183,13 @@ export default function BlogDetailPage() {
                 }}
               >
                 {isLiked ? (
-                  <HandThumbUpIcon className="w-6 h-6 dark:text-white text-black" />
+                  // Liked Icon
+                  <HandThumbUpIcon className="w-6 h-6 dark:text-primary-dark text-primary-light" />
                 ) : (
-                  <HandThumbUpIcon className="w-6 h-6 dark:text-gray-400 text-gray-600" />
+                  // Not Liked Icon
+                  <HandThumbUpIcon className="w-6 h-6 dark:text-secondary-dark text-secondary-light" />
                 )}
+                {/* Liked Count */}
                 <span className="dark:text-gray-400 text-gray-600">
                   {detail._count.likes}
                 </span>
@@ -205,10 +210,13 @@ export default function BlogDetailPage() {
                 }}
               >
                 {isDisLiked ? (
-                  <HandThumbDownIcon className="w-6 h-6 dark:text-white text-black" />
+                  // DisLiked Icon
+                  <HandThumbDownIcon className="w-6 h-6 dark:text-primary-dark text-primary-light" />
                 ) : (
-                  <HandThumbDownIcon className="w-6 h-6 dark:text-gray-400 text-gray-600" />
+                  // Not DisLiked Icon
+                  <HandThumbDownIcon className="w-6 h-6 dark:text-secondary-dark text-secondary-light" />
                 )}
+                  {/* Disliked Count */}
                 <span className="dark:text-gray-400 text-gray-600">
                   {detail._count.dislikes}
                 </span>
@@ -216,15 +224,19 @@ export default function BlogDetailPage() {
 
               {/* Comments Count */}
               <div className="flex items-center gap-2 text-sm">
-                <ChatBubbleLeftIcon className="w-6 h-6 dark:text-gray-400 text-gray-600" />
-                <span className="dark:text-gray-400 text-gray-600"></span>
+                {/* Comment Icon */}
+                <ChatBubbleLeftIcon className="w-6 h-6 dark:text-secondary-dark text-secondary-light" />
+                {/* Comment Count */}
+                <span className="dark:text-gray-400 text-gray-600">{detail._count.comments}</span>
               </div>
             </div>
 
+            {/* Container */}
             <div className="flex items-center gap-4">
               {/* Share Button */}
               <button className="flex items-center gap-2 text-sm">
-                <ShareIcon className="w-6 h-6 dark:text-gray-400 text-gray-600" />
+                {/* Share Button Icon */}
+                <ShareIcon className="w-6 h-6 dark:text-secondary-dark text-secondary-light" />
               </button>
             </div>
           </motion.div>
@@ -235,38 +247,33 @@ export default function BlogDetailPage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.4 }}
           >
+            {/* Comments Title */}
             <h2
-              className={`text-2xl font-bold mb-8 dark:text-white text-gray-900
-             
-            `}
-            >
+              className='text-2xl font-bold mb-8 dark:text-primary-dark text-primary-light'>
               {t("blogs.comments")}
             </h2>
 
             {/* Comment Form */}
             <div className="mb-8">
+              {/* Text Area For Comment */}
               <textarea
                 value={commentContent}
                 onChange={(e) => setCommentContent(e.target.value)}
                 placeholder={t("blogs.commentPlaceholder")}
-                className={`w-full px-4 py-3 rounded-xl
-                dark:bg-white/5 bg-white
+                className='w-full px-4 py-3 rounded-xl bg-transparent
                 dark:text-white text-gray-900
                 dark:border-white/10 border-gray-200 border
                 focus:outline-none focus:ring-2 focus:ring-[#1890ff]
-                placeholder:dark:text-gray-500 placeholder:text-gray-400
-                transition-all duration-200 min-h-[100px]
-                 
-                `}
+                placeholder:dark:text-secondary-dark placeholder:text-secondary-light
+                transition-all duration-200 min-h-[100px]'
               />
+              {/* Container */}
               <div className="flex justify-end mt-4">
+                {/* Submit Comment */}
                 <button
                   onClick={handleCommentSubmit}
-                  className={`px-6 py-2 bg-[#1890ff] text-white rounded-lg
-                  hover:bg-[#40a9ff] transition-colors duration-200
-                   
-                  `}
-                >
+                  className='px-6 py-2 bg-[#1890ff] text-white rounded-lg
+                  hover:bg-[#40a9ff] transition-colors duration-200'>
                   {t("blogs.submitComment")}
                 </button>
               </div>
@@ -274,10 +281,12 @@ export default function BlogDetailPage() {
 
             {/* Comments List */}
             {comments.length > 0 && (
+              // Container
               <div className="space-y-6">
                 {comments.map((comment) => {
                   return (
                     comment.user && (
+                      // Container Wiht Animation
                       <motion.div
                         key={comment.id}
                         initial={{ opacity: 0, y: 20 }}
@@ -285,10 +294,12 @@ export default function BlogDetailPage() {
                         className="relative z-10 p-6 rounded-2xl 
                   dark:border-white/10 border-black/5 border
                   backdrop-blur-xl 
-                  dark:bg-white/5 bg-white/80"
+                  bg-transparent"
                       >
+                        {/* Container */}
                         <div className="flex items-start gap-4">
                           {typeof comment.user.image == "string" && (
+                            // User Profile Picture
                             <Image
                               src={comment.user.image}
                               alt={comment.user?.username}
@@ -297,28 +308,28 @@ export default function BlogDetailPage() {
                               className="rounded-full w-10 h-10"
                             />
                           )}
+                          {/* Container */}
                           <div className="flex-1">
+                            {/* Container */}
                             <div className="flex items-center justify-between mb-2">
+                              {/* Link To User Detail Page */}
                               <Link href={`/Users/${comment.user.id}`}>
+                              {/* User Username */}
                                 <h3
-                                  className={`font-bold dark:text-white cursor-pointer text-gray-900
-                         
-                        `}
-                                >
+                                  className='font-bold dark:text-primary-dark text-primary-light'>
                                   {comment.user.username}
                                 </h3>
                               </Link>
-                              <span className="text-sm dark:text-gray-400 text-gray-600">
+                              {/* Comment Published Date */}
+                              <span className="text-sm text-secondary-light dark:text-secondary-dark">
                                 {new Date(
                                   comment.createdAt
                                 ).toLocaleDateString()}
                               </span>
                             </div>
+                            {/* Comment Content */}
                             <p
-                              className={`dark:text-gray-300 text-gray-700 mb-4
-                       
-                      `}
-                            >
+                              className='dark:text-primary-dark text-primary-light'>
                               {comment.content}
                             </p>
                           </div>

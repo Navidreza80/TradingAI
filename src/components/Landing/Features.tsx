@@ -10,8 +10,8 @@ import {
 import { motion } from 'framer-motion';
 // i18n imports for translation
 import { useTranslation } from 'react-i18next';
-// Global style
-import './Style.css';
+// Animation variables
+import { containerVariants, itemVariants } from '@/utils/animation-variants';
 
 export default function Features() {
   // i18n hooks for translation
@@ -44,36 +44,6 @@ export default function Features() {
       color: 'from-green-500 to-emerald-400' // News theme
     }
   ];
-
-  /**
-   * Animation variants for container
-   * Creates a staggered animation effect for child elements
-   */
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.2 // Delay between each child animation
-      }
-    }
-  };
-
-  /**
-   * Animation variants for individual feature cards
-   * Defines the animation for each card's entry
-   */
-  const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.5,
-        ease: "easeOut"
-      }
-    }
-  };
 
   return (
     <section className="relative py-11 bg-background-light dark:bg-background-dark overflow-hidden">

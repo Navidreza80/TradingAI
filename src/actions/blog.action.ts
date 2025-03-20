@@ -66,6 +66,7 @@ export async function fetchBlogById(id: string) {
           select: {
             likes: true,
             dislikes: true,
+            comments: true,
           },
         },
         publisher: true, // Include the publisher's details

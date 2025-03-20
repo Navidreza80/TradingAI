@@ -2,8 +2,8 @@
 // Server actions
 import { fetchBlogs } from "@/actions/blog.action";
 // Third party components
-import BlogCard from "@/components/blog-card";
-import SearchBlogs from "@/components/blog-search";
+import BlogCard from "@/components/blogs/blog-card";
+import SearchBlogs from "@/components/blogs/blog-search";
 import BlogCardSkeleton from "@/components/blogs/BlogSkeleton";
 // Types
 import { Blog } from "@/types/blog";
@@ -38,29 +38,25 @@ export default function BlogsPage() {
   );
 
   return (
-    <main className="min-h-screen bg-gradient-to-b dark:from-[#0a0a0a] dark:to-[#1a1a1a] from-white to-gray-50 pt-24 pb-12">
+    // Blog Page
+    <main className="min-h-screen bg-background-light dark:bg-background-dark pt-24 pb-12">
+      {/* Page Container */}
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Title Section */}
+        {/* Title And Subtitle Section */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
           className="text-center mb-12"
         >
+          {/* Blog Page Title */}
           <h1
-            className={`text-3xl sm:text-4xl lg:text-5xl font-bold mb-4 p-2
-            bg-gradient-to-r dark:from-white dark:to-gray-400 from-gray-900 to-gray-600 
-            bg-clip-text text-transparent 
-             
-            `}
-          >
+            className='text-3xl sm:text-4xl lg:text-5xl font-bold mb-4 p-2 text-primary-light dark:text-primary-dark'>
             {t("blogs.title")}
           </h1>
+          {/* Blogs Page Subtitle */}
           <p
-            className={`text-lg dark:text-gray-400 text-gray-600 max-w-3xl mx-auto p-2
-             
-            `}
-          >
+            className='text-lg text-secondary-light dark:text-secondary-dark max-w-3xl mx-auto p-2'>
             {t("blogs.subtitle")}
           </p>
         </motion.div>

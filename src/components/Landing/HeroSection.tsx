@@ -5,17 +5,16 @@ import { motion } from "framer-motion";
 import { Button } from "antd";
 // Next imports
 import Link from "next/link";
-// Global style
-import "./Style.css";
 // i18n imports for translation
 import { useTranslation } from "react-i18next";
 // 3D imports
-import { OrbitControls } from '@react-three/drei';
 import { Canvas } from '@react-three/fiber';
 import { Suspense } from 'react';
-import Model from "../model";
+import Model from "../3D/model";
 // responsive
 import { useMediaQuery } from "react-responsive";
+// Types
+import { HeroModelsType } from "@/types";
 
 export default function HeroSection() {
   // responsive hooks
@@ -23,8 +22,28 @@ export default function HeroSection() {
   const isMobile = useMediaQuery({ maxWidth: 768 });
   const isTablet = useMediaQuery({ minWidth: 768, maxWidth: 1024 });
   // i18n hooks for translation
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
   const modelScale = 0.2;
+
+  // models array
+  const models: HeroModelsType[] = [
+    {
+      url: "/models/bitcoin.glb",
+      position: isSmall ? [-2, 3.5, -3] : isMobile ? [-4, 3.5, -2.5] : isTablet ? [-6, 3.5, -2] : [-7, 3.5, 0],
+    },
+    {
+      url: "/models/chart.glb",
+      position: isSmall ? [2, 3.5, -3] : isMobile ? [4, 3.5, -2.5] : isTablet ? [6, 3.5, -2] : [7, 3.5, 0],
+    },
+    {
+      url: "/models/robot.glb",
+      position: isSmall ? [-2, -3.5, -3] : isMobile ? [-4, -3.5, -2.5] : isTablet ? [-6, -3.5, -2] : [-7, -3.5, 0],
+    },
+    {
+      url: "/models/graph.glb",
+      position: isSmall ? [2, -3.5, -3] : isMobile ? [4, -3.5, -2.5] : isTablet ? [6, -3.5, -2] : [7, -3.5, 0],
+    },
+  ]
 
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden dark:bg-background-dark bg-background-light">
@@ -37,57 +56,29 @@ export default function HeroSection() {
           <ambientLight intensity={2} />
           <pointLight position={[10, 10, 10]} />
           <Suspense fallback={null}>
-            {/* Bitcoin Model */}
-            <Model
-              url="/models/bitcoin.glb"
-              position={isSmall ? [-2, 3.5, -3] : isMobile ? [-4, 3.5, -2.5] : isTablet ? [-6, 3.5, -2] : [-7, 3.5, 0]} // Top-Left with Margin
-              rotation={[0, 0, 0]}
-              scale={modelScale}
-            />
-            {/* Chart Model */}
-            <Model
-              url="/models/chart.glb"
-              position={isSmall ? [2, 3.5, -3] : isMobile ? [4, 3.5, -2.5] : isTablet ? [6, 3.5, -2] : [7, 3.5, 0]} // Top-Right with Margin
-              rotation={[0, 0, 0]}
-              scale={modelScale}
-            />
-            {/* AI Robot Model */}
-            <Model
-              url="/models/robot.glb"
-              position={isSmall ? [-2, -3.5, -3] : isMobile ? [-4, -3.5, -2.5] : isTablet ? [-6, -3.5, -2] : [-7, -3.5, 0]} // Bottom-Left with Margin
-              rotation={[0, 0, 0]}
-              scale={modelScale}
-            />
-            {/* Crypto Model */}
-            <Model
-              url="/models/graph.glb"
-              position={isSmall ? [2, -3.5, -3] : isMobile ? [4, -3.5, -2.5] : isTablet ? [6, -3.5, -2] : [7, -3.5, 0]} // Bottom-Right with Margin
-              rotation={[0, 0, 0]}
-              scale={modelScale}
-            />
+            {models.map((item, index) => {
+              return (
+                <Model
+                  key={index}
+                  url={item.url}
+                  position={item.position}
+                  rotation={[0, 0, 0]}
+                  scale={modelScale}
+                />
+              )
+            })}
+
           </Suspense>
-          <OrbitControls
-            enableZoom={false}
-            enablePan={false}
-            minPolarAngle={Math.PI / 2}
-            maxPolarAngle={Math.PI / 2}
-          />
         </Canvas>
       </div>
 
       {/* Content Container */}
       <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
+        <div
           className="flex flex-col items-center justify-center text-center space-y-12 max-w-4xl mx-auto"
         >
           {/* Main Title */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
+          <div
             className="space-y-6 w-full"
           >
             <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black tracking-tight leading-none">
@@ -99,15 +90,12 @@ export default function HeroSection() {
                 {t("hero.title2")}
               </span>
             </h1>
-            <motion.p
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.8, delay: 0.4 }}
-              className="text-subtitle-light text-secondary-light dark:text-secondary-dark dark:text-subtitle-dark max-w-3xl mx-auto text-base sm:text-lg md:text-xl lg:text-2xllight:text-gray-600 font-medium px-4"
+            <div
+              className="text-secondary-light dark:text-secondary-dark max-w-3xl mx-auto text-base sm:text-lg md:text-xl font-medium px-4"
             >
               {t("hero.description")}
-            </motion.p>
-          </motion.div>
+            </div>
+          </div>
 
           {/* CTA Buttons */}
           <motion.div
@@ -134,7 +122,7 @@ export default function HeroSection() {
               </Button>
             </Link>
           </motion.div>
-        </motion.div>
+        </div>
       </div>
 
       {/* Decorative Elements */}

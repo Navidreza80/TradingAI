@@ -1,25 +1,20 @@
 "use client";
 // React built in hooks
-import { useState, useEffect } from "react";
+import { useState } from "react";
 // Framer motion for animation
-import { motion, AnimatePresence } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 // Third party components
-import CandlesSlider from "@/components/signals/candles-slider";
 import HeaderSignals from "@/components/signals/header-signals";
-import SymbolDropDown from "@/components/signals/symbol-dropdown";
-import TimeFrameDropDown from "@/components/signals/timeframe-dropdown";
+import SignalSetting from "@/components/signals/signal-setting";
+import MarketStats from "@/components/signals/market-stats";
 // Icons
-import { HiOutlineChartBar, HiOutlineCog, HiOutlineShieldCheck, HiOutlineTrendingUp, HiOutlineVolumeUp } from "react-icons/hi";
+import { HiOutlineChartBar, HiOutlineShieldCheck, HiOutlineTrendingUp, HiOutlineVolumeUp } from "react-icons/hi";
 // Types for type safety
 import { Signals } from "@/types/trade";
 // i18n for translation
 import { useTranslation } from "react-i18next";
-
-const fadeInUp = {
-  initial: { opacity: 0, y: 20 },
-  animate: { opacity: 1, y: 0 },
-  exit: { opacity: 0, y: -20 }
-};
+// Animation variables
+import { fadeInUp } from "@/utils/animation-variants";
 
 export default function TradingSignal() {
   // i18n for translation
@@ -42,7 +37,7 @@ export default function TradingSignal() {
   // State to save the status of the current request
   const [loading, setLoading] = useState(false);
   // State to save the error of the current request
-  const [error, setError] = useState<null | string | unknown>();
+  const [error, setError] = useState<null | string>();
 
   // Function to get the signal from AI
   const getSignal = async () => {
@@ -115,7 +110,6 @@ export default function TradingSignal() {
       if (obj.marketStats) {
         setMarketStats(obj.marketStats);
       }
-      console.log(aiMessage.content);
     } catch (error) {
       // Save the error of the request in a state
       setError(t('signals.error'));
@@ -125,12 +119,26 @@ export default function TradingSignal() {
     }
   };
 
+  const marketItems = [
+    { icon: <HiOutlineShieldCheck className="w-5 h-5 text-green-500" />, text: t('signals.accuracy'), value: marketStats.accuracy || '...' },
+    { icon: <HiOutlineTrendingUp className="w-5 h-5 text-blue-500" />, text: t('signals.trend'), value: marketStats.trend || '...' },
+    { icon: <HiOutlineVolumeUp className="w-5 h-5 text-purple-500" />, text: t('signals.volume'), value: marketStats.volume || '...' },
+    { icon: <HiOutlineChartBar className="w-5 h-5 text-red-500" />, text: t('signals.risk'), value: marketStats.risk || '...' },
+  ]
+
+  const signalItems = [
+    { text: t('signals.entry'), value: signal?.entryPrice, colour: 'dark:text-white text-black' },
+    { text: t('signals.profit'), value: signal?.takeProfit, colour: 'text-green-500' },
+    { text: t('signals.loss'), value: signal?.stopLoss, colour: 'text-red-500' },
+    { text: t('signals.level'), value: signal?.confidenceLevel, colour: 'text-blue-500' },
+  ]
+
   return (
-    <div className="min-h-screen bg-gradient-to-br dark:from-black dark:via-gray-900 dark:to-black from-gray-50 via-white to-gray-50 text-gray-900 dark:text-white transition-all duration-500">
+    <div className="min-h-screen bg-background-light dark:bg-background-dark transition-all duration-500">
       {/* Header */}
       <HeaderSignals />
 
-      <motion.div 
+      <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.5 }}
@@ -145,86 +153,10 @@ export default function TradingSignal() {
             animate="animate"
             className="lg:col-span-1 space-y-6"
           >
-            <div className="bg-white dark:bg-black/40 rounded-2xl shadow-xl p-6 backdrop-blur-lg backdrop-filter">
-              <div className="flex items-center gap-3 mb-6">
-                <HiOutlineCog className="w-6 h-6 text-blue-500" />
-                <h2 className="text-xl font-semibold">{t('signals.settings')}</h2>
-              </div>
-
-              <div className="space-y-6">
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                    {t('signals.symbol')}
-                  </label>
-                  <SymbolDropDown symbol={symbol} setSymbol={setSymbol} />
-                </div>
-
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                    {t('signals.time')}
-                  </label>
-                  <TimeFrameDropDown timeFrame={timeFrame} setTimeFrame={setTimeFrame} />
-                </div>
-
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                    {t('signals.candles')}
-                  </label>
-                  <CandlesSlider candles={candles} setCandles={setCandles} />
-                </div>
-
-                <motion.button
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
-                  onClick={getSignal}
-                  disabled={loading}
-                  className={`w-full py-3 px-4 rounded-xl font-semibold text-white transition-all duration-300 ${
-                    loading
-                      ? 'bg-gray-400 cursor-not-allowed'
-                      : 'bg-gradient-to-r from-blue-500 to-purple-600 hover:shadow-lg hover:shadow-blue-500/25'
-                  }`}
-                >
-                  {loading ? t('signals.loading') : t('signals.getSignal')}
-                </motion.button>
-              </div>
-            </div>
+            <SignalSetting getSignal={getSignal} loading={loading} candles={candles} setCandles={setCandles} timeFrame={timeFrame} setTimeFrame={setTimeFrame} symbol={symbol} setSymbol={setSymbol} />
 
             {/* Market Stats */}
-            <motion.div
-              variants={fadeInUp}
-              className="bg-white dark:bg-black/40 rounded-2xl shadow-xl p-6"
-            >
-              <div className="grid grid-cols-2 gap-4">
-                <div className="flex items-center gap-2">
-                  <HiOutlineShieldCheck className="w-5 h-5 text-green-500" />
-                  <div>
-                    <p className="text-sm text-gray-500 dark:text-gray-400">{t('signals.accuracy')}</p>
-                    <p className="font-semibold">{marketStats.accuracy || '...'}</p>
-                  </div>
-                </div>
-                <div className="flex items-center gap-2">
-                  <HiOutlineTrendingUp className="w-5 h-5 text-blue-500" />
-                  <div>
-                    <p className="text-sm text-gray-500 dark:text-gray-400">{t('signals.trend')}</p>
-                    <p className="font-semibold">{marketStats.trend || '...'}</p>
-                  </div>
-                </div>
-                <div className="flex items-center gap-2">
-                  <HiOutlineVolumeUp className="w-5 h-5 text-purple-500" />
-                  <div>
-                    <p className="text-sm text-gray-500 dark:text-gray-400">{t('signals.volume')}</p>
-                    <p className="font-semibold">{marketStats.volume || '...'}</p>
-                  </div>
-                </div>
-                <div className="flex items-center gap-2">
-                  <HiOutlineChartBar className="w-5 h-5 text-red-500" />
-                  <div>
-                    <p className="text-sm text-gray-500 dark:text-gray-400">{t('signals.risk')}</p>
-                    <p className="font-semibold">{marketStats.risk || '...'}</p>
-                  </div>
-                </div>
-              </div>
-            </motion.div>
+            <MarketStats marketItems={marketItems} />
           </motion.div>
 
           {/* Signal Output */}
@@ -237,7 +169,7 @@ export default function TradingSignal() {
             <div className="bg-white dark:bg-black/40 rounded-2xl shadow-xl p-6 h-full">
               <div className="flex items-center gap-3 mb-6">
                 <HiOutlineChartBar className="w-6 h-6 text-blue-500" />
-                <h2 className="text-xl font-semibold">{t('signals.analysis')}</h2>
+                <h2 className="text-xl font-semibold text-primary-light dark:text-primary-dark">{t('signals.analysis')}</h2>
               </div>
 
               <AnimatePresence mode="wait">
@@ -288,27 +220,19 @@ export default function TradingSignal() {
                     className="space-y-6"
                   >
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                      <div className="bg-gray-50 dark:bg-black/60 p-4 rounded-xl">
-                        <p className="text-sm text-gray-500 dark:text-gray-400">{t('signals.entry')}</p>
-                        <p className="text-xl font-semibold">{signal.entryPrice}</p>
-                      </div>
-                      <div className="bg-gray-50 dark:bg-black/60 p-4 rounded-xl">
-                        <p className="text-sm text-gray-500 dark:text-gray-400">{t('signals.profit')}</p>
-                        <p className="text-xl font-semibold text-green-500">{signal.takeProfit}</p>
-                      </div>
-                      <div className="bg-gray-50 dark:bg-black/60 p-4 rounded-xl">
-                        <p className="text-sm text-gray-500 dark:text-gray-400">{t('signals.loss')}</p>
-                        <p className="text-xl font-semibold text-red-500">{signal.stopLoss}</p>
-                      </div>
-                      <div className="bg-gray-50 dark:bg-black/60 p-4 rounded-xl">
-                        <p className="text-sm text-gray-500 dark:text-gray-400">{t('signals.level')}</p>
-                        <p className="text-xl font-semibold text-blue-500">{signal.confidenceLevel}</p>
-                      </div>
+                      {signalItems.map((item, index) => {
+                        return (
+                          <div className="bg-gray-50 dark:bg-black/60 p-4 rounded-xl">
+                            <p className="text-sm text-primary-light dark:text-primary-dark">{item.text}</p>
+                            <p className={`text-xl font-semibold ${item.colour}`}>{item.value}</p>
+                          </div>
+                        )
+                      })}
                     </div>
 
                     <div className="bg-gray-50 dark:bg-black/60 p-4 rounded-xl">
-                      <p className="text-sm text-gray-500 dark:text-gray-400 mb-2">{t('signals.reason')}</p>
-                      <p className="text-gray-800 dark:text-gray-200">{signal.reason}</p>
+                      <p className="text-sm text-primary-light dark:text-primary-dark mb-2">{t('signals.reason')}</p>
+                      <p className="text-secondary-light dark:text-secondary-dark">{signal.reason}</p>
                     </div>
 
                     <p className="text-sm text-gray-500 dark:text-gray-400 text-center mt-4">

@@ -6,7 +6,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 // Third party components
-import ThemeNLanguage from "../theme-n-language";
+import ThemeNLanguage from "./theme-n-language";
 // Icons imports
 import { UserIcon } from "lucide-react";
 // Antd style library imports

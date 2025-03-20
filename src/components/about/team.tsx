@@ -28,10 +28,7 @@ export default function Team() {
       transition={{ duration: 0.5, delay: 0.6 }}
     >
       <h2
-        className={`text-3xl font-bold mb-12 text-center dark:text-white text-gray-900
-           
-          `}
-      >
+        className='text-3xl font-bold mb-12 text-center dark:text-primary-dark text-primary-light'>
         {t("about.team.title")}
       </h2>
       <div className="flex flex-row flex-wrap justify-center w-full gap-8">
@@ -47,7 +44,6 @@ export default function Team() {
               className="relative z-10 rounded-2xl overflow-hidden
                 dark:border-white/10 border-black/5 border
                 backdrop-blur-xl 
-                dark:bg-white/5 bg-white/80
                 transition-all duration-300 hover:scale-[1.02]
                 dark:hover:shadow-[0_0_30px_rgba(24,144,255,0.1)]
                 hover:shadow-[0_0_30px_rgba(24,144,255,0.2)]"
@@ -62,17 +58,11 @@ export default function Team() {
               </div>
               <div className="p-6 text-center">
                 <h3
-                  className={`text-xl font-bold mb-2 dark:text-white text-gray-900
-                     
-                    `}
-                >
+                  className='text-xl font-bold mb-2 dark:text-primary-dark text-primary-light'>
                   {member.name}
                 </h3>
                 <p
-                  className={`dark:text-gray-400 text-gray-600
-                     
-                    `}
-                >
+                  className='dark:text-secondary-dark text-secondary-light'>
                   {member.role}
                 </p>
               </div>

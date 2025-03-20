@@ -14,17 +14,11 @@ export default function Mission() {
     >
       <div className="max-w-3xl mx-auto text-center">
         <h2
-          className={`text-3xl font-bold mb-6 dark:text-white text-gray-900
-         
-        `}
-        >
+          className='text-3xl font-bold mb-6 dark:text-primary-dark text-primary-light'>
           {t("about.mission.title")}
         </h2>
         <p
-          className={`text-lg dark:text-gray-400 text-gray-600
-         
-        `}
-        >
+          className='text-lg dark:text-secondary-dark text-secondary-light'>
           {t("about.mission.description")}
         </p>
       </div>

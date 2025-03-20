@@ -30,6 +30,8 @@ export default function UserSection() {
             width={32}
             height={32}
             className="rounded-full"
+            sizes="32"
+            style={{ objectFit: "contain" }}
           />
         </DropdownMenuTrigger>
         <DropdownMenuContent>

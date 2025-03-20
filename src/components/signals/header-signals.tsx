@@ -6,8 +6,8 @@ export default function HeaderSignals() {
   const { t } = useTranslation();
   return (
     <div className="text-center mb-8 pt-24">
-      <h1 className="text-4xl font-bold mb-2">{t("signals.title")}</h1>
-      <p className="text-gray-600 dark:text-gray-400">{t("signals.desc")}</p>
+      <h1 className="text-4xl font-bold mb-2 text-primary-light dark:text-primary-dark">{t("signals.title")}</h1>
+      <p className="text-secondary-light dark:text-secondary-dark">{t("signals.desc")}</p>
     </div>
   );
 }

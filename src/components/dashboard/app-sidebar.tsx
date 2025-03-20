@@ -4,7 +4,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import { useTranslation } from "react-i18next";
 // Third party components
-import ThemeNLanguage from "../theme-n-language";
+import ThemeNLanguage from "../Header/theme-n-language";
 // Type
 import { MouseEventHandler } from "react";
 

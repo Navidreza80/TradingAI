@@ -2,7 +2,7 @@
 import { motion } from "framer-motion";
 // Third party components
 import YourBlogCard from "./your-blog-card";
-import BlogCard from "../blog-card";
+import BlogCard from "../blogs/blog-card";
 
 export default function BlogsGrid({ filteredBlogs, selected, setBlogs}) {
   return (

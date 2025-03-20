@@ -3,7 +3,7 @@
 import i18n from '@/i18n/config';
 import { I18nextProvider } from 'react-i18next';
 // Redux for state management
-import { store } from '@/redux/store';
+import { store } from '@/hooks/redux/store';
 import { Provider } from 'react-redux';
 
 export function I18nProvider({ children }: { children: React.ReactNode }) {
