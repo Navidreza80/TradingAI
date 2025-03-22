@@ -2,7 +2,7 @@
 // Server actions
 import { fetchMostTradedCurrencies } from "@/actions/user.action";
 // Shadcn components
-import { Card, CardContent } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/UI/card";
 // Framer motion for animation
 import { motion } from "framer-motion";
 // React built in hooks
@@ -14,7 +14,8 @@ export default function MostTradedCryptos() {
   // Function to fetch users most traded currencies
   const getUserData = async () => {
     const request = await fetchMostTradedCurrencies();
-    setData(request);
+    if(request == "User not authenticated") return
+    else setData(request);
   };
   // UseEffect with callback function to fetch user most traded currencies when the component is mounting
   useEffect(() => {

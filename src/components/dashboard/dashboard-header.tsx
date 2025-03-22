@@ -4,8 +4,8 @@ import { useState } from "react";
 // Third party components
 import Navigation from "../Header/header-navigation";
 import UserSection from "../Header/user-section";
-import Logo from "../Logo";
-import ThemeNLanguage from "../theme-n-language";
+import Logo from "../Header/Logo";
+import ThemeNLanguage from "../Header/theme-n-language";
 import Sidebar from "./app-sidebar";
 import ToggleSideBar from "./toggle-sidebar";
 

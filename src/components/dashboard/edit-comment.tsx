@@ -1,5 +1,5 @@
-// Shadcn components
-import { Button } from "@/components/ui/button";
+// ShadCn components
+import { Button } from "@/components/UI/Button";
 import {
   Dialog,
   DialogContent,
@@ -8,11 +8,11 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "@/components/ui/dialog";
+} from "@/components/UI/dialog";
 // Icons
 import { Edit } from "lucide-react";
-import { Input } from "../ui/input";
-import { Label } from "../ui/label";
+import { Input } from "../UI/input";
+import { Label } from "../UI/label";
 // i18n for translation
 import { useTranslation } from "react-i18next";
 // React built in hooks
@@ -30,10 +30,8 @@ export default function EditComment({commentId, content}) {
   // Function that edit and updates users username by passing the username string value
   const updateComment = async () => {
     const data = await editComment(commentId, value)
-    if(data.success)toast.success('Comment updated successfully!!')
-    else{
-      toast.error('Failed to update comment.')
-    }
+    if(data == "User not authenticated") toast.error("User not authenticated")
+    else if(data.success)toast.success('Comment updated successfully!!')
   }
   return (
     <Dialog>

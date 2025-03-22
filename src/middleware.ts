@@ -1,3 +1,4 @@
+// Clerk to authenticate user
 import { clerkMiddleware } from "@clerk/nextjs/server";
 
 export default clerkMiddleware();

@@ -11,7 +11,7 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "../ui/dropdown-menu";
+} from "../UI/dropdown-menu";
 // i18n imports
 import { useTranslation } from "react-i18next";
 
@@ -30,6 +30,8 @@ export default function UserSection() {
             width={32}
             height={32}
             className="rounded-full"
+            sizes="32"
+            style={{ objectFit: "contain" }}
           />
         </DropdownMenuTrigger>
         <DropdownMenuContent>

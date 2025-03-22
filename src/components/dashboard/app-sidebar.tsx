@@ -4,9 +4,11 @@ import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import { useTranslation } from "react-i18next";
 // Third party components
-import ThemeNLanguage from "../theme-n-language";
+import ThemeNLanguage from "../Header/theme-n-language";
+// Type
+import { MouseEventHandler } from "react";
 
-export default function Sidebar({ isOpen, onClose }) {
+export default function Sidebar({ isOpen, onClose }: {isOpen: boolean; onClose: MouseEventHandler<HTMLButtonElement> | undefined}) {
   // i18n hooks for translation
   const { t, i18n } = useTranslation();
   // Sidebar items to map over them
@@ -36,7 +38,7 @@ export default function Sidebar({ isOpen, onClose }) {
       iconDark: "dark:bg-coinDM",
     },
     {
-      text: t("dashboard.side.comments"),
+      text: t("dashboard.sidebar.comments"),
       href: "/dashboard/comments",
       iconLight: "bg-commentLM",
       iconDark: "dark:bg-commentDM",

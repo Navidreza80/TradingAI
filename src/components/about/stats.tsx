@@ -53,7 +53,6 @@ export default function StatsGrid() {
             className="relative z-10 p-6 rounded-2xl 
                 dark:border-white/10 border-black/5 border
                 backdrop-blur-xl 
-                dark:bg-white/5 bg-white/80
                 dark:hover:bg-white/10 hover:bg-white/90
                 transition-all duration-300 hover:scale-[1.02]
                 dark:hover:shadow-[0_0_30px_rgba(24,144,255,0.1)]
@@ -61,13 +60,11 @@ export default function StatsGrid() {
                 text-center"
           >
             <div
-              className={`inline-flex p-3 rounded-xl bg-gradient-to-r ${stat.color}
-                  shadow-lg mb-4`}
-            >
+              className={`inline-flex p-3 rounded-xl bg-gradient-to-r ${stat.color} shadow-lg mb-4`}>
               {stat.icon}
             </div>
             <div
-              className={`text-3xl font-bold mb-2 dark:text-white text-gray-900
+              className={`text-3xl font-bold mb-2 dark:text-primary-dark text-primary-light
                   ${
                     i18n.language === "fa" || i18n.language === "ar"
                       ? "font-numericpersian"
@@ -77,10 +74,7 @@ export default function StatsGrid() {
               {stat.value}
             </div>
             <div
-              className={`dark:text-gray-400 text-gray-600
-                   
-                  `}
-            >
+              className='dark:text-secondary-dark text-secondary-light'>
               {stat.label}
             </div>
           </div>

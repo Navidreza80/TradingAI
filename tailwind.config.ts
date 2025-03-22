@@ -10,12 +10,6 @@ const config: Config = {
   theme: {
     extend: {
       backgroundImage: {
-        wave: "url('/image/gesture.png')",
-        waveDark: "url('/image/gestureDark.png')",
-        comments: "url('/image/comments.png')",
-        likes: "url('/image/likes.png')",
-        user: "url('/image/user.png')",
-        save: "url('/image/saved.png')",
         sidebarDM: "url('/image/sidebar-dark-mode.svg')",
         sidebarLM: "url('/image/sidebar-light-mode.svg')",
         dashboardDM: "url('/image/dashboard-dark-mode.svg')",
@@ -42,10 +36,38 @@ const config: Config = {
         numericpersian: ["NumericPersian", "system-ui", "sans-serif"],
       },
       colors: {
-        background: "var(--background)",
-        foreground: "var(--foreground)",
-        primary: "#6366f1", // Custom primary color
-        secondary: "#10b981", // Custom secondary color
+        primary: {
+          light: '#3A0CA3',
+          dark: '#4361EE',
+        },
+        secondary: {
+          light: '#7209B7',
+          dark: '#3F37C9',
+        },
+        background: {
+          light: '#F1FAEE',
+          dark: '#121212',
+        },
+        foreground: {
+          light: '#1D3557',
+          dark: '#E5E5E5',
+        },
+        success: {
+          light: '#80B918',
+          dark: '#55A630',
+        },
+        danger: {
+          light: '#D90429',
+          dark: '#EF233C',
+        },
+        warning: {
+          light: '#FF9F1C',
+          dark: '#FF8800',
+        },
+        neutral: {
+          light: '#ADB5BD',
+          dark: '#6C757D',
+        },
       },
       keyframes: {
         headerPattern: {

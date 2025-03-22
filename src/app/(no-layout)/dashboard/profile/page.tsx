@@ -1,7 +1,7 @@
 "use client";
 // Server actions
 import { calculateUserStats } from "@/actions/trade.action";
-import { getDbUser, getDbUserId } from "@/actions/user.action";
+import { getDbUser } from "@/actions/user.action";
 // Third party components
 import ProfileCard from "@/components/dashboard/profile-dashboard";
 // React built in hooks
@@ -13,21 +13,23 @@ export default function UserProfilePage() {
   // State to save user status: total trades, win rate, total profit
   const [stats, setStats] = useState({});
   // State to either hide win rate of user or not
-  const [hideWin, setHideWin] = useState(false);
+  const [hideWin, setHideWin] = useState<boolean | null>(false);
   // State to either hide user total trades or not
-  const [hideTotal, setHideTotal] = useState(false);
+  const [hideTotal, setHideTotal] = useState<boolean | null>(false);
   // State to either hide user profits or not
-  const [hidePnL, setHidePnL] = useState(false);
+  const [hidePnL, setHidePnL] = useState<boolean | null>(false);
   // function to fetch all of the user information
   const fetchUser = async () => {
-    const userId = await getDbUserId();
-    const stats = await calculateUserStats(userId);
+    const stats = await calculateUserStats();
     const data = await getDbUser();
-    setUser(data);
+    if (data == "User not found") return;
+    else if(data && typeof data !== "string") {
+      setUser(data);
+      setHideWin(data.hideWin);
+      setHideTotal(data.hideTotal);
+      setHidePnL(data.hidePnL);
+    }
     setStats(stats);
-    setHideWin(data.hideWin);
-    setHideTotal(data.hideTotal);
-    setHidePnL(data.hidePnL);
   };
   // useEffect to fetch user information when the component is mounting
   useEffect(() => {

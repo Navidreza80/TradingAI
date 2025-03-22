@@ -12,3 +12,8 @@ export interface Comment {
     likes: number;
     dislikes: number;
 }
+
+export interface CreateCommentInput {
+    content: string;
+    blogId: string;
+  }

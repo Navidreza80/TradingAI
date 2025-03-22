@@ -1,11 +1,11 @@
-// Shadcn components
-import { Button } from "@/components/ui/button";
+// ShadCn components
+import { Button } from "@/components/UI/Button";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
+} from "@/components/UI/dropdown-menu";
 // Icons
 import { ChevronDown } from "lucide-react";
 // i18n for translation

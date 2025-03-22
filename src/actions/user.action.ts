@@ -1,9 +1,12 @@
 "use server";
-
+// Prisma client
 import prisma from "@/lib/prisma";
+// Clerk for authentication
 import { auth, currentUser } from "@clerk/nextjs/server";
+// date-fns for converting date
 import { subMonths, startOfMonth, endOfMonth } from "date-fns";
 
+// Action to sync new users with database
 export async function syncUser() {
   try {
     const { userId } = await auth();
@@ -32,13 +35,13 @@ export async function syncUser() {
 
     return dbUser;
   } catch (error) {
-    console.log("Error in syncUser", error);
-    return
+    return { error, message: "Failed to sync user", success: false };
   } finally {
-    return
+    return;
   }
 }
 
+// Action to get user by clerk id
 export async function getUserByClerkId(clerkId: string) {
   return prisma.user.findUnique({
     where: {
@@ -47,13 +50,14 @@ export async function getUserByClerkId(clerkId: string) {
   });
 }
 
+// Action to get user from data base by id
 export async function getDbUserId() {
   const { userId: clerkId } = await auth();
   if (!clerkId) return clerkId;
 
   const user = await getUserByClerkId(clerkId);
 
-  if (!user) throw new Error("User not found");
+  if (!user) return "User not found";
 
   return user.id;
 }
@@ -64,11 +68,44 @@ export async function getDbUser() {
 
   const user = await getUserByClerkId(clerkId);
 
-  if (!user) throw new Error("User not found");
+  if (!user) return "User not found";
 
   return user;
 }
 
+// Action to get user by id
+export async function getUserById(userId: string) {
+  try {
+    const user = await prisma.user.findUnique({
+      where: { id: userId },
+      select: {
+        id: true,
+        username: true,
+        clerkId: true,
+        email: true,
+        name: true,
+        image: true,
+        coverImage: true,
+        createdAt: true,
+        hideWin: true,
+        hideTotal: true,
+        hidePnL: true,
+        blogs: true,
+        comments: true,
+      },
+    });
+
+    if (!user) {
+      return { success: false, message: "User not found." };
+    }
+
+    return { success: true, user };
+  } catch (error) {
+    return { success: false, message: "Failed to fetch user.", error };
+  }
+}
+
+// Action to update users username
 export async function updateUsername(userId: string, newUsername: string) {
   try {
     // Check if the new username is already taken
@@ -92,11 +129,11 @@ export async function updateUsername(userId: string, newUsername: string) {
       updatedUser,
     };
   } catch (error) {
-    console.error("Error updating username:", error);
     return { success: false, message: "An error occurred", error };
   }
 }
 
+// Action to update users profile picture
 export async function updateUserImage(userId: string, url: string) {
   try {
     // Update the user image
@@ -111,14 +148,14 @@ export async function updateUserImage(userId: string, url: string) {
       updatedUser,
     };
   } catch (error) {
-    console.error("Error updating avatar:", error);
     return { success: false, message: "An error occurred", error };
   }
 }
 
+// Action to update users background image or banner
 export async function updateUserBanner(userId: string, url: string) {
   try {
-    // Update the user image
+    // Update the user banner
     const updatedUser = await prisma.user.update({
       where: { id: userId },
       data: { coverImage: url },
@@ -130,11 +167,11 @@ export async function updateUserBanner(userId: string, url: string) {
       updatedUser,
     };
   } catch (error) {
-    console.error("Error updating banner:", error);
     return { success: false, message: "An error occurred", error };
   }
 }
 
+// Action to update user win rate status
 export async function updateWinRate(userId: string, value: boolean) {
   try {
     // Update the user hideWinRate
@@ -148,14 +185,14 @@ export async function updateWinRate(userId: string, value: boolean) {
       updatedUser,
     };
   } catch (error) {
-    console.error("Error updating:", error);
     return { success: false, message: "An error occurred", error };
   }
 }
 
+// Action to update users total trades status
 export async function updateTotalTrades(userId: string, value: boolean) {
   try {
-    // Update the user hideWinRate
+    // Update the user hide total trades
     const updatedUser = await prisma.user.update({
       where: { id: userId },
       data: { hideTotal: value },
@@ -166,14 +203,14 @@ export async function updateTotalTrades(userId: string, value: boolean) {
       updatedUser,
     };
   } catch (error) {
-    console.error("Error updating:", error);
     return { success: false, message: "An error occurred", error };
   }
 }
 
+// Action to update user PnL status
 export async function updatePnL(userId: string, value: boolean) {
   try {
-    // Update the user hideWinRate
+    // Update the user hide PnL
     const updatedUser = await prisma.user.update({
       where: { id: userId },
       data: { hidePnL: value },
@@ -184,24 +221,21 @@ export async function updatePnL(userId: string, value: boolean) {
       updatedUser,
     };
   } catch (error) {
-    console.error("Error updating:", error);
     return { success: false, message: "An error occurred", error };
   }
 }
 
+// Action to get users total profits
 export async function getUserProfits() {
   try {
     const userId = await getDbUserId();
+    if (!userId) return "User not authenticated";
     const now = new Date();
     const monthlyProfits = [];
 
     for (let i = 5; i >= 0; i--) {
       const monthStart = startOfMonth(subMonths(now, i));
       const monthEnd = endOfMonth(subMonths(now, i));
-
-      console.log(
-        `Fetching profits for: ${monthStart.toISOString()} - ${monthEnd.toISOString()}`
-      );
 
       const profitData = await prisma.trade.aggregate({
         _sum: { pnlAmount: true },
@@ -214,8 +248,6 @@ export async function getUserProfits() {
         },
       });
 
-      console.log(`Profit data:`, profitData); // Debugging output
-
       monthlyProfits.push({
         name: monthStart.toLocaleString("default", { month: "long" }),
         year: monthStart.getFullYear(),
@@ -225,14 +257,15 @@ export async function getUserProfits() {
 
     return monthlyProfits;
   } catch (error) {
-    console.error("Error fetching user profits:", error);
-    return [];
+    return { success: false, message: "failed to fetch user profit", error };
   }
 }
 
+// Action to fetch user wins and losses past 6 months
 export async function fetchUserWinLoss() {
   try {
     const userId = await getDbUserId();
+    if (!userId) return "User not authenticated";
     // Get current date
     const now = new Date();
 
@@ -281,14 +314,19 @@ export async function fetchUserWinLoss() {
 
     return results;
   } catch (error) {
-    console.error("Error fetching win/loss trades:", error);
-    return [];
+    return {
+      success: false,
+      message: "failed to fetch user wins and losses",
+      error,
+    };
   }
 }
 
+// Action to fetch user most traded currencies
 export async function fetchMostTradedCurrencies() {
   try {
     const userId = await getDbUserId();
+    if (!userId) return "User not authenticated";
     // Group trades by symbol and calculate total trades & traded amount
     const trades = await prisma.trade.groupBy({
       by: ["symbol"],
@@ -307,7 +345,10 @@ export async function fetchMostTradedCurrencies() {
       };
     });
   } catch (error) {
-    console.error("Error fetching most traded currencies:", error);
-    return [];
+    return {
+      success: false,
+      message: "failed to fetch user most traded currencies",
+      error,
+    };
   }
 }

@@ -2,7 +2,7 @@
 // Sever actions
 import { fetchUserWinLoss } from "@/actions/user.action";
 // Shadcn components
-import { Card, CardContent } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/UI/card";
 // Framer motion
 import { motion } from "framer-motion";
 // React built in hooks
@@ -26,6 +26,7 @@ export default function TradesAnalyticsChart() {
   // Function to fetch user winning and loosing trades past 6 months
   const getUserData = async () => {
     const request = await fetchUserWinLoss();
+    if(request == "User not authenticated")return
     setData(request);
   };
   // Call back function to get user data when the components is mounting

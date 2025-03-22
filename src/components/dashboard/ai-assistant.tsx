@@ -1,106 +1,300 @@
-'use client';
+"use client";
+// React built in hooks
+import { useState, useRef, useEffect } from "react";
+// Framer motion for animation
+import { motion, AnimatePresence } from "framer-motion";
+// ShadCn components
+import { Input } from "../UI/input";
+import { Button } from "../UI/Button";
+import { Card } from "../UI/card";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "../UI/tooltip";
+// Icons
+import { MessageSquare, Send, MessageCircle, X, Loader2 } from "lucide-react";
+// App theme
+import { useTheme } from "next-themes";
+// i18n for translation
+import { useTranslation } from "react-i18next";
+// Redux for state management
+import { useSelector } from "react-redux";
 
-import { useState } from 'react';
-import { motion } from 'framer-motion';
-import { Input } from '../UI/input';
-import { Button } from '../UI/Button';
-import { Card } from '../UI/card';
-import { MessageSquare, Send, MessageCircle, X } from 'lucide-react';
-import { useTheme } from 'next-themes';
+// Types
+interface Message {
+  role: "user" | "assistant";
+  content: string;
+  timestamp?: Date;
+}
 
 const ChatAssistant = () => {
-  const { theme } = useTheme();
-  const [messages, setMessages] = useState([]);
-  const [input, setInput] = useState('');
+  // i18n hook for translation
+  const { t } = useTranslation();
+  // Redux isDarkMode hook
+  const isDarkMode = useSelector((state: any) => state.theme.isDarkMode);
+  // State to save message of the user
+  const [messages, setMessages] = useState<Message[]>([]);
+  // State to save the value of the input
+  const [input, setInput] = useState("");
+  // State to save the status of the loading
   const [loading, setLoading] = useState(false);
+  // State to save the value of the isOpen for ai-assistant chat
   const [isOpen, setIsOpen] = useState(false);
+  // Ref for auto-scrolling
+  const messagesEndRef = useRef<HTMLDivElement>(null);
 
+  // Function to scroll to bottom of chat
+  const scrollToBottom = () => {
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  };
+
+  // Effect for auto-scrolling
+  useEffect(() => {
+    scrollToBottom();
+  }, [messages]);
+
+  // Function to handle input submission with enter key
+  const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter" && !e.shiftKey) {
+      e.preventDefault();
+      sendMessage();
+    }
+  };
+
+  // Function to post user message to AI assistant
   const sendMessage = async () => {
-    if (!input.trim()) return;
-    const userMessage = { role: 'user', content: input };
+    if (!input.trim() || loading) return;
+
+    const userMessage: Message = {
+      role: "user",
+      content: input,
+      timestamp: new Date(),
+    };
+
     setMessages((prev) => [...prev, userMessage]);
-    setInput('');
+    setInput("");
     setLoading(true);
 
+    // Get the API key from .env
+    const apiKey = process.env.NEXT_PUBLIC_OPENROUTER_API_KEY;
+
     try {
-      const response = await fetch('https://openrouter.ai/api/v1/chat/completions', {
-        method: 'POST',
-        headers: {
-          'Authorization': `Bearer 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`,
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          model: 'google/gemini-2.0-flash-thinking-exp:free',
-          messages: [
-            { role: 'system', content: `You are a useful trading expert. Guide the user to make better trading decisions and help navigate the TradingAI website.
-              Website information:
-              - Home: [Home](localhost3000)
-              - Blogs: [Blogs](/blogs)
-              - Signals: [Signals](/suggestion)
-              - About: [About](/about)
-              - Dashboard: [Dashboard](/dashboard)
-              - Market & Trade: [Market & Trade](/trade)
-              - Education: [Education](/education)` },
-            ...messages,
-            userMessage
-          ],
-        }),
-      });
+      const response = await fetch(
+        "https://openrouter.ai/api/v1/chat/completions",
+        {
+          method: "POST",
+          headers: {
+            Authorization: `Bearer ${apiKey}`,
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            model: "google/gemini-2.0-flash-thinking-exp:free",
+            messages: [
+              {
+                role: "system",
+                content: `You are a useful trading expert. Guide the user to make better trading decisions and help navigate the TradingAI website.
+                Website information:
+                - Home: localhost3000
+                desc: This is the page where user can see website information as a whole, like other website landing page
+                - Blogs: /blogs
+                desc: This is the page where user can read about latest cryptocurrency news
+                - Signals: /signals
+                desc: This is the page where user can generate trading signals with AI by selecting the currency
+                - About: /about
+                desc: This is the page where user can learn more about website creators and goals
+                - Dashboard: /dashboard
+                desc: This is the page where user can see his/her overall trading status, win rate, total trade, closed position history, total profit, current site plan, most traded currency by his/her, winning and loosing trades past 6 months, profits past 6 months
+                - Market & Trade: /trade
+                desc: This is the page where user can execute trades in demo mode
+                - Strategies: /education
+                desc: This is the page where user can past a test, learn about indicators or technical trading strategies
+                - Market: /market
+                desc: This is the page where user can see cryptocurrencies by them market cap and details`,
+              },
+              ...messages.map(({ role, content }) => ({ role, content })),
+              { role: "user", content: input },
+            ],
+          }),
+        }
+      );
+
       const data = await response.json();
-      const aiMessage = { role: 'assistant', content: data.choices[0]?.message?.content || '...' };
+      const aiMessage: Message = {
+        role: "assistant",
+        content: data.choices[0]?.message?.content || t("error.aiResponse"),
+        timestamp: new Date(),
+      };
+
       setMessages((prev) => [...prev, aiMessage]);
     } catch (error) {
-      console.error('Error fetching AI response:', error);
+      console.error("Error fetching AI response:", error);
+      // Add error message to chat
+      setMessages((prev) => [
+        ...prev,
+        {
+          role: "assistant",
+          content: t("error.apiError"),
+          timestamp: new Date(),
+        },
+      ]);
     } finally {
       setLoading(false);
     }
   };
 
+  // Function to format timestamp
+  const formatTimestamp = (date: Date) => {
+    return new Intl.DateTimeFormat("en-US", {
+      hour: "numeric",
+      minute: "numeric",
+    }).format(date);
+  };
+
   return (
     <div>
       {/* Floating Chat Button */}
-      <button
-        className="fixed z-50 bottom-6 right-6 bg-blue-500 text-white p-4 rounded-full shadow-lg hover:bg-blue-600 transition"
-        onClick={() => setIsOpen(!isOpen)}
-      >
-        <MessageCircle size={24} />
-      </button>
-      
+      <TooltipProvider>
+        <Tooltip>
+          <TooltipTrigger asChild>
+            <motion.button
+              className={`fixed z-50 bottom-6 ${
+                isDarkMode ? "right-6" : "left-6"
+              } p-4 rounded-full shadow-lg transition-all duration-300 hover:scale-105 ${
+                isDarkMode
+                  ? "bg-blue-500 hover:bg-blue-600"
+                  : "bg-white hover:bg-gray-100"
+              }`}
+              onClick={() => setIsOpen(!isOpen)}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              <MessageCircle
+                size={24}
+                className={isDarkMode ? "text-white" : "text-blue-500"}
+              />
+            </motion.button>
+          </TooltipTrigger>
+          <TooltipContent>
+            {isOpen ? t("chat.close") : t("chat.open")}
+          </TooltipContent>
+        </Tooltip>
+      </TooltipProvider>
+
       {/* Chat Window */}
-      {isOpen && (
-        <div className={`fixed bottom-20 right-6 z-50 w-80 p-4 border rounded-2xl shadow-lg transition-all ${theme === 'dark' ? 'bg-gray-900 text-white border-gray-700' : 'bg-white text-black border-gray-300'}`}>
-          <div className="flex justify-between items-center mb-2">
-            <h2 className="text-lg font-bold flex items-center gap-2"><MessageSquare /> Chat with AI</h2>
-            <button onClick={() => setIsOpen(false)} className="text-gray-500 hover:text-gray-700 dark:hover:text-gray-300">
-              <X size={20} />
-            </button>
-          </div>
-          <Card className={`p-4 space-y-3 h-80 overflow-y-auto rounded-xl shadow-inner ${theme === 'dark' ? 'bg-gray-800 border-gray-700' : 'bg-gray-100 border-gray-300'}`}>
-            {messages.map((msg, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                className={`p-2 rounded-lg ${msg.role === 'user' ? 'bg-blue-500 text-white ml-auto' : theme === 'dark' ? 'bg-gray-700 text-white' : 'bg-gray-200 text-black'} max-w-[75%]`}
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 20 }}
+            className={`fixed bottom-20 ${
+              isDarkMode ? "right-6" : "left-6"
+            } z-50 w-80 rounded-2xl shadow-2xl overflow-hidden ${
+              isDarkMode
+                ? "bg-gray-900 border border-gray-700"
+                : "bg-white border border-gray-200"
+            }`}
+          >
+            {/* Chat Header */}
+            <div
+              className={`p-4 flex justify-between items-center border-b ${
+                isDarkMode ? "border-gray-700" : "border-gray-200"
+              }`}
+            >
+              <h2 className="text-lg font-bold flex items-center gap-2">
+                <MessageSquare
+                  className={isDarkMode ? "text-white" : "text-blue-500"}
+                />
+                {t("chat")}
+              </h2>
+              <button
+                onClick={() => setIsOpen(false)}
+                className={`p-2 rounded-lg transition-colors ${
+                  isDarkMode
+                    ? "hover:bg-gray-800 text-gray-400 hover:text-gray-200"
+                    : "hover:bg-gray-100 text-gray-600 hover:text-gray-800"
+                }`}
               >
-                {msg.content}
-              </motion.div>
-            ))}
-            {loading && <p className="text-gray-500 text-sm">AI is thinking...</p>}
-          </Card>
-          <div className="flex gap-2 mt-2">
-            <Input
-              value={input}
-              onChange={(e) => setInput(e.target.value)}
-              placeholder="Type your message..."
-              className="flex-1"
-            />
-            <Button onClick={sendMessage} disabled={loading}>
-              <Send size={16} />
-            </Button>
-          </div>
-        </div>
-      )}
+                <X size={20} />
+              </button>
+            </div>
+
+            {/* Chat Messages */}
+            <Card
+              className={`p-4 space-y-4 h-[400px] overflow-y-auto ${
+                isDarkMode ? "bg-gray-800" : "bg-gray-50"
+              }`}
+            >
+              {messages.map((msg, index) => (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: index * 0.1 }}
+                  className={`flex flex-col ${
+                    msg.role === "user" ? "items-end" : "items-start"
+                  }`}
+                >
+                  <div
+                    className={`p-3 rounded-2xl max-w-[75%] ${
+                      msg.role === "user"
+                        ? "bg-blue-500 text-white"
+                        : isDarkMode
+                        ? "bg-gray-700 text-white"
+                        : "bg-white text-gray-900 border border-gray-200"
+                    }`}
+                  >
+                    {msg.content}
+                  </div>
+                  {msg.timestamp && (
+                    <span
+                      className={`text-xs mt-1 ${
+                        isDarkMode ? "text-gray-400" : "text-gray-500"
+                      }`}
+                    >
+                      {formatTimestamp(msg.timestamp)}
+                    </span>
+                  )}
+                </motion.div>
+              ))}
+              <div ref={messagesEndRef} />
+            </Card>
+
+            {/* Chat Input */}
+            <div className="p-4 flex gap-2">
+              <Input
+                value={input}
+                onChange={(e) => setInput(e.target.value)}
+                onKeyPress={handleKeyPress}
+                placeholder={t("message")}
+                className={`flex-1 ${
+                  isDarkMode
+                    ? "bg-gray-800 text-white border-gray-700"
+                    : "bg-white text-gray-900"
+                }`}
+                disabled={loading}
+              />
+              <Button
+                onClick={sendMessage}
+                disabled={loading || !input.trim()}
+                className={`${
+                  loading
+                    ? "opacity-50 cursor-not-allowed"
+                    : "hover:bg-blue-600"
+                } bg-blue-500 text-white`}
+              >
+                {loading ? (
+                  <Loader2 className="w-4 h-4 animate-spin" />
+                ) : (
+                  <Send size={16} />
+                )}
+              </Button>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 };

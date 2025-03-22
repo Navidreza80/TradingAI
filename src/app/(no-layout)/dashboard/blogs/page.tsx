@@ -19,7 +19,7 @@ export default function BlogsPage() {
   // State to save the value of users input to search over the blogs title
   const [searchQuery] = useState("");
   // State to save the blogs array
-  const [blogs, setBlogs] = useState<Blog[]>([]);
+  const [blogs, setBlogs] = useState<Blog[] | "User not authenticated">([]);
   // Function to fetch blogs from database
   const fetchBlog = async () => {
     if (selected === "Your blogs") {

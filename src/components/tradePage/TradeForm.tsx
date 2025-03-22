@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { addPosition } from '../../redux/positionsSlice';
+import { addPosition } from '../../hooks/redux/positionsSlice';
 import type { FormData, Position } from '../../types/index';
 import style from './style.module.css';
 import { Statistic, Select } from 'antd';

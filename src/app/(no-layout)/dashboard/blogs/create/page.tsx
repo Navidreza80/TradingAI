@@ -7,7 +7,7 @@ import { useState } from "react";
 
 export default function CreateBlog() {
   // State to save the blogs thumbnail
-  const [image, setImage] = useState("");
+  const [image, setImage] = useState(null);
   // State to save the blogs title
   const [title, setTitle] = useState("");
   // State to save the blogs short description

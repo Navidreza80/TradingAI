@@ -15,9 +15,9 @@ import {
 import React from "react";
 // Server actions
 import { deleteComment, fetchUserComment } from "@/actions/comment.action";
-// Shadcn components
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
+// ShadCn components
+import { Button } from "../../../../components/UI/Button";
+import { Input } from "../../../../components/UI/input";
 import {
   Table,
   TableBody,
@@ -25,7 +25,7 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@/components/ui/table";
+} from "../../../../components/UI/table";
 // i18n for translation
 import EditComment from "@/components/dashboard/edit-comment";
 import { Trash } from "lucide-react";
@@ -60,7 +60,8 @@ export default function DataTableDemo() {
   // Function to delete users comment
   const handleDelete = async (id) => {
     const request = await deleteComment(id)
-    if(request.success)toast.success("Comment deleted successfully!!")
+    if(request == "User not authenticated") toast.error("User not authenticated")
+    else if(request.success)toast.success("Comment deleted successfully!!")
   }
   // Tables column items
   const columns = [

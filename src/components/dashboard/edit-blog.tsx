@@ -1,8 +1,8 @@
 // Server action
 import { updateBlog } from "@/actions/blog.action";
 import { getDbUserId } from "@/actions/user.action";
-// Shadcn components
-import { Button } from "@/components/ui/button";
+// ShadCn components
+import { Button } from "@/components/UI/Button";
 import {
   Dialog,
   DialogContent,
@@ -11,9 +11,9 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "@/components/ui/dialog";
-import { Input } from "../ui/input";
-import { Label } from "../ui/label";
+} from "@/components/UI/dialog";
+import { Input } from "../UI/input";
+import { Label } from "../UI/label";
 // UploadThing components for converting file to URL
 import { UploadButton } from "@/utils/uploadthing";
 // Icons
