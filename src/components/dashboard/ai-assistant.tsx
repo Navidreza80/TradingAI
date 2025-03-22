@@ -32,8 +32,6 @@ interface Message {
 const ChatAssistant = () => {
   // i18n hook for translation
   const { t } = useTranslation();
-  // Theme hook
-  const { theme } = useTheme();
   // Redux isDarkMode hook
   const isDarkMode = useSelector((state: any) => state.theme.isDarkMode);
   // State to save message of the user

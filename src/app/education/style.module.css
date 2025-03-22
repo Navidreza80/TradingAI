@@ -1,0 +1,31 @@
+    .Card {
+        width: 48%;
+        max-width: 411px;
+    }
+
+    .CardHolder {
+        display: flex;
+        flex-flow: row nowrap;
+        gap: 10px;
+        width: 100%;
+        justify-content: center;
+    }
+
+    @media screen and (max-width: 698px) {
+        .imageCard {
+            height: 200px;
+        }
+
+        .imageCard>div {
+            background-size: 100% 200px !important;
+        }
+    }
+
+    @media screen and (max-width: 500px) {
+         .Card {
+            width: 100%;
+        } 
+        .CardHolder {
+            flex-flow: column wrap;
+        }
+    }
