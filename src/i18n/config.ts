@@ -21,6 +21,36 @@ const resources = {
         aboutDesc: "Learn more about TradingAI",
         tradeDesc: "Execute your trades",
         strategiesDesc: "Educate yourself on trading strategies",
+        market: "Market",
+        learn: "Learn",
+        news: "News",
+        marketItems: {
+          forex: "Forex",
+          crypto: "Crypto",
+          stock: "Stock",
+          commodities: "Commodities",
+          nft: "NFT"
+        },
+        learnItems: {
+          strategies: "Strategies",
+          indicators: "Indicators",
+          exams: "Exams",
+          certificates: "Certificates",
+          beginner: "Beginner",
+          markets: "Markets",
+          web3: "Web3"
+        },
+        signalsItems: {
+          aiGenerator: "AI Signal Generator",
+          suggestions: "What Other Suggests?"
+        },
+        newsItems: {
+          blogs: "Blogs",
+          magazine: "News Magazine",
+          events: "Events",
+          podcasts: "Podcasts",
+          videos: "Videos"
+        }
       },
       dropdown: {
         myAcc: "My Account",
@@ -393,6 +423,36 @@ const resources = {
         aboutDesc: "بیشتر درباره TradingAI بدانید",
         tradeDesc: "معاملات خود را انجام دهید",
         strategiesDesc: "آموزش استراتژی‌های معاملاتی",
+        market: "بازار",
+        learn: "آموزش",
+        news: "اخبار",
+        marketItems: {
+          forex: "فارکس",
+          crypto: "ارز دیجیتال",
+          stock: "سهام",
+          commodities: "کالاها",
+          nft: "ان‌اف‌تی"
+        },
+        learnItems: {
+          strategies: "استراتژی‌ها",
+          indicators: "اندیکاتورها",
+          exams: "آزمون‌ها",
+          certificates: "گواهینامه‌ها",
+          beginner: "مبتدی",
+          markets: "بازارها",
+          web3: "وب۳"
+        },
+        signalsItems: {
+          aiGenerator: "سیگنال‌ساز هوشمند",
+          suggestions: "پیشنهادات دیگران"
+        },
+        newsItems: {
+          blogs: "مقالات",
+          magazine: "مجله خبری",
+          events: "رویدادها",
+          podcasts: "پادکست‌ها",
+          videos: "ویدیوها"
+        }
       },
       analyze: {
         title: "رشد معاملاتی خود را نظارت کنید",
@@ -916,6 +976,36 @@ const resources = {
         aboutDesc: "تعرف على المزيد حول TradingAI",
         tradeDesc: "قم بتنفيذ صفقاتك",
         strategiesDesc: "تعلم استراتيجيات التداول",
+        market: "السوق",
+        learn: "التعلم",
+        news: "الأخبار",
+        marketItems: {
+          forex: "فوركس",
+          crypto: "العملات الرقمية",
+          stock: "الأسهم",
+          commodities: "السلع",
+          nft: "NFT"
+        },
+        learnItems: {
+          strategies: "الاستراتيجيات",
+          indicators: "المؤشرات",
+          exams: "الاختبارات",
+          certificates: "الشهادات",
+          beginner: "المبتدئين",
+          markets: "الأسواق",
+          web3: "ويب3"
+        },
+        signalsItems: {
+          aiGenerator: "مولد إشارات الذكاء الاصطناعي",
+          suggestions: "ماذا يقترح الآخرون؟"
+        },
+        newsItems: {
+          blogs: "المدونات",
+          magazine: "مجلة الأخبار",
+          events: "الفعاليات",
+          podcasts: "البودكاست",
+          videos: "الفيديوهات"
+        }
       },
       analyze: {
         title: "راقب نمو تداولك",
