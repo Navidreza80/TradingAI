@@ -1494,7 +1494,7 @@ const resources = {
       selectSymbol: "اختر رمزًا",
       popularCoins: "العملات الشائعة",
       allCoins: "جميع العملات",
-      searchResults: "نتائج البحث"
+      searchResults: "نتائج البحث",
       signals: {
         pair: "زوج التداول",
         symbol: "الرمز:",
