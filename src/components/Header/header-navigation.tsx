@@ -64,13 +64,12 @@ export default function Navigation() {
       name: t("nav.learn") || "Learn", 
       href: "#", 
       dropdownItems: [
-        { name: t("nav.learnItems.strategies") || "Strategies", href: "/learn/strategies" },
-        { name: t("nav.learnItems.indicators") || "Indicators", href: "/learn/indicators" },
-        { name: t("nav.learnItems.exams") || "Exams", href: "/learn/exams" },
-        { name: t("nav.learnItems.certificates") || "Certificates", href: "/learn/certificates" },
-        { name: t("nav.learnItems.beginner") || "Beginner", href: "/learn/beginner" },
-        { name: t("nav.learnItems.markets") || "Markets", href: "/learn/markets" },
-        { name: t("nav.learnItems.web3") || "Web3", href: "/learn/web3" },
+        { name: t("nav.learnItems.strategies") || "Strategies", href: "/education/technical" },
+        { name: t("nav.learnItems.indicators") || "Indicators", href: "/education/indicators" },
+        { name: t("nav.learnItems.exams") || "Exams", href: "/education/test" },
+        { name: t("nav.learnItems.beginner") || "Beginner", href: "/education/beginner" },
+        { name: t("nav.learnItems.markets") || "Markets", href: "/education/markets" },
+        { name: t("nav.learnItems.web3") || "Web3", href: "/education/web3" },
       ]
     },
     { 

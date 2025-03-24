@@ -222,7 +222,7 @@ export default function TradingSignal() {
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                       {signalItems.map((item, index) => {
                         return (
-                          <div className="bg-gray-50 dark:bg-black/60 p-4 rounded-xl">
+                          <div key={index} className="bg-gray-50 dark:bg-black/60 p-4 rounded-xl">
                             <p className="text-sm text-primary-light dark:text-primary-dark">{item.text}</p>
                             <p className={`text-xl font-semibold ${item.colour}`}>{item.value}</p>
                           </div>

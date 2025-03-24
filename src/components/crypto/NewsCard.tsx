@@ -1,10 +1,10 @@
 import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { ForexNews } from '@/types/forex';
+import { CryptoNews } from '@/types/crypto';
 
 interface NewsCardProps {
-  news: ForexNews;
+  news: CryptoNews;
 }
 
 export function NewsCard({ news }: NewsCardProps) {
@@ -67,7 +67,7 @@ export function NewsCard({ news }: NewsCardProps) {
           {news.excerpt}
         </p>
         <Link
-          href={`/news/forex/${news.id}`}
+          href={`/news/crypto/${news.id}`}
           className="text-blue-600 dark:text-blue-400 text-sm font-medium hover:underline"
         >
           Read More →
