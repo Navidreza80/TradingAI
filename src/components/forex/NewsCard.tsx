@@ -1,6 +1,7 @@
-import React from 'react';
+// Next built in components
 import Link from 'next/link';
 import Image from 'next/image';
+// Forex news type
 import { ForexNews } from '@/types/forex';
 
 interface NewsCardProps {

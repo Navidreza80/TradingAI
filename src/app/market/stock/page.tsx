@@ -1,10 +1,12 @@
 "use server";
-
+// Next built in component
 import Link from "next/link";
+// Page data
 import { getStockNews } from "@/services/stockNewsService";
 import { getStockPairs } from "@/services/stockMarketService";
 import { getStockSignals } from "@/services/stockSignalService";
 import { getEducationalContent } from "@/services/educationalService";
+// Third party component
 import { NewsCard } from "@/components/stocks/NewsCard";
 import { StockPairCard } from "@/components/stocks/StockPairCard";
 import { SignalCard } from "@/components/stocks/SignalCard";

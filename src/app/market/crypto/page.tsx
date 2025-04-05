@@ -1,10 +1,12 @@
 "use server";
-
+// Next built in components
 import Link from "next/link";
+// Get page data
 import { getCryptoNews } from "@/services/cryptoNewsService";
 import { getCryptoPairs } from "@/services/cryptoMarketService";
 import { getCryptoSignals } from "@/services/cryptoSignalService";
 import { getEducationalContent } from "@/services/educationalService";
+// Third party components
 import { NewsCard } from "@/components/crypto/NewsCard";
 import { CryptoPairCard } from "@/components/crypto/CryptoPairCard";
 import { SignalCard } from "@/components/crypto/SignalCard";

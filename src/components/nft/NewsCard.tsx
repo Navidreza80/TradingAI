@@ -1,8 +1,10 @@
 "use client";
-
-import React from 'react';
+// React built in hook
+import { useState } from 'react';
+// Next built in components
 import Link from 'next/link';
 import Image from 'next/image';
+// NFT news type
 import { NFTNews } from '@/types/nft';
 
 interface NewsCardProps {
@@ -10,7 +12,8 @@ interface NewsCardProps {
 }
 
 export function NewsCard({ news }: NewsCardProps) {
-  const [imageError, setImageError] = React.useState(false);
+  // State to save image load error
+  const [imageError, setImageError] = useState(false);
   
   // Format date to readable format
   const formatDate = (dateString: string) => {

@@ -1,5 +1,6 @@
-import React from 'react';
+// Next built in component
 import Image from 'next/image';
+// Crypto signal type
 import { CryptoSignal } from '@/types/crypto';
 
 interface SignalCardProps {
@@ -7,6 +8,7 @@ interface SignalCardProps {
 }
 
 export function SignalCard({ signal }: SignalCardProps) {
+  // Calculate signals data
   const isBuy = signal.direction === "buy";
   const profitPercentage = ((signal.takeProfit - signal.entryPrice) / signal.entryPrice * 100).toFixed(2);
   const lossPercentage = ((signal.entryPrice - signal.stopLoss) / signal.entryPrice * 100).toFixed(2);

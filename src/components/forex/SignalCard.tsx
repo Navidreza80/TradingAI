@@ -1,5 +1,3 @@
-import React from 'react';
-
 interface TradingSignal {
   pair: string;
   direction: "buy" | "sell";
@@ -14,6 +12,7 @@ interface SignalCardProps {
 }
 
 export function SignalCard({ signal }: SignalCardProps) {
+  // Calculate signal data
   const isBuy = signal.direction === "buy";
   const profitPips = Math.abs(
     (signal.takeProfit - signal.entryPrice) * (isBuy ? 10000 : -10000)

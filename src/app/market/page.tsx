@@ -1,10 +1,16 @@
 "use client";
+// Icons
 import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
+// Axios for data fetching
 import axios from "axios";
+// React built in hook
 import { useEffect, useState } from "react";
+// i18n
 import { useTranslation } from "react-i18next";
+// Global style
 import style from "./style.module.css";
 
+// Interface for type safety
 interface CryptoData {
   id: string;
   name: string;

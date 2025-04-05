@@ -1,3 +1,4 @@
+// Framer motion for animation
 import { motion } from "framer-motion";
 
 export default function BlogCardSkeleton() {

@@ -1,20 +1,23 @@
 "use client";
-
-import React from 'react';
+// Next built in components
 import Link from 'next/link';
 import Image from 'next/image';
+//  NFT signal type
 import { NFTSignal } from '@/types/nft';
+// React built in hook
+import { useState } from 'react';
 
 interface SignalCardProps {
   signal: NFTSignal;
 }
 
 export function SignalCard({ signal }: SignalCardProps) {
-  const [imageError, setImageError] = React.useState(false);
+  // State to save image load error
+  const [imageError, setImageError] = useState(false);
   
+  // Calculate signal items and data
   const isBuy = signal.action === "BUY";
   const isSell = signal.action === "SELL";
-  const isHold = signal.action === "HOLD";
   
   const getActionColor = () => {
     if (isBuy) return "bg-green-500";

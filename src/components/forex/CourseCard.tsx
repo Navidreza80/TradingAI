@@ -1,4 +1,4 @@
-import React from 'react';
+// Next built in component
 import Link from 'next/link';
 
 interface EducationalContent {

@@ -1,10 +1,12 @@
 "use server";
-
+// Next built in components
 import Link from "next/link";
+// Get data
 import { getCommodityNews } from "@/services/commodityNewsService";
 import { getCommodityPairs } from "@/services/commodityMarketService";
 import { getCommoditySignals } from "@/services/commoditySignalService";
 import { getEducationalContent } from "@/services/educationalService";
+// Third party components
 import { NewsCard } from "@/components/commodities/NewsCard";
 import { CommodityPairCard } from "@/components/commodities/CommodityPairCard";
 import { SignalCard } from "@/components/commodities/SignalCard";

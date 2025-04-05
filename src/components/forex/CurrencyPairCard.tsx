@@ -1,4 +1,4 @@
-import React from 'react';
+// Next built in component
 import Link from 'next/link';
 
 interface CurrencyPair {
@@ -13,6 +13,7 @@ interface CurrencyPairCardProps {
 }
 
 export function CurrencyPairCard({ pair }: CurrencyPairCardProps) {
+  // Check if the number is positive or negative
   const isPositive = !pair.change.startsWith('-');
   
   return (

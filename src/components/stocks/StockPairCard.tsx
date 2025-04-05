@@ -1,8 +1,10 @@
 "use client";
-
-import React, { useState } from 'react';
+// React built in hook
+import { useState } from 'react';
+// Next built in components
 import Link from 'next/link';
 import Image from 'next/image';
+// Stock pair type
 import { StockPair } from '@/types/stock';
 
 interface StockPairCardProps {
@@ -10,8 +12,10 @@ interface StockPairCardProps {
 }
 
 export function StockPairCard({ pair }: StockPairCardProps) {
+  // State to save image load error
   const [imageError, setImageError] = useState(false);
   
+  // Check if the number is positive or not
   const isPositive = parseFloat(pair.changePercent) >= 0;
   
   return (

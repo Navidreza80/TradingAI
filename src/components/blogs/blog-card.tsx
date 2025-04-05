@@ -21,7 +21,7 @@ export default function BlogCard({ blog }) {
       className="relative group"
     >
       {/* Link To Blog Detail */}
-      <Link href={`/blogs/${blog.id}`}>
+      <Link href={`/news/blogs/${blog.id}`}>
       {/* Container */}
         <div className="cursor-pointer w-full">
           {/* Container */}

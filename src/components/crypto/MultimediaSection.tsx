@@ -1,16 +1,24 @@
 "use client"
-
-import React, { useState, useEffect } from 'react';
+// React built in hooks
+import { useState, useEffect } from 'react';
+// Next built in component
 import Link from 'next/link';
+// Third party components
 import { MultimediaCard } from './MultimediaCard';
+// Crypto multi media type 
 import { CryptoMultimedia } from '@/types/crypto';
+// multi media data
 import { getMultimediaContent } from '@/services/cryptoMultimediaService';
 
 export function MultimediaSection() {
+  // State to save active tab
   const [activeTab, setActiveTab] = useState("all");
+  // State to save multi media data
   const [multimedia, setMultimedia] = useState<CryptoMultimedia[]>([]);
+  // state to save is loading status
   const [loading, setLoading] = useState(true);
 
+  // use effect  to get multi media content
   useEffect(() => {
     async function loadMultimedia() {
       try {
@@ -25,7 +33,6 @@ export function MultimediaSection() {
 
     loadMultimedia();
   }, []);
-
   const filteredMultimedia = multimedia.filter(item => {
     if (activeTab === "all") return true;
     return item.type === activeTab;

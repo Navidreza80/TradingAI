@@ -1,5 +1,3 @@
-import React from 'react';
-
 interface MediaContent {
   id: number;
   title: string;

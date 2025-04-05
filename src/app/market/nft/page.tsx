@@ -1,10 +1,12 @@
 "use server";
-
+// Next built in component
 import Link from "next/link";
+// Page data
 import { getNFTCollections } from "@/services/nftMarketService";
 import { getNFTNews } from "@/services/nftNewsService";
 import { getNFTSignals } from "@/services/nftSignalService";
 import { getEducationalContent } from "@/services/educationalService";
+// Third party component
 import { NewsCard } from "@/components/nft/NewsCard";
 import { NFTCollectionCard } from "@/components/nft/NFTCollectionCard";
 import { SignalCard } from "@/components/nft/SignalCard";

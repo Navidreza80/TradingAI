@@ -1,8 +1,8 @@
 "use client"
-
-import React, { useState } from 'react';
+// Next built in components
 import Link from 'next/link';
 import Image from 'next/image';
+// Crypto media type
 import { CryptoMultimedia } from '@/types/crypto';
 
 interface MultimediaCardProps {
@@ -10,13 +10,12 @@ interface MultimediaCardProps {
 }
 
 export function MultimediaCard({ media }: MultimediaCardProps) {
-  const [imageError, setImageError] = useState(false);
   
   return (
     <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden">
       <div className="h-40 relative">
         <Image 
-          src={imageError ? `https://via.placeholder.com/800x450?text=${media.type}` : media.thumbnail} 
+          src={media.thumbnail} 
           alt={media.title} 
           fill 
           className="object-cover"

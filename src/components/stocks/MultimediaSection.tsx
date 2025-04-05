@@ -1,10 +1,12 @@
 "use client";
-
-import React from 'react';
+// Next built in components
 import Link from 'next/link';
 import Image from 'next/image';
+// React built in hook
+import { useState } from 'react';
 
 export function MultimediaSection() {
+  // Multi media mock data
   const multimedia = [
     {
       id: 1,
@@ -40,8 +42,10 @@ export function MultimediaSection() {
     }
   ];
 
-  const [imageErrors, setImageErrors] = React.useState<Record<number, boolean>>({});
+  // State to save image load error
+  const [imageErrors, setImageErrors] = useState<Record<number, boolean>>({});
 
+  // Function to handle image load error
   const handleImageError = (id: number) => {
     setImageErrors(prev => ({ ...prev, [id]: true }));
   };

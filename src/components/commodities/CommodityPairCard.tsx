@@ -1,8 +1,10 @@
 "use client";
-
-import React from 'react';
+// Next built in components
 import Link from 'next/link';
 import Image from 'next/image';
+// React built in hooks
+import { useState } from 'react';
+// Types for type safety
 import { CommodityPair } from '@/types/commodity';
 
 interface CommodityPairCardProps {
@@ -10,8 +12,9 @@ interface CommodityPairCardProps {
 }
 
 export function CommodityPairCard({ pair }: CommodityPairCardProps) {
-  const [imageError, setImageError] = React.useState(false);
-  
+  // State to save image load error
+  const [imageError, setImageError] = useState(false);
+  // constant to check if the variable is positive or negative
   const isPositive = !pair.change.startsWith('-');
   
   return (

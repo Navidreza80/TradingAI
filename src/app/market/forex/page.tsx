@@ -1,16 +1,19 @@
 "use client";
-
+// Third party components
 import { CourseCard } from "@/components/forex/CourseCard";
 import { CurrencyPairCard } from "@/components/forex/CurrencyPairCard";
 import { MultimediaCard } from "@/components/forex/MultimediaCard";
 import { NewsCard } from "@/components/forex/NewsCard";
 import { SignalCard } from "@/components/forex/SignalCard";
-import { getForexNews, getFallbackNews } from '@/services/newsService';
+// Get page data
+import { getFallbackNews } from '@/services/newsService';
 import {
   educationalContent,
   forexMultimedia,
 } from "@/data/forexData";
+// Next built in components
 import Link from "next/link";
+// React built in hooks
 import { useEffect, useMemo, useState } from "react";
 
 // Define TypeScript interfaces
@@ -38,12 +41,17 @@ interface ExchangeRateApiResponse {
 
 // Replace the existing page component with this updated version that fetches real news
 export default function ForexPage() {
+  // State to save active tabs
   const [activeTab, setActiveTab] = useState<"all" | "video" | "podcast">(
     "all"
   );
+  // State to save currency pair
   const [currencyPairs, setCurrencyPairs] = useState<CurrencyPair[]>([]);
+  // State to save status of is loading
   const [loading, setLoading] = useState<boolean>(true);
+  // State to save error
   const [error, setError] = useState<string | null>(null);
+  // State to save forex news
   const [forexNews, setForexNews] = useState([])
 
   // Initial signals data
@@ -73,6 +81,8 @@ export default function ForexPage() {
       confidence: 82,
     },
   ]);
+
+  // Function to fetch forex data
   const fetchForexData = async () => {
     setLoading(true);
     try {
@@ -202,11 +212,13 @@ export default function ForexPage() {
     }
   };
 
+  // Function to fetch forex news
   const fetchForexNews = async () => {
     const fallbackNews = await getFallbackNews(4)
     setForexNews(fallbackNews)
   }
 
+  // useEffect to get data when the component is mounting
   useEffect(() => {
     fetchForexData();
     fetchForexNews()

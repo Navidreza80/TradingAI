@@ -1,14 +1,8 @@
 "use client";
-
-import React from 'react';
+// Next built in component
 import Link from 'next/link';
-import { TradingSignal } from '@/types/trading';
 
-interface SignalCardProps {
-  signal: TradingSignal;
-}
-
-export function SignalCard({ signal }: SignalCardProps) {
+export function SignalCard({ signal }) {
   const isBuy = signal.action === "BUY";
   
   return (

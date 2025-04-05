@@ -1,8 +1,10 @@
 "use client";
-
-import React from 'react';
+// React built in hook
+import { useState } from 'react';
+// Next built in components
 import Link from 'next/link';
 import Image from 'next/image';
+// NFT collection type
 import { NFTCollection } from '@/types/nft';
 
 interface NFTCollectionCardProps {
@@ -10,9 +12,12 @@ interface NFTCollectionCardProps {
 }
 
 export function NFTCollectionCard({ collection }: NFTCollectionCardProps) {
-  const [imageError, setImageError] = React.useState(false);
-  const [bannerError, setBannerError] = React.useState(false);
+  // State to save image load error
+  const [imageError, setImageError] = useState(false);
+  // State to save banner load error
+  const [bannerError, setBannerError] = useState(false);
   
+  // Check if the number is positive or not
   const isPositive = !collection.change.startsWith('-');
   
   return (

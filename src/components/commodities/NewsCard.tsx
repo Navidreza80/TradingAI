@@ -1,16 +1,19 @@
 "use client";
-
-import React from 'react';
+// Next built in components
 import Link from 'next/link';
 import Image from 'next/image';
+// Types for type safety
 import { CommodityNews } from '@/types/commodity';
+// React built in hook
+import { useState } from 'react';
 
 interface NewsCardProps {
   news: CommodityNews;
 }
 
 export function NewsCard({ news }: NewsCardProps) {
-  const [imageError, setImageError] = React.useState(false);
+  // State to save image load errors
+  const [imageError, setImageError] = useState(false);
   
   // Format date to readable format
   const formatDate = (dateString: string) => {

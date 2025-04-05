@@ -1,9 +1,12 @@
 "use client";
-
-import React from 'react';
+// React built in hook
+import { useState } from 'react';
+// Next built in component
 import Link from 'next/link';
 import Image from 'next/image';
+// date convertor
 import { formatDistanceToNow } from 'date-fns';
+// Stock news type
 import { StockNews } from '@/types/stock';
 
 interface NewsCardProps {
@@ -11,7 +14,8 @@ interface NewsCardProps {
 }
 
 export function NewsCard({ news }: NewsCardProps) {
-  const [imageError, setImageError] = React.useState(false);
+  // State to save image load error
+  const [imageError, setImageError] = useState(false);
   
   return (
     <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden border border-gray-100 dark:border-gray-700 hover:shadow-lg transition-shadow">

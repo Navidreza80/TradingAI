@@ -1,6 +1,7 @@
-import React from 'react';
+// Next built in components
 import Link from 'next/link';
 import Image from 'next/image';
+// Crypto news type
 import { CryptoNews } from '@/types/crypto';
 
 interface NewsCardProps {

@@ -1,17 +1,21 @@
 "use client";
-
-import React from 'react';
+// Next built in component
 import Image from 'next/image';
 import Link from 'next/link';
+// React built in hook
+import { useState } from 'react';
 
 export function TrendingNFTs() {
-  const [activeTab, setActiveTab] = React.useState('trending');
-  const [imageErrors, setImageErrors] = React.useState<Record<string, boolean>>({});
+  // State to save active tab
+  const [activeTab, setActiveTab] = useState('trending');
+  // State to save image load error
+  const [imageErrors, setImageErrors] = useState<Record<string, boolean>>({});
 
+  // Function to handle image load error
   const handleImageError = (id: string) => {
     setImageErrors(prev => ({ ...prev, [id]: true }));
   };
-
+  // Trading NFT mock data
   const trendingNFTs = [
     {
       id: "1",
@@ -59,7 +63,7 @@ export function TrendingNFTs() {
       positive: false
     }
   ];
-
+  // Top sales mock data
   const topSales = [
     {
       id: "6",
@@ -102,7 +106,7 @@ export function TrendingNFTs() {
       date: "12 hours ago"
     }
   ];
-
+  // Up coming drops mock data
   const upcomingDrops = [
     {
       id: "11",

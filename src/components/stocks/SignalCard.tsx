@@ -1,7 +1,7 @@
 "use client";
-
-import React from 'react';
+// Next built in component
 import Link from 'next/link';
+// Trading signal type
 import { TradingSignal } from '@/types/trading';
 
 interface SignalCardProps {
@@ -9,6 +9,7 @@ interface SignalCardProps {
 }
 
 export function SignalCard({ signal }: SignalCardProps) {
+  // Calculate signal data
   const isBuy = signal.action.toLowerCase() === 'buy';
   const isStrong = signal.strength >= 70;
   

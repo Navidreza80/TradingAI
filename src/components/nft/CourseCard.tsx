@@ -1,8 +1,10 @@
 "use client";
-
-import React from 'react';
+// React built in hook
+import { useState } from 'react';
+// Next built in components
 import Link from 'next/link';
 import Image from 'next/image';
+// Educational content type
 import { EducationalContent } from '@/types/educational';
 
 interface CourseCardProps {
@@ -10,7 +12,8 @@ interface CourseCardProps {
 }
 
 export function CourseCard({ course }: CourseCardProps) {
-  const [imageError, setImageError] = React.useState(false);
+  // State to save image load error
+  const [imageError, setImageError] = useState(false);
   
   return (
     <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden border border-gray-100 dark:border-gray-700 hover:shadow-lg transition-shadow h-full flex flex-col">
