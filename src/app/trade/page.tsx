@@ -1,43 +1,33 @@
 "use client";
 
 // انواع
-import { Coin } from "@/types/trade"; // نوع ارز
-import { Position } from "@/types/trade"; // نوع موقعیت
-import { PriceMap } from "@/types/trade"; // نقشه قیمت‌ها
-import { ClosedPosition } from "@/types/trade"; // نوع موقعیت‌های بسته شده
-import html2canvas from "html2canvas"; // کتابخانه برای گرفتن عکس از صفحه
 import ImageLogo from "@/../public/image/LogoTradingAi.jpg"; // لوگوی برنامه
+import { ClosedPosition, Position, PriceMap } from "@/types/trade"; // نوع موقعیت
 import { DownloadOutlined } from "@ant-design/icons"; // آیکون دانلود
-import toast, { Toaster } from "react-hot-toast"; // کتابخانه برای نمایش نوتیفیکیشن
+import html2canvas from "html2canvas"; // کتابخانه برای گرفتن عکس از صفحه
+import toast from "react-hot-toast"; // کتابخانه برای نمایش نوتیفیکیشن
 
 // کامپوننت‌های antd
 import {
   Button,
-  Card,
   ConfigProvider,
-  Divider,
-  Image,
-  Input,
   Layout,
   Modal,
   Select,
-  Space,
-  Statistic,
-  Tag,
-  Typography,
+  Typography
 } from "antd"; // کتابخانه antd برای طراحی رابط کاربری
 import fa_IR from "antd/locale/fa_IR"; // زبان فارسی برای antd
 
 // هوک‌های React
-import { useCallback, useEffect, useState, useRef } from "react"; // هوک‌های React
+import { useCallback, useEffect, useRef, useState } from "react"; // هوک‌های React
 import { useTranslation } from 'react-i18next'; // هوک برای ترجمه
 
 // کامپوننت‌ها
-import TradeForm from "../../components/tradePage/TradeForm"; // فرم معاملات
-import style from "./style.module.css"; // استایل‌های CSS
-import { TradingViewWidgetDark } from "../../components/tradePage/TradingViewWidgetDark"; // ویجت نمودار
-import { useRouter } from "next/navigation"; // هوک برای ناوبری
 import { closeTrade } from "@/actions/trade.action"; // تابع بستن معامله
+import { useRouter } from "next/navigation"; // هوک برای ناوبری
+import TradeForm from "../../components/tradePage/TradeForm"; // فرم معاملات
+import { TradingViewWidgetDark } from "../../components/tradePage/TradingViewWidgetDark"; // ویجت نمودار
+import style from "./style.module.css"; // استایل‌های CSS
 
 // تایپوگرافی
 const { Content } = Layout; // محتوای لایه
