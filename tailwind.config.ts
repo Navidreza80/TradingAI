@@ -23,12 +23,6 @@ const config: Config = {
         commentLM: "url('/image/comment-light-mode.svg')",
         commentDM: "url('/image/comment-dark-mode.svg')",
       },
-      borderColor: {
-        border: 'var(--border)',
-      },
-      ringColor: {
-        ring: 'var(--ring)',
-      },
       screens: {
         xs: "375px",
         sm: "640px",
@@ -74,7 +68,6 @@ const config: Config = {
           light: '#ADB5BD',
           dark: '#6C757D',
         },
-        ring: 'var(--ring)',
       },
       keyframes: {
         headerPattern: {
