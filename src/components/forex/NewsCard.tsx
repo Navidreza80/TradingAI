@@ -46,12 +46,18 @@ export function NewsCard({ news }: NewsCardProps) {
     <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden">
       <div className="h-48 relative">
         <Image 
-          src={news.image} 
+          src={news.imageUrl || "/image/noImage.jpg"} 
           alt={news.title} 
           fill 
           className="object-cover"
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           priority={false}
+          onError={(e) => {
+            // Fallback to default image if the provided URL fails to load
+            const target = e.target as HTMLImageElement;
+            target.onerror = null; // Prevent infinite error loop
+            target.src = "/image/noImage.jpg";
+          }}
         />
         <div className="absolute top-0 left-0 bg-blue-600 text-white text-xs px-2 py-1 m-2 rounded-br rounded-tl">
           {news.category}

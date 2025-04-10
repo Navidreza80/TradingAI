@@ -1,73 +1,84 @@
-"use client";
-// Next built in components
-import Link from 'next/link';
-import Image from 'next/image';
-// React built in hooks
-import { useState } from 'react';
-// Types for type safety
-import { CommodityPair } from '@/types/commodity';
+import { CommodityPair } from "@/types/commodity";
+import Link from "next/link";
+import { ArrowDown, ArrowUp, TrendingUp } from "lucide-react";
 
 interface CommodityPairCardProps {
   pair: CommodityPair;
 }
 
 export function CommodityPairCard({ pair }: CommodityPairCardProps) {
-  // State to save image load error
-  const [imageError, setImageError] = useState(false);
-  // constant to check if the variable is positive or negative
-  const isPositive = !pair.change.startsWith('-');
-  
+  // Format large numbers with commas
+  const formatNumber = (num: number) => {
+    return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  };
+
+  // Get category-specific styling
+  const getCategoryStyle = (category: string) => {
+    const styles = {
+      "Precious Metals": "bg-yellow-100 text-yellow-800 dark:bg-yellow-900/30 dark:text-yellow-300",
+      "Energy": "bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-300",
+      "Agriculture": "bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-300",
+      "Industrial Metals": "bg-gray-100 text-gray-800 dark:bg-gray-700/50 dark:text-gray-300",
+      "Other": "bg-purple-100 text-purple-800 dark:bg-purple-900/30 dark:text-purple-300",
+    };
+    
+    return styles[category as keyof typeof styles] || styles["Other"];
+  };
+
   return (
-    <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden border border-gray-100 dark:border-gray-700 hover:shadow-lg transition-shadow">
+    <Link 
+      href={`/market/commodities/${pair.symbol.toLowerCase()}`}
+      className="block bg-white dark:bg-gray-800 rounded-lg shadow-sm hover:shadow-md transition-shadow border border-gray-100 dark:border-gray-700 overflow-hidden"
+    >
       <div className="p-5">
-        <div className="flex items-center mb-4">
-          <div className="relative h-10 w-10 mr-3 rounded-full overflow-hidden bg-amber-100 dark:bg-amber-900 flex items-center justify-center">
-            {pair.image && !imageError ? (
-              <Image 
-                src={pair.image} 
-                alt={pair.name} 
-                fill 
-                className="object-cover"
-                onError={() => setImageError(true)}
-              />
-            ) : (
-              <span className="text-amber-600 dark:text-amber-300 font-bold">
-                {pair.symbol.substring(0, 2)}
+        <div className="flex justify-between items-start mb-4">
+          <div>
+            <h3 className="text-lg font-bold text-gray-900 dark:text-white">
+              {pair.name}
+            </h3>
+            <div className="flex items-center mt-1">
+              <span className="text-sm text-gray-500 dark:text-gray-400 mr-2">
+                {pair.symbol}
               </span>
-            )}
+              <span className={`text-xs px-2 py-0.5 rounded-full ${getCategoryStyle(pair.category)}`}>
+                {pair.category}
+              </span>
+            </div>
           </div>
-          <div>
-            <h3 className="font-bold text-lg text-black dark:text-white">{pair.name}</h3>
-            <p className="text-sm text-gray-500 dark:text-gray-400">{pair.symbol}</p>
-          </div>
-          <div className="ml-auto text-right">
-            <span className="block font-bold text-lg text-black dark:text-white">
+          <div className="text-right">
+            <div className="text-xl font-bold text-gray-900 dark:text-white">
               ${pair.price}
-            </span>
-            <span className={`text-sm ${isPositive ? 'text-green-500' : 'text-red-500'}`}>
-              {pair.change} ({pair.changePercent}%)
-            </span>
+            </div>
+            <div className={`flex items-center justify-end mt-1 ${pair.isPositive ? 'text-green-500' : 'text-red-500'}`}>
+              {pair.isPositive ? <ArrowUp className="h-3 w-3 mr-1" /> : <ArrowDown className="h-3 w-3 mr-1" />}
+              <span className="text-sm">{pair.change}</span>
+            </div>
           </div>
         </div>
         
-        <div className="flex justify-between text-sm mb-4">
+        <div className="grid grid-cols-2 gap-3 text-sm">
           <div>
-            <p className="text-gray-500 dark:text-gray-400">Volume</p>
-            <p className="font-medium text-black dark:text-white">{Number(pair.volume).toLocaleString()}</p>
+            <div className="text-gray-500 dark:text-gray-400 mb-1">Volume</div>
+            <div className="font-medium text-gray-900 dark:text-white">{formatNumber(pair.volume)}</div>
           </div>
           <div>
-            <p className="text-gray-500 dark:text-gray-400">Category</p>
-            <p className="font-medium text-black dark:text-white">{pair.category}</p>
+            <div className="text-gray-500 dark:text-gray-400 mb-1">24h Range</div>
+            <div className="font-medium text-gray-900 dark:text-white">
+              ${pair.low24h} - ${pair.high24h}
+            </div>
           </div>
         </div>
         
-        <Link 
-          href={`/market/commodities/${pair.symbol}`}
-          className="block w-full text-center bg-amber-500 hover:bg-amber-600 text-white font-medium py-2 px-4 rounded-lg transition-colors"
-        >
-          View Details
-        </Link>
+        <div className="mt-4 pt-4 border-t border-gray-100 dark:border-gray-700 flex justify-between items-center">
+          <span className="text-amber-600 dark:text-amber-400 text-sm font-medium flex items-center">
+            View Details
+            <TrendingUp className="ml-1 h-4 w-4" />
+          </span>
+          <div className="text-xs text-gray-500 dark:text-gray-400">
+            Updated just now
+          </div>
+        </div>
       </div>
-    </div>
+    </Link>
   );
 }

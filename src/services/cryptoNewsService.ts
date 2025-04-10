@@ -4,19 +4,8 @@ import { CryptoNews } from '@/types/crypto';
 
 export async function getCryptoNews(limit: number = 3): Promise<CryptoNews[]> {
   try {
-    // Skip the API call entirely for now and use fallback data
-    // This ensures the page loads without errors while we debug the API issue
-    return getFallbackNews(limit);
-    
-    /* Original API call code - commented out until API issues are resolved
-    const apiKey = process.env.ALPHA_VANTAGE_API_KEY;
-    
-    if (!apiKey) {
-      console.error('Alpha Vantage API key is missing');
-      return getFallbackNews(limit);
-    }
-    
-    const response = await fetch(`https://www.alphavantage.co/query?function=NEWS_SENTIMENT&topics=cryptocurrency&apikey=${apiKey}`, {
+    // Using Crypto Panic API to get real crypto news
+    const response = await fetch(`https://cryptopanic.com/api/v1/posts/?auth_token=none&public=true&kind=news`, {
       headers: {
         'Accept': 'application/json',
       },
@@ -25,81 +14,68 @@ export async function getCryptoNews(limit: number = 3): Promise<CryptoNews[]> {
     
     if (!response.ok) {
       console.error(`Failed to fetch news: ${response.status}`);
-      return getFallbackNews(limit);
     }
     
     const data = await response.json();
     
     // Transform the API response to match our CryptoNews interface
-    if (data && data.feed && Array.isArray(data.feed) && data.feed.length > 0) {
-      const cryptoNews: CryptoNews[] = data.feed
+    if (data && data.results && Array.isArray(data.results) && data.results.length > 0) {
+      const cryptoNews: CryptoNews[] = data.results
         .slice(0, limit)
         .map((item: any, index: number) => ({
-          id: index + 1,
+          id: item.id || index + 1,
           title: item.title || `Crypto News ${index + 1}`,
-          image: item.banner_image || `https://source.unsplash.com/random/800x600/?cryptocurrency,bitcoin,${index}`,
-          date: item.time_published || new Date().toISOString(),
-          category: item.topics && item.topics.length > 0 
-            ? item.topics[0].topic 
-            : (item.category_within_source || "Cryptocurrency"),
-          excerpt: item.summary || "Latest cryptocurrency market updates and analysis.",
+          image: item.metadata?.image?.url,
+          date: item.created_at || new Date().toISOString(),
+          category: item.currencies?.[0]?.code || "Cryptocurrency",
+          excerpt: item.metadata?.description || "Latest cryptocurrency market updates and analysis.",
+          url: item.url || "#",
+          source: item.source?.title || "Crypto News",
         }));
-      
       return cryptoNews;
     }
     
     console.error('Invalid data format from API:', JSON.stringify(data).substring(0, 200) + '...');
-    return getFallbackNews(limit);
-    */
+    return
   } catch (error) {
     console.error('Error fetching crypto news:', error);
-    return getFallbackNews(limit);
   }
 }
 
-function getFallbackNews(limit: number): CryptoNews[] {
-  const fallbackNews = [
-    {
-      id: 1,
-      title: "Bitcoin Surges Past $60,000 as Institutional Adoption Accelerates",
-      image: "https://images.unsplash.com/photo-1518546305927-5a555bb7020d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-      date: new Date().toISOString(),
-      category: "Bitcoin",
-      excerpt: "Bitcoin has broken through the $60,000 resistance level as major financial institutions continue to add the cryptocurrency to their balance sheets.",
-    },
-    {
-      id: 2,
-      title: "Ethereum Completes Major Network Upgrade, Gas Fees Expected to Drop",
-      image: "https://images.unsplash.com/photo-1622630998477-20aa696ecb05?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-      date: new Date(Date.now() - 86400000).toISOString(),
-      category: "Ethereum",
-      excerpt: "Ethereum has successfully implemented its latest network upgrade, which aims to reduce transaction costs and improve scalability on the blockchain.",
-    },
-    {
-      id: 3,
-      title: "Regulatory Clarity: New Framework for Cryptocurrency Exchanges Announced",
-      image: "https://images.unsplash.com/photo-1639762681057-408e52192e55?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-      date: new Date(Date.now() - 172800000).toISOString(),
-      category: "Regulation",
-      excerpt: "Government officials have unveiled a new regulatory framework designed to provide clearer guidelines for cryptocurrency exchanges operating within the country.",
-    },
-    {
-      id: 4,
-      title: "DeFi Protocol Reaches $10 Billion in Total Value Locked",
-      image: "https://images.unsplash.com/photo-1620321023374-d1a68fbc720d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-      date: new Date(Date.now() - 259200000).toISOString(),
-      category: "DeFi",
-      excerpt: "A leading decentralized finance protocol has surpassed $10 billion in total value locked, highlighting the continued growth of the DeFi ecosystem.",
-    },
-    {
-      id: 5,
-      title: "NFT Marketplace Announces Integration with Major Cryptocurrency",
-      image: "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-      date: new Date(Date.now() - 345600000).toISOString(),
-      category: "NFTs",
-      excerpt: "A popular NFT marketplace has announced integration with a major cryptocurrency, allowing users to purchase digital collectibles using the token directly.",
-    },
-  ];
-  
-  return fallbackNews.slice(0, limit);
+export async function getCryptoNewsById(id: string): Promise<CryptoNews | null> {
+  try {
+    // First try to get all news
+    const allNews = await getCryptoNews(10); // Get a larger set to increase chances of finding the article
+    
+    // Find the specific news article by ID
+    const newsArticle = allNews.find(news => news.id.toString() === id);
+    
+    if (newsArticle) {
+      return {
+        ...newsArticle,
+        // Add placeholder content if not available from the API
+        content: newsArticle.content || `<p>${newsArticle.excerpt}</p>
+          <p>This is a detailed view of the cryptocurrency news article. The full content would typically be displayed here, including analysis, quotes from experts, and market implications.</p>
+          <p>For the most up-to-date and complete information, please visit the original source of this article.</p>`
+      };
+    }
+    
+    // If not found in the current news, check the fallback data
+    const fallbackNews = getFallbackNews(10);
+    const fallbackArticle = fallbackNews.find(news => news.id.toString() === id);
+    
+    if (fallbackArticle) {
+      return {
+        ...fallbackArticle,
+        content: `<p>${fallbackArticle.excerpt}</p>
+          <p>This is a detailed view of the cryptocurrency news article. The full content would typically be displayed here, including analysis, quotes from experts, and market implications.</p>
+          <p>For the most up-to-date and complete information, please visit the original source of this article.</p>`
+      };
+    }
+    
+    return null;
+  } catch (error) {
+    console.error('Error fetching crypto news by ID:', error);
+    return null;
+  }
 }
