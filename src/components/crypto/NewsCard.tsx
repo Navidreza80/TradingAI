@@ -46,7 +46,7 @@ export function NewsCard({ news }: NewsCardProps) {
     <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden">
       <div className="h-48 relative">
         <Image 
-          src={news.image} 
+          src={typeof news.image == "string" ? news.image : "/image/noImage.jpg"} 
           alt={news.title} 
           fill 
           className="object-cover"

@@ -14,7 +14,7 @@ export async function getCommodityPairs(limit: number = 6): Promise<CommodityPai
 }
 
 export async function getCommodityMarketStats(): Promise<CommodityMarketStats> {
-  try {
+  try {zzz
     // Mock data for market stats
     return {
       totalVolume: "245.3B",

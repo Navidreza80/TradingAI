@@ -1,10 +1,13 @@
 export interface CryptoNews {
-  id: number;
+  id: number | string;
   title: string;
   image: string;
   date: string;
   category: string;
   excerpt: string;
+  url?: string;
+  source?: string;
+  content?: string;
 }
 
 export interface CryptoPair {

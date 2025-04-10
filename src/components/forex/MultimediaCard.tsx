@@ -1,4 +1,5 @@
 // Next built in component
+import Image from 'next/image';
 import Link from 'next/link';
 
 interface ForexMultimedia {
@@ -19,14 +20,12 @@ export function MultimediaCard({ media }: MultimediaCardProps) {
     <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden">
       <div className="h-40 relative">
         <div className="absolute inset-0 bg-gray-200 dark:bg-gray-700 flex items-center justify-center">
-          <span className="text-gray-400">Image Placeholder</span>
-          {/* Uncomment when you have actual images */}
-          {/* <Image 
-            src={media.thumbnail} 
+          <Image
+            src={media.thumbnailUrl} 
             alt={media.title} 
             fill 
             className="object-cover"
-          /> */}
+          />
         </div>
         <div className="absolute bottom-0 right-0 bg-black/70 text-white text-xs px-2 py-1 m-2 rounded">
           {media.duration}
@@ -43,7 +42,7 @@ export function MultimediaCard({ media }: MultimediaCardProps) {
           By {media.author}
         </p>
         <Link
-          href={`/learn/forex/${media.type}/${media.id}`}
+          href={media.url}
           className="text-blue-600 dark:text-blue-400 text-sm font-medium hover:underline"
         >
           {media.type === "video" ? "Watch Now" : "Listen Now"}

@@ -2,19 +2,15 @@
 // Third party components
 import { CourseCard } from "@/components/forex/CourseCard";
 import { CurrencyPairCard } from "@/components/forex/CurrencyPairCard";
-import { MultimediaCard } from "@/components/forex/MultimediaCard";
 import { NewsCard } from "@/components/forex/NewsCard";
 import { SignalCard } from "@/components/forex/SignalCard";
 // Get page data
-import { getFallbackNews } from '@/services/newsService';
-import {
-  educationalContent,
-  forexMultimedia,
-} from "@/data/forexData";
+import { getFallbackNews } from "@/services/newsService";
+import { educationalContent } from "@/data/forexData";
 // Next built in components
 import Link from "next/link";
 // React built in hooks
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 
 // Define TypeScript interfaces
 interface CurrencyPair {
@@ -24,13 +20,14 @@ interface CurrencyPair {
   changePercent: string;
 }
 
-interface TradingSignal {
-  pair: string;
-  direction: "buy" | "sell";
-  entryPrice: number;
-  takeProfit: number;
-  stopLoss: number;
-  confidence: number;
+interface ForexNews {
+  id: string;
+  title: string;
+  summary: string;
+  url: string;
+  imageUrl: string;
+  source: string;
+  publishedAt: string;
 }
 
 interface ExchangeRateApiResponse {
@@ -41,46 +38,16 @@ interface ExchangeRateApiResponse {
 
 // Replace the existing page component with this updated version that fetches real news
 export default function ForexPage() {
-  // State to save active tabs
-  const [activeTab, setActiveTab] = useState<"all" | "video" | "podcast">(
-    "all"
-  );
+  const [forexNews, setForexNews] = useState<ForexNews[]>([]);
+  const [newsLoading, setNewsLoading] = useState<boolean>(true);
+  const [newsError, setNewsError] = useState<string | null>(null);
+
   // State to save currency pair
   const [currencyPairs, setCurrencyPairs] = useState<CurrencyPair[]>([]);
   // State to save status of is loading
   const [loading, setLoading] = useState<boolean>(true);
   // State to save error
   const [error, setError] = useState<string | null>(null);
-  // State to save forex news
-  const [forexNews, setForexNews] = useState([])
-
-  // Initial signals data
-  const [signals] = useState<TradingSignal[]>([
-    {
-      pair: "EUR/USD",
-      direction: "buy",
-      entryPrice: 1.0915,
-      takeProfit: 1.0965,
-      stopLoss: 1.0885,
-      confidence: 85,
-    },
-    {
-      pair: "GBP/USD",
-      direction: "sell",
-      entryPrice: 1.266,
-      takeProfit: 1.261,
-      stopLoss: 1.269,
-      confidence: 78,
-    },
-    {
-      pair: "USD/JPY",
-      direction: "buy",
-      entryPrice: 149.2,
-      takeProfit: 149.8,
-      stopLoss: 148.8,
-      confidence: 82,
-    },
-  ]);
 
   // Function to fetch forex data
   const fetchForexData = async () => {
@@ -212,26 +179,50 @@ export default function ForexPage() {
     }
   };
 
-  // Function to fetch forex news
-  const fetchForexNews = async () => {
-    const fallbackNews = await getFallbackNews(4)
-    setForexNews(fallbackNews)
-  }
-
   // useEffect to get data when the component is mounting
   useEffect(() => {
     fetchForexData();
-    fetchForexNews()
+    fetchForexNews();
     const intervalId = setInterval(fetchForexData, 300000);
     return () => clearInterval(intervalId);
   }, []);
 
-  // Filter multimedia content based on active tab
-  const filteredMultimedia = useMemo(() => {
-    return forexMultimedia.filter(
-      (item) => activeTab === "all" || item.type === activeTab
-    );
-  }, [activeTab]);
+  const fetchForexNews = async () => {
+    setNewsLoading(true);
+    try {
+      // Using a free news API (you may need to register for an API key)
+      const response = await fetch(
+        "https://finnhub.io/api/v1/news?category=forex&token=cvrljf9r01qnpem87dsgcvrljf9r01qnpem87dt0"
+      );
+
+      if (!response.ok) {
+        throw new Error("Failed to fetch forex news");
+      }
+
+      const data = await response.json();
+
+      // Process and format the news data
+      const formattedNews: ForexNews[] = data.slice(0, 3).map((item: any) => ({
+        id: item.id || String(Math.random()),
+        title: item.headline || "Forex Market Update",
+        summary: item.summary || "Latest updates from the forex market",
+        url: item.url || "#",
+        imageUrl: item.image || "/image/noImage.jpg",
+        source: item.source || "Financial News",
+        publishedAt: new Date(item.datetime * 1000).toISOString(),
+      }));
+
+      setForexNews(formattedNews);
+      setNewsError(null);
+    } catch (err) {
+      console.error("Error fetching forex news:", err);
+      setNewsError(
+        err instanceof Error ? err.message : "An unknown error occurred"
+      );
+    } finally {
+      setNewsLoading(false);
+    }
+  };
 
   return (
     <div className="container mx-auto px-4 py-24">
@@ -379,58 +370,6 @@ export default function ForexPage() {
         </div>
       </section>
 
-      {/* AI Signals Section */}
-      <section className="mb-16 rounded-2xl overflow-hidden">
-        <div className="bg-gradient-to-r from-blue-600 to-indigo-700 p-6">
-          <div className="flex justify-between items-center">
-            <h2 className="text-2xl md:text-3xl font-bold text-white flex items-center">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-8 w-8 mr-3"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014"
-                ></path>
-              </svg>
-              AI Trading Signals
-            </h2>
-            <Link
-              href="/tools/forex/signals"
-              className="text-white/80 hover:text-white flex items-center group"
-            >
-              View All Signals
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-5 w-5 ml-1 group-hover:translate-x-1 transition-transform"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M13 7l5 5m0 0l-5 5m5-5H6"
-                />
-              </svg>
-            </Link>
-          </div>
-        </div>
-        <div className="bg-white dark:bg-gray-800 p-6">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {signals.map((signal) => (
-              <SignalCard key={signal.pair} signal={signal} />
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* News Section */}
       <section className="mb-16">
         <div className="flex justify-between items-center mb-8">
@@ -452,6 +391,29 @@ export default function ForexPage() {
               </svg>
             </span>
             Latest Forex News
+            {newsLoading && (
+              <span className="ml-2 inline-block animate-pulse">
+                <svg
+                  className="w-5 h-5 text-blue-500"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                >
+                  <circle
+                    className="opacity-25"
+                    cx="12"
+                    cy="12"
+                    r="10"
+                    stroke="currentColor"
+                    strokeWidth="4"
+                  ></circle>
+                  <path
+                    className="opacity-75"
+                    fill="currentColor"
+                    d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                  ></path>
+                </svg>
+              </span>
+            )}
           </h2>
           <Link
             href="/news/forex"
@@ -474,94 +436,36 @@ export default function ForexPage() {
             </svg>
           </Link>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {forexNews.map((news) => (
-            <NewsCard key={news.id} news={news} />
-          ))}
-        </div>
-      </section>
 
-      {/* Multimedia Content Section */}
-      <section className="mb-16">
-        <div className="flex justify-between items-center mb-8">
-          <h2 className="text-2xl md:text-3xl font-bold flex items-center text-black dark:text-white">
-            <span className="bg-blue-100 dark:bg-blue-900 text-blue-600 dark:text-blue-300 p-2 rounded-lg mr-3">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-6 w-6"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"
-                />
-              </svg>
-            </span>
-            Multimedia Content
-          </h2>
-          <Link
-            href="/learn/forex/multimedia"
-            className="text-blue-500 hover:text-blue-700 flex items-center group"
-          >
-            View All Content
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-5 w-5 ml-1 group-hover:translate-x-1 transition-transform"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M13 7l5 5m0 0l-5 5m5-5H6"
-              />
-            </svg>
-          </Link>
-        </div>
-        <div className="mb-6">
-          <div className="flex space-x-4 border-b border-gray-200 dark:border-gray-700 mb-6">
-            <button
-              onClick={() => setActiveTab("all")}
-              className={`py-2 px-4 font-medium ${
-                activeTab === "all"
-                  ? "text-blue-600 dark:text-blue-400 border-b-2 border-blue-600 dark:border-blue-400"
-                  : "text-gray-500 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400"
-              }`}
-            >
-              All
-            </button>
-            <button
-              onClick={() => setActiveTab("video")}
-              className={`py-2 px-4 font-medium ${
-                activeTab === "video"
-                  ? "text-blue-600 dark:text-blue-400 border-b-2 border-blue-600 dark:border-blue-400"
-                  : "text-gray-500 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400"
-              }`}
-            >
-              Videos
-            </button>
-            <button
-              onClick={() => setActiveTab("podcast")}
-              className={`py-2 px-4 font-medium ${
-                activeTab === "podcast"
-                  ? "text-blue-600 dark:text-blue-400 border-b-2 border-blue-600 dark:border-blue-400"
-                  : "text-gray-500 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400"
-              }`}
-            >
-              Podcasts
-            </button>
+        {newsError && (
+          <div className="bg-red-100 dark:bg-red-900/30 text-red-800 dark:text-red-200 p-4 rounded-lg mb-6">
+            <p>Error loading forex news: {newsError}</p>
+            <p className="text-sm mt-1">Showing fallback news instead.</p>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {filteredMultimedia.map((item) => (
-              <MultimediaCard key={item.id} media={item} />
-            ))}
-          </div>
+        )}
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {newsLoading && forexNews.length === 0
+            ? Array(3)
+                .fill(0)
+                .map((_, index) => (
+                  <div
+                    key={index}
+                    className="bg-white dark:bg-gray-800 rounded-xl shadow-md overflow-hidden border border-gray-100 dark:border-gray-700"
+                  >
+                    <div className="h-48 bg-gray-200 dark:bg-gray-700 animate-pulse"></div>
+                    <div className="p-5">
+                      <div className="h-6 bg-gray-200 dark:bg-gray-700 rounded w-3/4 mb-3 animate-pulse"></div>
+                      <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-full mb-2 animate-pulse"></div>
+                      <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-2/3 mb-4 animate-pulse"></div>
+                      <div className="flex justify-between items-center">
+                        <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-1/3 animate-pulse"></div>
+                        <div className="h-8 bg-gray-200 dark:bg-gray-700 rounded w-1/4 animate-pulse"></div>
+                      </div>
+                    </div>
+                  </div>
+                ))
+            : forexNews.map((news) => <NewsCard key={news.id} news={news} />)}
         </div>
       </section>
 
@@ -635,3 +539,4 @@ export default function ForexPage() {
       </section>
     </div>
   );
+}
