@@ -13,12 +13,6 @@
     background: transparent;
 }
 
-::-webkit-scrollbar-thumb {
-    background: rgba(156, 163, 175, 0.3);
-    border-radius: 5px;
-    transition: background 0.2s ease;
-}
-
 ::-webkit-scrollbar-thumb:hover {
     background: rgba(156, 163, 175, 0.5);
 }
