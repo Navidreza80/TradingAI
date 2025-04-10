@@ -67,11 +67,6 @@ export default function Navigation() {
           href: "/market/crypto",
         },
         { name: t("nav.marketItems.stock") || "Stock", href: "/market/stock" },
-        {
-          name: t("nav.marketItems.commodities") || "Commodities",
-          href: "/market/commodities",
-        },
-        { name: t("nav.marketItems.nft") || "NFT", href: "/market/nft" },
       ],
     },
     {
@@ -122,11 +117,6 @@ export default function Navigation() {
           href: "/news/magazine",
         },
         { name: t("nav.newsItems.events") || "Events", href: "/news/events" },
-        {
-          name: t("nav.newsItems.podcasts") || "Podcasts",
-          href: "/news/podcasts",
-        },
-        { name: t("nav.newsItems.videos") || "Videos", href: "/news/videos" },
       ],
     },
   ];

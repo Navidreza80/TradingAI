@@ -5,9 +5,8 @@ import Link from "next/link";
 import { getCryptoNews } from "@/services/cryptoNewsService";
 import { getEducationalContent } from "@/services/educationalService";
 // Third party components
-import { NewsCard } from "@/components/crypto/NewsCard";
 import { CryptoPairCard } from "@/components/crypto/CryptoPairCard";
-import { CourseCard } from "@/components/crypto/CourseCard";
+import { NewsCard } from "@/components/crypto/NewsCard";
 import { useEffect, useState } from "react";
 
 // Define TypeScript interfaces
@@ -342,75 +341,6 @@ export default function CryptoPage() {
         </div>
       </section>
 
-      {/* Educational Content Section */}
-      <section className="mb-16">
-        <div className="flex justify-between items-center mb-8">
-          <h2 className="text-2xl md:text-3xl font-bold flex items-center text-black dark:text-white">
-            <span className="bg-blue-100 dark:bg-blue-900 text-blue-600 dark:text-blue-300 p-2 rounded-lg mr-3">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-6 w-6"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"
-                />
-              </svg>
-            </span>
-            Educational Resources
-          </h2>
-          <Link
-            href="/learn/crypto"
-            className="text-blue-500 hover:text-blue-700 flex items-center group"
-          >
-            View All Courses
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-5 w-5 ml-1 group-hover:translate-x-1 transition-transform"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M13 7l5 5m0 0l-5 5m5-5H6"
-              />
-            </svg>
-          </Link>
-        </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {educationalContent.length > 0 ? (
-            educationalContent.map((course) => (
-              <CourseCard key={course.id} course={course} />
-            ))
-          ) : (
-            Array(4)
-              .fill(0)
-              .map((_, index) => (
-                <div
-                  key={index}
-                  className="bg-white dark:bg-gray-800 rounded-xl shadow-md overflow-hidden border border-gray-100 dark:border-gray-700"
-                >
-                  <div className="h-40 bg-gray-200 dark:bg-gray-700 animate-pulse"></div>
-                  <div className="p-5">
-                    <div className="h-6 bg-gray-200 dark:bg-gray-700 rounded w-3/4 mb-3 animate-pulse"></div>
-                    <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-full mb-2 animate-pulse"></div>
-                    <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-2/3 mb-4 animate-pulse"></div>
-                    <div className="h-8 bg-gray-200 dark:bg-gray-700 rounded w-1/3 animate-pulse"></div>
-                  </div>
-                </div>
-              ))
-          )}
-        </div>
-      </section>
-
       {/* Call to Action Section */}
       <section className="mb-16 bg-gradient-to-r from-blue-600 to-indigo-700 rounded-2xl p-8 md:p-12 text-white text-center">
         <h2 className="text-3xl md:text-4xl font-bold mb-4">
@@ -431,3 +361,4 @@ export default function CryptoPage() {
       </section>
     </div>
   );
+}
