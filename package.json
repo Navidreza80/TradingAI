@@ -38,7 +38,6 @@
     "clsx": "^2.1.1",
     "date-fns": "^4.1.0",
     "dom-to-image-more": "^3.5.0",
-    "emoji-picker-react": "^4.12.2",
     "framer-motion": "^12.4.1",
     "html-to-image": "^1.11.13",
     "html2canvas": "^1.4.1",
