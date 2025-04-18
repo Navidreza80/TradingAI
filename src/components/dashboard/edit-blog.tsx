@@ -22,8 +22,8 @@ import { Edit } from "lucide-react";
 import { useState } from "react";
 // React hot toast for creating toasts
 import toast from "react-hot-toast";
-// i18n for translation
-import { useTranslation } from "react-i18next";
+
+
 
 export default function EditBlog({
   id,
@@ -32,8 +32,8 @@ export default function EditBlog({
   setShortDescription,
   setBlogThumbnail,
 }) {
-  // i18n hook for translation
-  const { t } = useTranslation();
+  
+  
   // State to save the value of blogs title
   const [titleValue, setTitleValue] = useState("");
   // State to save the value of blogs short Description
@@ -47,15 +47,15 @@ export default function EditBlog({
       <DialogTrigger asChild>
         <Button className="absolute z-10 top-2 right-2">
           {/* Icon */}
-          <Edit /> {t("dashboard.blogs.edit.edit")}
+          <Edit /> Edit blog
         </Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
           <DialogTitle className="dark:text-white text-gray-400">
-            {t("dashboard.blogs.edit.edit")}
+          Edit Blog
           </DialogTitle>
-          <DialogDescription>{t("dashboard.blogs.edit.change")}</DialogDescription>
+          <DialogDescription>Make changes to your blog, click save changes to apply.</DialogDescription>
         </DialogHeader>
         <div className="flex flex-row flex-wrap justify-center py-4">
           <div className="flex flex-row gap-5 w-full justify-center">
@@ -63,7 +63,7 @@ export default function EditBlog({
               htmlFor="Title"
               className="text-left text-lg dark:text-white text-gray-400 w-1/3"
             >
-              {t("dashboard.blogs.edit.title")}
+              Title
             </Label>
             <Input
               id="Title"
@@ -77,7 +77,7 @@ export default function EditBlog({
               htmlFor="Desc"
               className="text-left text-lg dark:text-white text-gray-400 w-1/3"
             >
-              {t("dashboard.blogs.edit.content")}
+              Content
             </Label>
             <Input
               className="col-span-3 w-2/3"
@@ -90,7 +90,7 @@ export default function EditBlog({
               htmlFor="Desc"
               className="text-left text-lg dark:text-white text-gray-400 w-1/3"
             >
-              {t("dashboard.blogs.edit.short")}
+              Short Description
             </Label>
             <Input
               className="col-span-3 w-2/3"
@@ -100,7 +100,7 @@ export default function EditBlog({
           </div>
           <div className="flex flex-row gap-5 w-full justify-center mt-2 flex-wrap">
             <h2 className="text-left text-lg dark:text-white text-gray-400 w-full">
-              {t("dashboard.blogs.edit.thumb")}
+            Thumbnail
             </h2>
             <UploadButton
               endpoint="imageUploader"
@@ -136,7 +136,7 @@ export default function EditBlog({
               }
             }}
           >
-            {t("dashboard.modals.save")}
+            Save changes
           </Button>
         </DialogFooter>
       </DialogContent>

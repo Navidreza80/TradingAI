@@ -15,10 +15,6 @@ import {
 } from "../UI/tooltip";
 // Icons
 import { MessageSquare, Send, MessageCircle, X, Loader2 } from "lucide-react";
-// App theme
-import { useTheme } from "next-themes";
-// i18n for translation
-import { useTranslation } from "react-i18next";
 // Redux for state management
 import { useSelector } from "react-redux";
 
@@ -30,8 +26,6 @@ interface Message {
 }
 
 const ChatAssistant = () => {
-  // i18n hook for translation
-  const { t } = useTranslation();
   // Redux isDarkMode hook
   const isDarkMode = useSelector((state: any) => state.theme.isDarkMode);
   // State to save message of the user
@@ -123,7 +117,7 @@ const ChatAssistant = () => {
       const data = await response.json();
       const aiMessage: Message = {
         role: "assistant",
-        content: data.choices[0]?.message?.content || t("error.aiResponse"),
+        content: data.choices[0]?.message?.content || "Error",
         timestamp: new Date(),
       };
 
@@ -135,7 +129,7 @@ const ChatAssistant = () => {
         ...prev,
         {
           role: "assistant",
-          content: t("error.apiError"),
+          content: "Error",
           timestamp: new Date(),
         },
       ]);
@@ -177,7 +171,7 @@ const ChatAssistant = () => {
             </motion.button>
           </TooltipTrigger>
           <TooltipContent>
-            {isOpen ? t("chat.close") : t("chat.open")}
+            {isOpen ? "Close" : "Open"}
           </TooltipContent>
         </Tooltip>
       </TooltipProvider>
@@ -203,11 +197,11 @@ const ChatAssistant = () => {
                 isDarkMode ? "border-gray-700" : "border-gray-200"
               }`}
             >
-              <h2 className="text-lg font-bold flex items-center gap-2">
+              <h2 className="text-lg font-bold flex items-center gap-2 text-black dark:text-white">
                 <MessageSquare
                   className={isDarkMode ? "text-white" : "text-blue-500"}
                 />
-                {t("chat")}
+                Chat
               </h2>
               <button
                 onClick={() => setIsOpen(false)}
@@ -268,7 +262,7 @@ const ChatAssistant = () => {
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
                 onKeyPress={handleKeyPress}
-                placeholder={t("message")}
+                placeholder="Type your message..."
                 className={`flex-1 ${
                   isDarkMode
                     ? "bg-gray-800 text-white border-gray-700"

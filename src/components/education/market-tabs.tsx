@@ -7,14 +7,23 @@ import {
   RiseOutlined,
 } from "@ant-design/icons";
 // antd components
-import { Col, Row, Tabs, Typography } from "antd";
+import { Col, Row, Tabs, Typography, Grid } from "antd";
 // Next built in components
 import Image from "next/image";
+import { useState, useEffect } from "react";
 
 // antd typography
 const { Title, Paragraph } = Typography;
+const { useBreakpoint } = Grid;
 
 export default function MarketTabs() {
+  const screens = useBreakpoint();
+  const [tabPosition, setTabPosition] = useState<"left" | "top">("left");
+  
+  useEffect(() => {
+    setTabPosition(screens.md ? "left" : "top");
+  }, [screens.md]);
+
   // Market data
   const markets = [
     // In the markets array, update the image paths for each market type
@@ -35,7 +44,7 @@ export default function MarketTabs() {
         "Emotional decision-making can impact returns",
         "May require larger capital for diversification",
       ],
-      icon: <BankOutlined className="text-4xl text-blue-500" />,
+      icon: <BankOutlined className="text-2xl sm:text-3xl md:text-4xl text-blue-500" />,
       image: "/image/tradingChart.avif",
     },
     {
@@ -55,7 +64,7 @@ export default function MarketTabs() {
         "Requires understanding of macroeconomic indicators",
         "Can be challenging for beginners to navigate",
       ],
-      icon: <GlobalOutlined className="text-4xl text-green-500" />,
+      icon: <GlobalOutlined className="text-2xl sm:text-3xl md:text-4xl text-green-500" />,
       image: "/image/forex.avif",
     },
     {
@@ -75,7 +84,7 @@ export default function MarketTabs() {
         "Security concerns with exchanges and wallets",
         "Market manipulation risks",
       ],
-      icon: <DollarOutlined className="text-4xl text-purple-500" />,
+      icon: <DollarOutlined className="text-2xl sm:text-3xl md:text-4xl text-purple-500" />,
       image: "/image/crypto-market.avif",
     },
     {
@@ -95,7 +104,7 @@ export default function MarketTabs() {
         "Storage and delivery considerations for physical commodities",
         "Seasonal patterns affect agricultural commodities",
       ],
-      icon: <GoldOutlined className="text-4xl text-yellow-500" />,
+      icon: <GoldOutlined className="text-2xl sm:text-3xl md:text-4xl text-yellow-500" />,
       image: "/image/commodities-market.png",
     },
     {
@@ -115,44 +124,47 @@ export default function MarketTabs() {
         "Time decay affects options",
         "Counterparty risk in some derivatives",
       ],
-      icon: <RiseOutlined className="text-4xl text-red-500" />,
+      icon: <RiseOutlined className="text-2xl sm:text-3xl md:text-4xl text-red-500" />,
       image: "/image/derivatives-market.avif",
     },
   ];
+  
   return (
-    <div className="max-w-6xl mx-auto mb-16">
-      <Title level={2} className="dark:text-white text-center mb-8">
+    <div className="max-w-6xl mx-auto mb-8 md:mb-16 px-3 sm:px-4 md:px-6">
+      <Title level={2} className="dark:text-white text-center mb-4 md:mb-8 text-xl sm:text-2xl md:text-3xl">
         Major Financial Markets
       </Title>
       <Tabs
         defaultActiveKey="stocks"
-        className="dark:text-white market-tabs"
-        tabPosition="left"
-        size="large"
+        className="dark:text-white market-tabs responsive-tabs"
+        tabPosition={tabPosition}
+        size={screens.sm ? "large" : "middle"}
         items={markets.map((market) => ({
           key: market.key,
           label: (
-            <span className="flex items-center gap-2">
+            <span className="flex items-center gap-1 sm:gap-2">
               {market.icon}
-              <span className="dark:text-white text-black">{market.title}</span>
+              <span className="dark:text-white text-black text-xs sm:text-sm md:text-base">
+                {screens.sm ? market.title : market.key.charAt(0).toUpperCase() + market.key.slice(1)}
+              </span>
             </span>
           ),
           children: (
-            <div className="p-4">
-              <Row gutter={[24, 24]}>
+            <div className="p-2 sm:p-3 md:p-4">
+              <Row gutter={[12, 16]} align="stretch">
                 <Col xs={24} md={12}>
-                  <Title level={3} className="dark:text-white mb-4">
+                  <Title level={3} className="dark:text-white mb-2 md:mb-4 text-lg sm:text-xl md:text-2xl">
                     {market.title}
                   </Title>
-                  <Paragraph className="dark:text-gray-300 text-lg mb-6">
+                  <Paragraph className="dark:text-gray-300 text-sm sm:text-base md:text-lg mb-3 md:mb-6">
                     {market.description}
                   </Paragraph>
 
-                  <div className="mb-6">
-                    <Title level={4} className="dark:text-white mb-3">
+                  <div className="mb-3 md:mb-6">
+                    <Title level={4} className="dark:text-white mb-2 md:mb-3 text-base sm:text-lg md:text-xl">
                       Key Benefits
                     </Title>
-                    <ul className="dark:text-gray-300 list-disc pl-5 space-y-2">
+                    <ul className="dark:text-gray-300 list-disc pl-5 space-y-1 md:space-y-2 text-sm sm:text-base">
                       {market.benefits.map((benefit, index) => (
                         <li key={index}>{benefit}</li>
                       ))}
@@ -160,18 +172,18 @@ export default function MarketTabs() {
                   </div>
 
                   <div>
-                    <Title level={4} className="dark:text-white mb-3">
+                    <Title level={4} className="dark:text-white mb-2 md:mb-3 text-base sm:text-lg md:text-xl">
                       Challenges to Consider
                     </Title>
-                    <ul className="dark:text-gray-300 list-disc pl-5 space-y-2">
+                    <ul className="dark:text-gray-300 list-disc pl-5 space-y-1 md:space-y-2 text-sm sm:text-base">
                       {market.challenges.map((challenge, index) => (
                         <li key={index}>{challenge}</li>
                       ))}
                     </ul>
                   </div>
                 </Col>
-                <Col xs={24} md={12}>
-                  <div className="rounded-xl overflow-hidden shadow-lg h-full">
+                <Col xs={24} md={12} className="mt-4 md:mt-0">
+                  <div className="rounded-lg sm:rounded-xl overflow-hidden shadow-md sm:shadow-lg h-48 sm:h-64 md:h-full">
                     <Image
                       src={market.image}
                       alt={market.title}

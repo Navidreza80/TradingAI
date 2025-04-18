@@ -56,3 +56,43 @@ export interface EconomicCalendarEvent {
   forecast: string;
   previous: string;
 }
+
+export interface ForexPair {
+  symbol: string;
+  baseCurrency: string;
+  quoteCurrency: string;
+  bid: number;
+  ask: number;
+  spread: number;
+  change: number;
+  changePercent: number;
+  high: number;
+  low: number;
+  volume: number;
+  timestamp: number;
+}
+
+export interface ForexNews {
+  id: string;
+  title: string;
+  summary: string;
+  source: string;
+  url: string;
+  imageUrl: string;
+  publishedAt: string;
+  relatedPairs: string[];
+  sentiment: "positive" | "negative" | "neutral";
+}
+
+export interface ForexSignal {
+  id: string;
+  pair: string;
+  direction: "buy" | "sell" | "hold";
+  entryPrice: number;
+  stopLoss: number;
+  takeProfit: number;
+  timeframe: string;
+  analysis: string;
+  confidence: number;
+  timestamp: number;
+}

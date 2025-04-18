@@ -3,8 +3,8 @@ import { UploadButton } from "@/utils/uploadthing";
 // Shadcn components
 import { Button } from "../UI/Button";
 import { Input } from "../UI/input";
-// i18n for translation
-import { useTranslation } from "react-i18next";
+
+
 // Server actions
 import { createBlog } from "@/actions/blog.action";
 // React hot toast for creating toasts
@@ -20,8 +20,6 @@ export default function CreateNewBlog({
   setImage,
   image,
 }) {
-  // i18n hook fot translation
-  const { t } = useTranslation();
   // Function to handle submit of blog creation
   const handleSubmit = async () => {
     const newBlog = await createBlog({
@@ -37,7 +35,7 @@ export default function CreateNewBlog({
     <div className="flex flex-col flex-wrap lg:w-1/2 md:w-full sm:w-full xs:w-full lg:h-full md:h-1/2 sm:h-1/2 xs:h-1/2 p-5 border rounded-2xl items-start dark:border-gray-400 dark:bg-[#4b4b4b5b] bg-white border-[#4b4b4b61]">
       <div className="flex flex-col h-1/6 w-full mt-4">
         <h2 className="w-full text-left text-md dark:text-gray-300 text-black">
-          {t("dashboard.blogs.edit.title")}
+          Title
         </h2>
         {/* Title Of The Blog */}
         <Input
@@ -48,7 +46,7 @@ export default function CreateNewBlog({
       </div>
       <div className="flex flex-col h-1/6 w-full mt-4">
         <h2 className="w-full text-left text-md dark:text-gray-300 text-black">
-          {t("dashboard.blogs.edit.short")}
+          Short Description
         </h2>
         {/* Short Description Of The Blog */}
         <Input
@@ -59,7 +57,7 @@ export default function CreateNewBlog({
       </div>
       <div className="flex flex-col h-1/6 w-full mt-4">
         <h2 className="w-full text-left text-md dark:text-gray-300 text-black">
-          {t("dashboard.blogs.edit.content")}
+          Content
         </h2>
         {/* Content Of The Blog */}
         <Input
@@ -70,7 +68,7 @@ export default function CreateNewBlog({
       </div>
       <div className="flex flex-col h-1/6 w-full my-4">
         <h2 className="w-full text-left text-md dark:text-gray-300 text-black">
-          {t("dashboard.blogs.edit.thumb")}
+          Thumbnail
         </h2>
         {/* Upload Thing Component To Convert File To URL */}
         <UploadButton
@@ -85,7 +83,7 @@ export default function CreateNewBlog({
           }}
         />
       </div>
-      <Button onClick={handleSubmit}> {t("dashboard.blogs.create")}</Button>
+      <Button onClick={handleSubmit}> Create Blog</Button>
     </div>
   );
 }

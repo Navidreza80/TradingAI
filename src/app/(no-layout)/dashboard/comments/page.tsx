@@ -26,15 +26,15 @@ import {
   TableHeader,
   TableRow,
 } from "../../../../components/UI/table";
-// i18n for translation
+
 import EditComment from "@/components/dashboard/edit-comment";
 import { Trash } from "lucide-react";
-import { useTranslation } from "react-i18next";
+
 import toast from "react-hot-toast";
 
 export default function DataTableDemo() {
-  // i18n hook for translation
-  const { t } = useTranslation();
+  
+  
   // State to save data of the users comment
   const [data, setData] = React.useState([]);
   // State to sort table items
@@ -73,7 +73,7 @@ export default function DataTableDemo() {
     },
     {
       accessorKey: "content",
-      header: t("dashboard.commentsPage.content"),
+      header: "Content",
       cell: ({ row }) => (
         <div className="capitalize dark:text-white text-black">
           {row.getValue("content")}
@@ -82,7 +82,7 @@ export default function DataTableDemo() {
     },
     {
       accessorKey: "likes",
-      header: t("dashboard.commentsPage.likes"),
+      header: "Likes",
       cell: ({ row }) => (
         <div className="capitalize dark:text-white text-black">
           {row.getValue("likes")}
@@ -91,7 +91,7 @@ export default function DataTableDemo() {
     },
     {
       accessorKey: "dislikes",
-      header: t("dashboard.commentsPage.dislikes"),
+      header: "Dislikes",
       cell: ({ row }) => (
         <div className="capitalize dark:text-white text-black">
           {row.getValue("dislikes")}
@@ -100,7 +100,7 @@ export default function DataTableDemo() {
     },
     {
       accessorKey: "createdAt",
-      header: t("dashboard.commentsPage.created"),
+      header: 'Created At',
       cell: ({ row }) => (
         <div className="capitalize dark:text-white text-black">
           {new Date(row.getValue("createdAt")).toLocaleDateString()}
@@ -109,7 +109,7 @@ export default function DataTableDemo() {
     },
     {
       accessorKey: "actions",
-      header: t("dashboard.commentsPage.actions"),
+      header: 'Actions',
       cell: ({ row }) => (
         <div className="flex gap-1">
           <EditComment
@@ -146,7 +146,7 @@ export default function DataTableDemo() {
       <div className="flex items-center py-4">
         {/* Search input */}
         <Input
-          placeholder={t("dashboard.commentsPage.filter")}
+          placeholder="Filter comments"
           value={(table.getColumn("content")?.getFilterValue() as string) ?? ""}
           onChange={(event) =>
             table.getColumn("content")?.setFilterValue(event.target.value)
@@ -202,7 +202,7 @@ export default function DataTableDemo() {
                   colSpan={columns.length}
                   className="h-24 text-center"
                 >
-                  {t("dashboard.commentsPage.no")}
+                  No comments.
                 </TableCell>
               </TableRow>
             )}
@@ -217,7 +217,7 @@ export default function DataTableDemo() {
             onClick={() => table.previousPage()}
             disabled={!table.getCanPreviousPage()}
           >
-            {t("dashboard.commentsPage.prev")}
+            Prev
           </Button>
           {/* Next Page Button */}
           <Button
@@ -225,7 +225,7 @@ export default function DataTableDemo() {
             onClick={() => table.nextPage()}
             disabled={!table.getCanNextPage()}
           >
-            {t("dashboard.commentsPage.next")}
+            Next
           </Button>
         </div>
       </div>

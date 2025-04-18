@@ -6,12 +6,12 @@ import { Button } from "../UI/Button";
 import { deleteBlog } from "@/actions/blog.action";
 // React hot toast for creating toasts
 import toast from "react-hot-toast";
-// i18n for translation
-import { useTranslation } from "react-i18next";
+
+
 
 export default function DeleteBlog({ id, blog, setBlogs }) {
-  // i18n hook for translation
-  const { t } = useTranslation();
+  
+  
   // Function to delete user blog
   const handleDeleteBlog = async () => {
     const request = await deleteBlog(id);
@@ -22,10 +22,10 @@ export default function DeleteBlog({ id, blog, setBlogs }) {
   return (
     <Button
       onClick={handleDeleteBlog}
-      className="absolute z-10 top-12 right-2 dark:bg-red-800 bg-red-800"
+      className="absolute z-10 top-12 right-2 dark:bg-red-800 bg-red-800 text-white dark:text-white"
     >
       {/* Icon */}
-      <Trash /> {t('dashboard.blogs.delete')}
+      <Trash /> Delete
     </Button>
   );
 }

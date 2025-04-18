@@ -3,7 +3,7 @@
 import { motion } from "framer-motion";
 // Icons
 import { CheckCircle } from "lucide-react"; // Using Lucide React for icons
-import { useTranslation } from "react-i18next";
+
 
 // Define types for the plan data
 interface Plan {
@@ -66,12 +66,12 @@ const PlanCardDecoration = () => (
 );
 
 export default function SubscriptionPlans() {
-  const { t } = useTranslation();
+  
   return (
     <div className="min-h-screen w-full mt-3">
       <div className="mx-auto">
         <h1 className="text-4xl font-bold text-center mb-12 text-gray-900 dark:text-white">
-          {t("dashboard.subscription")}
+        Choose Your Plan
         </h1>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-center">
           {plans.map((plan, index) => (

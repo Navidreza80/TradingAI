@@ -1,14 +1,12 @@
-"use client";
 // Next imports
 import Link from "next/link";
-// i18n imports for translation
-import { useTranslation } from "react-i18next";
+// React built ins
 import { useState, useRef, useEffect } from "react";
 
 export default function Navigation() {
-  // i18n hooks for translation
-  const [t, i18n] = useTranslation();
+  // States
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
+  // Refs
   const dropdownRef = useRef<HTMLDivElement>(null);
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
 
@@ -58,65 +56,76 @@ export default function Navigation() {
       dropdownItem: null,
     },
     {
-      name: t("nav.market") || "Market",
+      name: "Market",
       href: "#",
       dropdownItems: [
-        { name: t("nav.marketItems.forex") || "Forex", href: "/market/forex" },
+        { name: "Forex", href: "/market/forex" },
         {
-          name: t("nav.marketItems.crypto") || "Crypto",
+          name: "Crypto",
           href: "/market/crypto",
         },
-        { name: t("nav.marketItems.stock") || "Stock", href: "/market/stock" },
+        { name: "Stock", href: "/market/stock" },
       ],
     },
     {
-      name: t("nav.learn") || "Learn",
+      name: "Learn",
       href: "#",
       dropdownItems: [
         {
-          name: t("nav.learnItems.beginner") || "Beginner",
+          name: "Beginner",
           href: "/education/beginner",
         },
         {
-          name: t("nav.learnItems.markets") || "Markets",
+          name: "Markets",
           href: "/education/markets",
         },
-        { name: t("nav.learnItems.web3") || "Web3", href: "/education/web3" },
+        { name: "Web3", href: "/education/web3" },
         {
-          name: t("nav.learnItems.strategies") || "Strategies",
+          name: "Strategies",
           href: "/education/technical",
         },
         {
-          name: t("nav.learnItems.indicators") || "Indicators",
+          name: "Indicators",
           href: "/education/indicators",
         },
-        { name: t("nav.learnItems.exams") || "Exams", href: "/education/test" },
+        { name: "Exams", href: "/education/test" },
       ],
     },
     {
-      name: t("nav.signals") || "Signals",
+      name: "Signals",
       href: "#",
       dropdownItems: [
         {
-          name: t("nav.signalsItems.aiGenerator") || "AI Signal Generator",
+          name: "AI Signal Generator",
           href: "/signals/ai-generator",
         },
-        {
-          name: t("nav.signalsItems.suggestions") || "What Other Suggests?",
-          href: "/signals/suggestions",
-        },
       ],
     },
     {
-      name: t("nav.news") || "News",
+      name: "News",
       href: "#",
       dropdownItems: [
-        { name: t("nav.newsItems.blogs") || "Blogs", href: "/news/blogs" },
+        { name: "Blogs", href: "/news/blogs" },
         {
-          name: t("nav.newsItems.magazine") || "News Magazine",
-          href: "/news/magazine",
+          name: "News",
+          href: "/news",
         },
-        { name: t("nav.newsItems.events") || "Events", href: "/news/events" },
+        {
+          name: "Blogs",
+          href: "/blogs" 
+        },
+        {
+          name: "Forex",
+          href: "/news/forex",
+        },
+        {
+          name: "Stock",
+          href: "/stocks",
+        },
+        {
+          name: "Crypto",
+          href: "/news/crypto",
+        },
       ],
     },
   ];
@@ -160,19 +169,15 @@ export default function Navigation() {
           item.dropdownItems ? (
             <li
               key={item.name}
-              className={`${
-                i18n.language === "fa" || i18n.language === "ar"
-                  ? "ml-[32px]"
-                  : "first:ml-0"
-              } relative`}
+              className="relative"
               onMouseEnter={() => handleMouseEnter(item.name)}
               onMouseLeave={handleMouseLeave}
             >
               <button
                 onClick={() => toggleDropdown(item.name)}
                 onKeyDown={(e) => handleKeyDown(e, item.name)}
-                className="relative text-sm lg:text-base dark:text-white/80 text-black font-medium
-                    hover:text-gray-900 dark:hover:text-white
+                className="relative text-sm lg:text-base font-medium
+                    text-primary-light dark:text-primary-dark
                     after:absolute after:bottom-0 after:left-0 after:right-0
                     after:h-0.5 after:w-0 after:bg-gradient-to-r
                     after:from-[#1890ff] after:to-[#69c0ff]
@@ -237,8 +242,7 @@ export default function Navigation() {
               <button
                 onClick={() => toggleDropdown(item.name)}
                 onKeyDown={(e) => handleKeyDown(e, item.name)}
-                className="relative text-sm lg:text-base dark:text-white/80 text-black font-medium
-                hover:text-gray-900 dark:hover:text-white
+                className="relative text-sm lg:text-base text-secondary-light dark:text-secondary-dark font-bold
                 after:absolute after:bottom-0 after:left-0 after:right-0
                 after:h-0.5 after:w-0 after:bg-gradient-to-r
                 after:from-[#1890ff] after:to-[#69c0ff]

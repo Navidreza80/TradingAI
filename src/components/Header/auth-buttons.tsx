@@ -3,16 +3,14 @@
 import { SignedOut, SignInButton, SignUpButton } from "@clerk/nextjs";
 // Icons imports
 import { UserIcon } from "lucide-react";
-// i18n imports
-import { useTranslation } from "react-i18next";
 // Redux imports
 import { useSelector } from "react-redux";
 // Framer Motion
 import { motion } from "framer-motion";
 
 export default function AuthButtons() {
-  // i18n hooks for translation
-  const { t } = useTranslation();
+  
+  
   // Redux States
   const isDarkMode = useSelector((state: any) => state.theme.isDarkMode);
 
@@ -35,7 +33,7 @@ export default function AuthButtons() {
             `}
           >
             <UserIcon className="w-4 h-4" />
-            <span>{t("auth.login")}</span>
+            <span>Login</span>
           </motion.button>
         </SignInButton>
 
@@ -51,7 +49,7 @@ export default function AuthButtons() {
               ${isDarkMode ? "focus:ring-offset-gray-900" : "focus:ring-offset-white"}
             `}
           >
-            {t("auth.getStarted")}
+            Get Started
           </motion.button>
         </SignUpButton>
       </div>

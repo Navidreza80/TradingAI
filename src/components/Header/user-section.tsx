@@ -12,12 +12,10 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "../UI/dropdown-menu";
-// i18n imports
-import { useTranslation } from "react-i18next";
 
 export default function UserSection() {
-  // i18n hooks for translation
-  const { t } = useTranslation();
+  
+  
   // Auth hooks
   const { user } = useUser();
   return (
@@ -35,22 +33,22 @@ export default function UserSection() {
           />
         </DropdownMenuTrigger>
         <DropdownMenuContent>
-          <DropdownMenuLabel> {t("dropdown.myAcc")}</DropdownMenuLabel>
+          <DropdownMenuLabel> My Account</DropdownMenuLabel>
           <DropdownMenuSeparator />
           <DropdownMenuItem>
-            <Link href="/dashboard">{t("dropdown.dash")}</Link>
+            <Link href="/dashboard">Dashboard</Link>
           </DropdownMenuItem>
           <DropdownMenuItem>
-            <Link href="/dashboard/profile">{t("dropdown.profile")}</Link>
+            <Link href="/dashboard/profile">Profile</Link>
           </DropdownMenuItem>
           <DropdownMenuItem>
-            <Link href="/dashboard/blogs">{t("dropdown.blogs")}</Link>
+            <Link href="/dashboard/blogs">Blogs</Link>
           </DropdownMenuItem>
           <DropdownMenuItem>
-            <Link href="/dashboard/subscriptions">{t("dropdown.sub")}</Link>
+            <Link href="/dashboard/subscriptions">Subscriptions</Link>
           </DropdownMenuItem>
           <DropdownMenuItem>
-            <SignOutButton>{t("dropdown.out")}</SignOutButton>
+            <SignOutButton>Sign Out</SignOutButton>
           </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>

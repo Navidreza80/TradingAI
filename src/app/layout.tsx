@@ -1,7 +1,7 @@
 // global styles
 import "./globals.css";
 // Providers
-import { I18nProvider } from "@/providers/i18n-provider";
+import { ReduxProvider } from "@/providers/redux-provider";
 // Configs
 import { siteConfig } from "@/config/metadata";
 // Clerk for authentication
@@ -9,6 +9,7 @@ import { ClerkProvider } from "@clerk/nextjs";
 // Third party components
 import HeaderServer from "@/components/Header/HeaderServer";
 import ChatAssistant from "@/components/dashboard/ai-assistant";
+import Footer from "@/components/Footer";
 // React hot toast provider
 import { Toaster } from "react-hot-toast";
 
@@ -60,14 +61,17 @@ export default function RootLayout({
           crossOrigin="anonymous"
         />
       </head>
-      <body className="bg-[#F0F0F0] dark:bg-[#0A0A0A]">
+      <body className="bg-[#F0F0F0] dark:bg-[#0A0A0A] flex flex-col min-h-screen">
         <Toaster />
         <ClerkProvider>
-          <I18nProvider>
+          <ReduxProvider>
             <HeaderServer />
+            <main className="flex-grow bg-background-light dark:bg-background-dark">
+              {children}
+            </main>
+            <Footer />
             <ChatAssistant />
-            {children}
-          </I18nProvider>
+          </ReduxProvider>
         </ClerkProvider>
       </body>
     </html>

@@ -11,8 +11,8 @@ import { Switch } from "../UI/switch";
 import { AnimatePresence, motion } from "framer-motion";
 // Icons
 import { GlobeLock } from "lucide-react";
-// i18n for translation
-import { useTranslation } from "react-i18next";
+
+
 // React hot toast to create toasts
 import toast from "react-hot-toast";
 export default function UserTabs({
@@ -24,8 +24,8 @@ export default function UserTabs({
   setHidePnL,
   user,
 }) {
-  // i18n hooks for translation
-  const { t } = useTranslation();
+  
+  
   return (
     <Tabs defaultValue="security" className="mt-12">
       <TabsList className="flex flex-wrap justify-center gap-2 bg-gray-100 dark:bg-gray-800 p-1 rounded-lg">
@@ -34,7 +34,7 @@ export default function UserTabs({
           className="flex items-center gap-2 whitespace-nowrap"
         >
           <GlobeLock className="w-5 h-5" />
-          {t("dashboard.profile.privacy")}
+          Privacy
         </TabsTrigger>
       </TabsList>
 
@@ -50,13 +50,13 @@ export default function UserTabs({
           >
             <div className="flex flex-row w-full items-center flex-nowrap gap-1">
               <h2 className="text-gray-600 whitespace-nowrap">
-                {t("dashboard.profile.privacy")}
+                Privacy
               </h2>
               <div className="w-full border border-[#9f9f9f90]"></div>
             </div>
             <div className="flex flex-row w-full items-center justify-between flex-nowrap gap-1 mt-6">
               <h2 className="dark:text-white text-black whitespace-nowrap">
-                {t("dashboard.profile.hideW")}
+                Hide Win Rate
               </h2>
               {/* Switch To Hide Win Rate Status */}
               <Switch
@@ -72,7 +72,7 @@ export default function UserTabs({
             </div>
             <div className="flex flex-row w-full items-center justify-between flex-nowrap gap-1 mt-6">
               <h2 className="dark:text-white text-black whitespace-nowrap">
-                {t("dashboard.profile.hideT")}
+                Hide Total Trades
               </h2>
               {/* Switch To Hide Total Trades Status */}
               <Switch
@@ -88,7 +88,7 @@ export default function UserTabs({
             </div>
             <div className="flex flex-row w-full items-center justify-between flex-nowrap gap-1 mt-6">
               <h2 className="dark:text-white text-black whitespace-nowrap">
-                {t("dashboard.profile.hideP")}
+                Hide P&L
               </h2>
               {/* Switch To Hide Profit And Losses Status */}
               <Switch

@@ -37,7 +37,7 @@ export function NewsCard({ news, compact = false }: NewsCardProps) {
             />
           </div>
           <div className="flex-1 min-w-0">
-            <h3 className="text-sm font-medium text-gray-900 dark:text-gray-100 line-clamp-2">
+            <h3 className="text-sm font-medium text-primary-light dark:text-primary-dark line-clamp-2">
               {news.title}
             </h3>
             <div className="mt-1 flex items-center text-xs text-gray-500 dark:text-gray-400">
@@ -85,10 +85,10 @@ export function NewsCard({ news, compact = false }: NewsCardProps) {
             </div>
           )}
         </div>
-        <h3 className="text-lg font-semibold mb-2 text-gray-900 dark:text-gray-100">
+        <h3 className="text-lg font-semibold mb-2 text-primary-light dark:text-primary-dark">
           {news.title}
         </h3>
-        <p className="text-gray-600 dark:text-gray-300 text-sm mb-4 line-clamp-2">
+        <p className="text-secondary-light dark:text-secondary-dark text-sm mb-4 line-clamp-2">
           {news.summary}
         </p>
         <div className="flex justify-between items-center">

@@ -121,57 +121,15 @@ export default function CryptoPage() {
   }, []);
 
   return (
-    <div className="container mx-auto px-4 py-24">
-      {/* Hero Section */}
-      <section className="mb-16 relative overflow-hidden rounded-2xl bg-gradient-to-r from-blue-600 to-indigo-700 p-8 md:p-12">
-        <div className="absolute inset-0 opacity-10">
-          <svg className="h-full w-full" viewBox="0 0 800 800">
-            <defs>
-              <pattern
-                id="grid"
-                width="40"
-                height="40"
-                patternUnits="userSpaceOnUse"
-              >
-                <path
-                  d="M 40 0 L 0 0 0 40"
-                  fill="none"
-                  stroke="white"
-                  strokeWidth="1"
-                />
-              </pattern>
-            </defs>
-            <rect width="800" height="800" fill="url(#grid)" />
-          </svg>
-        </div>
-        <div className="relative z-10 text-center text-white">
-          <h1 className="text-4xl md:text-5xl font-bold mb-6 text-white">
-            Cryptocurrency Market
-          </h1>
-          <p className="text-xl max-w-3xl mx-auto mb-8 text-white">
-            Explore the world of cryptocurrencies with real-time data,
-            AI-powered trading signals, and expert analysis to help you make
-            informed decisions.
-          </p>
-          <div className="mt-8 flex flex-wrap justify-center gap-4">
-            <button className="bg-white text-blue-700 hover:bg-blue-50 font-bold py-3 px-6 rounded-lg transition duration-300 shadow-lg">
-              Start Trading
-            </button>
-            <button className="bg-transparent hover:bg-white/20 border-2 border-white font-bold py-3 px-6 rounded-lg transition duration-300">
-              Learn Crypto Basics
-            </button>
-          </div>
-        </div>
-      </section>
-
+    <div className="container mx-auto px-4 pt-24">
       {/* Top Cryptocurrencies Section */}
-      <section className="mb-16">
-        <div className="flex justify-between items-center mb-8">
-          <h2 className="text-2xl md:text-3xl font-bold flex items-center text-black dark:text-white">
-            <span className="bg-blue-100 dark:bg-blue-900 text-blue-600 dark:text-blue-300 p-2 rounded-lg mr-3">
+      <section className="mb-8 md:mb-16">
+        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 md:mb-8 gap-2 sm:gap-0">
+          <h2 className="text-xl md:text-2xl lg:text-3xl font-bold flex items-center text-black dark:text-white">
+            <span className="bg-blue-100 dark:bg-blue-900 text-blue-600 dark:text-blue-300 p-1.5 md:p-2 rounded-lg mr-2 md:mr-3">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                className="h-6 w-6"
+                className="h-5 w-5 md:h-6 md:w-6"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
@@ -188,7 +146,7 @@ export default function CryptoPage() {
             {loading && (
               <span className="ml-2 inline-block animate-pulse">
                 <svg
-                  className="w-5 h-5 text-blue-500"
+                  className="w-4 h-4 md:w-5 md:h-5 text-blue-500"
                   fill="none"
                   viewBox="0 0 24 24"
                 >
@@ -210,17 +168,17 @@ export default function CryptoPage() {
             )}
           </h2>
           <div className="flex items-center">
-            <span className="text-sm text-gray-500 dark:text-gray-400 mr-3">
+            <span className="text-xs md:text-sm text-gray-500 dark:text-gray-400 mr-3">
               Auto-refresh: 5m
             </span>
             <Link
               href="/market/crypto/prices"
-              className="text-blue-500 hover:text-blue-700 flex items-center group"
+              className="text-blue-500 hover:text-blue-700 flex items-center group text-sm md:text-base"
             >
               View All Prices
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                className="h-5 w-5 ml-1 group-hover:translate-x-1 transition-transform"
+                className="h-4 w-4 md:h-5 md:w-5 ml-1 group-hover:translate-x-1 transition-transform"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
@@ -237,29 +195,29 @@ export default function CryptoPage() {
         </div>
 
         {error && (
-          <div className="bg-red-100 dark:bg-red-900/30 text-red-800 dark:text-red-200 p-4 rounded-lg mb-6">
+          <div className="bg-red-100 dark:bg-red-900/30 text-red-800 dark:text-red-200 p-3 md:p-4 rounded-lg mb-4 md:mb-6 text-sm md:text-base">
             <p>Error loading cryptocurrency data: {error}</p>
-            <p className="text-sm mt-1">Showing fallback data instead.</p>
+            <p className="text-xs md:text-sm mt-1">Showing fallback data instead.</p>
           </div>
         )}
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-6">
           {loading
             ? Array(6)
                 .fill(0)
                 .map((_, index) => (
                   <div
                     key={index}
-                    className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-5 border border-gray-100 dark:border-gray-700"
+                    className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-4 md:p-5 border border-gray-100 dark:border-gray-700"
                   >
                     <div className="flex justify-between items-center mb-3">
-                      <div className="h-6 bg-gray-200 dark:bg-gray-700 rounded w-20 animate-pulse"></div>
-                      <div className="h-6 bg-gray-200 dark:bg-gray-700 rounded-full w-16 animate-pulse"></div>
+                      <div className="h-5 md:h-6 bg-gray-200 dark:bg-gray-700 rounded w-16 md:w-20 animate-pulse"></div>
+                      <div className="h-5 md:h-6 bg-gray-200 dark:bg-gray-700 rounded-full w-12 md:w-16 animate-pulse"></div>
                     </div>
-                    <div className="h-10 bg-gray-200 dark:bg-gray-700 rounded w-24 mb-2 animate-pulse"></div>
+                    <div className="h-8 md:h-10 bg-gray-200 dark:bg-gray-700 rounded w-20 md:w-24 mb-2 animate-pulse"></div>
                     <div className="flex items-center">
-                      <div className="h-4 w-4 bg-gray-200 dark:bg-gray-700 rounded-full mr-1 animate-pulse"></div>
-                      <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-12 animate-pulse"></div>
+                      <div className="h-3 md:h-4 w-3 md:w-4 bg-gray-200 dark:bg-gray-700 rounded-full mr-1 animate-pulse"></div>
+                      <div className="h-3 md:h-4 bg-gray-200 dark:bg-gray-700 rounded w-10 md:w-12 animate-pulse"></div>
                     </div>
                   </div>
                 ))
@@ -270,13 +228,13 @@ export default function CryptoPage() {
       </section>
 
       {/* News Section */}
-      <section className="mb-16">
-        <div className="flex justify-between items-center mb-8">
-          <h2 className="text-2xl md:text-3xl font-bold flex items-center text-black dark:text-white">
-            <span className="bg-blue-100 dark:bg-blue-900 text-blue-600 dark:text-blue-300 p-2 rounded-lg mr-3">
+      <section className="mb-8 md:mb-16">
+        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 md:mb-8 gap-2 sm:gap-0">
+          <h2 className="text-xl md:text-2xl lg:text-3xl font-bold flex items-center text-black dark:text-white">
+            <span className="bg-blue-100 dark:bg-blue-900 text-blue-600 dark:text-blue-300 p-1.5 md:p-2 rounded-lg mr-2 md:mr-3">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                className="h-6 w-6"
+                className="h-5 w-5 md:h-6 md:w-6"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
@@ -293,12 +251,12 @@ export default function CryptoPage() {
           </h2>
           <Link
             href="/news/crypto"
-            className="text-blue-500 hover:text-blue-700 flex items-center group"
+            className="text-blue-500 hover:text-blue-700 flex items-center group text-sm md:text-base"
           >
             View All News
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              className="h-5 w-5 ml-1 group-hover:translate-x-1 transition-transform"
+              className="h-4 w-4 md:h-5 md:w-5 ml-1 group-hover:translate-x-1 transition-transform"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
@@ -312,7 +270,7 @@ export default function CryptoPage() {
             </svg>
           </Link>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 md:gap-6">
           {cryptoNews.length > 0 ? (
             cryptoNews.map((news) => (
               <NewsCard key={news.id} news={news} />
@@ -325,14 +283,14 @@ export default function CryptoPage() {
                   key={index}
                   className="bg-white dark:bg-gray-800 rounded-xl shadow-md overflow-hidden border border-gray-100 dark:border-gray-700"
                 >
-                  <div className="h-48 bg-gray-200 dark:bg-gray-700 animate-pulse"></div>
-                  <div className="p-5">
-                    <div className="h-6 bg-gray-200 dark:bg-gray-700 rounded w-3/4 mb-3 animate-pulse"></div>
-                    <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-full mb-2 animate-pulse"></div>
-                    <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-2/3 mb-4 animate-pulse"></div>
+                  <div className="h-40 md:h-48 bg-gray-200 dark:bg-gray-700 animate-pulse"></div>
+                  <div className="p-4 md:p-5">
+                    <div className="h-5 md:h-6 bg-gray-200 dark:bg-gray-700 rounded w-3/4 mb-2 md:mb-3 animate-pulse"></div>
+                    <div className="h-3 md:h-4 bg-gray-200 dark:bg-gray-700 rounded w-full mb-1 md:mb-2 animate-pulse"></div>
+                    <div className="h-3 md:h-4 bg-gray-200 dark:bg-gray-700 rounded w-2/3 mb-3 md:mb-4 animate-pulse"></div>
                     <div className="flex justify-between items-center">
-                      <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-1/3 animate-pulse"></div>
-                      <div className="h-8 bg-gray-200 dark:bg-gray-700 rounded w-1/4 animate-pulse"></div>
+                      <div className="h-3 md:h-4 bg-gray-200 dark:bg-gray-700 rounded w-1/3 animate-pulse"></div>
+                      <div className="h-6 md:h-8 bg-gray-200 dark:bg-gray-700 rounded w-1/4 animate-pulse"></div>
                     </div>
                   </div>
                 </div>
@@ -342,21 +300,21 @@ export default function CryptoPage() {
       </section>
 
       {/* Call to Action Section */}
-      <section className="mb-16 bg-gradient-to-r from-blue-600 to-indigo-700 rounded-2xl p-8 md:p-12 text-white text-center">
-        <h2 className="text-3xl md:text-4xl font-bold mb-4">
+      <section className="mb-8 md:mb-16 bg-gradient-to-r from-blue-600 to-indigo-700 rounded-xl md:rounded-2xl p-6 md:p-12 text-white text-center">
+        <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-3 md:mb-4">
           Ready to Start Trading Crypto?
         </h2>
-        <p className="text-xl max-w-3xl mx-auto mb-8 opacity-90">
+        <p className="text-base md:text-lg lg:text-xl max-w-3xl mx-auto mb-6 md:mb-8 opacity-90">
           Join thousands of traders who use our AI-powered platform to make
           smarter trading decisions in the cryptocurrency market.
         </p>
-        <div className="flex flex-wrap justify-center gap-4">
-          <button className="bg-white text-blue-700 hover:bg-blue-50 font-bold py-3 px-8 rounded-lg transition duration-300 shadow-lg">
+        <div className="flex flex-wrap justify-center gap-3 md:gap-4">
+          <Link href="/trade" className="bg-white text-blue-700 hover:bg-blue-50 font-bold py-2 md:py-3 px-6 md:px-8 rounded-lg transition duration-300 shadow-lg text-sm md:text-base">
             Open Free Account
-          </button>
-          <button className="bg-transparent hover:bg-white/20 border-2 border-white font-bold py-3 px-8 rounded-lg transition duration-300">
+          </Link>
+          <Link href="/trade" className="bg-transparent hover:bg-white/20 border-2 border-white font-bold py-2 md:py-3 px-6 md:px-8 rounded-lg transition duration-300 text-sm md:text-base">
             Schedule Demo
-          </button>
+          </Link>
         </div>
       </section>
     </div>

@@ -6,7 +6,7 @@ import {
 } from "@heroicons/react/24/outline";
 import { AnimatePresence, motion } from "framer-motion";
 import Link from "next/link";
-import { useTranslation } from "react-i18next";
+
 import ProfileHeader from "./profile-header";
 import TotalProfit from "./total-profit";
 import TotalTrades from "./total-trades";
@@ -21,7 +21,7 @@ export default function ProfileCard({
   user: User;
   stats: Stats;
 }) {
-  const { t } = useTranslation();
+  
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -82,7 +82,7 @@ export default function ProfileCard({
             <TabsList className="flex justify-center space-x-2 bg-gray-100 dark:bg-gray-800 p-1 rounded-lg">
               <TabsTrigger value="blogs" className="flex items-center gap-2">
                 <BookOpenIcon className="w-5 h-5" />
-                {t('nav.blogs')}
+                Blogs
               </TabsTrigger>
             </TabsList>
 

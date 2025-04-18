@@ -2,22 +2,22 @@
 import { motion } from "framer-motion";
 // Next built in components
 import Image from "next/image";
-// i18n for translation
-import { useTranslation } from "react-i18next";
+
+
 
 export default function Team() {
-  // i18n hooks for translation
-  const { t } = useTranslation();
+  
+  
   // Team items for translation
   const team = [
     {
       name: "Navidreza Abbaszadeh",
-      role: t("about.team.navid"),
+      role: 'Front / Back developer',
       image: "/image/8b167af653c2399dd93b952a48740620.jpg",
     },
     {
       name: "Taha Talebi",
-      role: t("about.team.taha"),
+      role: 'Front developer',
       image: "/image/8b167af653c2399dd93b952a48740620.jpg",
     },
   ];
@@ -29,7 +29,7 @@ export default function Team() {
     >
       <h2
         className='text-3xl font-bold mb-12 text-center dark:text-primary-dark text-primary-light'>
-        {t("about.team.title")}
+        Meet Our Team
       </h2>
       <div className="flex flex-row flex-wrap justify-center w-full gap-8">
         {team.map((member, index) => (

@@ -118,58 +118,6 @@ export default function ForexPage() {
       setError(
         err instanceof Error ? err.message : "An unknown error occurred"
       );
-
-      // Fallback to mock data if API fails
-      setCurrencyPairs([
-        {
-          pair: "EUR/USD",
-          price: "1.0921",
-          change: "0.0012",
-          changePercent: "0.11",
-        },
-        {
-          pair: "GBP/USD",
-          price: "1.2654",
-          change: "-0.0023",
-          changePercent: "-0.18",
-        },
-        {
-          pair: "USD/JPY",
-          price: "149.32",
-          change: "0.45",
-          changePercent: "0.30",
-        },
-        {
-          pair: "USD/CHF",
-          price: "0.8732",
-          change: "-0.0015",
-          changePercent: "-0.17",
-        },
-        {
-          pair: "AUD/USD",
-          price: "0.6543",
-          change: "0.0021",
-          changePercent: "0.32",
-        },
-        {
-          pair: "USD/CAD",
-          price: "1.3654",
-          change: "0.0034",
-          changePercent: "0.25",
-        },
-        {
-          pair: "NZD/USD",
-          price: "0.6123",
-          change: "-0.0018",
-          changePercent: "-0.29",
-        },
-        {
-          pair: "EUR/GBP",
-          price: "0.8632",
-          change: "0.0009",
-          changePercent: "0.10",
-        },
-      ]);
     } finally {
       setLoading(false);
     }
@@ -221,54 +169,16 @@ export default function ForexPage() {
   };
 
   return (
-    <div className="container mx-auto px-4 py-24">
-      {/* Hero Section */}
-      <section className="mb-16 relative overflow-hidden rounded-2xl bg-gradient-to-r from-blue-600 to-indigo-700 p-8 md:p-12">
-        <div className="absolute inset-0 opacity-10">
-          <svg className="h-full w-full" viewBox="0 0 800 800">
-            <defs>
-              <pattern
-                id="grid"
-                width="40"
-                height="40"
-                patternUnits="userSpaceOnUse"
-              >
-                <path
-                  d="M 40 0 L 0 0 0 40"
-                  fill="none"
-                  stroke="white"
-                  strokeWidth="1"
-                />
-              </pattern>
-            </defs>
-            <rect width="800" height="800" fill="url(#grid)" />
-          </svg>
-        </div>
-        <div className="relative z-10 text-center text-white">
-          <h1 className="text-4xl md:text-5xl font-bold mb-4">Forex Trading</h1>
-          <p className="text-xl md:text-2xl max-w-3xl mx-auto opacity-90">
-            Explore the world's largest financial market with real-time data,
-            expert analysis, and AI-powered trading signals.
-          </p>
-          <div className="mt-8 flex flex-wrap justify-center gap-4">
-            <button className="bg-white text-blue-700 hover:bg-blue-50 font-bold py-3 px-6 rounded-lg transition duration-300 shadow-lg">
-              Start Trading
-            </button>
-            <button className="bg-transparent hover:bg-white/20 border-2 border-white font-bold py-3 px-6 rounded-lg transition duration-300">
-              Learn Forex Basics
-            </button>
-          </div>
-        </div>
-      </section>
+    <div className="container mx-auto px-4 pt-24 bg-background-light dark:bg-background-dark">
 
       {/* Currency Pairs Section */}
-      <section className="mb-16">
-        <div className="flex justify-between items-center mb-8">
-          <h2 className="text-2xl md:text-3xl font-bold flex items-center text-black dark:text-white">
-            <span className="bg-blue-100 dark:bg-blue-900 text-blue-600 dark:text-blue-300 p-2 rounded-lg mr-3">
+      <section className="mb-8 md:mb-16">
+        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 md:mb-8 gap-2 sm:gap-0">
+          <h2 className="text-xl md:text-2xl lg:text-3xl font-bold flex items-center text-primary-light dark:text-primary-dark">
+            <span className="bg-blue-100 dark:bg-blue-900 text-blue-600 dark:text-blue-300 p-1.5 md:p-2 rounded-lg mr-2 md:mr-3">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                className="h-6 w-6"
+                className="h-5 w-5 md:h-6 md:w-6"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
@@ -285,7 +195,7 @@ export default function ForexPage() {
             {loading && (
               <span className="ml-2 inline-block animate-pulse">
                 <svg
-                  className="w-5 h-5 text-blue-500"
+                  className="w-4 h-4 md:w-5 md:h-5 text-blue-500"
                   fill="none"
                   viewBox="0 0 24 24"
                 >
@@ -307,17 +217,17 @@ export default function ForexPage() {
             )}
           </h2>
           <div className="flex items-center">
-            <span className="text-sm text-gray-500 dark:text-gray-400 mr-3">
+            <span className="text-xs md:text-sm text-gray-500 dark:text-gray-400 mr-3">
               Auto-refresh: 5m
             </span>
             <Link
               href="/market/forex/all-pairs"
-              className="text-blue-500 hover:text-blue-700 flex items-center group"
+              className="text-blue-500 hover:text-blue-700 flex items-center group text-sm md:text-base"
             >
               View All Pairs
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                className="h-5 w-5 ml-1 group-hover:translate-x-1 transition-transform"
+                className="h-4 w-4 md:h-5 md:w-5 ml-1 group-hover:translate-x-1 transition-transform"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
@@ -334,29 +244,29 @@ export default function ForexPage() {
         </div>
 
         {error && (
-          <div className="bg-red-100 dark:bg-red-900/30 text-red-800 dark:text-red-200 p-4 rounded-lg mb-6">
+          <div className="bg-red-100 dark:bg-red-900/30 text-red-800 dark:text-red-200 p-3 md:p-4 rounded-lg mb-4 md:mb-6 text-sm md:text-base">
             <p>Error loading forex data: {error}</p>
-            <p className="text-sm mt-1">Showing fallback data instead.</p>
+            <p className="text-xs md:text-sm mt-1">Showing fallback data instead.</p>
           </div>
         )}
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 md:gap-6">
           {loading
             ? Array(8)
                 .fill(0)
                 .map((_, index) => (
                   <div
                     key={index}
-                    className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-5 border border-gray-100 dark:border-gray-700"
+                    className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-4 md:p-5 border border-gray-100 dark:border-gray-700"
                   >
                     <div className="flex justify-between items-center mb-3">
-                      <div className="h-6 bg-gray-200 dark:bg-gray-700 rounded w-20 animate-pulse"></div>
-                      <div className="h-6 bg-gray-200 dark:bg-gray-700 rounded-full w-16 animate-pulse"></div>
+                      <div className="h-5 md:h-6 bg-gray-200 dark:bg-gray-700 rounded w-16 md:w-20 animate-pulse"></div>
+                      <div className="h-5 md:h-6 bg-gray-200 dark:bg-gray-700 rounded-full w-12 md:w-16 animate-pulse"></div>
                     </div>
-                    <div className="h-10 bg-gray-200 dark:bg-gray-700 rounded w-24 mb-2 animate-pulse"></div>
+                    <div className="h-8 md:h-10 bg-gray-200 dark:bg-gray-700 rounded w-20 md:w-24 mb-2 animate-pulse"></div>
                     <div className="flex items-center">
-                      <div className="h-4 w-4 bg-gray-200 dark:bg-gray-700 rounded-full mr-1 animate-pulse"></div>
-                      <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-12 animate-pulse"></div>
+                      <div className="h-3 md:h-4 w-3 md:w-4 bg-gray-200 dark:bg-gray-700 rounded-full mr-1 animate-pulse"></div>
+                      <div className="h-3 md:h-4 bg-gray-200 dark:bg-gray-700 rounded w-10 md:w-12 animate-pulse"></div>
                     </div>
                   </div>
                 ))
@@ -367,13 +277,13 @@ export default function ForexPage() {
       </section>
 
       {/* News Section */}
-      <section className="mb-16">
-        <div className="flex justify-between items-center mb-8">
-          <h2 className="text-2xl md:text-3xl font-bold flex items-center text-black dark:text-white">
-            <span className="bg-blue-100 dark:bg-blue-900 text-blue-600 dark:text-blue-300 p-2 rounded-lg mr-3">
+      <section className="mb-8 md:mb-16">
+        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 md:mb-8 gap-2 sm:gap-0">
+          <h2 className="text-xl md:text-2xl lg:text-3xl font-bold flex items-center text-primary-light dark:text-primary-dark">
+            <span className="bg-blue-100 dark:bg-blue-900 text-blue-600 dark:text-blue-300 p-1.5 md:p-2 rounded-lg mr-2 md:mr-3">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                className="h-6 w-6"
+                className="h-5 w-5 md:h-6 md:w-6"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
@@ -390,7 +300,7 @@ export default function ForexPage() {
             {newsLoading && (
               <span className="ml-2 inline-block animate-pulse">
                 <svg
-                  className="w-5 h-5 text-blue-500"
+                  className="w-4 h-4 md:w-5 md:h-5 text-blue-500"
                   fill="none"
                   viewBox="0 0 24 24"
                 >
@@ -413,12 +323,12 @@ export default function ForexPage() {
           </h2>
           <Link
             href="/news/forex"
-            className="text-blue-500 hover:text-blue-700 flex items-center group"
+            className="text-blue-500 hover:text-blue-700 flex items-center group text-sm md:text-base"
           >
             View All News
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              className="h-5 w-5 ml-1 group-hover:translate-x-1 transition-transform"
+              className="h-4 w-4 md:h-5 md:w-5 ml-1 group-hover:translate-x-1 transition-transform"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
@@ -434,14 +344,14 @@ export default function ForexPage() {
         </div>
 
         {newsError && (
-          <div className="bg-red-100 dark:bg-red-900/30 text-red-800 dark:text-red-200 p-4 rounded-lg mb-6">
+          <div className="bg-red-100 dark:bg-red-900/30 text-red-800 dark:text-red-200 p-3 md:p-4 rounded-lg mb-4 md:mb-6 text-sm md:text-base">
             <p>Error loading forex news: {newsError}</p>
-            <p className="text-sm mt-1">Showing fallback news instead.</p>
+            <p className="text-xs md:text-sm mt-1">Showing fallback news instead.</p>
           </div>
         )}
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {newsLoading && forexNews.length === 0
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 md:gap-6">
+          {newsLoading && forexNews && forexNews.length === 0
             ? Array(3)
                 .fill(0)
                 .map((_, index) => (
@@ -449,38 +359,19 @@ export default function ForexPage() {
                     key={index}
                     className="bg-white dark:bg-gray-800 rounded-xl shadow-md overflow-hidden border border-gray-100 dark:border-gray-700"
                   >
-                    <div className="h-48 bg-gray-200 dark:bg-gray-700 animate-pulse"></div>
-                    <div className="p-5">
-                      <div className="h-6 bg-gray-200 dark:bg-gray-700 rounded w-3/4 mb-3 animate-pulse"></div>
-                      <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-full mb-2 animate-pulse"></div>
-                      <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-2/3 mb-4 animate-pulse"></div>
+                    <div className="h-40 md:h-48 bg-gray-200 dark:bg-gray-700 animate-pulse"></div>
+                    <div className="p-4 md:p-5">
+                      <div className="h-5 md:h-6 bg-gray-200 dark:bg-gray-700 rounded w-3/4 mb-2 md:mb-3 animate-pulse"></div>
+                      <div className="h-3 md:h-4 bg-gray-200 dark:bg-gray-700 rounded w-full mb-1 md:mb-2 animate-pulse"></div>
+                      <div className="h-3 md:h-4 bg-gray-200 dark:bg-gray-700 rounded w-2/3 mb-3 md:mb-4 animate-pulse"></div>
                       <div className="flex justify-between items-center">
-                        <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-1/3 animate-pulse"></div>
-                        <div className="h-8 bg-gray-200 dark:bg-gray-700 rounded w-1/4 animate-pulse"></div>
+                        <div className="h-3 md:h-4 bg-gray-200 dark:bg-gray-700 rounded w-1/3 animate-pulse"></div>
+                        <div className="h-6 md:h-8 bg-gray-200 dark:bg-gray-700 rounded w-1/4 animate-pulse"></div>
                       </div>
                     </div>
                   </div>
                 ))
-            : forexNews.map((news) => <NewsCard key={news.id} news={news} />)}
-        </div>
-      </section>
-
-      {/* Call to Action Section */}
-      <section className="mb-16 bg-gradient-to-r from-blue-600 to-indigo-700 rounded-2xl p-8 md:p-12 text-white text-center">
-        <h2 className="text-3xl md:text-4xl font-bold mb-4">
-          Ready to Start Trading Forex?
-        </h2>
-        <p className="text-xl max-w-3xl mx-auto mb-8 opacity-90">
-          Join thousands of traders who use our AI-powered platform to make
-          smarter trading decisions in the forex market.
-        </p>
-        <div className="flex flex-wrap justify-center gap-4">
-          <button className="bg-white text-blue-700 hover:bg-blue-50 font-bold py-3 px-8 rounded-lg transition duration-300 shadow-lg">
-            Open Free Account
-          </button>
-          <button className="bg-transparent hover:bg-white/20 border-2 border-white font-bold py-3 px-8 rounded-lg transition duration-300">
-            Schedule Demo
-          </button>
+            : forexNews && forexNews.map((news) => <NewsCard key={news.id} news={news} />)}
         </div>
       </section>
     </div>

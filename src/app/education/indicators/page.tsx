@@ -9,8 +9,6 @@ import debounce from "lodash/debounce";
 import Link from "next/link";
 // React built in
 import { useCallback, useState } from "react";
-// i18n
-import { useTranslation } from "react-i18next";
 // Indicators data
 import { indicators } from "../data";
 import style from "../technical/[id]/style.module.css";
@@ -22,8 +20,8 @@ const DEFAULT_IMAGE =
   "https://media.salameno.com/d/2022/07/25/3/15384301.jpg?ts=1658737063000";
 
 export default function Indicators() {
-  // i18n hook for translation
-  const { t } = useTranslation();
+  
+  
   // State to search over indicators
   const [filteredIndicators, setFilteredIndicators] = useState(indicators);
 
@@ -45,10 +43,10 @@ export default function Indicators() {
           <div className="max-w-7xl mx-auto">
             <div className="text-center mb-8">
               <h1 className="text-3xl font-bold dark:text-white text-black mb-2">
-                {t("indicators.title")}
+                Technical Indicators
               </h1>
               <p className="text-lg dark:text-gray-300 text-gray-600">
-                {t("indicators.subtitle")}
+                Learn about different technical analysis indicators
               </p>
             </div>
 
@@ -59,7 +57,7 @@ export default function Indicators() {
                   onChange={(e) => {
                     handleSearch(e.target.value);
                   }}
-                  placeholder={t("indicators.searchPlaceholder")}
+                  placeholder="Search in indicators"
                   className="w-full px-4 py-3 pl-12 rounded-xl dark:bg-white/5 bg-white dark:text-white text-gray-900 dark:border-white/10 border-gray-200 border focus:outline-none focus:ring-2 focus:ring-[#1890ff] placeholder:dark:text-gray-500 placeholder:text-gray-400 transition-all duration-200"
                 />
                 <SearchOutlined className="absolute text-2xl left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 dark:text-gray-400 text-gray-500" />
@@ -108,7 +106,7 @@ export default function Indicators() {
             {filteredIndicators.length === 0 && (
               <div className="text-center mt-8">
                 <h1 className="dark:text-white text-gray-900">
-                  {t("indicators.noResults")}
+                  No Results
                 </h1>
               </div>
             )}
@@ -117,4 +115,4 @@ export default function Indicators() {
       </Layout>
     </ConfigProvider>
   );
-};
+}

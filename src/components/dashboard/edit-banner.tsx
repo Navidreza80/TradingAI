@@ -17,12 +17,12 @@ import { UploadButton } from "@/utils/uploadthing";
 import { Edit } from "lucide-react";
 // React hot toast for creating toasts
 import toast from "react-hot-toast";
-// i18n for translation
-import { useTranslation } from "react-i18next";
+
+
 
 export default function EditBanner({ banner, setBanner, id }) {
-  // i18n hook for translation
-  const { t } = useTranslation();
+  
+  
   // Function to handle upload button logic => when user click it, it posts the file URL to the database
   const handleUpload = async () => {
     const request = await updateUserBanner(id, banner);
@@ -40,10 +40,10 @@ export default function EditBanner({ banner, setBanner, id }) {
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
           <DialogTitle className="text-gray-400 dark:text-white">
-            {t("dashboard.modals.banner")}
+          Edit Banner
           </DialogTitle>
           <DialogDescription>
-            {t("dashboard.modals.bannerDesc")}
+          Make changes to your profile banner here. Click save when you are done.
           </DialogDescription>
         </DialogHeader>
         <div className="py-4">
@@ -60,7 +60,7 @@ export default function EditBanner({ banner, setBanner, id }) {
           />
         </div>
         <DialogFooter>
-          <Button onClick={handleUpload}>{t("dashboard.modals.save")}</Button>
+          <Button onClick={handleUpload}>Save changes</Button>
         </DialogFooter>
       </DialogContent>
     </Dialog>

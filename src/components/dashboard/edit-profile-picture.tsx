@@ -17,12 +17,12 @@ import { UploadButton } from "@/utils/uploadthing";
 import { Edit } from "lucide-react";
 // React hot toast to create toasts
 import toast from "react-hot-toast";
-// i18n for translation
-import { useTranslation } from "react-i18next";
+
+
 
 export default function EditProfilePicture({ setImage, id, image }) {
-  // i18n hooks for translation
-  const { t } = useTranslation();
+  
+  
   // Function that edits user profile picture by passing the photo URL
   const handleUpload = async () => {
     const request = await updateUserImage(id, image);
@@ -41,10 +41,10 @@ export default function EditProfilePicture({ setImage, id, image }) {
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
           <DialogTitle className="dark:text-white text-gray-400">
-            {t("dashboard.modals.avatar")}
+          Edit Avatar
           </DialogTitle>
           <DialogDescription>
-            {t("dashboard.modals.avatarDesc")}
+          Make changes to your avatar here. Click save when you are done.
           </DialogDescription>
         </DialogHeader>
         <div className="py-4">
@@ -61,7 +61,7 @@ export default function EditProfilePicture({ setImage, id, image }) {
           />
         </div>
         <DialogFooter>
-          <Button onClick={handleUpload}> {t("dashboard.modals.save")}</Button>
+          <Button onClick={handleUpload}>Save changes.</Button>
         </DialogFooter>
       </DialogContent>
     </Dialog>

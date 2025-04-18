@@ -12,12 +12,11 @@ import { Blog } from "@/types/blog";
 import { motion } from "framer-motion";
 // React built in hooks
 import { useEffect, useState } from "react";
-// i18n for translation
-import { useTranslation } from "react-i18next";
+
+
 
 export default function BlogsPage() {
-  // i18n hooks for translation
-  const { t } = useTranslation();
+  
   // Search query state for searching through blogs
   const [searchQuery, setSearchQuery] = useState("");
   // Save blogs in state variable
@@ -33,9 +32,11 @@ export default function BlogsPage() {
     fetch();
   }, []);
   // Function to search through blogs
-  const filteredBlogs = blogs.length > 0 && blogs.filter((blog) =>
-    blog.title.toLowerCase().includes(searchQuery.toLowerCase())
-  );
+  const filteredBlogs =
+    blogs.length > 0 &&
+    blogs.filter((blog) =>
+      blog.title.toLowerCase().includes(searchQuery.toLowerCase())
+    );
 
   return (
     // Blog Page
@@ -50,19 +51,20 @@ export default function BlogsPage() {
           className="text-center mb-12"
         >
           {/* Blog Page Title */}
-          <h1
-            className='text-3xl sm:text-4xl lg:text-5xl font-bold mb-4 p-2 text-primary-light dark:text-primary-dark'>
-            {t("blogs.title")}
+          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4 p-2 text-primary-light dark:text-primary-dark">
+            Cryptocurrency Blog
           </h1>
           {/* Blogs Page Subtitle */}
-          <p
-            className='text-lg text-secondary-light dark:text-secondary-dark max-w-3xl mx-auto p-2'>
-            {t("blogs.subtitle")}
+          <p className="text-lg text-secondary-light dark:text-secondary-dark max-w-3xl mx-auto p-2">
+            Latest news, analysis and insights about cryptocurrency market
           </p>
         </motion.div>
 
         {/* Search Section */}
-        <SearchBlogs searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
+        <SearchBlogs
+          searchQuery={searchQuery}
+          setSearchQuery={setSearchQuery}
+        />
 
         {/* Blogs Grid */}
         <motion.div
@@ -71,7 +73,13 @@ export default function BlogsPage() {
           transition={{ duration: 0.5, delay: 0.2 }}
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
         >
-          {filteredBlogs.length > 0 ? filteredBlogs.map((blog, index) => (<BlogCard key={index} blog={blog} />)) :  Array.from({ length: 6 }).map((_, index) => <BlogCardSkeleton key={index} />)}
+          {filteredBlogs.length > 0
+            ? filteredBlogs.map((blog, index) => (
+                <BlogCard key={index} blog={blog} />
+              ))
+            : Array.from({ length: 6 }).map((_, index) => (
+                <BlogCardSkeleton key={index} />
+              ))}
         </motion.div>
       </div>
     </main>

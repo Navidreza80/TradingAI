@@ -5,10 +5,10 @@ import React, { useEffect, useState } from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
-import { useTranslation } from 'react-i18next';
+
 
 export default function NotFoundPage() {
-  const { t } = useTranslation();
+  
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
 
   useEffect(() => {
@@ -129,7 +129,7 @@ export default function NotFoundPage() {
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5, delay: 0.4 }}
           >
-            {t('notFound.title')}
+            Page Not Found
           </motion.p>
 
           <motion.p 
@@ -138,7 +138,7 @@ export default function NotFoundPage() {
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5, delay: 0.6 }}
           >
-            {t('notFound.description')}
+            Sorry, we couldn't find the page you're looking for.
           </motion.p>
 
           <motion.div
@@ -150,7 +150,7 @@ export default function NotFoundPage() {
               href="/" 
               className="inline-block px-8 py-4 rounded-full bg-gradient-to-r from-blue-600 to-blue-400 text-white font-medium transition-all duration-300 hover:shadow-lg hover:shadow-blue-500/25 hover:scale-105"
             >
-              {t('notFound.backHome')}
+              Back to Home
             </Link>
           </motion.div>
         </motion.div>

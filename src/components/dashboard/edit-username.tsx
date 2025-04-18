@@ -13,8 +13,8 @@ import { Input } from "../UI/input";
 import { Label } from "../UI/label";
 // Icons
 import { Edit } from "lucide-react";
-// i18n for translation
-import { useTranslation } from "react-i18next";
+
+
 // React built in hooks
 import { useState } from "react";
 // Server actions
@@ -23,8 +23,8 @@ import { updateUsername } from "@/actions/user.action";
 import toast from "react-hot-toast";
 
 export default function EditUserName({id, username, setUsername}) {
-  // i18n hooks for translation
-  const { t } = useTranslation();
+  
+  
   // State to save the value of users username
   const [value, setValue] = useState(username)
   // Function that edit and updates users username by passing the username string value
@@ -45,22 +45,22 @@ export default function EditUserName({id, username, setUsername}) {
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
-          <DialogTitle className="dark:text-white text-gray-400">{t('dashboard.modals.username')}</DialogTitle>
+          <DialogTitle className="dark:text-white text-gray-400">Edit Username</DialogTitle>
           <DialogDescription>
-          {t('dashboard.modals.usernameDesc')}
+          Make changes to your profile username here. Click save when you aredone.
           </DialogDescription>
         </DialogHeader>
         <div className="grid py-4">
           <div className="grid grid-cols-4 items-center gap-4">
             <Label htmlFor="username" className="text-right dark:text-white text-gray-400">
-            {t('dashboard.modals.usernameInput')}
+            Username
             </Label>
             <Input id="username" defaultValue={username} onChange={(e) => setValue(e.currentTarget.value)} className="col-span-3" />
           </div>
         </div>
         <div className="py-4"></div>
         <DialogFooter>
-          <Button onClick={updateUserName}>{t('dashboard.modals.save')}</Button>
+          <Button onClick={updateUserName}>Save changes</Button>
         </DialogFooter>
       </DialogContent>
     </Dialog>

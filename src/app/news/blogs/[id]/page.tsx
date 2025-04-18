@@ -1,8 +1,8 @@
 "use client";
 // Framer motion imports for animation
 import { motion } from "framer-motion";
-// i18n for translation
-import { useTranslation } from "react-i18next";
+
+
 // Next built in components and hooks
 import Image from "next/image";
 import Link from "next/link";
@@ -33,8 +33,8 @@ import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 
 export default function BlogDetailPage() {
-  // i18n hooks for translation
-  const { t } = useTranslation();
+  
+  
   // Getting id of the blog from the params
   const { id } = useParams();
   // State to save the data of the blog
@@ -250,7 +250,7 @@ export default function BlogDetailPage() {
             {/* Comments Title */}
             <h2
               className='text-2xl font-bold mb-8 dark:text-primary-dark text-primary-light'>
-              {t("blogs.comments")}
+              Comments
             </h2>
 
             {/* Comment Form */}
@@ -259,7 +259,7 @@ export default function BlogDetailPage() {
               <textarea
                 value={commentContent}
                 onChange={(e) => setCommentContent(e.target.value)}
-                placeholder={t("blogs.commentPlaceholder")}
+                placeholder="Write your comment..."
                 className='w-full px-4 py-3 rounded-xl bg-transparent
                 dark:text-white text-gray-900
                 dark:border-white/10 border-gray-200 border
@@ -274,7 +274,7 @@ export default function BlogDetailPage() {
                   onClick={handleCommentSubmit}
                   className='px-6 py-2 bg-[#1890ff] text-white rounded-lg
                   hover:bg-[#40a9ff] transition-colors duration-200'>
-                  {t("blogs.submitComment")}
+                  Submit
                 </button>
               </div>
             </div>

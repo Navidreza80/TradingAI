@@ -65,10 +65,10 @@ export default function NewsCategories() {
     <div className="container mx-auto px-4 py-24">
       <div className="max-w-6xl mx-auto">
         <div className="text-center mb-16">
-          <h1 className="text-4xl md:text-5xl font-bold mb-4 text-gray-900 dark:text-white">
+          <h1 className="text-4xl md:text-5xl font-bold mb-4 text-primary-light dark:text-primary-dark">
             Market News Center
           </h1>
-          <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
+          <p className="text-xl text-secondary-light dark:text-secondary-dark max-w-3xl mx-auto">
             Select a category to explore the latest news and insights from financial markets around the world.
           </p>
         </div>

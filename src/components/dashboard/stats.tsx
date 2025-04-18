@@ -9,28 +9,28 @@ import { motion } from "framer-motion";
 import { BarChart, DollarSign, TrendingUp } from "lucide-react";
 // React built in hooks
 import { useEffect, useState } from "react";
-// i18n hooks for translation
-import { useTranslation } from "react-i18next";
+
+
 
 export default function Stats() {
-  // i18n hooks for translation
-  const { t } = useTranslation();
+  
+  
   // State to save status of the user
   const [stats, setStats] = useState({});
   // Status items
   const statsItems = [
     {
-      text: t("dashboard.stats.profits"),
+      text: 'Total Profits',
       data: `${Math.ceil(stats.totalPnL)}$`,
       icon: <DollarSign size={24} className="text-green-500" />,
     },
     {
-      text: t("dashboard.stats.trades"),
+      text: 'Total Trades',
       data: stats.totalTrades,
       icon: <BarChart size={24} className="text-blue-500" />,
     },
     {
-      text: t("dashboard.stats.win"),
+      text: 'Win Rate',
       data: `${Math.ceil(stats.winRate)}%`,
       icon: <TrendingUp size={24} className="text-purple-500" />,
     },

@@ -5,8 +5,6 @@ import { motion } from "framer-motion";
 import { Button } from "antd";
 // Next imports
 import Link from "next/link";
-// i18n imports for translation
-import { useTranslation } from "react-i18next";
 // 3D imports
 import { Canvas } from '@react-three/fiber';
 import { Suspense } from 'react';
@@ -18,11 +16,13 @@ import { HeroModelsType } from "@/types";
 
 export default function HeroSection() {
   // responsive hooks
+  // For very small screens
   const isSmall = useMediaQuery({ maxWidth: 440 });
+  // For mobiles
   const isMobile = useMediaQuery({ maxWidth: 768 });
+  // For Tablets
   const isTablet = useMediaQuery({ minWidth: 768, maxWidth: 1024 });
-  // i18n hooks for translation
-  const { t } = useTranslation();
+  // 3D model scale
   const modelScale = 0.2;
 
   // models array
@@ -83,17 +83,17 @@ export default function HeroSection() {
           >
             <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black tracking-tight leading-none">
               <span className="inline-block text-headline-light dark:text-headline-dark pb-2 dark:text-primary-dark text-primary-light">
-                {t("hero.title")}
+              Trade Smarter with AI
               </span>
               <br />
               <span className="inline-block text-headline-light dark:text-headline-dark dark:text-primary-dark text-primary-light">
-                {t("hero.title2")}
+              Master the Crypto Market
               </span>
             </h1>
             <div
               className="text-secondary-light dark:text-secondary-dark max-w-3xl mx-auto text-base sm:text-lg md:text-xl font-medium px-4"
             >
-              {t("hero.description")}
+              Experience the power of AI-driven trading analysis, real-time market insights, and professional-grade tools to maximize your crypto trading potential.
             </div>
           </div>
 
@@ -110,7 +110,7 @@ export default function HeroSection() {
                 size="large"
                 className="bounce-button w-full text-subtitle-light dark:text-subtitle-dark sm:w-auto h-12 sm:h-14 px-6 sm:px-8 text-base sm:text-lg font-bold rounded-xl bg-button-primary-light dark:bg-button-primary-dark border-none transition-all duration-300"
               >
-                {t("hero.getStarted")}
+                Get Started
               </Button>
             </Link>
             <Link href="/about" className="sm:w-auto">
@@ -118,7 +118,7 @@ export default function HeroSection() {
                 size="large"
                 className="w-full sm:w-auto h-12 sm:h-14 px-6 sm:px-8 text-base sm:text-lg font-bold rounded-xl bg-button-secondary-light dark:bg-button-secondary-dark border-none hover:scale-105 transition-all duration-300"
               >
-                {t("hero.learnMore")}
+                Learn More
               </Button>
             </Link>
           </motion.div>

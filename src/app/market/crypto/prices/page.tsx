@@ -199,8 +199,8 @@ export default function CryptoPricesPage() {
   return (
     <div className="container mx-auto px-4 py-24">
       <div className="mb-8">
-        <h1 className="text-3xl font-bold mb-2 text-gray-900 dark:text-white">Cryptocurrency Prices</h1>
-        <p className="text-gray-600 dark:text-gray-400">
+        <h1 className="text-3xl font-bold mb-2 text-primary-light dark:text-primary-dark">Cryptocurrency Prices</h1>
+        <p className="text-secondary-light dark:text-secondary-dark">
           Live prices for top cryptocurrencies by market capitalization
         </p>
       </div>
@@ -221,7 +221,7 @@ export default function CryptoPricesPage() {
           <Button
             variant={showFavoritesOnly ? "default" : "outline"}
             onClick={() => setShowFavoritesOnly(!showFavoritesOnly)}
-            className="flex items-center"
+            className="flex items-center text-primary-light dark:text-primary-dark"
           >
             <Star className="mr-2 h-4 w-4" />
             {showFavoritesOnly ? "All Coins" : "Favorites"}
@@ -234,7 +234,7 @@ export default function CryptoPricesPage() {
               fetchCryptoData();
             }}
           >
-            <SelectTrigger className="w-[120px]">
+            <SelectTrigger className="w-[120px] text-primary-light dark:text-primary-dark">
               <SelectValue placeholder="Show 50" />
             </SelectTrigger>
             <SelectContent>

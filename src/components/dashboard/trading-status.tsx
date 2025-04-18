@@ -1,16 +1,16 @@
-// i18n for translation
-import { useTranslation } from "react-i18next";
+
+
 
 export default function TradingStatus({ hideWin, stats, hideTotal, hidePnL }) {
-  // i18n hook for translation
-  const { t } = useTranslation();
+  
+  
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mt-6">
       {/* Win Rate */}
       {!hideWin && (
         <div className="p-4 rounded-xl dark:bg-gray-800 bg-gray-100">
           <div className="text-sm dark:text-gray-400 text-gray-600">
-            {t("dashboard.profile.rate")}
+            Win Rate
           </div>
           <div className="text-xl font-bold dark:text-white text-gray-900">
             {Math.ceil(stats.winRate)}%
@@ -21,7 +21,7 @@ export default function TradingStatus({ hideWin, stats, hideTotal, hidePnL }) {
       {!hideTotal && (
         <div className="p-4 rounded-xl dark:bg-gray-800 bg-gray-100">
           <div className="text-sm dark:text-gray-400 text-gray-600">
-            {t("dashboard.profile.total")}
+            Total Trades
           </div>
           <div className="text-xl font-bold dark:text-white text-gray-900">
             {stats.totalTrades}
@@ -32,7 +32,7 @@ export default function TradingStatus({ hideWin, stats, hideTotal, hidePnL }) {
       {!hidePnL && (
         <div className="p-4 rounded-xl dark:bg-gray-800 bg-gray-100">
           <div className="text-sm dark:text-gray-400 text-gray-600">
-            {t("dashboard.profile.pl")}
+            P&L
           </div>
           <div
             className={`text-xl font-bold ${

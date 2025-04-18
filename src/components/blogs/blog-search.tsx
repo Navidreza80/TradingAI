@@ -2,12 +2,12 @@
 import { motion } from "framer-motion";
 // Icons
 import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
-// i18n for translation
-import { useTranslation } from "react-i18next";
+
+
 
 export default function SearchBlogs({ searchQuery, setSearchQuery }) {
-  // i18n hooks for translation
-  const { t } = useTranslation();
+  
+  
   return (
     // Container With Animation
     <motion.div
@@ -23,7 +23,7 @@ export default function SearchBlogs({ searchQuery, setSearchQuery }) {
           type="text"
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
-          placeholder={t("blogs.searchPlaceholder")}
+          placeholder="Search articles..."
           className='w-full px-4 py-3 pl-12 rounded-xl bg-transparent
               dark:border-white/10 border-gray-200 border
               focus:outline-none focus:ring-2 focus:ring-[#1890ff]

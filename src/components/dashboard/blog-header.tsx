@@ -8,12 +8,12 @@ import { Button } from "../UI/Button";
 import { Plus } from "lucide-react";
 // Framer motion
 import { motion } from "framer-motion";
-// i18n for translation
-import { useTranslation } from "react-i18next";
+
+
 
 export default function BlogsHeader({ selected, setSelected }) {
-    // i18n hook for translation
-  const { t } = useTranslation();
+    
+  
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -28,19 +28,19 @@ export default function BlogsHeader({ selected, setSelected }) {
            
           `}
       >
-        {t("dashboard.blogs.your")}
+        Your Blogs
       </h1>
       <p
         className={`text-lg dark:text-gray-400 text-gray-600 max-w-3xl mx-auto p-2
            
           `}
       >
-        {t("dashboard.blogs.manage")}
+        Manage your blogs here
       </p>
       <BlogsDropdown selected={selected} setSelected={setSelected} />
       <Link href="/dashboard/blogs/create">
         <Button className="mt-2">
-          <Plus /> {t("dashboard.blogs.create")}
+          <Plus /> Create Blog
         </Button>
       </Link>
     </motion.div>

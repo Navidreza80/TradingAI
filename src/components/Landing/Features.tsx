@@ -8,39 +8,37 @@ import {
 } from '@heroicons/react/24/outline';
 // Framer motion imports for animation
 import { motion } from 'framer-motion';
-// i18n imports for translation
-import { useTranslation } from 'react-i18next';
 // Animation variables
 import { containerVariants, itemVariants } from '@/utils/animation-variants';
 
 export default function Features() {
-  // i18n hooks for translation
-  const { t } = useTranslation();
+  
+  
 
   // Features items object
   const features = [
     {
       icon: <ChartBarIcon className="w-8 h-8" />,
-      title: t('features.realtime.title'),
-      description: t('features.realtime.description'),
+      title: 'Real-Time Analysis',
+      description: 'Get instant market analysis and trading signals based on real-time data',
       color: 'from-blue-500 to-cyan-400' // Real-time analysis theme
     },
     {
       icon: <AcademicCapIcon className="w-8 h-8" />,
-      title: t('features.learn.title'),
-      description: t('features.learn.description'),
+      title: 'Learn & Test',
+      description: 'Master trading strategies through interactive courses and test your knowledge with comprehensive exams',
       color: 'from-purple-500 to-pink-500' // Education theme
     },
     {
       icon: <BoltIcon className="w-8 h-8" />,
-      title: t('features.advanced.title'),
-      description: t('features.advanced.description'),
+      title: 'Advanced Features',
+      description: 'Advanced tools and features powered by artificial intelligence to help you make better trading decisions.',
       color: 'from-amber-500 to-orange-400' // Advanced features theme
     },
     {
       icon: <NewspaperIcon className="w-8 h-8" />,
-      title: t('features.update.title'),
-      description: t('features.update.description'),
+      title: 'Stay Updated',
+      description: 'Get the latest crypto news, market analysis, and expert insights through our regularly updated blogs and news section',
       color: 'from-green-500 to-emerald-400' // News theme
     }
   ];
@@ -65,12 +63,12 @@ export default function Features() {
         >
           {/* Section Title - Gradient text with language support */}
           <h2 className='text-3xl sm:text-4xl lg:text-5xl font-bold p-3 text-primary-light dark:text-primary-dark'>
-            {t('features.title')}
+          Powerful Features for Smart Trading
           </h2>
 
           {/* Section Subtitle - Responsive text with theme support */}
           <p className='text-secondary-light dark:text-secondary-dark mt-4 text-lg max-w-3xl mx-auto'>
-            {t('features.subtitle')}
+          Advanced tools and features powered by artificial intelligence to help you make better trading decisions
           </p>
         </motion.div>
 

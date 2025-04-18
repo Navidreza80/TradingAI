@@ -2,43 +2,43 @@
 import { motion, AnimatePresence } from "framer-motion";
 // Next built in components
 import Link from "next/link";
-import { useTranslation } from "react-i18next";
+
 // Third party components
 import ThemeNLanguage from "../Header/theme-n-language";
 // Type
 import { MouseEventHandler } from "react";
 
 export default function Sidebar({ isOpen, onClose }: {isOpen: boolean; onClose: MouseEventHandler<HTMLButtonElement> | undefined}) {
-  // i18n hooks for translation
-  const { t, i18n } = useTranslation();
+  
+  
   // Sidebar items to map over them
   const sidebarItems = [
     {
       iconLight: "bg-dashboardLM",
       iconDark: "dark:bg-dashboardDM",
-      text: t("dashboard.sidebar.dash"),
+      text: 'Dashboard',
       href: "/dashboard",
     },
     {
-      text: t("dashboard.sidebar.prof"),
+      text: 'Profile',
       href: "/dashboard/profile",
       iconLight: "bg-userLM",
       iconDark: "dark:bg-userDM",
     },
     {
-      text: t("dashboard.sidebar.blogs"),
+      text: 'Blogs',
       href: "/dashboard/blogs",
       iconLight: "bg-bookLM",
       iconDark: "dark:bg-bookDM",
     },
     {
-      text: t("dashboard.sidebar.sub"),
+      text: 'Subscription',
       href: "/dashboard/subscriptions",
       iconLight: "bg-coinLM",
       iconDark: "dark:bg-coinDM",
     },
     {
-      text: t("dashboard.sidebar.comments"),
+      text: 'Comments',
       href: "/dashboard/comments",
       iconLight: "bg-commentLM",
       iconDark: "dark:bg-commentDM",
@@ -60,13 +60,11 @@ export default function Sidebar({ isOpen, onClose }: {isOpen: boolean; onClose: 
 
           {/* Sidebar */}
           <motion.div
-            initial={i18n.language == "en" ? { x: -300 } : { x: 300 }}
+            initial={{ x: -300 }}
             animate={{ x: 0 }}
-            exit={i18n.language == "en" ? { x: -300 } : { x: 300 }}
+            exit={{ x: -300 }}
             transition={{ type: "spring", stiffness: 300, damping: 30 }}
-            className={`fixed inset-y-0 ${
-              i18n.language == "en" ? "left-0" : "right-0"
-            } bg-gradient-to-b from-[#F0F0F0] to-white dark:from-[#0A0A0A] dark:to-black text-black dark:text-white w-64 min-h-screen z-50 shadow-2xl`}
+            className='fixed inset-y-0 left-0 bg-gradient-to-b from-[#F0F0F0] to-white dark:from-[#0A0A0A] dark:to-black text-black dark:text-white w-64 min-h-screen z-50 shadow-2xl'
           >
             {/* Sidebar Header */}
             <div className="w-full flex flex-row justify-between border-b border-gray-700">

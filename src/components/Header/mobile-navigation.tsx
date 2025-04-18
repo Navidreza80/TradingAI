@@ -2,57 +2,54 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { useTranslation } from "react-i18next";
+
 import { motion, AnimatePresence } from "framer-motion";
 
 export default function MobileNavigation() {
-  const [t, i18n] = useTranslation();
   const [isOpen, setIsOpen] = useState(false);
   const [expandedItem, setExpandedItem] = useState<string | null>(null);
 
   // Navigation items with translations and dropdown menus - same structure as header-navigation
   const navItems = [
     { 
-      name: t("nav.market") || "Market", 
+      name: "Market", 
       href: "#", 
       dropdownItems: [
-        { name: t("nav.marketItems.forex") || "Forex", href: "/market/forex" },
-        { name: t("nav.marketItems.crypto") || "Crypto", href: "/market/crypto" },
-        { name: t("nav.marketItems.stock") || "Stock", href: "/market/stock" },
-        { name: t("nav.marketItems.commodities") || "Commodities", href: "/market/commodities" },
-        { name: t("nav.marketItems.nft") || "NFT", href: "/market/nft" },
+        { name: "Forex", href: "/market/forex" },
+        { name: "Crypto", href: "/market/crypto" },
+        { name: "Stock", href: "/market/stock" },
       ]
     },
     { 
-      name: t("nav.learn") || "Learn", 
+      name: "Learn", 
       href: "#", 
       dropdownItems: [
-        { name: t("nav.learnItems.strategies") || "Strategies", href: "/learn/strategies" },
-        { name: t("nav.learnItems.indicators") || "Indicators", href: "/learn/indicators" },
-        { name: t("nav.learnItems.exams") || "Exams", href: "/learn/exams" },
-        { name: t("nav.learnItems.certificates") || "Certificates", href: "/learn/certificates" },
-        { name: t("nav.learnItems.beginner") || "Beginner", href: "/learn/beginner" },
-        { name: t("nav.learnItems.markets") || "Markets", href: "/learn/markets" },
-        { name: t("nav.learnItems.web3") || "Web3", href: "/learn/web3" },
+        { name: "Strategies", href: "/learn/strategies" },
+        { name: "Indicators", href: "/learn/indicators" },
+        { name: "Exams", href: "/learn/exams" },
+        { name: "Certificates", href: "/learn/certificates" },
+        { name: "Beginner", href: "/learn/beginner" },
+        { name: "Markets", href: "/learn/markets" },
+        { name: "Web3", href: "/learn/web3" },
       ]
     },
     { 
-      name: t("nav.signals") || "Signals", 
+      name: "Signals", 
       href: "#", 
       dropdownItems: [
-        { name: t("nav.signalsItems.aiGenerator") || "AI Signal Generator", href: "/signals/ai-generator" },
-        { name: t("nav.signalsItems.suggestions") || "What Other Suggests?", href: "/signals/suggestions" },
+        { name: "AI Signal Generator", href: "/signals/ai-generator" },
+        { name: "What Other Suggests?", href: "/signals/suggestions" },
       ]
     },
     { 
-      name: t("nav.news") || "News", 
+      name: "News", 
       href: "#", 
       dropdownItems: [
-        { name: t("nav.newsItems.blogs") || "Blogs", href: "/news/blogs" },
-        { name: t("nav.newsItems.magazine") || "News Magazine", href: "/news/magazine" },
-        { name: t("nav.newsItems.events") || "Events", href: "/news/events" },
-        { name: t("nav.newsItems.podcasts") || "Podcasts", href: "/news/podcasts" },
-        { name: t("nav.newsItems.videos") || "Videos", href: "/news/videos" },
+        { name:"Blogs", href: "/news/blogs" },
+        { name: "News Magazine", href: "/news/magazine" },
+        { name:"Events", href: "/news/events" },
+        { name: "Podcasts", href: "/news/podcasts" },
+        { name: "Videos", href: "/news/videos" },
       ]
     },
   ];

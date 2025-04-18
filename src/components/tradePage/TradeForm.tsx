@@ -6,7 +6,7 @@ import { addPosition } from '../../hooks/redux/positionsSlice';
 import type { FormData, Position } from '../../types/index';
 import style from './style.module.css';
 import { Statistic, Select } from 'antd';
-import { useTranslation } from 'react-i18next';
+
 
 const { Option } = Select;
 
@@ -21,7 +21,7 @@ interface TradeFormProps {
 // کامپوننت اصلی فرم معامله
 const TradeForm: React.FC<TradeFormProps> = ({ currentPrice, onOpenPosition, symbol, isDarkMode = true }) => {
   const dispatch = useDispatch();
-  const { t, i18n } = useTranslation();
+  
 
   // وضعیت‌های مختلف فرم
   const [formData, setFormData] = useState<FormData>({
@@ -133,11 +133,11 @@ const TradeForm: React.FC<TradeFormProps> = ({ currentPrice, onOpenPosition, sym
   };
 
   return (
-    <form onSubmit={handleSubmit} className={`${style.Form} text-${i18n.language === 'fa' || i18n.language === 'ar' ? 'right' : 'left'}`} dir={i18n.dir()}>
+    <form onSubmit={handleSubmit} className={`${style.Form} text-left}`} dir='ltr'>
       {/* نمایش قیمت فعلی */}
       <div className="bg-gray-200 dark:bg-[#1a1a1a] rounded-lg p-4 mb-4 transition-colors duration-300">
         <div className="flex justify-between items-center">
-          <h1 className='text-[16px] font-semibold text-black dark:text-white transition-colors duration-300'>{t("currentPrice")}</h1>
+          <h1 className='text-[16px] font-semibold text-black dark:text-white transition-colors duration-300'>Current Price</h1>
           <h1 className='text-[20px] font-bold text-black dark:text-white transition-colors duration-300'>
             ${currentPrice || "—"}
           </h1>
@@ -146,7 +146,7 @@ const TradeForm: React.FC<TradeFormProps> = ({ currentPrice, onOpenPosition, sym
 
       {/* بخش نوع معامله */}
       <div className="mb-4">
-        <label className="block text-[14px] text-gray-600 dark:text-[#8c8c8c] mb-2 transition-colors duration-300">{t("tradeType")}:</label>
+        <label className="block text-[14px] text-gray-600 dark:text-[#8c8c8c] mb-2 transition-colors duration-300">Trade Type:</label>
         <div className="grid grid-cols-2 gap-2">
           <button
             type="button"
@@ -157,7 +157,7 @@ const TradeForm: React.FC<TradeFormProps> = ({ currentPrice, onOpenPosition, sym
                 : 'bg-white dark:bg-[#1a1a1a] text-[#00c087] border border-[#00c087] transition-colors duration-300'
             }`}
           >
-            {t("long")}
+            Long
           </button>
           <button
             type="button"
@@ -168,7 +168,7 @@ const TradeForm: React.FC<TradeFormProps> = ({ currentPrice, onOpenPosition, sym
                 : 'bg-white dark:bg-[#1a1a1a] text-[#ff4343] border border-[#ff4343] transition-colors duration-300'
             }`}
           >
-            {t("short")}
+            Short
           </button>
         </div>
       </div>
@@ -176,7 +176,7 @@ const TradeForm: React.FC<TradeFormProps> = ({ currentPrice, onOpenPosition, sym
       {/* بخش حالت معامله و اهرم*/}
       <div className="grid grid-cols-2 gap-4 mb-4">
         <div>
-          <label className="block text-[14px] text-gray-600 dark:text-[#8c8c8c] mb-2 transition-colors duration-300">{t("tradeMode")}:</label>
+          <label className="block text-[14px] text-gray-600 dark:text-[#8c8c8c] mb-2 transition-colors duration-300">Trade Mode:</label>
           <select 
             className="w-full bg-white dark:bg-[#1a1a1a] text-black dark:text-white border border-gray-300 dark:border-[#2a2a2a] rounded-lg p-2 transition-colors duration-300" 
             name="mode" 
@@ -187,7 +187,7 @@ const TradeForm: React.FC<TradeFormProps> = ({ currentPrice, onOpenPosition, sym
           </select>
         </div>
         <div>
-          <label className="block text-[14px] text-gray-600 dark:text-[#8c8c8c] mb-2 transition-colors duration-300">{t("leverage")}: {leverage}x</label>
+          <label className="block text-[14px] text-gray-600 dark:text-[#8c8c8c] mb-2 transition-colors duration-300">Leverage: {leverage}x</label>
           <div className="flex items-center gap-2">
             <span className="text-sm text-gray-600 dark:text-[#8c8c8c] transition-colors duration-300">1x</span>
             <input
@@ -205,7 +205,7 @@ const TradeForm: React.FC<TradeFormProps> = ({ currentPrice, onOpenPosition, sym
 
       {/* بخش مقدار معامله */}
       <div className="mb-4">
-        <label className="block text-[14px] text-gray-600 dark:text-[#8c8c8c] mb-2 transition-colors duration-300">{t("amount")}:</label>
+        <label className="block text-[14px] text-gray-600 dark:text-[#8c8c8c] mb-2 transition-colors duration-300">Amount:</label>
         <input
           type="number"
           name="amount"
@@ -228,7 +228,7 @@ const TradeForm: React.FC<TradeFormProps> = ({ currentPrice, onOpenPosition, sym
             id='inputTPSL'
             onChange={(e) => setTPSL(e.target.checked)}
           />
-          <label className='text-[14px] text-gray-600 dark:text-[#8c8c8c] cursor-pointer transition-colors duration-300' htmlFor="inputTPSL">{t("TP_SL")}</label>
+          <label className='text-[14px] text-gray-600 dark:text-[#8c8c8c] cursor-pointer transition-colors duration-300' htmlFor="inputTPSL">TP/SL</label>
         </div>
         {TPSL && (
           <div className="grid grid-cols-2 gap-4">
@@ -237,7 +237,7 @@ const TradeForm: React.FC<TradeFormProps> = ({ currentPrice, onOpenPosition, sym
                 type="text"
                 value={takeProfitPrice}
                 onChange={(e) => handlePriceChange(e.target.value, setTakeProfitPrice)}
-                placeholder={t("takeProfit")}
+                placeholder="Take profit"
                 className="w-full bg-white dark:bg-[#1a1a1a] text-black dark:text-white border border-gray-300 dark:border-[#2a2a2a] rounded-lg p-2 focus:border-[#00c087] transition-colors duration-300"
               />
             </div>
@@ -246,7 +246,7 @@ const TradeForm: React.FC<TradeFormProps> = ({ currentPrice, onOpenPosition, sym
                 type="text"
                 value={stopLossPrice}
                 onChange={(e) => handlePriceChange(e.target.value, setStopLossPrice)}
-                placeholder={t("stopLoss")}
+                placeholder="Stop loss"
                 className="w-full bg-white dark:bg-[#1a1a1a] text-black dark:text-white border border-gray-300 dark:border-[#2a2a2a] rounded-lg p-2 focus:border-[#ff4343] transition-colors duration-300"
               />
             </div>
@@ -263,7 +263,7 @@ const TradeForm: React.FC<TradeFormProps> = ({ currentPrice, onOpenPosition, sym
             : 'bg-[#ff4343] text-white hover:bg-[#e53935]'
         }`}
       >
-        {t("openPosition")}
+        Open Position
       </button>
     </form>
   );

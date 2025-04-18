@@ -1,7 +1,7 @@
 // Framer motion import for animation
 import { motion } from "framer-motion";
-// i18n for translation
-import { useTranslation } from "react-i18next";
+
+
 // Icons
 import {
   UserGroupIcon,
@@ -11,32 +11,32 @@ import {
 } from "@heroicons/react/24/outline";
 
 export default function StatsGrid() {
-  // i18n hooks for translation
-  const { t, i18n } = useTranslation();
+  
+  
   // Stats items to map over them
   const stats = [
     {
       icon: <UserGroupIcon className="w-6 h-6" />,
       value: "50K+",
-      label: t("about.stats.users.title"),
+      label: 'Users',
       color: "from-blue-500 to-cyan-400",
     },
     {
       icon: <GlobeAltIcon className="w-6 h-6" />,
       value: "150+",
-      label: t("about.stats.countries.title"),
+      label: 'Countries',
       color: "from-purple-500 to-pink-500",
     },
     {
       icon: <CubeTransparentIcon className="w-6 h-6" />,
       value: "99.9%",
-      label: t("about.stats.uptime.title"),
+      label: 'Uptime',
       color: "from-amber-500 to-orange-400",
     },
     {
       icon: <ShieldCheckIcon className="w-6 h-6" />,
       value: "24/7",
-      label: t("about.stats.support.title"),
+      label: 'Support',
       color: "from-green-500 to-emerald-400",
     },
   ];
@@ -64,13 +64,7 @@ export default function StatsGrid() {
               {stat.icon}
             </div>
             <div
-              className={`text-3xl font-bold mb-2 dark:text-primary-dark text-primary-light
-                  ${
-                    i18n.language === "fa" || i18n.language === "ar"
-                      ? "font-numericpersian"
-                      : ""
-                  }`}
-            >
+              className='text-3xl font-bold mb-2 dark:text-primary-dark text-primary-light'>
               {stat.value}
             </div>
             <div

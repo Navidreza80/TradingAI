@@ -13,8 +13,8 @@ import {
 import { Edit } from "lucide-react";
 import { Input } from "../UI/input";
 import { Label } from "../UI/label";
-// i18n for translation
-import { useTranslation } from "react-i18next";
+
+
 // React built in hooks
 import { useState } from "react";
 // Server actions
@@ -23,8 +23,8 @@ import { editComment } from "@/actions/comment.action";
 import toast from "react-hot-toast";
 
 export default function EditComment({commentId, content}) {
-  // i18n hooks for translation
-  const { t } = useTranslation();
+  
+  
   // State to save the value of users username
   const [value, setValue] = useState(content)
   // Function that edit and updates users username by passing the username string value
@@ -40,22 +40,22 @@ export default function EditComment({commentId, content}) {
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
-          <DialogTitle className="dark:text-white text-gray-400">{t('dashboard.commentsPage.edit.title')}</DialogTitle>
+          <DialogTitle className="dark:text-white text-gray-400">Edit Comment</DialogTitle>
           <DialogDescription>
-          {t("dashboard.commentsPage.edit.desc")}
+          Make changes to your comment here, click save when you're done
           </DialogDescription>
         </DialogHeader>
         <div className="grid py-4">
           <div className="grid grid-cols-4 items-center gap-4">
             <Label htmlFor="username" className="text-right dark:text-white text-gray-400">
-            {t('dashboard.commentsPage.edit.content')}
+            Content
             </Label>
             <Input id="username" defaultValue={content} onChange={(e) => setValue(e.currentTarget.value)} className="col-span-3" />
           </div>
         </div>
         <div className="py-4"></div>
         <DialogFooter>
-          <Button onClick={updateComment}>{t('dashboard.modals.save')}</Button>
+          <Button onClick={updateComment}>Save changes</Button>
         </DialogFooter>
       </DialogContent>
     </Dialog>

@@ -1,10 +1,8 @@
 "use client"
 import React from 'react';
 import { motion } from 'framer-motion';
-import { useTranslation } from 'react-i18next';
 
 const LoadingPage = () => {
-  const { t } = useTranslation();
 
   return (
     <div className="min-h-screen flex flex-col justify-center items-center bg-gradient-to-b from-gray-900 to-black relative overflow-hidden">
@@ -14,12 +12,6 @@ const LoadingPage = () => {
           <motion.div
             key={i}
             className="absolute w-1 h-1 bg-blue-500/20"
-            initial={{ 
-              x: Math.random() * window.innerWidth,
-              y: Math.random() * window.innerHeight,
-              scale: 0,
-              opacity: 0 
-            }}
             animate={{ 
               scale: [0, 1, 0],
               opacity: [0, 0.5, 0],
@@ -74,10 +66,10 @@ const LoadingPage = () => {
         transition={{ delay: 0.2 }}
       >
         <h2 className="text-2xl font-semibold bg-gradient-to-r from-blue-400 to-blue-600 text-transparent bg-clip-text mb-2">
-          {t('loading.title')}
+          Loading...
         </h2>
         <p className="text-gray-400 text-sm">
-          {t('loading.subtitle')}
+          Please Wait
         </p>
       </motion.div>
 

@@ -1,188 +1,211 @@
-"use client"
 // Next built in
 import dynamic from "next/dynamic";
 // Third party components
-const Features = dynamic(() => import('@/components/Landing/Features'), { ssr: false });
-const LandingSections = dynamic(() => import('@/components/Landing/Sections'), { ssr: false });
+const Features = dynamic(() => import("@/components/Landing/Features"), {
+  ssr: true,
+});
+const LandingSections = dynamic(() => import("@/components/Landing/Sections"), {
+  ssr: true,
+});
 import HeroSection from "@/components/Landing/HeroSection";
 // Icons
-import { AcademicCapIcon, ArrowTrendingUpIcon, MagnifyingGlassIcon, UserGroupIcon } from "@heroicons/react/24/outline";
-import { BitcoinIcon, BookOpenIcon, ChartBarIcon, ClockIcon, NewspaperIcon, PaperclipIcon, RssIcon, StarIcon, TrophyIcon, UsersIcon } from "lucide-react";
+import {
+  AcademicCapIcon,
+  ArrowTrendingUpIcon,
+  MagnifyingGlassIcon,
+  UserGroupIcon,
+} from "@heroicons/react/24/outline";
+import {
+  BitcoinIcon,
+  BookOpenIcon,
+  ChartBarIcon,
+  ClockIcon,
+  NewspaperIcon,
+  PaperclipIcon,
+  RssIcon,
+  StarIcon,
+  TrophyIcon,
+  UsersIcon,
+} from "lucide-react";
 import { FaRobot } from "react-icons/fa";
-// i18n for translation
-import { useTranslation } from "react-i18next";
 // Types
 import { LandingSectionsInterface } from "@/types";
 
 export default function Home() {
-  const { t } = useTranslation()
   const landingSectionItems: LandingSectionsInterface[] = [
     {
-      title: t('signals.title'),
-      description: t('signals.desc'),
+      title: "AI-Powered Crypto Trading Signal",
+      description:
+        "Get AI-powered trading signals for your favorite crypto pairs in 4 easy steps.",
       mainButton: {
         className: "from-blue-500 to-cyan-400",
-        text: t('signals.getSignal')
+        text: "Get Signal",
       },
       secondButton: null,
       features: [
         {
           icon: <BitcoinIcon className="w-8 h-8" />,
-          value: 'BTCUSDT',
-          title: t('signals.selectP'),
+          value: "BTCUSDT",
+          title: "Select Crypto Pair",
           description: null,
-          color: 'from-blue-500 to-cyan-400',
+          color: "from-blue-500 to-cyan-400",
         },
         {
           icon: <ClockIcon className="w-8 h-8" />,
-          value: '1h',
-          title: t('signals.selectT'),
+          value: "1h",
+          title: "Select Time Frame",
           description: null,
-          color: 'from-emerald-500 to-teal-500'
+          color: "from-emerald-500 to-teal-500",
         },
         {
           icon: <ChartBarIcon className="w-8 h-8" />,
-          value: '100',
-          title: t('signals.adjustC'),
+          value: "100",
+          title: "Adjust Candles",
           description: null,
-          color: 'from-amber-500 to-orange-400'
+          color: "from-amber-500 to-orange-400",
         },
         {
           icon: <StarIcon className="w-8 h-8" />,
-          value: 'TP / SL',
-          title: t('signals.generateS'),
+          value: "TP / SL",
+          title: "Generate Signal",
           description: null,
-          color: 'from-purple-500 to-pink-500'
-        }
-      ]
+          color: "from-purple-500 to-pink-500",
+        },
+      ],
     },
     {
-      title: t('strategies.title'),
-      description: t('strategies.description'),
+      title: "Master Trading Strategies",
+      description:
+        "Learn professional trading strategies and test your knowledge with interactive exercises and comprehensive exams",
       mainButton: {
         className: "from-emerald-500 to-teal-500",
-        text: t('strategies.startLearning')
+        text: "Start Learning",
       },
       secondButton: {
         className: "hover:bg-emerald-500/10 border-emerald-500",
-        text: t('strategies.takeTest')
+        text: "Take a Test",
       },
       features: [
         {
           icon: <BookOpenIcon className="w-8 h-8" />,
           value: 50,
-          title: t('strategies.courses'),
-          description: t('strategies.coursesDesc'),
-          color: 'from-blue-500 to-cyan-400'
+          title: "Trading Courses",
+          description: "Professional trading courses from basic to advanced.",
+          color: "from-blue-500 to-cyan-400",
         },
         {
           icon: <AcademicCapIcon className="w-8 h-8" />,
           value: 1000,
-          title: t('strategies.exercises'),
-          description: t('strategies.exercisesDesc'),
-          color: 'from-emerald-500 to-teal-500'
+          title: "Practice Exercises",
+          description: "Interactive exercises to master trading skills",
+          color: "from-emerald-500 to-teal-500",
         },
         {
           icon: <TrophyIcon className="w-8 h-8" />,
           value: 20,
-          title: t('strategies.certificates'),
-          description: t('strategies.certificatesDesc'),
-          color: 'from-amber-500 to-orange-400'
+          title: "Certificates",
+          description: "Professional trading certificates",
+          color: "from-amber-500 to-orange-400",
         },
         {
           icon: <UserGroupIcon className="w-8 h-8" />,
           value: 5000,
-          title: t('strategies.students'),
-          description: t('strategies.studentsDesc'),
-          color: 'from-purple-500 to-pink-500'
-        }
+          title: "Active Students",
+          description: "Successful traders in our community",
+          color: "from-purple-500 to-pink-500",
+        },
       ],
     },
     {
-      title: t("features.update.title"),
-      description: t("features.update.description"),
+      title: "Stay Updated",
+      description:
+        "Get the latest crypto news, market analysis, and expert insights through our regularly updated blogs and news section",
       mainButton: {
         className: "from-purple-500 to-pink-500",
-        text: t('news.explore')
+        text: "Explore News",
       },
       secondButton: {
         className: "hover:bg-purple-500/10 border-purple-500",
-        text: t('news.read')
+        text: "Read Blogs",
       },
       features: [
         {
           icon: <NewspaperIcon className="w-8 h-8 text-white" />,
           value: null,
-          title: t("news.latest.title"),
-          description: t("news.latest.description"),
+          title: "Stay Updated",
+          description:
+            "Get the latest financial market news and updates in real-time",
           color: "from-blue-500 to-cyan-400",
         },
         {
           icon: <ChartBarIcon className="w-8 h-8 text-white" />,
           value: null,
-          title: t("news.impact.title"),
-          description: t("news.impact.description"),
+          title: "Market Impact",
+          description:
+            "See how news affects market trends and make informed decisions",
           color: "from-purple-500 to-pink-500",
         },
         {
           icon: <RssIcon className="w-8 h-8 text-white" />,
           value: null,
-          title: t("news.blogs.title"),
-          description: t("news.blogs.description"),
+          title: "Market Insights",
+          description:
+            "Read interesting blogs about market analysis and trading strategies",
           color: "from-amber-500 to-orange-400",
         },
         {
           icon: <ArrowTrendingUpIcon className="w-8 h-8 text-white" />,
-          title: t("news.share.title"),
+          title: "Share Knowledge",
           value: null,
-          description: t("news.share.description"),
+          description:
+            "Share your trading insights and experiences with the community",
           color: "from-green-500 to-emerald-400",
         },
       ],
     },
     {
-      title: t("analyze.title"),
-      description: t("analyze.description"),
+      title: 'Monitor Your Trading Growth',
+      description: 'Leverage our advanced tools and AI-powered insights to analyze your trading journey and optimize your strategy.',
       mainButton: {
         className: "from-amber-500 to-orange-400",
-        text: t('analyze.execute')
+        text: 'Demo Trade',
       },
       secondButton: {
         className: "hover:bg-amber-500/10 from-amber-500",
-        text: t('analyze.analyze')
+        text: 'Analyze Yourself',
       },
       features: [
         {
           icon: <PaperclipIcon className="w-8 h-8 text-white" />,
-          title: t("analyze.demo"),
-          description: t("analyze.desc"),
+          title: 'Demo Trade',
+          description: 'Analyze market and execute your trades in demo mode.',
           value: null,
           color: "from-blue-500 to-cyan-400",
         },
         {
           icon: <FaRobot className="w-8 h-8 text-white" />,
-          title: t("analyze.titleR"),
-          description: t("analyze.descR"),
+          title: 'AI Mentor',
+          description: 'Look how you performed on your last trades',
           value: null,
           color: "from-purple-500 to-pink-500",
         },
         {
           icon: <MagnifyingGlassIcon className="w-8 h-8 text-white" />,
-          title: t("analyze.titleM"),
-          description: t("analyze.descM"),
+          title: 'Track Your Progress',
+          description: 'Track your progress in your trading journey with our professional analytics tools',
           value: null,
           color: "from-amber-500 to-orange-400",
         },
         {
           icon: <UsersIcon className="w-8 h-8 text-white" />,
-          title: t("analyze.titleF"),
+          title: 'Share Your Profits',
           value: null,
-          description: t("analyze.descF"),
+          description: 'Share your profits with your friends and invite them to our site!',
           color: "from-green-500 to-emerald-400",
         },
       ],
     },
-  ]
+  ];
   return (
     <main className="min-h-screen bg-[#0a0a0a] text-white flex flex-col">
       {/* Hero Section */}
@@ -190,12 +213,19 @@ export default function Home() {
 
       {/* Features Section */}
       <Features />
-      
+
       {landingSectionItems.map((item, index) => {
         return (
-          <LandingSections features={item.features} secondButton={item.secondButton} title={item.title} description={item.description} mainButton={item.mainButton} key={index} />
-        )
+          <LandingSections
+            features={item.features}
+            secondButton={item.secondButton}
+            title={item.title}
+            description={item.description}
+            mainButton={item.mainButton}
+            key={index}
+          />
+        );
       })}
     </main>
-  )
+  );
 }

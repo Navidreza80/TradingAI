@@ -30,7 +30,7 @@ import fa_IR from "antd/locale/fa_IR"; // زبان فارسی برای antd
 
 // هوک‌های React
 import { useCallback, useEffect, useState, useRef } from "react"; // هوک‌های React
-import { useTranslation } from 'react-i18next'; // هوک برای ترجمه
+ // هوک برای ترجمه
 
 // کامپوننت‌ها
 import TradeForm from "../../components/tradePage/TradeForm"; // فرم معاملات
@@ -66,7 +66,7 @@ export default function TradePage() {
   const [showChart, setShowChart] = useState(false); // وضعیت چک‌باکس نمایش نمودار
   const [isMobile, setIsMobile] = useState(false); // وضعیت برای بررسی عرض صفحه
   const [isDarkMode, setIsDarkMode] = useState(true); // وضعیت تم تاریک
-  const { t, i18n } = useTranslation(); // ترجمه
+   // ترجمه
   const [isSymbolModalVisible, setIsSymbolModalVisible] = useState(false); // وضعیت نمایش مودال انتخاب نماد
   const [searchQuery, setSearchQuery] = useState(''); // جستجوی نماد
   const [filteredCoins, setFilteredCoins] = useState<string[]>([]); // ارزهای فیلتر شده
@@ -731,8 +731,8 @@ export default function TradePage() {
   }, []);
 
   return (
-    <div dir={i18n.language === 'fa' || i18n.language === 'ar' ? 'rtl' : 'ltr'}>
-      <ConfigProvider locale={i18n.language === 'fa' ? fa_IR : undefined}>
+    <div dir='ltr'>
+      <ConfigProvider>
         <Layout className="min-h-screen mt-16 bg-white dark:bg-[#0e0e0e] text-black dark:text-white transition-colors duration-300">
           <Content className="p-6 bg-white dark:bg-[#0e0e0e] transition-colors duration-300">
             <div className="bg-white dark:bg-[#0e0e0e] transition-colors duration-300">
@@ -745,14 +745,6 @@ export default function TradePage() {
                   onChange={handleCheckboxChange}
                   disabled={!isMobile}
                 />
-                <div
-                  className={
-                    "cursor-pointer rounded-xl p-2 font-bold border border-gray-300 dark:border-[#2a2a2a] text-blue-600 dark:text-[#00a0ff] hover:bg-gray-100 dark:hover:bg-[#1a1a1a] transition-colors duration-300"
-                  }
-                  onClick={() => router.push(`/education`)}
-                >
-                  <h1 className="text-blue-600 dark:text-[#00a0ff] transition-colors duration-300">{t("education")}</h1>
-                </div>
                 <label
                   className={`cursor-pointer rounded-xl p-2 font-bold transition-colors duration-300 ${showChart
                     ? "bg-gray-200 dark:bg-[#1a1a1a]"
@@ -783,7 +775,7 @@ export default function TradePage() {
                   <div className="flex justify-between items-center mb-[20px]">
                     <div className="flex items-center gap-3">
                       <label className="text-[16px] font-semibold text-black dark:text-white transition-colors duration-300">
-                        {t("symbol")}:
+                        Symbol:
                       </label>
                       <div className="my-auto">
                         <div className="flex flex-col">
@@ -819,7 +811,7 @@ export default function TradePage() {
                   <div className="flex text-black dark:text-white mb-1 justify-between items-center mb-4 transition-colors duration-300">
                     <div className="flex gap-1.5 items-center">
                       <span className="text-[16px] font-[700] text-black dark:text-white transition-colors duration-300">
-                        {t("activeTrades")}
+                        Active Trades
                       </span>
                       <span
                         className="text-[17px] font-bold border border-gray-300 dark:border-[#2a2a2a] text-blue-600 dark:text-[#00a0ff] px-2 py-0.5 rounded bg-white dark:bg-[#1a1a1a] transition-colors duration-300"
@@ -832,7 +824,7 @@ export default function TradePage() {
                         onClick={() => setIsHistoryModalVisible(true)}
                         className="border-none flex items-center gap-1 bg-gray-100 dark:bg-[#1a1a1a] hover:bg-gray-200 dark:hover:bg-[#252525] p-2 rounded-[8px] text-blue-600 dark:text-[#00a0ff] transition-colors duration-300"
                       >
-                        <span className="text-[16px]">{t("history")}</span>
+                        <span className="text-[16px]">History</span>
                         <img
                           className="w-5 h-5"
                           src={`https://img.icons8.com/?size=100&id=ZG6vinMQTTq8&format=png&color=${isDarkMode ? '00a0ff' : '0066cc'}`}
@@ -849,7 +841,7 @@ export default function TradePage() {
                           src="https://img.icons8.com/?size=100&id=12776&format=png&color=cccccc"
                           className="w-16 h-16 mb-4 opacity-50"
                         />
-                        <p>{t("noActivePositions")}</p>
+                        <p>No Active Positions</p>
                       </div>
                     ) : (
                       <div className="space-y-4">
@@ -904,19 +896,19 @@ export default function TradePage() {
                               <div className="p-3">
                                 <div className="grid grid-cols-2 gap-3 mb-3">
                                   <div>
-                                    <p className="text-xs text-gray-500 dark:text-gray-400 mb-1">{t("entryPrice")}</p>
+                                    <p className="text-xs text-gray-500 dark:text-gray-400 mb-1">Entry Price</p>
                                     <p className="text-sm font-medium text-black dark:text-white">${(position.entryPrice != null ? position.entryPrice : 0)}</p>
                                   </div>
                                   <div>
-                                    <p className="text-xs text-gray-500 dark:text-gray-400 mb-1">{t("currentPrice")}</p>
+                                    <p className="text-xs text-gray-500 dark:text-gray-400 mb-1">Current Price</p>
                                     <p className="text-sm font-medium text-black dark:text-white">${prices[position.symbol] || "—"}</p>
                                   </div>
                                   <div>
-                                    <p className="text-xs text-gray-500 dark:text-gray-400 mb-1">{t("amount")}</p>
+                                    <p className="text-xs text-gray-500 dark:text-gray-400 mb-1">Amount</p>
                                     <p className="text-sm font-medium text-black dark:text-white">${(position.amount != null ? position.amount : 0)}</p>
                                   </div>
                                   <div>
-                                    <p className="text-xs text-gray-500 dark:text-gray-400 mb-1">{t("mode")}</p>
+                                    <p className="text-xs text-gray-500 dark:text-gray-400 mb-1">Mode</p>
                                     <p className="text-sm font-medium text-black dark:text-white">{position.mode}</p>
                                   </div>
                                 </div>
@@ -924,7 +916,7 @@ export default function TradePage() {
                                 {/* PNL and actions */}
                                 <div className="flex items-center justify-between bg-gray-50 dark:bg-[#252525] p-3 rounded-lg">
                                   <div>
-                                    <p className="text-xs text-gray-500 dark:text-gray-400 mb-1">{t("pnl")}</p>
+                                    <p className="text-xs text-gray-500 dark:text-gray-400 mb-1">PNL</p>
                                     <div className="flex items-center gap-2">
                                       <p className={`text-sm font-bold ${isProfitable ? "text-green-600 dark:text-[#00c087]" : "text-red-600 dark:text-[#ff4343]"}`}>
                                         ${Math.abs(pnl.amount).toFixed(2)}
@@ -951,7 +943,7 @@ export default function TradePage() {
                                         : "bg-red-600 dark:bg-[#ff4343] hover:bg-red-700 dark:hover:bg-[#e53935]"
                                         } transition-colors`}
                                     >
-                                      {t("closePosition")}
+                                      Close Position
                                     </button>
                                   </div>
                                 </div>
@@ -971,21 +963,20 @@ export default function TradePage() {
                           src="https://img.icons8.com/?size=100&id=12776&format=png&color=cccccc"
                           className="w-16 h-16 mb-4 opacity-50"
                         />
-                        <p>{t("noActivePositions")}</p>
+                        <p>No Active Positions</p>
                       </div>
                     ) : (
                       <table className="w-full border-collapse">
                         <thead>
                           <tr>
-                            <th className={`${i18n.language === 'fa' || i18n.language === 'ar' ? 'text-right' : 'text-left'} p-3 text-sm font-medium text-gray-500 dark:text-gray-400 border-b border-gray-200 dark:border-[#2a2a2a]`}>{t("symbol")}</th>
-                            <th className={`${i18n.language === 'fa' || i18n.language === 'ar' ? 'text-right' : 'text-left'} p-3 text-sm font-medium text-gray-500 dark:text-gray-400 border-b border-gray-200 dark:border-[#2a2a2a]`}>{t("type")}</th>
-                            <th className={`${i18n.language === 'fa' || i18n.language === 'ar' ? 'text-right' : 'text-left'} p-3 text-sm font-medium text-gray-500 dark:text-gray-400 border-b border-gray-200 dark:border-[#2a2a2a]`}>{t("leverage")}</th>
-                            <th className={`${i18n.language === 'fa' || i18n.language === 'ar' ? 'text-right' : 'text-left'} p-3 text-sm font-medium text-gray-500 dark:text-gray-400 border-b border-gray-200 dark:border-[#2a2a2a]`}>{t("mode")}</th>
-                            <th className={`${i18n.language === 'fa' || i18n.language === 'ar' ? 'text-right' : 'text-left'} p-3 text-sm font-medium text-gray-500 dark:text-gray-400 border-b border-gray-200 dark:border-[#2a2a2a]`}>{t("entryPrice")}</th>
-                            <th className={`${i18n.language === 'fa' || i18n.language === 'ar' ? 'text-right' : 'text-left'} p-3 text-sm font-medium text-gray-500 dark:text-gray-400 border-b border-gray-200 dark:border-[#2a2a2a]`}>{t("currentPrice")}</th>
-                            <th className={`${i18n.language === 'fa' || i18n.language === 'ar' ? 'text-right' : 'text-left'} p-3 text-sm font-medium text-gray-500 dark:text-gray-400 border-b border-gray-200 dark:border-[#2a2a2a]`}>{t("amount")}</th>
-                            <th className={`${i18n.language === 'fa' || i18n.language === 'ar' ? 'text-right' : 'text-left'} p-3 text-sm font-medium text-gray-500 dark:text-gray-400 border-b border-gray-200 dark:border-[#2a2a2a]`}>{t("pnl")}</th>
-                            <th className={`${i18n.language === 'fa' || i18n.language === 'ar' ? 'text-left' : 'text-right'} p-3 text-sm font-medium text-gray-500 dark:text-gray-400 border-b border-gray-200 dark:border-[#2a2a2a]`}></th>
+                            <th className="'text-left p-3 text-sm font-medium text-gray-500 dark:text-gray-400 border-b border-gray-200 dark:border-[#2a2a2a]">Symbol</th>
+                            <th className="'text-left p-3 text-sm font-medium text-gray-500 dark:text-gray-400 border-b border-gray-200 dark:border-[#2a2a2a]">Leverage</th>
+                            <th className="'text-left p-3 text-sm font-medium text-gray-500 dark:text-gray-400 border-b border-gray-200 dark:border-[#2a2a2a]">Mode</th>
+                            <th className="'text-left p-3 text-sm font-medium text-gray-500 dark:text-gray-400 border-b border-gray-200 dark:border-[#2a2a2a]">Entry Price</th>
+                            <th className="'text-left p-3 text-sm font-medium text-gray-500 dark:text-gray-400 border-b border-gray-200 dark:border-[#2a2a2a]">Current Price</th>
+                            <th className="'text-left p-3 text-sm font-medium text-gray-500 dark:text-gray-400 border-b border-gray-200 dark:border-[#2a2a2a]">Amount</th>
+                            <th className="'text-left p-3 text-sm font-medium text-gray-500 dark:text-gray-400 border-b border-gray-200 dark:border-[#2a2a2a]">PNL</th>
+                            <th className="'text-left p-3 text-sm font-medium text-gray-500 dark:text-gray-400 border-b border-gray-200 dark:border-[#2a2a2a]"></th>
                           </tr>
                         </thead>
                         <tbody>
@@ -1001,7 +992,7 @@ export default function TradePage() {
                                 key={position.timestamp || Math.random()}
                                 className="hover:bg-gray-50 dark:hover:bg-[#1a1a1a] transition-colors"
                               >
-                                <td className={`p-3 text-sm font-medium text-black dark:text-white border-b border-gray-200 dark:border-[#2a2a2a] ${i18n.language === 'fa' || i18n.language === 'ar' ? 'text-right' : 'text-left'}`}>
+                                <td className='p-3 text-sm font-medium text-black dark:text-white border-b border-gray-200 dark:border-[#2a2a2a] text-left'>
                                   <span
                                     className={`${style.clickableSymbol} text-black dark:text-white`}
                                     onClick={() => handleSymbolChange(position.symbol)}
@@ -1009,7 +1000,7 @@ export default function TradePage() {
                                     {position.symbol}
                                   </span>
                                 </td>
-                                <td className={`p-3 border-b border-gray-200 dark:border-[#2a2a2a] ${i18n.language === 'fa' || i18n.language === 'ar' ? 'text-right' : 'text-left'}`}>
+                                <td className='p-3 border-b border-gray-200 dark:border-[#2a2a2a] text-left'>
                                   <span className={`px-2 py-0.5 rounded text-xs font-medium ${position.type === "LONG"
                                     ? "bg-green-100 text-green-600 dark:bg-[rgba(0,192,135,0.1)] dark:text-[#00c087]"
                                     : "bg-red-100 text-red-600 dark:bg-[rgba(255,67,67,0.1)] dark:text-[#ff4343]"
@@ -1017,22 +1008,22 @@ export default function TradePage() {
                                     {position.type}
                                   </span>
                                 </td>
-                                <td className={`p-3 text-sm text-black dark:text-white border-b border-gray-200 dark:border-[#2a2a2a] ${i18n.language === 'fa' || i18n.language === 'ar' ? 'text-right' : 'text-left'}`}>
+                                <td className='p-3 text-sm text-black dark:text-white border-b border-gray-200 dark:border-[#2a2a2a] text-left'>
                                   {position.leverage}x
                                 </td>
-                                <td className={`p-3 text-sm text-black dark:text-white border-b border-gray-200 dark:border-[#2a2a2a] ${i18n.language === 'fa' || i18n.language === 'ar' ? 'text-right' : 'text-left'}`}>
+                                <td className='p-3 text-sm text-black dark:text-white border-b border-gray-200 dark:border-[#2a2a2a] text-left'>
                                   {position.mode}
                                 </td>
-                                <td className={`p-3 text-sm text-black dark:text-white border-b border-gray-200 dark:border-[#2a2a2a] ${i18n.language === 'fa' || i18n.language === 'ar' ? 'text-right' : 'text-left'}`}>
+                                <td className='p-3 text-sm text-black dark:text-white border-b border-gray-200 dark:border-[#2a2a2a] text-left'>
                                   ${(position.entryPrice != null ? position.entryPrice : 0)}
                                 </td>
-                                <td className={`p-3 text-sm text-black dark:text-white border-b border-gray-200 dark:border-[#2a2a2a] ${i18n.language === 'fa' || i18n.language === 'ar' ? 'text-right' : 'text-left'}`}>
+                                <td className='p-3 text-sm text-black dark:text-white border-b border-gray-200 dark:border-[#2a2a2a] text-left'>
                                   ${prices[position.symbol] || "—"}
                                 </td>
-                                <td className={`p-3 text-sm text-black dark:text-white border-b border-gray-200 dark:border-[#2a2a2a] ${i18n.language === 'fa' || i18n.language === 'ar' ? 'text-right' : 'text-left'}`}>
+                                <td className='p-3 text-sm text-black dark:text-white border-b border-gray-200 dark:border-[#2a2a2a] text-left'>
                                   ${(position.amount != null ? position.amount : 0)}
                                 </td>
-                                <td className={`p-3 border-b border-gray-200 dark:border-[#2a2a2a] ${i18n.language === 'fa' || i18n.language === 'ar' ? 'text-right' : 'text-left'}`}>
+                                <td className='p-3 border-b border-gray-200 dark:border-[#2a2a2a]  text-left'>
                                   <div>
                                     <p className={`text-sm font-bold ${isProfitable ? "text-green-600 dark:text-[#00c087]" : "text-red-600 dark:text-[#ff4343]"}`}>
                                       ${Math.abs(pnl.amount).toFixed(2)}
@@ -1042,7 +1033,7 @@ export default function TradePage() {
                                     </p>
                                   </div>
                                 </td>
-                                <td className={`p-3 text-right border-b border-gray-200 dark:border-[#2a2a2a] ${i18n.language === 'fa' || i18n.language === 'ar' ? 'text-left' : 'text-right'}`}>
+                                <td className='p-3 text-right border-b border-gray-200 dark:border-[#2a2a2a]'>
                                   <div className="flex justify-end gap-2">
                                     <button
                                       onClick={() => {
@@ -1072,7 +1063,7 @@ export default function TradePage() {
                                         : "bg-red-600 dark:bg-[#ff4343] hover:bg-red-700 dark:hover:bg-[#e53935]"
                                         } transition-colors`}
                                     >
-                                      {t("closePosition")}
+                                      Close Position
                                     </button>
                                   </div>
                                 </td>
@@ -1094,7 +1085,7 @@ export default function TradePage() {
             onCancel={() => setIsHistoryModalVisible(false)}
             footer={null}
             width={900}
-            className={`${i18n.language === 'fa' || i18n.language === 'ar' ? 'rtl' : 'ltr'}`}
+            className='ltr'
             styles={{
               header: {
                 display: 'none'
@@ -1127,8 +1118,8 @@ export default function TradePage() {
                     </svg>
                   </div>
                   <div>
-                    <h2 className="text-xl font-bold text-white">{t("tradingHistory")}</h2>
-                    <p className="text-sm text-gray-400">{t("viewYourClosedPositions")}</p>
+                    <h2 className="text-xl font-bold text-white">Trading History</h2>
+                    <p className="text-sm text-gray-400">View Your Closed Positions</p>
                   </div>
                 </div>
                 <div className="flex items-center gap-3">
@@ -1145,19 +1136,19 @@ export default function TradePage() {
 
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4 p-5">
                 <div className="bg-[#1a1a1a] rounded-xl p-4 border border-[#2a2a2a] shadow-sm">
-                  <p className="text-sm text-gray-400 mb-1">{t("totalTrades")}</p>
+                  <p className="text-sm text-gray-400 mb-1">Total trades</p>
                   <h3 className="text-2xl font-bold text-white">{closedPositions.length}</h3>
                 </div>
 
                 <div className="bg-[#1a1a1a] rounded-xl p-4 border border-[#2a2a2a] shadow-sm">
-                  <p className="text-sm text-gray-400 mb-1">{t("totalProfit")}</p>
+                  <p className="text-sm text-gray-400 mb-1">Total profit</p>
                   <h3 className={`text-2xl font-bold ${calculateTotalPnL(closedPositions) >= 0 ? 'text-[#00c087]' : 'text-[#ff4343]'}`}>
                     ${calculateTotalPnL(closedPositions).toFixed(2)}
                   </h3>
                 </div>
 
                 <div className="bg-[#1a1a1a] rounded-xl p-4 border border-[#2a2a2a] shadow-sm">
-                  <p className="text-sm text-gray-400 mb-1">{t("winRate")}</p>
+                  <p className="text-sm text-gray-400 mb-1">Win rate</p>
                   <h3 className="text-2xl font-bold text-white">
                     {closedPositions.length > 0
                       ? `${Math.round((closedPositions.filter(p => p.pnl && p.pnl.amount > 0).length / closedPositions.length) * 100)}%`
@@ -1170,7 +1161,7 @@ export default function TradePage() {
                 <div className="flex items-center gap-2 w-full md:w-auto">
                   <input
                     type="text"
-                    placeholder={t("searchSymbol")}
+                    placeholder="Search symbol"
                     className="px-4 py-2 bg-[#252525] border border-[#2a2a2a] rounded-lg text-white w-full md:w-auto"
                   />
                 </div>
@@ -1183,7 +1174,7 @@ export default function TradePage() {
                     }}
                     className="px-4 py-2 bg-[rgba(255,67,67,0.1)] text-[#ff4343] rounded-lg font-medium hover:bg-[rgba(255,67,67,0.2)] transition-colors w-full md:w-auto"
                   >
-                    {t("clearHistory")}
+                    Clear history
                   </button>
                 </div>
               </div>
@@ -1196,8 +1187,8 @@ export default function TradePage() {
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                       </svg>
                     </div>
-                    <h3 className="text-xl font-semibold mb-2 text-white">{t("noHistoryYet")}</h3>
-                    <p className="text-center max-w-md text-gray-400">{t("yourClosedPositionsWillAppearHere")}</p>
+                    <h3 className="text-xl font-semibold mb-2 text-white">No history yet</h3>
+                    <p className="text-center max-w-md text-gray-400">Your closed position will apear hear</p>
                   </div>
                 ) : (
                   <div className="overflow-auto max-h-[60vh]">
@@ -1206,14 +1197,14 @@ export default function TradePage() {
                       <table className="w-full">
                         <thead className="sticky top-0 z-10 bg-[#151515]">
                           <tr className="bg-[#1a1a1a]">
-                            <th className={`${i18n.language === 'fa' || i18n.language === 'ar' ? 'text-right' : 'text-left'} p-4 text-sm font-medium text-gray-400 border-b border-[#2a2a2a]`}>{t("symbol")}</th>
-                            <th className={`${i18n.language === 'fa' || i18n.language === 'ar' ? 'text-right' : 'text-left'} p-4 text-sm font-medium text-gray-400 border-b border-[#2a2a2a]`}>{t("type")}</th>
-                            <th className={`${i18n.language === 'fa' || i18n.language === 'ar' ? 'text-right' : 'text-left'} p-4 text-sm font-medium text-gray-400 border-b border-[#2a2a2a]`}>{t("entryPrice")}</th>
-                            <th className={`${i18n.language === 'fa' || i18n.language === 'ar' ? 'text-right' : 'text-left'} p-4 text-sm font-medium text-gray-400 border-b border-[#2a2a2a]`}>{t("closePrice")}</th>
-                            <th className={`${i18n.language === 'fa' || i18n.language === 'ar' ? 'text-right' : 'text-left'} p-4 text-sm font-medium text-gray-400 border-b border-[#2a2a2a]`}>{t("amount")}</th>
-                            <th className={`${i18n.language === 'fa' || i18n.language === 'ar' ? 'text-right' : 'text-left'} p-4 text-sm font-medium text-gray-400 border-b border-[#2a2a2a]`}>{t("leverage")}</th>
-                            <th className={`${i18n.language === 'fa' || i18n.language === 'ar' ? 'text-right' : 'text-left'} p-4 text-sm font-medium text-gray-400 border-b border-[#2a2a2a]`}>{t("pnl")}</th>
-                            <th className={`${i18n.language === 'fa' || i18n.language === 'ar' ? 'text-right' : 'text-left'} p-4 text-sm font-medium text-gray-400 border-b border-[#2a2a2a]`}>{t("closeTime")}</th>
+                          <th className="'text-left p-3 text-sm font-medium text-gray-500 dark:text-gray-400 border-b border-gray-200 dark:border-[#2a2a2a]">Symbol</th>
+                            <th className="'text-left p-3 text-sm font-medium text-gray-500 dark:text-gray-400 border-b border-gray-200 dark:border-[#2a2a2a]">Leverage</th>
+                            <th className="'text-left p-3 text-sm font-medium text-gray-500 dark:text-gray-400 border-b border-gray-200 dark:border-[#2a2a2a]">Mode</th>
+                            <th className="'text-left p-3 text-sm font-medium text-gray-500 dark:text-gray-400 border-b border-gray-200 dark:border-[#2a2a2a]">Entry Price</th>
+                            <th className="'text-left p-3 text-sm font-medium text-gray-500 dark:text-gray-400 border-b border-gray-200 dark:border-[#2a2a2a]">Current Price</th>
+                            <th className="'text-left p-3 text-sm font-medium text-gray-500 dark:text-gray-400 border-b border-gray-200 dark:border-[#2a2a2a]">Amount</th>
+                            <th className="'text-left p-3 text-sm font-medium text-gray-500 dark:text-gray-400 border-b border-gray-200 dark:border-[#2a2a2a]">PNL</th>
+                            <th className="'text-left p-3 text-sm font-medium text-gray-500 dark:text-gray-400 border-b border-gray-200 dark:border-[#2a2a2a]">Close Time</th>
                           </tr>
                         </thead>
                         <tbody>
@@ -1251,13 +1242,13 @@ export default function TradePage() {
                               </td>
                               <td className="p-4">
                                 <span className="text-gray-400">
-                                  {new Date(position.closeTime).toLocaleDateString(i18n.language, {
+                                  {new Date(position.closeTime).toLocaleDateString('en', {
                                     year: 'numeric',
                                     month: 'short',
                                     day: 'numeric',
                                   })}
                                   <br />
-                                  {new Date(position.closeTime).toLocaleTimeString(i18n.language, {
+                                  {new Date(position.closeTime).toLocaleTimeString('en', {
                                     hour: '2-digit',
                                     minute: '2-digit'
                                   })}
@@ -1315,28 +1306,28 @@ export default function TradePage() {
 
                             <div className="grid grid-cols-2 gap-3 text-sm">
                               <div>
-                                <p className="text-xs text-gray-400">{t("entryPrice")}</p>
+                                <p className="text-xs text-gray-400">Entry Price</p>
                                 <p className="font-medium text-white">${(position.entryPrice != null ? position.entryPrice : 0)}</p>
                               </div>
                               <div>
-                                <p className="text-xs text-gray-400">{t("closePrice")}</p>
+                                <p className="text-xs text-gray-400">Close Price</p>
                                 <p className="font-medium text-white">${(position.closePrice != null ? position.closePrice : 0).toFixed(2)}</p>
                               </div>
                               <div>
-                                <p className="text-xs text-gray-400">{t("amount")}</p>
+                                <p className="text-xs text-gray-400">Amount</p>
                                 <p className="font-medium text-white">${(position.amount != null ? position.amount : 0).toFixed(2)}</p>
                               </div>
                               <div>
-                                <p className="text-xs text-gray-400">{t("closeTime")}</p>
+                                <p className="text-xs text-gray-400">Close Time</p>
                                 <p className="font-medium text-white">
-                                  {new Date(position.closeTime).toLocaleDateString(i18n.language, {
+                                  {new Date(position.closeTime).toLocaleDateString('en', {
                                     year: 'numeric',
                                     month: 'short',
                                     day: 'numeric',
                                   })}
                                 </p>
                                 <p className="text-xs text-gray-400">
-                                  {new Date(position.closeTime).toLocaleTimeString(i18n.language, {
+                                  {new Date(position.closeTime).toLocaleTimeString('en', {
                                     hour: '2-digit',
                                     minute: '2-digit'
                                   })}
@@ -1354,7 +1345,7 @@ export default function TradePage() {
           </Modal>
 
           <Modal
-            title={<h2 className="text-white">{t("setLimits")}</h2>}
+            title={<h2 className="text-white">Set Limits</h2>}
             open={isLimitModalVisible}
             onCancel={() => {
               setIsLimitModalVisible(false);
@@ -1371,14 +1362,14 @@ export default function TradePage() {
                 }}
                 className={`${style.bingxButtonSecondary}`}
               >
-                {t("cancel")}
+                Cancel
               </Button>,
               <Button
                 key="apply"
                 onClick={handleApplyLimits}
                 className={`${style.bingxButton}`}
               >
-                {t("applyChanges")}
+                Apply Changes
               </Button>,
             ]}
             width={600}
@@ -1395,19 +1386,19 @@ export default function TradePage() {
                 <div className="bg-[#1a1a1a] p-4 rounded-lg">
                   <div className="mb-4">
                     <div className="flex items-center justify-between mb-3">
-                      <span className="text-[16px] font-semibold text-white">{t("takeProfit")}</span>
+                      <span className="text-[16px] font-semibold text-white">Take Profit</span>
                       <span className={`${style.bingxTag} ${selectedPosition.type === "LONG" ? style.bingxTagLong : style.bingxTagShort
                         }`}>
-                        {selectedPosition.type === "LONG" ? t("long") : t("short")}
+                        {selectedPosition.type === "LONG" ? "Long" : "Short"}
                       </span>
                     </div>
                     <div className="grid grid-cols-2 gap-4">
                       <div>
-                        <label className="block text-[14px] text-[#8c8c8c] mb-2">{t("price")}</label>
+                        <label className="block text-[14px] text-[#8c8c8c] mb-2">Price</label>
                         <input
                           type="number"
                           className="w-full bg-[#252525] text-white border border-[#2a2a2a] rounded-lg p-2 focus:border-[#00a0ff] transition-colors"
-                          placeholder={t("enterPrice")}
+                          placeholder="Entry price"
                           value={
                             tempLimits.takeProfit?.price ||
                             selectedPosition.takeProfit?.price ||
@@ -1433,20 +1424,13 @@ export default function TradePage() {
                             }
                           }}
                         />
-                        {tempLimits.takeProfit?.price && (
-                          <div className="mt-2 text-xs text-[#00c087]">
-                            {selectedPosition.type === 'LONG'
-                              ? t("willTriggerWhenPriceRisesTo", { price: tempLimits.takeProfit.price.toFixed(2) })
-                              : t("willTriggerWhenPriceFallsTo", { price: tempLimits.takeProfit.price.toFixed(2) })}
-                          </div>
-                        )}
                       </div>
                       <div>
-                        <label className="block text-[14px] text-[#8c8c8c] mb-2">{t("percent")}</label>
+                        <label className="block text-[14px] text-[#8c8c8c] mb-2">Percent</label>
                         <input
                           type="number"
                           className="w-full bg-[#252525] text-white border border-[#2a2a2a] rounded-lg p-2 focus:border-[#00a0ff] transition-colors"
-                          placeholder={t("enterPercent")}
+                          placeholder="Enter percent"
                           value={
                             tempLimits.takeProfit?.percent?.toFixed(2) ||
                             selectedPosition.takeProfit?.percent?.toFixed(2) ||
@@ -1479,7 +1463,7 @@ export default function TradePage() {
                       <div className="mt-4 p-3 bg-[rgba(0,192,135,0.1)] border border-[rgba(0,192,135,0.2)] rounded-lg">
                         <div className="flex justify-between items-center">
                           <div>
-                            <p className="text-[14px] text-[#00c087]">{t("estimatedProfit")}</p>
+                            <p className="text-[14px] text-[#00c087]">Estimated Profit</p>
                             <p className="text-[18px] font-bold text-[#00c087]">
                               ${calculateEstimatedPnL(
                                 selectedPosition,
@@ -1488,14 +1472,14 @@ export default function TradePage() {
                             </p>
                           </div>
                           <div>
-                            <p className="text-[14px] text-[#00c087]">{t("profitPercent")}</p>
+                            <p className="text-[14px] text-[#00c087]">Profit Percent</p>
                             <p className="text-[18px] font-bold text-[#00c087]">
                               {(tempLimits.takeProfit?.percent || selectedPosition.takeProfit?.percent || 0).toFixed(2)}%
                             </p>
                           </div>
                         </div>
                         <div className="mt-2 text-xs text-[#8c8c8c]">
-                          {t("currentPrice")}: ${prices[selectedPosition.symbol] || "—"}
+                          "Current Price": ${prices[selectedPosition.symbol] || "—"}
                         </div>
                       </div>
                     )}
@@ -1503,15 +1487,15 @@ export default function TradePage() {
 
                   <div className="mb-4">
                     <div className="flex items-center justify-between mb-3">
-                      <span className="text-[16px] font-semibold text-white">{t("stopLoss")}</span>
+                      <span className="text-[16px] font-semibold text-white">Stop Loss</span>
                     </div>
                     <div className="grid grid-cols-2 gap-4">
                       <div>
-                        <label className="block text-[14px] text-[#8c8c8c] mb-2">{t("price")}</label>
+                        <label className="block text-[14px] text-[#8c8c8c] mb-2">Price</label>
                         <input
                           type="number"
                           className="w-full bg-[#252525] text-white border border-[#2a2a2a] rounded-lg p-2 focus:border-[#ff4343] transition-colors"
-                          placeholder={t("enterPrice")}
+                          placeholder="Enter price"
                           value={
                             tempLimits.stopLoss?.price ||
                             selectedPosition.stopLoss?.price ||
@@ -1537,20 +1521,13 @@ export default function TradePage() {
                             }
                           }}
                         />
-                        {tempLimits.stopLoss?.price && (
-                          <div className="mt-2 text-xs text-[#ff4343]">
-                            {selectedPosition.type === 'LONG'
-                              ? t("willTriggerWhenPriceFallsTo", { price: tempLimits.stopLoss.price.toFixed(2) })
-                              : t("willTriggerWhenPriceRisesTo", { price: tempLimits.stopLoss.price.toFixed(2) })}
-                          </div>
-                        )}
                       </div>
                       <div>
-                        <label className="block text-[14px] text-[#8c8c8c] mb-2">{t("percent")}</label>
+                        <label className="block text-[14px] text-[#8c8c8c] mb-2">Percent</label>
                         <input
                           type="number"
                           className="w-full bg-[#252525] text-white border border-[#2a2a2a] rounded-lg p-2 focus:border-[#ff4343] transition-colors"
-                          placeholder={t("enterPercent")}
+                          placeholder="Enter percent"
                           value={
                             tempLimits.stopLoss?.percent?.toFixed(2) ||
                             selectedPosition.stopLoss?.percent?.toFixed(2) ||
@@ -1583,7 +1560,7 @@ export default function TradePage() {
                       <div className="mt-4 p-3 bg-[rgba(255,67,67,0.1)] border border-[rgba(255,67,67,0.2)] rounded-lg">
                         <div className="flex justify-between items-center">
                           <div>
-                            <p className="text-[14px] text-[#ff4343]">{t("estimatedLoss")}</p>
+                            <p className="text-[14px] text-[#ff4343]">Estimated Loss</p>
                             <p className="text-[18px] font-bold text-[#ff4343]">
                               ${Math.abs(calculateEstimatedPnL(
                                 selectedPosition,
@@ -1592,14 +1569,14 @@ export default function TradePage() {
                             </p>
                           </div>
                           <div>
-                            <p className="text-[14px] text-[#ff4343]">{t("lossPercent")}</p>
+                            <p className="text-[14px] text-[#ff4343]">Loss Percent</p>
                             <p className="text-[18px] font-bold text-[#ff4343]">
                               {(tempLimits.stopLoss?.percent || selectedPosition.stopLoss?.percent || 0).toFixed(2)}%
                             </p>
                           </div>
                         </div>
                         <div className="mt-2 text-xs text-[#8c8c8c]">
-                          {t("currentPrice")}: ${prices[selectedPosition.symbol] || "—"}
+                          Current Price: ${prices[selectedPosition.symbol] || "—"}
                         </div>
                       </div>
                     )}
@@ -1675,15 +1652,15 @@ export default function TradePage() {
                       <div className="flex relative">
                         <div className="flex flex-col gap-[15px] flex-wrap">
                           <div className="flex flex-col flex-wrap gap-[0] text-white">
-                            <p className="text-[14px] text-[#969696]">{t("quantity")}</p>
+                            <p className="text-[14px] text-[#969696]">Quantity</p>
                             <h1 className="text-[20px] mr-[5px]">{selectedPosition.amount}$</h1>
                           </div>
                           <div className="flex flex-col flex-wrap gap-[0] text-white">
-                            <p className="text-[14px] text-[#969696]">{t("entryPrice")}</p>
+                            <p className="text-[14px] text-[#969696]">Entry Price</p>
                             <h1 className="text-[20px] mr-[5px]">{selectedPosition.entryPrice}$</h1>
                           </div>
                           <div className="flex flex-col flex-wrap gap-[0] text-white">
-                            <p className="text-[14px] text-[#969696]">{t("currentPrice")}</p>
+                            <p className="text-[14px] text-[#969696]">Current Price</p>
                             <h1 className="text-[20px] mr-[5px]">{currentPrice | "!"}$</h1>
                           </div>
                         </div>
@@ -1754,14 +1731,14 @@ export default function TradePage() {
                       <div className="flex relative">
                         <div className="flex flex-col gap-[15px] flex-wrap">
                           <div className="flex flex-col flex-wrap gap-[0] text-white">
-                            <p className="text-[14px] text-[#969696]">{t("quantity")}</p>
+                            <p className="text-[14px] text-[#969696]">Quantity</p>
                             <h1 className="text-[20px] mr-[5px] mt-[-19px]">
                               {selectedPosition.amount}$
                             </h1>
                           </div>
                           <div className="flex flex-col flex-wrap gap-[0] text-white">
                             <p className="text-[14px] text-[#969696]">
-                              {t("entryPrice")}
+                              Entry Price
                             </p>
                             <h1 className="text-[20px] mr-[5px] mt-[-19px]">
                               {selectedPosition.entryPrice}$
@@ -1769,7 +1746,7 @@ export default function TradePage() {
                           </div>
                           <div className="flex flex-col flex-wrap gap-[0] text-white">
                             <p className="text-[14px] text-[#969696]">
-                              {t("currentPrice")}
+                              Current Price
                             </p>
                             <h1 className="text-[20px] mr-[5px] mt-[-19px]">
                               {prices[selectedPosition.symbol] | "!"}$
@@ -1787,12 +1764,12 @@ export default function TradePage() {
               })()}
           </Modal>
           <Modal
-            title={<h2 className="text-white">{t("selectSymbol")}</h2>}
+            title={<h2 className="text-white">Select Symbol</h2>}
             open={isSymbolModalVisible}
             onCancel={() => setIsSymbolModalVisible(false)}
             footer={null}
             width={500}
-            className={`${i18n.language === 'fa' || i18n.language === 'ar' ? 'rtl' : 'ltr'} ${style.symbolModal} text-white`}
+            className={`ltr ${style.symbolModal} text-white`}
             styles={{
               header: {
                 backgroundColor: '#1a1a1a',
@@ -1821,7 +1798,7 @@ export default function TradePage() {
             {/* Search Field */}
             <div className="p-4 border-b border-[#2a2a2a]">
               <input
-                placeholder={t("searchPlaceholder")}
+                placeholder="Search..."
                 className="w-full p-2 bg-[#252525] border border-[#2a2a2a] rounded-lg text-white"
                 value={searchQuery}
                 onChange={(e) => {
@@ -1835,7 +1812,7 @@ export default function TradePage() {
               {/* All Coins */}
               <div>
                 <div className="px-4 py-2 bg-[#1a1a1a] text-gray-400 text-xs uppercase tracking-wider">
-                  {t("allCoins")}
+                  All Coins
                 </div>
                 <div className="divide-y divide-[#2a2a2a]">
                   {allCoins.length > 0 ? (
@@ -1877,7 +1854,7 @@ export default function TradePage() {
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                         </svg>
                       </div>
-                      <p>{t("noResults")}</p>
+                      <p>No Results</p>
                     </div>
                   )}
                 </div>
