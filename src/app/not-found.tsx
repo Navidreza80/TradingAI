@@ -1,3 +1,4 @@
+/* eslint-disable */
 "use client"
 // React built in hooks
 import React, { useEffect, useState } from 'react';

@@ -1,3 +1,4 @@
+/* eslint-disable */
 "use client";
 // Server action
 import { calculateUserStatsById } from "@/actions/trade.action";

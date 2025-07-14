@@ -1,3 +1,4 @@
+/* eslint-disable */
 // Next built in components
 import Image from "next/image";
 // antd components

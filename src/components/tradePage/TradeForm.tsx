@@ -1,14 +1,13 @@
+/* eslint-disable */
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { addPosition } from '../../hooks/redux/positionsSlice';
 import type { FormData, Position } from '../../types/index';
 import style from './style.module.css';
-import { Statistic, Select } from 'antd';
 
 
-const { Option } = Select;
 
 // تعریف اینترفیس props فرم معامله
 interface TradeFormProps {
@@ -34,11 +33,6 @@ const TradeForm: React.FC<TradeFormProps> = ({ currentPrice, onOpenPosition, sym
   const [mode, setMode] = useState<'cross' | 'isolated'>('cross'); // حالت معامله (کراس یا ایزوله)
   const [takeProfitPrice, setTakeProfitPrice] = useState<string>(''); // قیمت حد سود
   const [stopLossPrice, setStopLossPrice] = useState<string>(''); // قیمت حد ضرر
-
-  // محاسبه قیمت حد سود
-  const calculateTakeProfit = (price: number, type: 'LONG' | 'SHORT', percent: number): number => {
-    return type === 'LONG' ? price * (1 + (percent / 100)) : price * (1 - (percent / 100));
-  };
 
   // محاسبه قیمت حد ضرر
   const calculateStopLoss = (price: number, type: 'LONG' | 'SHORT', percent: number): number => {

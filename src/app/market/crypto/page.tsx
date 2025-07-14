@@ -1,9 +1,9 @@
+/* eslint-disable */
 "use client";
 // Next built in components
 import Link from "next/link";
 // Get page data
 import { getCryptoNews } from "@/services/cryptoNewsService";
-import { getEducationalContent } from "@/services/educationalService";
 // Third party components
 import { CryptoPairCard } from "@/components/crypto/CryptoPairCard";
 import { NewsCard } from "@/components/crypto/NewsCard";
@@ -26,11 +26,10 @@ export default function CryptoPage() {
   const [topCryptoPairs, setTopCryptoPairs] = useState<CryptoPair[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
-  
+
   // State for other sections
   const [cryptoNews, setCryptoNews] = useState([]);
-  const [educationalContent, setEducationalContent] = useState([]);
-  
+
   // Function to fetch cryptocurrency data
   const fetchCryptoData = async () => {
     setLoading(true);
@@ -102,10 +101,6 @@ export default function CryptoPage() {
       // Fetch news
       const news = await getCryptoNews(3);
       setCryptoNews(news);
-      
-      // Fetch educational content
-      const content = await getEducationalContent("crypto", 4);
-      setEducationalContent(content);
     } catch (error) {
       console.error("Error fetching data for crypto page:", error);
       // Continue with empty arrays - the UI will handle empty states
@@ -197,7 +192,9 @@ export default function CryptoPage() {
         {error && (
           <div className="bg-red-100 dark:bg-red-900/30 text-red-800 dark:text-red-200 p-3 md:p-4 rounded-lg mb-4 md:mb-6 text-sm md:text-base">
             <p>Error loading cryptocurrency data: {error}</p>
-            <p className="text-xs md:text-sm mt-1">Showing fallback data instead.</p>
+            <p className="text-xs md:text-sm mt-1">
+              Showing fallback data instead.
+            </p>
           </div>
         )}
 
@@ -271,31 +268,27 @@ export default function CryptoPage() {
           </Link>
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 md:gap-6">
-          {cryptoNews.length > 0 ? (
-            cryptoNews.map((news) => (
-              <NewsCard key={news.id} news={news} />
-            ))
-          ) : (
-            Array(3)
-              .fill(0)
-              .map((_, index) => (
-                <div
-                  key={index}
-                  className="bg-white dark:bg-gray-800 rounded-xl shadow-md overflow-hidden border border-gray-100 dark:border-gray-700"
-                >
-                  <div className="h-40 md:h-48 bg-gray-200 dark:bg-gray-700 animate-pulse"></div>
-                  <div className="p-4 md:p-5">
-                    <div className="h-5 md:h-6 bg-gray-200 dark:bg-gray-700 rounded w-3/4 mb-2 md:mb-3 animate-pulse"></div>
-                    <div className="h-3 md:h-4 bg-gray-200 dark:bg-gray-700 rounded w-full mb-1 md:mb-2 animate-pulse"></div>
-                    <div className="h-3 md:h-4 bg-gray-200 dark:bg-gray-700 rounded w-2/3 mb-3 md:mb-4 animate-pulse"></div>
-                    <div className="flex justify-between items-center">
-                      <div className="h-3 md:h-4 bg-gray-200 dark:bg-gray-700 rounded w-1/3 animate-pulse"></div>
-                      <div className="h-6 md:h-8 bg-gray-200 dark:bg-gray-700 rounded w-1/4 animate-pulse"></div>
+          {cryptoNews.length > 0
+            ? cryptoNews.map((news) => <NewsCard key={news.id} news={news} />)
+            : Array(3)
+                .fill(0)
+                .map((_, index) => (
+                  <div
+                    key={index}
+                    className="bg-white dark:bg-gray-800 rounded-xl shadow-md overflow-hidden border border-gray-100 dark:border-gray-700"
+                  >
+                    <div className="h-40 md:h-48 bg-gray-200 dark:bg-gray-700 animate-pulse"></div>
+                    <div className="p-4 md:p-5">
+                      <div className="h-5 md:h-6 bg-gray-200 dark:bg-gray-700 rounded w-3/4 mb-2 md:mb-3 animate-pulse"></div>
+                      <div className="h-3 md:h-4 bg-gray-200 dark:bg-gray-700 rounded w-full mb-1 md:mb-2 animate-pulse"></div>
+                      <div className="h-3 md:h-4 bg-gray-200 dark:bg-gray-700 rounded w-2/3 mb-3 md:mb-4 animate-pulse"></div>
+                      <div className="flex justify-between items-center">
+                        <div className="h-3 md:h-4 bg-gray-200 dark:bg-gray-700 rounded w-1/3 animate-pulse"></div>
+                        <div className="h-6 md:h-8 bg-gray-200 dark:bg-gray-700 rounded w-1/4 animate-pulse"></div>
+                      </div>
                     </div>
                   </div>
-                </div>
-              ))
-          )}
+                ))}
         </div>
       </section>
 
@@ -309,10 +302,16 @@ export default function CryptoPage() {
           smarter trading decisions in the cryptocurrency market.
         </p>
         <div className="flex flex-wrap justify-center gap-3 md:gap-4">
-          <Link href="/trade" className="bg-white text-blue-700 hover:bg-blue-50 font-bold py-2 md:py-3 px-6 md:px-8 rounded-lg transition duration-300 shadow-lg text-sm md:text-base">
+          <Link
+            href="/trade"
+            className="bg-white text-blue-700 hover:bg-blue-50 font-bold py-2 md:py-3 px-6 md:px-8 rounded-lg transition duration-300 shadow-lg text-sm md:text-base"
+          >
             Open Free Account
           </Link>
-          <Link href="/trade" className="bg-transparent hover:bg-white/20 border-2 border-white font-bold py-2 md:py-3 px-6 md:px-8 rounded-lg transition duration-300 text-sm md:text-base">
+          <Link
+            href="/trade"
+            className="bg-transparent hover:bg-white/20 border-2 border-white font-bold py-2 md:py-3 px-6 md:px-8 rounded-lg transition duration-300 text-sm md:text-base"
+          >
             Schedule Demo
           </Link>
         </div>

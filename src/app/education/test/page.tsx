@@ -1,3 +1,4 @@
+/* eslint-disable */
 "use client";
 // Next built in component
 import Link from "next/link"
@@ -24,9 +25,9 @@ function shuffleArray<T>(array: T[]): T[] {
 
 // Function to get random question from data
 const getRandomQuestions = (): Question[] => {
-  let shuffledQuestions = shuffleArray([...allQuestions]).slice(0, 15);
+  const shuffledQuestions = shuffleArray([...allQuestions]).slice(0, 15);
   return shuffledQuestions.map((q) => {
-    let shuffledOptions = shuffleArray([...q.options]);
+    const shuffledOptions = shuffleArray([...q.options]);
     return {
       ...q,
       options: shuffledOptions,

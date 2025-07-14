@@ -1,7 +1,6 @@
 'use client';
 // Redux for state management
 import { Provider } from 'react-redux';
-// Types for type safety
 import { store } from './store';
 
 // Redux provider

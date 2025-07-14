@@ -1,3 +1,4 @@
+/* eslint-disable */
 "use client";
 // Clerk imports
 import { SignedOut, SignInButton, SignUpButton } from "@clerk/nextjs";

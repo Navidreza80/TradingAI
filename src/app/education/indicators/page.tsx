@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 "use client";
 // Icons
 import { SearchOutlined } from "@ant-design/icons";

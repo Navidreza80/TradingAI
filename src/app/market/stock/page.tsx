@@ -24,13 +24,12 @@ export default async function StocksPage() {
     if (newsResult.status === "fulfilled") stockNews = newsResult.value;
     if (pairsResult.status === "fulfilled") topStockPairs = pairsResult.value;
   } catch (error) {
-    return "fetch failed"
+    throw error;
     // Continue with empty arrays - the UI will handle empty states
   }
 
   return (
     <div className="container mx-auto px-4 pt-24">
-
       {/* Top Stocks Section */}
       <section className="mb-8 md:mb-16">
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 md:mb-8 gap-2 sm:gap-0">

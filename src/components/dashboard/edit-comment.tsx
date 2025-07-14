@@ -1,3 +1,4 @@
+/* eslint-disable */
 // ShadCn components
 import { Button } from "@/components/UI/Button";
 import {

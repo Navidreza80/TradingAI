@@ -6,7 +6,7 @@ import { Input } from "@/components/UI/input";
 import { Tabs, TabsList, TabsTrigger } from "@/components/UI/tabs";
 import { getCryptoNews } from "@/services/cryptoNewsService";
 import { CryptoNews } from "@/types/crypto";
-import { Filter, Search } from "lucide-react";
+import { Search } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 

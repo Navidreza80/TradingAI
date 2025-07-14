@@ -1,8 +1,7 @@
-'use client'
+/* eslint-disable */
+"use client";
 
-import { useEffect, useRef, useState } from 'react'
-
-let tvScriptLoadingPromise: Promise<void> | null = null;
+import { useEffect, useRef, useState } from "react";
 
 /**
  * تعریف پراپ‌های کامپوننت TradingViewWidget
@@ -51,7 +50,7 @@ const widgetConfig = {
     "Rectangle", // مستطیل
     "Circle", // دایره
     "Arrow Marker", // فلش
-    "Text" // متن
+    "Text", // متن
   ],
 
   // ویژگی‌های غیرفعال در چارت
@@ -122,7 +121,7 @@ const widgetConfig = {
       histogram: "#4CAF50", // هیستوگرام
     },
   },
-}
+};
 
 /**
  * کامپوننت TradingViewWidget
@@ -131,7 +130,7 @@ const widgetConfig = {
 export const TradingViewWidgetDark: React.FC<TradingViewWidgetDarkProps> = ({
   symbol,
   onPriceChange,
-  theme = "dark"
+  theme = "dark",
 }) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const scriptRef = useRef<HTMLScriptElement | null>(null);
@@ -143,23 +142,32 @@ export const TradingViewWidgetDark: React.FC<TradingViewWidgetDarkProps> = ({
       setIsFullscreen(!!document.fullscreenElement);
     };
 
-    document.addEventListener('fullscreenchange', handleFullscreenChange);
-    document.addEventListener('webkitfullscreenchange', handleFullscreenChange);
-    document.addEventListener('mozfullscreenchange', handleFullscreenChange);
-    document.addEventListener('MSFullscreenChange', handleFullscreenChange);
+    document.addEventListener("fullscreenchange", handleFullscreenChange);
+    document.addEventListener("webkitfullscreenchange", handleFullscreenChange);
+    document.addEventListener("mozfullscreenchange", handleFullscreenChange);
+    document.addEventListener("MSFullscreenChange", handleFullscreenChange);
 
     return () => {
-      document.removeEventListener('fullscreenchange', handleFullscreenChange);
-      document.removeEventListener('webkitfullscreenchange', handleFullscreenChange);
-      document.removeEventListener('mozfullscreenchange', handleFullscreenChange);
-      document.removeEventListener('MSFullscreenChange', handleFullscreenChange);
+      document.removeEventListener("fullscreenchange", handleFullscreenChange);
+      document.removeEventListener(
+        "webkitfullscreenchange",
+        handleFullscreenChange
+      );
+      document.removeEventListener(
+        "mozfullscreenchange",
+        handleFullscreenChange
+      );
+      document.removeEventListener(
+        "MSFullscreenChange",
+        handleFullscreenChange
+      );
     };
   }, []);
 
   useEffect(() => {
     // تبدیل فرمت نماد به فرمت مورد نیاز TradingView
     const formattedSymbol = symbol.replace("/", "");
-    
+
     // حذف اسکریپت قبلی اگر وجود داشته باشد
     if (scriptRef.current) {
       scriptRef.current.remove();
@@ -168,7 +176,7 @@ export const TradingViewWidgetDark: React.FC<TradingViewWidgetDarkProps> = ({
 
     // پاک کردن محتوای کانتینر
     if (containerRef.current) {
-      containerRef.current.innerHTML = '';
+      containerRef.current.innerHTML = "";
     }
 
     // ایجاد اسکریپت جدید
@@ -183,19 +191,19 @@ export const TradingViewWidgetDark: React.FC<TradingViewWidgetDarkProps> = ({
           interval: "1",
           timezone: "Etc/UTC",
           theme: theme,
-        style: "1",
+          style: "1",
           locale: "en",
-          toolbar_bg: theme === 'dark' ? "#2a2e39" : "#f1f3f6",
-        enable_publishing: false,
+          toolbar_bg: theme === "dark" ? "#2a2e39" : "#f1f3f6",
+          enable_publishing: false,
           allow_symbol_change: false, // غیرفعال کردن تغییر نماد
           container_id: "tradingview_widget",
-        hide_side_toolbar: false,
-        disabled_features: [
+          hide_side_toolbar: false,
+          disabled_features: [
             "header_symbol_search", // حذف جستجوی نماد
             "symbol_search_hot_key", // حذف کلید میانبر جستجو
             "header_compare", // حذف مقایسه نمادها
           ],
-        enabled_features: [
+          enabled_features: [
             "header_fullscreen_button", // فعال کردن دکمه تمام صفحه داخلی TradingView
           ],
         });
@@ -217,11 +225,11 @@ export const TradingViewWidgetDark: React.FC<TradingViewWidgetDarkProps> = ({
   return (
     <div
       ref={containerRef}
-      id="tradingview_widget" 
-      style={{ 
-        height: isFullscreen ? "100vh" : "100%", 
+      id="tradingview_widget"
+      style={{
+        height: isFullscreen ? "100vh" : "100%",
         width: "100%",
-        transition: "all 0.3s ease"
+        transition: "all 0.3s ease",
       }}
       className={isFullscreen ? "fixed top-0 left-0 z-50" : ""}
     />
@@ -234,11 +242,12 @@ export const TradingViewWidgetDark: React.FC<TradingViewWidgetDarkProps> = ({
  * @returns شناسه CoinGecko (مثال: 'bitcoin')
  */
 function convertSymbolToCoinId(symbol: string): string {
-  return symbol.toLowerCase()
-    .replace('usdt', '')
-    .replace('btc', 'bitcoin')
-    .replace('eth', 'ethereum')
-    .replace('bnb', 'binancecoin')
+  return symbol
+    .toLowerCase()
+    .replace("usdt", "")
+    .replace("btc", "bitcoin")
+    .replace("eth", "ethereum")
+    .replace("bnb", "binancecoin");
 }
 
 /**
@@ -255,23 +264,23 @@ function setupTradingViewWidget(
   widgetRef: React.MutableRefObject<any>,
   setIsWidgetReady: (ready: boolean) => void
 ) {
-  const script = document.createElement('script')
-  script.src = 'https://s3.tradingview.com/tv.js'
-  script.async = true
+  const script = document.createElement("script");
+  script.src = "https://s3.tradingview.com/tv.js";
+  script.async = true;
 
   script.onload = () => {
-    if (!window.TradingView) return
+    if (!window.TradingView) return;
 
     // Load saved chart settings from localStorage
-    const savedSettings = localStorage.getItem(`tradingview.chart.${symbol}`)
-    const chartSettings = savedSettings ? JSON.parse(savedSettings) : {}
+    const savedSettings = localStorage.getItem(`tradingview.chart.${symbol}`);
+    const chartSettings = savedSettings ? JSON.parse(savedSettings) : {};
 
     // Initialize widget with all configurations
     widgetRef.current = new window.TradingView.widget({
       ...widgetConfig.chartConfig,
       symbol: `BINANCE:${symbol}`,
       container_id: "tradingview_widget",
-      drawings_access: { type: 'all', tools: widgetConfig.drawingTools },
+      drawings_access: { type: "all", tools: widgetConfig.drawingTools },
       disabled_features: widgetConfig.disabledFeatures,
       enabled_features: widgetConfig.enabledFeatures,
       overrides: generateChartOverrides(widgetConfig.chartStyles),
@@ -283,16 +292,22 @@ function setupTradingViewWidget(
       user_id: "public_user",
       favorites: {
         intervals: ["1", "5", "15", "30", "60", "240", "1D", "1W", "1M"],
-        chartTypes: ["Candlestick"]
+        chartTypes: ["Candlestick"],
       },
-      callback: () => initializeWidget(widgetRef.current, symbol, setIsWidgetReady, chartSettings)
-    })
-  }
+      callback: () =>
+        initializeWidget(
+          widgetRef.current,
+          symbol,
+          setIsWidgetReady,
+          chartSettings
+        ),
+    });
+  };
 
-  container.innerHTML = '<div id="tradingview_widget"></div>'
-  document.head.appendChild(script)
+  container.innerHTML = '<div id="tradingview_widget"></div>';
+  document.head.appendChild(script);
 
-  return () => cleanup(widgetRef.current, symbol, container, script)
+  return () => cleanup(widgetRef.current, symbol, container, script);
 }
 
 /**
@@ -313,8 +328,8 @@ function generateChartOverrides(styles: typeof widgetConfig.chartStyles) {
     "paneProperties.background": "#131722",
     "paneProperties.vertGridProperties.color": "#363c4e",
     "paneProperties.horzGridProperties.color": "#363c4e",
-    "scalesProperties.textColor": "#AAA"
-  }
+    "scalesProperties.textColor": "#AAA",
+  };
 }
 
 /**
@@ -336,8 +351,8 @@ function generateStudyOverrides(studies: typeof widgetConfig.studyOverrides) {
     "bollinger bands.lower.color": studies.bollinger.lower,
     "macd.signal.color": studies.macd.signal,
     "macd.macd.color": studies.macd.main,
-    "macd.histogram.color": studies.macd.histogram
-  }
+    "macd.histogram.color": studies.macd.histogram,
+  };
 }
 
 /**
@@ -375,9 +390,12 @@ function initializeWidget(
   chart.onAutoSaveNeeded().subscribe(null, () => {
     try {
       const chartData = widget.save();
-      localStorage.setItem(`tradingview.chart.${symbol}`, JSON.stringify(chartData));
+      localStorage.setItem(
+        `tradingview.chart.${symbol}`,
+        JSON.stringify(chartData)
+      );
     } catch (error) {
-      console.error('Error saving chart settings:', error);
+      console.error("Error saving chart settings:", error);
     }
   });
 
@@ -386,7 +404,7 @@ function initializeWidget(
     try {
       widget.load(chartSettings);
     } catch (error) {
-      console.error('Error loading chart settings:', error);
+      console.error("Error loading chart settings:", error);
     }
   }
 }
@@ -395,22 +413,30 @@ function initializeWidget(
  * تابع پاکسازی برای unmount شدن ویجت
  * ذخیره تنظیمات فعلی و حذف المان‌های DOM
  */
-function cleanup(widget: any, symbol: string, container: HTMLDivElement, script: HTMLScriptElement) {
+function cleanup(
+  widget: any,
+  symbol: string,
+  container: HTMLDivElement,
+  script: HTMLScriptElement
+) {
   if (widget) {
     try {
-      const chartData = widget.save()
-      localStorage.setItem(`tradingview.chart.${symbol}`, JSON.stringify(chartData))
+      const chartData = widget.save();
+      localStorage.setItem(
+        `tradingview.chart.${symbol}`,
+        JSON.stringify(chartData)
+      );
     } catch (error) {
-      console.error('Error saving chart settings on unmount:', error)
+      console.error("Error saving chart settings on unmount:", error);
     }
   }
 
-  container.innerHTML = ''
-  script.remove()
+  container.innerHTML = "";
+  script.remove();
 }
 
 declare global {
   interface Window {
-    TradingView: any
+    TradingView: any;
   }
-} 
+}

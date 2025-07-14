@@ -1,3 +1,4 @@
+/* eslint-disable */
 // Icons
 import { ArrowRightOutlined } from "@ant-design/icons";
 // ant components

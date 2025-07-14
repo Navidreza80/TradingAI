@@ -1,16 +1,14 @@
 'use client'
 
-import { Layout, Typography, Card, Space, Button, Image, List, Tag } from 'antd';
 import { ArrowLeftOutlined } from '@ant-design/icons';
-import { ConfigProvider } from 'antd';
+import { Button, Card, ConfigProvider, Image, Layout, Space, Tag } from 'antd';
 import fa_IR from 'antd/locale/fa_IR';
 import Link from 'next/link';
-import { technicalAnalysis } from '../../data';
 import { useParams } from 'next/navigation';
+import { technicalAnalysis } from '../../data';
 import style from './style.module.css';
 
 const { Header, Content } = Layout;
-const { Title, Text, Paragraph } = Typography;
 
 export default function TechnicalAnalysisDetailPage() {
     const params = useParams();
@@ -18,7 +16,6 @@ export default function TechnicalAnalysisDetailPage() {
     const DEFAULT_IMAGE = 'https://nobitex.ir/mag/wp-content/uploads//2023/08/01-%D8%AA%D8%AD%D9%84%DB%8C%D9%84-%D8%AA%DA%A9%D9%86%DB%8C%DA%A9%D8%A7%D9%84.jpg';
     if (!analysis) return null;
 
-    // تبدیل متن توضیحات به پاراگراف‌های مجزا
     const descriptionParagraphs = analysis.description.split('\n\n').filter(p => p.trim());
 
     return (

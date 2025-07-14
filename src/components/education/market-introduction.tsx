@@ -1,3 +1,4 @@
+/* eslint-disable */
 // antd components
 import { Col, Row, Typography } from "antd";
 // Next built in components

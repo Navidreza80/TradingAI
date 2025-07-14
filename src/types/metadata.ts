@@ -1,4 +1,3 @@
-import { Metadata } from 'next';
 
 export interface RobotsInfo {
   index?: boolean;

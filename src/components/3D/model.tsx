@@ -10,7 +10,7 @@ export default function Model({ url, position, rotation, scale }: ModelProps) {
     const { scene } = useGLTF(url) as { scene: THREE.Object3D };
     const meshRef = useRef<THREE.Object3D>(null);
 
-    useFrame((state) => {
+    useFrame(() => {
         if (meshRef.current) {
             meshRef.current.rotation.y += 0.005;
             meshRef.current.position.y = position[1];

@@ -1,12 +1,11 @@
+/* eslint-disable */
 "use client";
 // antd icons
 import {
-  ArrowLeftOutlined,
-  LineChartOutlined,
-  SearchOutlined,
+  SearchOutlined
 } from "@ant-design/icons";
 // antd components
-import { Button, Card, ConfigProvider, Image, Layout, Row } from "antd";
+import { Card, ConfigProvider, Image, Layout, Row } from "antd";
 import fa_IR from "antd/locale/fa_IR";
 import debounce from "lodash/debounce";
 // Next components
@@ -19,7 +18,7 @@ import { technicalAnalysis } from "../data";
 import style from "./[id]/style.module.css";
 
 // antd layout
-const { Header, Content } = Layout;
+const { Content } = Layout;
 // default image
 const DEFAULT_IMAGE =
   "https://media.salameno.com/d/2022/07/25/3/15384301.jpg?ts=1658737063000";

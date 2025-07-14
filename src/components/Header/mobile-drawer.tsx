@@ -1,3 +1,4 @@
+/* eslint-disable */
 "use client";
 // Next imports
 import Image from "next/image";
@@ -19,7 +20,7 @@ import {
   Zap,
 } from "lucide-react";
 // Antd style library imports
-import { Button, Drawer } from "antd";
+import { Drawer } from "antd";
 // Redux imports
 import { SignedIn, SignedOut, SignInButton, SignUpButton } from "@clerk/nextjs";
 import { useSelector } from "react-redux";

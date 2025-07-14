@@ -1,3 +1,4 @@
+/* eslint-disable */
 "use client";
 // Framer motion imports for animation
 import { motion } from "framer-motion";

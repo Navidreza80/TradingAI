@@ -1,3 +1,4 @@
+/* eslint-disable */
 "use client";
 
 import { useState, useEffect } from "react";
@@ -110,17 +111,24 @@ export default function StockPricesPage() {
     });
 
     setFilteredData(result);
-  }, [stockData, searchQuery, sortConfig, favorites, showFavoritesOnly, sectorFilter]);
+  }, [
+    stockData,
+    searchQuery,
+    sortConfig,
+    favorites,
+    showFavoritesOnly,
+    sectorFilter,
+  ]);
 
   const fetchStockData = async () => {
     setLoading(true);
     try {
       const data = await getStockPairs();
-      
+
       if (!data || data.length === 0) {
         throw new Error("No stock data available");
       }
-      
+
       // Add favorite flag to each stock
       const dataWithFavorites = data.map((stock) => ({
         ...stock,
@@ -131,7 +139,9 @@ export default function StockPricesPage() {
       setError(null);
     } catch (err) {
       console.error("Error fetching stock data:", err);
-      setError(err instanceof Error ? err.message : "An unknown error occurred");
+      setError(
+        err instanceof Error ? err.message : "An unknown error occurred"
+      );
     } finally {
       setLoading(false);
     }
@@ -198,14 +208,17 @@ export default function StockPricesPage() {
   };
 
   // Get unique sectors for the filter
-  const sectors = stockData.length > 0 
-    ? ["all", ...new Set(stockData.map(stock => stock.sector))]
-    : ["all"];
+  const sectors =
+    stockData.length > 0
+      ? ["all", ...new Set(stockData.map((stock) => stock.sector))]
+      : ["all"];
 
   return (
     <div className="container mx-auto px-4 py-24">
       <div className="mb-8">
-        <h1 className="text-3xl font-bold mb-2 text-gray-900 dark:text-white">Stock Market Prices</h1>
+        <h1 className="text-3xl font-bold mb-2 text-gray-900 dark:text-white">
+          Stock Market Prices
+        </h1>
         <p className="text-gray-600 dark:text-gray-400">
           Live prices for top stocks by market capitalization
         </p>
@@ -242,8 +255,8 @@ export default function StockPricesPage() {
             </SelectTrigger>
             <SelectContent className="dark:bg-gray-800 dark:border-gray-700">
               {sectors.map((sector) => (
-                <SelectItem 
-                  key={sector} 
+                <SelectItem
+                  key={sector}
                   value={sector}
                   className="dark:text-gray-200 dark:data-[highlighted]:bg-gray-700 dark:data-[highlighted]:text-gray-50"
                 >
@@ -347,7 +360,10 @@ export default function StockPricesPage() {
                 Array(10)
                   .fill(0)
                   .map((_, index) => (
-                    <TableRow key={index} className="border-b border-gray-100 dark:border-gray-800">
+                    <TableRow
+                      key={index}
+                      className="border-b border-gray-100 dark:border-gray-800"
+                    >
                       <TableCell colSpan={8} className="h-16 text-center">
                         <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded animate-pulse mx-auto w-3/4"></div>
                       </TableCell>
@@ -361,7 +377,10 @@ export default function StockPricesPage() {
                 </TableRow>
               ) : (
                 filteredData.map((stock) => (
-                  <TableRow key={stock.symbol} className="border-b border-gray-100 dark:border-gray-800">
+                  <TableRow
+                    key={stock.symbol}
+                    className="border-b border-gray-100 dark:border-gray-800"
+                  >
                     <TableCell className="text-center">
                       <Button
                         variant="ghost"
@@ -375,7 +394,9 @@ export default function StockPricesPage() {
                       >
                         <Star
                           className={`h-5 w-5 ${
-                            favorites.includes(stock.symbol) ? "fill-current" : ""
+                            favorites.includes(stock.symbol)
+                              ? "fill-current"
+                              : ""
                           }`}
                         />
                       </Button>

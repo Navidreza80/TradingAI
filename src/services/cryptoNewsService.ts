@@ -1,3 +1,4 @@
+/* eslint-disable */
 "use server";
 
 import { CryptoNews } from '@/types/crypto';

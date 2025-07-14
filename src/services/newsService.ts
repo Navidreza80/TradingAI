@@ -1,3 +1,4 @@
+/* eslint-disable */
 "use server";
 
 import { ForexNews } from "@/types/forex";

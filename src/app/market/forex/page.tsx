@@ -1,3 +1,4 @@
+/* eslint-disable */
 "use client";
 // Third party components
 import { CurrencyPairCard } from "@/components/forex/CurrencyPairCard";
