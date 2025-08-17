@@ -85,7 +85,7 @@ const ChatAssistant = () => {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
-            model: "google/gemini-2.0-flash-thinking-exp:free",
+            model: "deepseek/deepseek-r1-0528-qwen3-8b:free",
             messages: [
               {
                 role: "system",

@@ -105,7 +105,7 @@ export default function Navigation() {
       name: "News",
       href: "#",
       dropdownItems: [
-        { name: "Blogs", href: "/news/blogs" },
+        { name: "News Blogs", href: "/news/blogs" },
         {
           name: "News",
           href: "/news",
