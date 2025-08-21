@@ -1,157 +1,128 @@
 # TradingAI
 
----
+A full-stack cryptocurrency platform offering price tracking, AI-driven market signals, news aggregation, and simulated trading—all built with Next.js, Prisma, TypeScript, Clerk, Socket.io, Redux, Zustand, React Query, UploadThing, Shadcn, and the OpenRouter API.
 
-## نحوه نصب و اجرا
-
-1. ابتدا **Node.js** را روی سیستم نصب کنید.
-
-2. پروژه را unzip کنید
-
-3. وقتی پروژه را باز کردید در file manager خود
-در قسمت بالا دستور cmd را وارد کنید
-تا برای شما command prompt باز شود
-
-4. دستور npm install را بزنید 
-تا پکیچ های مورد نیاز پروژه نصب شود
-
-5. بعد از تکمیل مطمعن شوید فولدر node_modules در پروژخ قرار دارد
-
-6. سپس در همان command prompt
-دستور npm run dev را وارد کنید
-تا پروژه بصورت لوکال در سیستم شما اجرا شود
-سپس مرورگر خود را باز کنید و به آدرس localhost:3000 بروید
-
-live: https://tradingaiapp.netlify.app/
-repository: https://github.com/Navidreza80/TradingAI
-
-## توضیحات
-
-این سایت شامل صفحات متنوعی است که جزئیات آن در ادامه آورده شده است:
-
-### **1. صفحه لندینگ یا خانه**
-
-صفحه اصلی سایت اطلاعات کلی درباره اهداف و کاربردهای سایت را به کاربران ارائه می‌کند.
-
-### **2. صفحه بلاگ‌ها**
-
-**Route**: `localhost:3000/news/blogs`  
-کاربران می‌توانند بلاگ‌هایی که به اشتراک گذاشته شده‌اند را مشاهده کنند تا از آخرین اخبار و مقالات دنیای رمز‌ارزها مطلع شوند.
-
-- **امکانات**:
-  - قابلیت جست‌وجو بر اساس نام بلاگ‌ها.
-  - مشاهده جزئیات هر بلاگ با کلیک روی آن (**Route**: `localhost:3000/blogs/[id]`).
-  - امکان لایک، دیسلایک، ارسال نظر و اشتراک‌گذاری بلاگ‌ها.
-  - امکان ساخت بلاگ جدید برای کاربران وارد شده به حساب کاربری.
-
-### **3. صفحه اعمال معامله یا ترید**
-
-**Route**: `localhost:3000/trade`  
-این بخش به کاربران اجازه می‌دهد تا معاملات آزمایشی (غیرواقعی) خود را اجرا کنند.
-
-- **ویژگی‌ها**:
-  - مشاهده نمودارهای مربوط به ارز دیجیتال در سمت چپ صفحه.
-  - انتخاب نماد معاملاتی، نوع، حالت، اهرم، حد سود و ضرر.
-  - امکان مشاهده تاریخچه و معاملات فعال در پایین صفحه.
-  - امکان تغییر حد سود و ضرر یا بستن معامله در بخش معاملات فعال.
-
-### **4. صفحه آموزش ترید و معامله‌گری**
-
-**Route**: `localhost:3000/education/beginner`  
-این بخش با هدف آموزش کاربران در حوزه معاملات رمز‌ارزها طراحی شده است.  
-**بازار ها**  
- **Route**: `localhost:3000/education/markets`  
-این بخش کاربران را با ویژگی بازارهای مالی اشنا میکند تا بهترین را برای خود انتخاب کنند.
-**وب3**  
- **Route**: `localhost:3000/education/web3`  
-آموزش اولیه و اشنا سازی نسل جدید اینترنت یعنی وب3 به کاربران
-**تحلیل تکنیکال**  
- **Route**: `localhost:3000/education/technical`  
-**اندیکاتورها**  
- **Route**: `localhost:3000/education/indicators`  
-هر دو زیرمجموعه شامل توضیحات کامل در مورد مفاهیم هستند.
-**تست و امتحان**  
- **Route**: `localhost:3000/education/indicators`  
-کاربران میتوانند در این بخش اطلاعات خود را در این زمینه مهک بزنند
-
-### **5. صفحه سیگنال‌ها**
-
-**Route**: `localhost:3000/signal/ai-generrator`  
-یکی از مهم‌ترین بخش‌های سایت که با استفاده از هوش مصنوعی، پیش‌بینی‌های بازار را ارائه می‌دهد.
-
-- **امکانات**:
-  - انتخاب ارز، محدوده زمانی و تعداد کندل.
-  - دریافت پیش‌بینی شامل حد سود، ضرر، قیمت ورودی و سطح اعتماد.
-
-### **6. صفحه مارکتها**
-
-مشاهده اخبار و قیمت های بازارهای مالی.
-**Route**: `localhost:3000/market/forex`  
-**Route**: `localhost:3000/market/stock`  
-**Route**: `localhost:3000/market/crypto`
-**بخش های مشاهده قیمت ها به صورت جداگانه**
-**Route**: `localhost:3000/market/crypto/prices`
-**Route**: `localhost:3000/market/forex/all-pairs`
-**Route**: `localhost:3000/market/stock/prices`
-
-### **7. صفحه درباره ما**
-
-**Route**: `localhost:3000/about`  
-این بخش به معرفی سازندگان و توضیحات کلی درباره سایت می‌پردازد.
-
-### **8. صفحه پنل کاربری یا داشبورد**
-
-**Route**: `localhost:3000/dashboard`
-
-- **ویژگی‌ها**:
-  - نمایش اطلاعات کلیدی: مجموع سود، تعداد معاملات و درصد موفقیت.
-  - ارائه نمودار عملکرد کاربران در ۶ ماه گذشته.
-  - سه بخش مهم:
-    1. اطلاعات اشتراک کاربر.
-    2. مرتب‌سازی رمز‌ارزهای معامله‌شده از بیشترین به کمترین.
-    3. تاریخچه کامل معاملات.
-
-### **9.صفحه اخبار ها**
-
-**Route**: 'localhost:3000/news'
-در این صفحه یک دسته بندی از اخبار هارا میتوانید انتخاب کنید و
-اخبار مربوط به ان را ببینید
-**Route**: `localhost:3000/news/forex`
-**Route**: `localhost:3000/news/stocks`
-**Route**: `localhost:3000/news/crypto`
-
-#### بخش‌های دیگر:
-
-- **پروفایل کاربر:**  
-  امکان ویرایش اطلاعات نمایه و تنظیمات حریم خصوصی. (**Route**: `localhost:3000/dashboard/profile`)
-- **مدیریت بلاگ‌ها:**  
-  امکان ایجاد، ویرایش حذف و مشاهده بلاگ‌های لایک/دیسلایک‌شده. (**Route**: `localhost:3000/dashboard/blogs`)
-- **اشتراک‌ها:**  
-  پیش‌بینی شده برای خرید اشتراک در آینده. (**Route**: `localhost:3000/dashboard/subscriptions`)
-- **اشتراک‌ها:**  
-  امکان مشاهده حذف ها ویرایش کامنت های خود. (**Route**: `localhost:3000/dashboard/comments`)
+[**Live Demo**](https://tradingaiapp.netlify.app)
 
 ---
 
-## ویژگی‌ها
+##  Table of Contents
 
-- ارائه پیشنهادات هوشمند بر اساس تحلیل تکنیکال.
-- امکان آموزش و یادگیری انواع تحلیل‌ها.
-- اجرای معاملات آزمایشی جهت آشنایی با بازار.
-- تحلیل عملکرد گذشته کاربران با ثبت روزانه اطلاعات.
-- سازگاری با پلتفرم‌های مختلف و پشتیبانی از حالت روز و شب.
-- رابط کاربری مدرن همراه با انیمیشن‌های جذاب.
-- پشتیبانی چت با هوش مصنوعی.
+- [Introduction](#introduction)  
+- [Features](#features)  
+- [Live Demo & Repository](#live-demo--repository)  
+- [Installation](#installation)  
+- [Project Overview](#project-overview)  
+- [Technologies](#technologies)  
+- [Contributing](#contributing)  
+- [License](#license)
 
 ---
 
-## فناوری‌های مورد استفاده
+## Introduction
 
-- **Next.js:** برای توسعه فرانت‌اند.
-- **Prisma و PSQL:** برای توسعه و مدیریت پایگاه داده.
-- **TailwindCSS:** برای طراحی رابط کاربری.
-- **Typescript:** برای تایپ ایمن و دیباگ سریع.
-- **Redux Toolkit:** برای مدیریت وضعیت‌ها.
-- **Clerk:** برای احراز هویت کاربران.
-- **OpenRouter API:** استفاده از مدل هوش مصنوعی.
+TradingAI is a modern, interactive platform designed to help users explore the world of cryptocurrency through real-time price tracking, simulated trades, AI-based market predictions, educational content, and aggregated news—all within one cohesive interface.
+
+---
+
+## Features
+
+- **Landing Page**: Offers insight into the project’s purpose and capabilities.
+- **Blog & News Section**:  
+  - Browse and read the latest in crypto through categorized blogs.  
+  - Search blog posts by title, view details, like/dislike, comment, share, and write new posts (for authenticated users).
+- **Simulated Trading**:  
+  - Practice trading with a demo interface featuring chart views, symbol selection, order types, leverage, stop-loss & take-profit.  
+  - View active trades and history. Modify orders or close open trades on the fly.
+- **Educational Hub**: Explore learning modules on:  
+  - **Beginner Trading**  
+  - **Markets Overview**  
+  - **Web3 Fundamentals**  
+  - **Technical Analysis**  
+  - **Indicators & Quizzes** to test your knowledge.
+- **AI-Powered Signals**: Generate trading signals (entry price, take-profit, stop-loss, confidence score) using AI based on chosen asset, time range, and candle count.
+- **Market Price Watch**: View live prices for crypto, forex, and stocks in organized categories (e.g., `crypto/prices`, `forex/all-pairs`, `stock/prices`).
+- **About Page**: Learn about the project’s vision and contributors.
+- **User Dashboard**:  
+  - Displays total profit, number of trades, and success rate.  
+  - Shows 6-month performance charts.  
+  - Includes subscription details, traded assets sorted by frequency, and transaction history.
+- **Additional Utilities**:  
+  - Edit profile and privacy settings.  
+  - Manage blog creations, edits, likes/dislikes.  
+  - Handle subscriptions and comments within a unified user interface.
+
+---
+
+## Live Demo & Repository
+
+- **Live Preview**: [tradingaiapp.netlify.app](https://tradingaiapp.netlify.app)  
+- **Source Code**: [GitHub Repository](https://github.com/Navidreza80/TradingAI)
+
+---
+
+| Section         | Route                                                                      |
+| --------------- | -------------------------------------------------------------------------- |
+| Landing Page    | `/`                                                                        |
+| Blog & News     | `/news/blogs`, `/blogs/[id]`                                               |
+| Trade Simulator | `/trade`                                                                   |
+| Education       | `/education/beginner`, `/markets`, `/web3`, `/technical`, `/indicators`    |
+| AI Signals      | `/signal/ai-generator`                                                     |
+| Market Prices   | `/market/crypto/prices`, `/market/forex/all-pairs`, `/market/stock/prices` |
+| About           | `/about`                                                                   |
+| Dashboard       | `/dashboard`, with sub-routes for profile, blogs, subscriptions, comments  |
+
+
+## Technologies
+
+Framework: Next.js
+
+Backend / ORM: Prisma (with PostgreSQL)
+
+Frontend UI: Tailwind CSS, Shadcn components
+
+State Management: Redux Toolkit, Zustand, React Query
+
+Authentication: Clerk
+
+AI Integration: OpenRouter API
+
+Real-time Communication: Socket.io
+
+Media Uploads: UploadThing
+
+Language: TypeScript
+
+## Contributing
+
+Contributions are always welcome!
+
+Fork the repository
+
+Create a new branch (git checkout -b feature/my-feature)
+
+Make your changes and commit (git commit -m "Add feature")
+
+Push to your branch (git push origin feature/my-feature)
+
+Open a pull request detailing your changes
+
+## Installation
+
+To run TradingAI locally:
+
+```bash
+    # Clone the repository
+    git clone https://github.com/Navidreza80/TradingAI.git
+    cd TradingAI
+    
+    # Install dependencies
+    npm install
+    
+    # Run in development mode
+    npm run dev
+    
+    # Open in browser
+    http://localhost:3000
+
 
