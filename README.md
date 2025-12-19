@@ -2,6 +2,20 @@
 
 A full-stack cryptocurrency platform offering price tracking, AI-driven market signals, news aggregation, and simulated trading—all built with Next.js, Prisma, TypeScript, Clerk, Socket.io, Redux, Zustand, React Query, UploadThing, Shadcn, and the OpenRouter API.
 
+---
+
+<img width="1918" height="925" alt="Screenshot 2025-09-06 143214" src="https://github.com/user-attachments/assets/01f80274-0b18-4396-a505-cf53f9ad96a1" />
+*Homepage*
+<img width="1919" height="926" alt="Screenshot 2025-09-06 143241" src="https://github.com/user-attachments/assets/9d5f5cc2-662a-4539-840f-5eeb6547bd8a" />
+*AI-powered crypto signal*
+<img width="1919" height="928" alt="image" src="https://github.com/user-attachments/assets/5a15723e-dde4-4e3c-bbf9-0e5a02d2ada8" />
+*Crypto Centre*
+<img width="1919" height="925" alt="image" src="https://github.com/user-attachments/assets/2285ef0c-bd74-4176-9c30-148ef91a0e5c" />
+*Live Demo Crypto Trade*
+
+
+---
+
 [**Live Demo**](https://tradingaiapp.netlify.app)
 
 ---
