@@ -9,17 +9,19 @@ import HeaderSignals from "@/components/signals/header-signals";
 import SignalSetting from "@/components/signals/signal-setting";
 import MarketStats from "@/components/signals/market-stats";
 // Icons
-import { HiOutlineChartBar, HiOutlineShieldCheck, HiOutlineTrendingUp, HiOutlineVolumeUp } from "react-icons/hi";
+import {
+  HiOutlineChartBar,
+  HiOutlineShieldCheck,
+  HiOutlineTrendingUp,
+  HiOutlineVolumeUp,
+} from "react-icons/hi";
 // Types for type safety
 import { Signals } from "@/types/trade";
-
 
 // Animation variables
 import { fadeInUp } from "@/utils/animation-variants";
 
 export default function TradingSignal() {
-  
-  
   // State to save the symbol that user selected
   const [symbol, setSymbol] = useState("BTCUSDT");
   // State to save the timeframe that user selected
@@ -30,10 +32,10 @@ export default function TradingSignal() {
   const [signal, setSignal] = useState<Signals | null>(null);
   // Add new states for market stats
   const [marketStats, setMarketStats] = useState({
-    accuracy: '',
-    trend: '',
-    volume: '',
-    risk: ''
+    accuracy: "",
+    trend: "",
+    volume: "",
+    risk: "",
   });
   // State to save the status of the current request
   const [loading, setLoading] = useState(false);
@@ -67,7 +69,7 @@ export default function TradingSignal() {
           },
           body: JSON.stringify({
             // Provide the model
-            model: "deepseek/deepseek-r1-0528-qwen3-8b:free",
+            model: "nex-agi/deepseek-v3.1-nex-n1:free",
             // Provide the message
             messages: [
               {
@@ -96,6 +98,7 @@ export default function TradingSignal() {
         }
       );
       // Convert response to a valid JS object
+      console.log("response", response);
       const data = await response.json();
       const aiMessage = {
         role: "assistant",
@@ -113,7 +116,7 @@ export default function TradingSignal() {
       }
     } catch (error) {
       // Save the error of the request in a state
-      setError('Error getting signal');
+      setError("Error getting signal");
     } finally {
       // At the end set the status of the loading to false
       setLoading(false);
@@ -121,18 +124,46 @@ export default function TradingSignal() {
   };
 
   const marketItems = [
-    { icon: <HiOutlineShieldCheck className="w-5 h-5 text-green-500" />, text: 'Signal Accuracy', value: marketStats.accuracy || '...' },
-    { icon: <HiOutlineTrendingUp className="w-5 h-5 text-blue-500" />, text: 'Market Trend', value: marketStats.trend || '...' },
-    { icon: <HiOutlineVolumeUp className="w-5 h-5 text-purple-500" />, text: 'Trading Volume', value: marketStats.volume || '...' },
-    { icon: <HiOutlineChartBar className="w-5 h-5 text-red-500" />, text: 'Risk Level', value: marketStats.risk || '...' },
-  ]
+    {
+      icon: <HiOutlineShieldCheck className="w-5 h-5 text-green-500" />,
+      text: "Signal Accuracy",
+      value: marketStats.accuracy || "...",
+    },
+    {
+      icon: <HiOutlineTrendingUp className="w-5 h-5 text-blue-500" />,
+      text: "Market Trend",
+      value: marketStats.trend || "...",
+    },
+    {
+      icon: <HiOutlineVolumeUp className="w-5 h-5 text-purple-500" />,
+      text: "Trading Volume",
+      value: marketStats.volume || "...",
+    },
+    {
+      icon: <HiOutlineChartBar className="w-5 h-5 text-red-500" />,
+      text: "Risk Level",
+      value: marketStats.risk || "...",
+    },
+  ];
 
   const signalItems = [
-    { text: 'Entry Price:', value: signal?.entryPrice, colour: 'dark:text-white text-black' },
-    { text: 'Take Profit:', value: signal?.takeProfit, colour: 'text-green-500' },
-    { text: 'Stop Loss:', value: signal?.stopLoss, colour: 'text-red-500' },
-    { text: 'Confidence Level:', value: signal?.confidenceLevel, colour: 'text-blue-500' },
-  ]
+    {
+      text: "Entry Price:",
+      value: signal?.entryPrice,
+      colour: "dark:text-white text-black",
+    },
+    {
+      text: "Take Profit:",
+      value: signal?.takeProfit,
+      colour: "text-green-500",
+    },
+    { text: "Stop Loss:", value: signal?.stopLoss, colour: "text-red-500" },
+    {
+      text: "Confidence Level:",
+      value: signal?.confidenceLevel,
+      colour: "text-blue-500",
+    },
+  ];
 
   return (
     <div className="min-h-screen bg-background-light dark:bg-background-dark transition-all duration-500">
@@ -145,7 +176,6 @@ export default function TradingSignal() {
         transition={{ duration: 0.5 }}
         className="max-w-7xl mx-auto px-4 py-8"
       >
-
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           {/* Settings Panel */}
           <motion.div
@@ -154,7 +184,16 @@ export default function TradingSignal() {
             animate="animate"
             className="lg:col-span-1 space-y-6"
           >
-            <SignalSetting getSignal={getSignal} loading={loading} candles={candles} setCandles={setCandles} timeFrame={timeFrame} setTimeFrame={setTimeFrame} symbol={symbol} setSymbol={setSymbol} />
+            <SignalSetting
+              getSignal={getSignal}
+              loading={loading}
+              candles={candles}
+              setCandles={setCandles}
+              timeFrame={timeFrame}
+              setTimeFrame={setTimeFrame}
+              symbol={symbol}
+              setSymbol={setSymbol}
+            />
 
             {/* Market Stats */}
             <MarketStats marketItems={marketItems} />
@@ -170,7 +209,9 @@ export default function TradingSignal() {
             <div className="bg-white dark:bg-black/40 rounded-2xl shadow-xl p-6 h-full">
               <div className="flex items-center gap-3 mb-6">
                 <HiOutlineChartBar className="w-6 h-6 text-blue-500" />
-                <h2 className="text-xl font-semibold text-primary-light dark:text-primary-dark">Market Analysis</h2>
+                <h2 className="text-xl font-semibold text-primary-light dark:text-primary-dark">
+                  Market Analysis
+                </h2>
               </div>
 
               <AnimatePresence mode="wait">
@@ -183,7 +224,9 @@ export default function TradingSignal() {
                     className="flex flex-col items-center justify-center h-[400px]"
                   >
                     <div className="w-16 h-16 border-4 border-blue-500 border-t-transparent rounded-full animate-spin mb-4" />
-                    <p className="text-gray-600 dark:text-gray-300">AI is thinking...</p>
+                    <p className="text-gray-600 dark:text-gray-300">
+                      AI is thinking...
+                    </p>
                   </motion.div>
                 )}
 
@@ -207,7 +250,9 @@ export default function TradingSignal() {
                     exit={{ opacity: 0 }}
                     className="flex items-center justify-center h-[400px]"
                   >
-                    <p className="text-gray-600 dark:text-gray-300">No signal has been generated</p>
+                    <p className="text-gray-600 dark:text-gray-300">
+                      No signal has been generated
+                    </p>
                   </motion.div>
                 )}
 
@@ -223,21 +268,34 @@ export default function TradingSignal() {
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                       {signalItems.map((item, index) => {
                         return (
-                          <div key={index} className="bg-gray-50 dark:bg-black/60 p-4 rounded-xl">
-                            <p className="text-sm text-primary-light dark:text-primary-dark">{item.text}</p>
-                            <p className={`text-xl font-semibold ${item.colour}`}>{item.value}</p>
+                          <div
+                            key={index}
+                            className="bg-gray-50 dark:bg-black/60 p-4 rounded-xl"
+                          >
+                            <p className="text-sm text-primary-light dark:text-primary-dark">
+                              {item.text}
+                            </p>
+                            <p
+                              className={`text-xl font-semibold ${item.colour}`}
+                            >
+                              {item.value}
+                            </p>
                           </div>
-                        )
+                        );
                       })}
                     </div>
 
                     <div className="bg-gray-50 dark:bg-black/60 p-4 rounded-xl">
-                      <p className="text-sm text-primary-light dark:text-primary-dark mb-2">Reason:</p>
-                      <p className="text-secondary-light dark:text-secondary-dark">{signal.reason}</p>
+                      <p className="text-sm text-primary-light dark:text-primary-dark mb-2">
+                        Reason:
+                      </p>
+                      <p className="text-secondary-light dark:text-secondary-dark">
+                        {signal.reason}
+                      </p>
                     </div>
 
                     <p className="text-sm text-gray-500 dark:text-gray-400 text-center mt-4">
-                    Trading signals are for informational purposes only.
+                      Trading signals are for informational purposes only.
                     </p>
                   </motion.div>
                 )}
