@@ -5,95 +5,28 @@ import { motion } from "framer-motion";
 import { Button } from "antd";
 // Next imports
 import Link from "next/link";
-// 3D imports
-import { Canvas } from '@react-three/fiber';
-import { Suspense } from 'react';
-import Model from "../3D/model";
-// responsive
-import { useMediaQuery } from "react-responsive";
-// Types
-import { HeroModelsType } from "@/types";
 
 export default function HeroSection() {
-  // responsive hooks
-  // For very small screens
-  const isSmall = useMediaQuery({ maxWidth: 440 });
-  // For mobiles
-  const isMobile = useMediaQuery({ maxWidth: 768 });
-  // For Tablets
-  const isTablet = useMediaQuery({ minWidth: 768, maxWidth: 1024 });
-  // 3D model scale
-  const modelScale = 0.2;
-
-  // models array
-  const models: HeroModelsType[] = [
-    {
-      url: "/models/bitcoin.glb",
-      position: isSmall ? [-2, 3.5, -3] : isMobile ? [-4, 3.5, -2.5] : isTablet ? [-6, 3.5, -2] : [-7, 3.5, 0],
-    },
-    {
-      url: "/models/chart.glb",
-      position: isSmall ? [2, 3.5, -3] : isMobile ? [4, 3.5, -2.5] : isTablet ? [6, 3.5, -2] : [7, 3.5, 0],
-    },
-    {
-      url: "/models/robot.glb",
-      position: isSmall ? [-2, -3.5, -3] : isMobile ? [-4, -3.5, -2.5] : isTablet ? [-6, -3.5, -2] : [-7, -3.5, 0],
-    },
-    {
-      url: "/models/graph.glb",
-      position: isSmall ? [2, -3.5, -3] : isMobile ? [4, -3.5, -2.5] : isTablet ? [6, -3.5, -2] : [7, -3.5, 0],
-    },
-  ]
-
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden dark:bg-background-dark bg-background-light">
-      {/* 3D Objects Canvas */}
-      <div className="absolute inset-0 z-0">
-        <Canvas
-          camera={{ position: [0, 0, 15], fov: 40 }}
-          gl={{ alpha: true, antialias: true }}
-        >
-          <ambientLight intensity={2} />
-          <pointLight position={[10, 10, 10]} />
-          <Suspense fallback={null}>
-            {models.map((item, index) => {
-              return (
-                <Model
-                  key={index}
-                  url={item.url}
-                  position={item.position}
-                  rotation={[0, 0, 0]}
-                  scale={modelScale}
-                />
-              )
-            })}
-
-          </Suspense>
-        </Canvas>
-      </div>
-
       {/* Content Container */}
       <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
-        <div
-          className="flex flex-col items-center justify-center text-center space-y-12 max-w-4xl mx-auto"
-        >
+        <div className="flex flex-col items-center justify-center text-center space-y-12 max-w-4xl mx-auto">
           {/* Main Title */}
-          <div
-            className="space-y-6 w-full"
-          >
+          <div className="space-y-6 w-full">
             <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black tracking-tight leading-none">
               <span className="inline-block text-headline-light dark:text-headline-dark pb-2 dark:text-primary-dark text-primary-light">
-              Trade Smarter with AI
+                Trade Smarter with AI
               </span>
               <br />
               <span className="inline-block text-headline-light dark:text-headline-dark dark:text-primary-dark text-primary-light">
-              Master the Crypto Market
+                Master the Crypto Market
               </span>
             </h1>
-            <div
-              className="text-secondary-light dark:text-secondary-dark max-w-3xl mx-auto text-base sm:text-lg md:text-xl font-medium px-4"
-            >
-              Experience the power of AI-driven trading analysis, real-time market insights, and professional-grade tools to maximize your crypto trading potential.
+            <div className="text-secondary-light dark:text-secondary-dark max-w-3xl mx-auto text-base sm:text-lg md:text-xl font-medium px-4">
+              Experience the power of AI-driven trading analysis, real-time
+              market insights, and professional-grade tools to maximize your
+              crypto trading potential.
             </div>
           </div>
 
