@@ -85,7 +85,7 @@ const ChatAssistant = () => {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
-            model: "deepseek/deepseek-r1-0528-qwen3-8b:free",
+            model: "z-ai/glm-4.5-air:free",
             messages: [
               {
                 role: "system",

@@ -69,7 +69,7 @@ export default function TradingSignal() {
           },
           body: JSON.stringify({
             // Provide the model
-            model: "nex-agi/deepseek-v3.1-nex-n1:free",
+            model: "z-ai/glm-4.5-air:free",
             // Provide the message
             messages: [
               {
